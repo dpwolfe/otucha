@@ -38,15 +38,19 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>../external/lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.;../external/include;terasca;s1</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -64,6 +68,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="otucha.cpp" />
+    <ClCompile Include="s1\AffPoint.cpp" />
+    <ClCompile Include="s1\AffVector.cpp" />
+    <ClCompile Include="terasca\Controller.cpp" />
+    <ClCompile Include="terasca\GLFWController.cpp" />
+    <ClCompile Include="terasca\ModelView.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="s1\AffPoint.h" />
+    <ClInclude Include="s1\AffVector.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="terasca\Controller.h" />
+    <ClInclude Include="terasca\GLFWController.h" />
+    <ClInclude Include="terasca\ModelView.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
