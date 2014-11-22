@@ -1,14 +1,17 @@
 #include "GLFWController.h"
 #include "ModelView.h"
-#include "AffPoint.h"
-#include "AffVector.h"
+#include "AffinePoint.h"
+#include "AffineVector.h"
 
 void set3DViewingInformation(double xyz[6])
 {
 	ModelView::setMCRegionOfInterest(xyz);
 
-	s1::AffPoint eye, center;
-	s1::AffVector up;
+	s1::AffinePoint eye, center;
+	s1::AffineVector up;
+
+	// todo: set eye, center, up
+	ModelView::setEyeCenterUp(eye, center, up);
 }
 
 int main(int argc, char* argv[])

@@ -27,10 +27,10 @@
     <ClCompile Include="terasca\ModelView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="s1\AffPoint.cpp">
+    <ClCompile Include="s1\AffinePoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="s1\AffVector.cpp">
+    <ClCompile Include="s1\AffineVector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,10 +47,10 @@
     <ClInclude Include="terasca\ModelView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="s1\AffPoint.h">
+    <ClInclude Include="s1\AffinePoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="s1\AffVector.h">
+    <ClInclude Include="s1\AffineVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -33,3 +33,4 @@ src/Debug/
 # IDE files
 *.opensdf
 *.sdf
+*.suo
