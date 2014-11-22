@@ -69,15 +69,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="otucha.cpp" />
-    <ClCompile Include="s1\AffPoint.cpp" />
-    <ClCompile Include="s1\AffVector.cpp" />
+    <ClCompile Include="s1\AffinePoint.cpp" />
+    <ClCompile Include="s1\AffineVector.cpp" />
     <ClCompile Include="terasca\Controller.cpp" />
     <ClCompile Include="terasca\GLFWController.cpp" />
     <ClCompile Include="terasca\ModelView.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="s1\AffPoint.h" />
-    <ClInclude Include="s1\AffVector.h" />
+    <ClInclude Include="s1\AffinePoint.h" />
+    <ClInclude Include="s1\AffineVector.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="terasca\Controller.h" />
     <ClInclude Include="terasca\GLFWController.h" />
