@@ -10,6 +10,15 @@ public:
 	GLFWController(const std::string& windowTitle);
 	virtual ~GLFWController();
 
+	void run();
+
 protected:
 	void reportWindowInterfaceVersion(std::ostream& os) const;
+	void establishInitialCallbacksForRC();
+	virtual void handleDisplay();
+
+private:
+	GLFWwindow* _window;
+
+	static void displayCB(GLFWwindow* window);
 };

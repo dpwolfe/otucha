@@ -53,5 +53,8 @@
     <ClInclude Include="s1\AffineVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="terasca\ProjectionType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
