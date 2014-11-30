@@ -1,6 +1,9 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
+
+#include "ModelView.h"
 
 class Controller
 {
@@ -15,4 +18,9 @@ protected:
 	virtual void reportWindowInterfaceVersion(std::ostream& os) const = 0;
 
 	double overallMCBoundingBox[6];
+	int glClearFlags;
+	std::vector<ModelView*> models;
+
+	static Controller* _instance;
+	static bool checkForErrors(std::ostream& os, const std::string& context);
 };
