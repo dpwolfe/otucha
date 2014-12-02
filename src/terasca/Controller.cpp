@@ -42,9 +42,15 @@ void Controller::getOverallMCBoundingBox(double xyzLimits[6]) const
 
 bool Controller::checkForErrors(std::ostream& os, const std::string& context)
 {
+	std::string dude = "dude";
 	bool result = false;
-
-	// HERE
-
+	GLenum e = glGetError();
+	while (e != GL_NO_ERROR)
+	{
+		//os << "Controller::checkForErrors [" << context << "]: " << (char*)gluErrorString(e) << std::endl;
+		e = glGetError();
+		result = true;
+	}
+	
 	return result;
 }
