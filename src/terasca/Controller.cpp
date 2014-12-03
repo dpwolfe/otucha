@@ -40,6 +40,12 @@ void Controller::getOverallMCBoundingBox(double xyzLimits[6]) const
 	}
 }
 
+void Controller::handleReshape(int width, int height)
+{
+	glViewport(0, 0, width, height);
+	redraw();
+}
+
 bool Controller::checkForErrors(std::ostream& os, const std::string& context)
 {
 	std::string dude = "dude";

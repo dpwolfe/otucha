@@ -23,6 +23,7 @@ void GLFWController::reportWindowInterfaceVersion(std::ostream& os) const
 void GLFWController::establishInitialCallbacksForRC()
 {
 	glfwSetWindowRefreshCallback(_window, displayCB);
+	glfwSetWindowSizeCallback(_window, reshapeCB);
 }
 
 void GLFWController::displayCB(GLFWwindow* window)
@@ -31,6 +32,11 @@ void GLFWController::displayCB(GLFWwindow* window)
 	{
 		dynamic_cast<GLFWController*>(_instance)->handleDisplay();
 	}
+}
+
+void GLFWController::reshapeCB(GLFWwindow* window, int width, int height)
+{
+	dynamic_cast<GLFWController*>(_instance)->handleReshape(width, height);
 }
 
 void GLFWController::handleDisplay()
