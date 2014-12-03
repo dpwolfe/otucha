@@ -45,11 +45,16 @@ bool Controller::checkForErrors(std::ostream& os, const std::string& context)
 	std::string dude = "dude";
 	bool result = false;
 	GLenum e = glGetError();
-	while (e != GL_NO_ERROR)
+	if (e != GL_NO_ERROR)
 	{
-		//os << "Controller::checkForErrors [" << context << "]: " << (char*)gluErrorString(e) << std::endl;
-		e = glGetError();
 		result = true;
+		os << "Controller::checkForErrors [" << context << "]:";
+		while (e != GL_NO_ERROR)
+		{
+			os << " " << e;
+			e = glGetError();
+		}
+		os << std::endl;
 	}
 	
 	return result;
