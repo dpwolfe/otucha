@@ -14,9 +14,11 @@ public:
 
 	void reportVersions(std::ostream& os) const;
 	void getOverallMCBoundingBox(double* xyzLimits) const;
+	virtual void redraw() const {}
 
 protected:
 	virtual void reportWindowInterfaceVersion(std::ostream& os) const = 0;
+	virtual void handleReshape(int width, int height);
 
 	double overallMCBoundingBox[6];
 	int glClearFlags;

@@ -21,4 +21,5 @@ private:
 	GLFWwindow* _window;
 
 	static void displayCB(GLFWwindow* window);
+	static void reshapeCB(GLFWwindow* window, int width, int height);
 };
