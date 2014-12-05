@@ -10,6 +10,7 @@ Visual Studio 2013 (only tried with Ultimate so far)
 TODO: A makefile for compilation on linux or with MinGW will be coming to remove the dependency.
 
 Steps:
+
 1. Download the GLEW distributable zip from [here](http://glew.sourceforge.net/)
 2. Copy the glew32.lib to the ./external/lib directory
 3. Download the GLFW 32-bit Windows binaries from [here](http://www.glfw.org/download.html)
