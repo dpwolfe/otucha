@@ -24,4 +24,5 @@ private:
 	static void displayCB(GLFWwindow* window);
 	static void reshapeCB(GLFWwindow* window, int width, int height);
 	static void charCB(GLFWwindow* window, unsigned int theChar);
+	static void keyboardCB(GLFWwindow* window, int key, int scanCode, int action, int mods);
 };
