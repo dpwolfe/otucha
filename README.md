@@ -3,11 +3,10 @@ otucha
 
 A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 
+
 Developer Setup
 ===========================
-Prerequisites:
-Visual Studio 2013 (only tried with Ultimate so far)
-TODO: A makefile for compilation on linux or with MinGW will be coming to remove the dependency.
+This is currently developed with Visual Studio 2013 Ultimate.  Eventually a makefile will be created to remove that as a requirement as a step toward compilation with Emscripten.
 
 Steps:
 
