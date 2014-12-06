@@ -26,6 +26,7 @@ void GLFWController::establishInitialCallbacksForRC()
 	glfwSetWindowRefreshCallback(_window, displayCB);
 	glfwSetWindowSizeCallback(_window, reshapeCB);
 	glfwSetCharCallback(_window, charCB);
+	glfwSetKeyCallback(_window, keyboardCB);
 }
 
 void GLFWController::displayCB(GLFWwindow* window)
@@ -47,6 +48,19 @@ void GLFWController::charCB(GLFWwindow* window, unsigned int theChar)
 	{
 		GLFWController* controller = dynamic_cast<GLFWController*>(_instance);
 		controller->handleAsciiChar(static_cast<unsigned char>(theChar), controller->lastPixelPosX, controller->lastPixelPosY);
+	}
+}
+
+void GLFWController::keyboardCB(GLFWwindow* window, int key, int scanCode, int action, int mods)
+{
+	const unsigned char ESC = 27;
+	if (_instance != nullptr)
+	{
+		GLFWController* controller = dynamic_cast<GLFWController*>(_instance);
+		if (key == GLFW_KEY_ESCAPE)
+		{
+			controller->handleAsciiChar(ESC, controller->lastPixelPosX, controller->lastPixelPosY);
+		}
 	}
 }
 
