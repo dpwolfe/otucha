@@ -5,10 +5,8 @@ A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 
 
 Developer Setup
-===========================
+===============
 This is currently developed with Visual Studio 2013 Ultimate.  Eventually a makefile will be created to remove that as a requirement as a step toward compilation with Emscripten.
-
-Steps:
 
 1. Download the GLEW distributable zip from [here](http://glew.sourceforge.net/)
 2. Copy the glew32.lib to the ./external/lib directory
