@@ -19,6 +19,9 @@ public:
 protected:
 	virtual void reportWindowInterfaceVersion(std::ostream& os) const = 0;
 	virtual void handleReshape(int width, int height);
+	virtual void handleAsciiChar(unsigned char theChar, int x, int y);
+	virtual void endProgram();
+	void screenSpaceToDeviceSpace(int x, int y, double& dsX, double& dsY);
 
 	double overallMCBoundingBox[6];
 	int glClearFlags;

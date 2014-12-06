@@ -11,6 +11,7 @@ public:
 	virtual ~ModelView();
 
 	virtual void render() = 0;
+	virtual void handleCommand(unsigned char key, double ldsX, double ldsY) { }
 
 	static void setMCRegionOfInterest(double xyz[6]);
 	static void setEyeCenterUp(s1::AffinePoint eye, s1::AffinePoint center, s1::AffineVector up);
