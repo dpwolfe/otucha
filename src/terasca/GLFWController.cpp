@@ -14,6 +14,13 @@ GLFWController::~GLFWController()
 void GLFWController::run()
 {
 	establishInitialCallbacksForRC();
+	while (!glfwWindowShouldClose(_window))
+	{
+		handleDisplay();
+		glfwWaitEvents();
+	}
+	glfwDestroyWindow(_window);
+	_window = nullptr;
 }
 
 void GLFWController::reportWindowInterfaceVersion(std::ostream& os) const
@@ -29,6 +36,7 @@ void GLFWController::establishInitialCallbacksForRC()
 	glfwSetKeyCallback(_window, keyboardCB);
 	glfwSetMouseButtonCallback(_window, mouseButtonCB);
 	glfwSetScrollCallback(_window, scrollCB);
+	glfwSetCursorPosCallback(_window, cursorPosCB);
 }
 
 void GLFWController::displayCB(GLFWwindow* window)
@@ -128,5 +136,16 @@ void GLFWController::handleDisplay()
 
 void GLFWController::scrollCB(GLFWwindow* window, double xOffset, double yOffset)
 {
-	dynamic_cast<GLFWController*>(_instance)->handleScroll(xOffset, yOffset);
+	dynamic_cast<GLFWController*>(_instance)->handleMouseScroll(xOffset, yOffset);
+}
+
+void GLFWController::cursorPosCB(GLFWwindow* window, double x, double y)
+{
+	if (_instance != nullptr)
+	{
+		GLFWController* controller = dynamic_cast<GLFWController*>(_instance);
+		controller->lastPixelPosX = static_cast<int>(x + 0.5);
+		controller->lastPixelPosY = static_cast<int>(y + 0.5);
+		controller->handleMousePosition(controller->lastPixelPosX, controller->lastPixelPosY);
+	}
 }
