@@ -28,6 +28,7 @@ void GLFWController::establishInitialCallbacksForRC()
 	glfwSetCharCallback(_window, charCB);
 	glfwSetKeyCallback(_window, keyboardCB);
 	glfwSetMouseButtonCallback(_window, mouseButtonCB);
+	glfwSetScrollCallback(_window, scrollCB);
 }
 
 void GLFWController::displayCB(GLFWwindow* window)
@@ -123,4 +124,9 @@ void GLFWController::handleDisplay()
 	glfwSwapBuffers(_window);
 
 	checkForErrors(std::cout, "GLFWController::handleDisplay");
+}
+
+void GLFWController::scrollCB(GLFWwindow* window, double xOffset, double yOffset)
+{
+	dynamic_cast<GLFWController*>(_instance)->handleScroll(xOffset, yOffset);
 }

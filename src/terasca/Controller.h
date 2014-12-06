@@ -31,6 +31,7 @@ protected:
 	virtual void handleReshape(int width, int height);
 	virtual void handleAsciiChar(unsigned char theChar, int x, int y);
 	virtual void handleMouseButton(MouseButton button, bool isPressed, int x, int y, int mods) {}
+	virtual void handleScroll(double xOffset, double yOffset) {}
 	virtual void endProgram();
 	void screenSpaceToDeviceSpace(int x, int y, double& dsX, double& dsY);
 
