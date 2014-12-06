@@ -27,4 +27,5 @@ private:
 	static void keyboardCB(GLFWwindow* window, int key, int scanCode, int action, int mods);
 	static void mouseButtonCB(GLFWwindow* window, int button, int action, int mods);
 	static int mapMods(int glfwMods);
+	static void scrollCB(GLFWwindow* window, double xOffset, double yOffset);
 };
