@@ -27,6 +27,7 @@ void GLFWController::establishInitialCallbacksForRC()
 	glfwSetWindowSizeCallback(_window, reshapeCB);
 	glfwSetCharCallback(_window, charCB);
 	glfwSetKeyCallback(_window, keyboardCB);
+	glfwSetMouseButtonCallback(_window, mouseButtonCB);
 }
 
 void GLFWController::displayCB(GLFWwindow* window)
@@ -62,6 +63,48 @@ void GLFWController::keyboardCB(GLFWwindow* window, int key, int scanCode, int a
 			controller->handleAsciiChar(ESC, controller->lastPixelPosX, controller->lastPixelPosY);
 		}
 	}
+}
+
+void GLFWController::mouseButtonCB(GLFWwindow*, int button, int action, int mods)
+{
+	if (_instance != nullptr)
+	{
+		Controller::MouseButton mButton;
+		if (button == GLFW_MOUSE_BUTTON_LEFT)
+		{
+			mButton = Controller::LEFT_BUTTON;
+		}
+		else if (button == GLFW_MOUSE_BUTTON_RIGHT)
+		{
+			mButton = Controller::RIGHT_BUTTON;
+		}
+		else
+		{
+			mButton = Controller::MIDDLE_BUTTON;
+		}
+
+		bool isPressed = (action == GLFW_PRESS);
+		GLFWController* controller = dynamic_cast<GLFWController*>(_instance);
+		controller->handleMouseButton(mButton, isPressed, controller->lastPixelPosX, controller->lastPixelPosY, mapMods(mods));
+	}
+}
+
+int GLFWController::mapMods(int glfwMods)
+{
+	int controllerMods = 0;
+	if ((glfwMods & GLFW_MOD_ALT) != 0)
+	{
+		controllerMods |= ModifierBit::ALT;
+	}
+	if ((glfwMods & GLFW_MOD_CONTROL) != 0)
+	{
+		controllerMods |= ModifierBit::CONTROL;
+	}
+	if ((glfwMods & GLFW_MOD_SHIFT) != 0)
+	{
+		controllerMods |= ModifierBit::SHIFT;
+	}
+	return controllerMods;
 }
 
 void GLFWController::handleDisplay()
