@@ -25,4 +25,6 @@ private:
 	static void reshapeCB(GLFWwindow* window, int width, int height);
 	static void charCB(GLFWwindow* window, unsigned int theChar);
 	static void keyboardCB(GLFWwindow* window, int key, int scanCode, int action, int mods);
+	static void mouseButtonCB(GLFWwindow* window, int button, int action, int mods);
+	static int mapMods(int glfwMods);
 };

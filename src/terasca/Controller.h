@@ -9,6 +9,16 @@
 class Controller
 {
 public:
+	enum MouseButton
+	{
+		LEFT_BUTTON, MIDDLE_BUTTON, RIGHT_BUTTON
+	};
+
+	enum ModifierBit
+	{
+		ALT = 1, CONTROL = 2, SHIFT = 4
+	};
+
 	Controller();
 	virtual ~Controller();
 
@@ -20,6 +30,7 @@ protected:
 	virtual void reportWindowInterfaceVersion(std::ostream& os) const = 0;
 	virtual void handleReshape(int width, int height);
 	virtual void handleAsciiChar(unsigned char theChar, int x, int y);
+	virtual void handleMouseButton(MouseButton button, bool isPressed, int x, int y, int mods) {}
 	virtual void endProgram();
 	void screenSpaceToDeviceSpace(int x, int y, double& dsX, double& dsY);
 
