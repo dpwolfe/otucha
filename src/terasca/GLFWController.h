@@ -19,7 +19,9 @@ protected:
 
 private:
 	GLFWwindow* _window;
+	int lastPixelPosX, lastPixelPosY;
 
 	static void displayCB(GLFWwindow* window);
 	static void reshapeCB(GLFWwindow* window, int width, int height);
+	static void charCB(GLFWwindow* window, unsigned int theChar);
 };

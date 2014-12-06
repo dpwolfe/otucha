@@ -1,6 +1,7 @@
 #include "GLFWController.h"
 
-GLFWController::GLFWController(const std::string& windowTitle)
+GLFWController::GLFWController(const std::string& windowTitle) :
+	lastPixelPosX(0), lastPixelPosY(0)
 {
 
 }
@@ -24,6 +25,7 @@ void GLFWController::establishInitialCallbacksForRC()
 {
 	glfwSetWindowRefreshCallback(_window, displayCB);
 	glfwSetWindowSizeCallback(_window, reshapeCB);
+	glfwSetCharCallback(_window, charCB);
 }
 
 void GLFWController::displayCB(GLFWwindow* window)
@@ -37,6 +39,15 @@ void GLFWController::displayCB(GLFWwindow* window)
 void GLFWController::reshapeCB(GLFWwindow* window, int width, int height)
 {
 	dynamic_cast<GLFWController*>(_instance)->handleReshape(width, height);
+}
+
+void GLFWController::charCB(GLFWwindow* window, unsigned int theChar)
+{
+	if (theChar < 128)
+	{
+		GLFWController* controller = dynamic_cast<GLFWController*>(_instance);
+		controller->handleAsciiChar(static_cast<unsigned char>(theChar), controller->lastPixelPosX, controller->lastPixelPosY);
+	}
 }
 
 void GLFWController::handleDisplay()

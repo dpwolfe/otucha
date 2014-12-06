@@ -46,6 +46,30 @@ void Controller::handleReshape(int width, int height)
 	redraw();
 }
 
+void Controller::handleAsciiChar(unsigned char theChar, int x, int y)
+{
+	const unsigned char ESC = 27;
+	if (theChar == ESC)
+	{
+		endProgram();
+	}
+
+	double dsX, dsY;
+	screenSpaceToDeviceSpace(x, y, dsX, dsY);
+
+	for (std::vector<ModelView*>::iterator it = models.begin(); it < models.end(); it++)
+	{
+		(*it)->handleCommand(theChar, dsX, dsY);
+	}
+
+	redraw();
+}
+
+void Controller::endProgram()
+{
+	exit(0);
+}
+
 bool Controller::checkForErrors(std::ostream& os, const std::string& context)
 {
 	std::string dude = "dude";
@@ -64,4 +88,14 @@ bool Controller::checkForErrors(std::ostream& os, const std::string& context)
 	}
 	
 	return result;
+}
+
+void Controller::screenSpaceToDeviceSpace(int x, int y, double& dsX, double& dxY)
+{
+	int viewport[4];
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	double xv = x - viewport[0];
+	dsX = 2.0 * xv / static_cast<double>(viewport[2]) - 1.0;
+	double yv = (viewport[3] - y) - viewport[1];
+	dxY = 2.0 * yv / static_cast<double>(viewport[3]) - 1.0;
 }
