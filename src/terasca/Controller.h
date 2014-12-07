@@ -19,12 +19,18 @@ public:
 		ALT = 1, CONTROL = 2, SHIFT = 4
 	};
 
+	enum RenderingContextBit
+	{
+		ALPHA = 1, DEPTH = 2, STENCIL = 4, ACCUM = 8
+	};
+
 	Controller();
 	virtual ~Controller();
 
 	void reportVersions(std::ostream& os) const;
 	void getOverallMCBoundingBox(double* xyzLimits) const;
 	virtual void redraw() const {}
+	void setClearFlags(int rcFlags);
 
 protected:
 	virtual void reportWindowInterfaceVersion(std::ostream& os) const = 0;
@@ -41,5 +47,6 @@ protected:
 	std::vector<ModelView*> models;
 
 	static Controller* _instance;
+	static int initialWindowWidth, initialWindowHeight;
 	static bool checkForErrors(std::ostream& os, const std::string& context);
 };
