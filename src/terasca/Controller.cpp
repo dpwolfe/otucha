@@ -4,6 +4,8 @@
 #include <GL/gl.h>
 
 Controller* Controller::_instance = nullptr;
+int Controller::initialWindowWidth = 512;
+int Controller::initialWindowHeight = 512;
 
 Controller::Controller() : glClearFlags(GL_COLOR_BUFFER_BIT)
 {
@@ -72,7 +74,6 @@ void Controller::endProgram()
 
 bool Controller::checkForErrors(std::ostream& os, const std::string& context)
 {
-	std::string dude = "dude";
 	bool result = false;
 	GLenum e = glGetError();
 	if (e != GL_NO_ERROR)
@@ -81,7 +82,7 @@ bool Controller::checkForErrors(std::ostream& os, const std::string& context)
 		os << "Controller::checkForErrors [" << context << "]:";
 		while (e != GL_NO_ERROR)
 		{
-			os << " " << e;
+			os << " " << std::hex << e;
 			e = glGetError();
 		}
 		os << std::endl;
@@ -98,4 +99,17 @@ void Controller::screenSpaceToDeviceSpace(int x, int y, double& dsX, double& dxY
 	dsX = 2.0 * xv / static_cast<double>(viewport[2]) - 1.0;
 	double yv = (viewport[3] - y) - viewport[1];
 	dxY = 2.0 * yv / static_cast<double>(viewport[3]) - 1.0;
+}
+
+void Controller::setClearFlags(int rcFlags)
+{
+	glClearFlags = GL_COLOR_BUFFER_BIT;
+	if ((rcFlags & RenderingContextBit::DEPTH) != 0)
+	{
+		glClearFlags |= GL_DEPTH_BUFFER_BIT;
+	}
+	if ((rcFlags & RenderingContextBit::STENCIL) != 0)
+	{
+		glClearFlags |= GL_STENCIL_BUFFER_BIT;
+	}
 }

@@ -1,9 +1,17 @@
 #include "GLFWController.h"
 
-GLFWController::GLFWController(const std::string& windowTitle) :
+bool GLFWController::glfwInitialized = false;
+
+GLFWController::GLFWController(const std::string& windowTitle, int rcFlags) :
 	lastPixelPosX(0), lastPixelPosY(0)
 {
+	if (!glfwInitialized)
+	{
+		glfwInit();
+		glfwInitialized = true;
+	}
 
+	createWindow(windowTitle, rcFlags);
 }
 
 GLFWController::~GLFWController()
@@ -147,5 +155,48 @@ void GLFWController::cursorPosCB(GLFWwindow* window, double x, double y)
 		controller->lastPixelPosX = static_cast<int>(x + 0.5);
 		controller->lastPixelPosY = static_cast<int>(y + 0.5);
 		controller->handleMousePosition(controller->lastPixelPosX, controller->lastPixelPosY);
+	}
+}
+
+void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
+{
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	if ((rcFlags & RenderingContextBit::DEPTH) == 0)
+	{
+		glfwWindowHint(GLFW_DEPTH_BITS, 0);
+	}
+	else
+	{
+		glfwWindowHint(GLFW_DEPTH_BITS, 24);
+	}
+	setClearFlags(rcFlags);
+
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	int minor = 7;
+	_window = nullptr;
+	while ((_window == nullptr) && (minor > 0))
+	{
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
+		_window = glfwCreateWindow(initialWindowWidth, initialWindowHeight, windowTitle.c_str(), nullptr, nullptr);
+		minor--;
+	}
+	if (_window == nullptr)
+	{
+		std::cerr << "Unable to create a 4.x rendering context!";
+		glfwTerminate();
+		glfwInitialized = false;
+	}
+
+	glfwMakeContextCurrent(_window);
+
+	GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		std::cerr << "GLEW failed to initialize" << std::hex << err;
+	}
+	else
+	{
+		std::cout << "GLEW initialized with version " << glewGetString(GLEW_VERSION);
 	}
 }

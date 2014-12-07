@@ -24,7 +24,7 @@ void set3DViewingInformation(double xyz[6])
 
 int main(int argc, char* argv[])
 {
-	GLFWController c("otucha");
+	GLFWController c("otucha", Controller::RenderingContextBit::DEPTH);
 	c.reportVersions(std::cout);
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	double xyz[6];

@@ -2,12 +2,13 @@
 
 #include "Controller.h"
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 class GLFWController : public Controller
 {
 public:
-	GLFWController(const std::string& windowTitle);
+	GLFWController(const std::string& windowTitle, int rcFlags);
 	virtual ~GLFWController();
 
 	void run();
@@ -20,6 +21,10 @@ protected:
 private:
 	GLFWwindow* _window;
 	int lastPixelPosX, lastPixelPosY;
+
+	void createWindow(const std::string& windowTitle, int rcFlags);
+
+	static bool glfwInitialized;
 
 	static void displayCB(GLFWwindow* window);
 	static void reshapeCB(GLFWwindow* window, int width, int height);
