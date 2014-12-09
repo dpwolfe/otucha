@@ -69,19 +69,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="otucha.cpp" />
+    <ClCompile Include="rffalcon\Block.cpp" />
     <ClCompile Include="s1\AffinePoint.cpp" />
     <ClCompile Include="s1\AffineVector.cpp" />
     <ClCompile Include="terasca\Controller.cpp" />
     <ClCompile Include="terasca\GLFWController.cpp" />
     <ClCompile Include="terasca\ModelView.cpp" />
+    <ClCompile Include="terasca\ModelViewWithShader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="rffalcon\Block.h" />
     <ClInclude Include="s1\AffinePoint.h" />
     <ClInclude Include="s1\AffineVector.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="terasca\Controller.h" />
     <ClInclude Include="terasca\GLFWController.h" />
     <ClInclude Include="terasca\ModelView.h" />
+    <ClInclude Include="terasca\ModelViewWithShader.h" />
     <ClInclude Include="terasca\ProjectionType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

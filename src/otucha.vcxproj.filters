@@ -33,6 +33,12 @@
     <ClCompile Include="s1\AffineVector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="terasca\ModelViewWithShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rffalcon\Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="terasca\GLFWController.h">
@@ -54,6 +60,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="terasca\ProjectionType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="terasca\ModelViewWithShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rffalcon\Block.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
