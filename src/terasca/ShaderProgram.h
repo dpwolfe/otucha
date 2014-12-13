@@ -29,6 +29,9 @@ private:
 	int _shaderCount;
 	std::unique_ptr<Shader[]> _shaders;
 
-	void initShaders();
-	bool loadShaderSource(Shader shader);
+	void initialize();
+	void loadShaderSource(Shader shader);
+	void dispose();
+	void compileShader(Shader shader);
+	void readFailLog(GLint id);
 };
