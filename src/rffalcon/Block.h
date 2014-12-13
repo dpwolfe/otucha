@@ -5,7 +5,7 @@
 class Block : public ModelViewWithShader
 {
 public:
-	Block();
+	Block(float x, float y, float z, float lengthX, float lengthY, float lengthZ);
 	virtual ~Block();
 };
 
