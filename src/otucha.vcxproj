@@ -76,6 +76,7 @@
     <ClCompile Include="terasca\GLFWController.cpp" />
     <ClCompile Include="terasca\ModelView.cpp" />
     <ClCompile Include="terasca\ModelViewWithShader.cpp" />
+    <ClCompile Include="terasca\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rffalcon\Block.h" />
@@ -87,6 +88,7 @@
     <ClInclude Include="terasca\ModelView.h" />
     <ClInclude Include="terasca\ModelViewWithShader.h" />
     <ClInclude Include="terasca\ProjectionType.h" />
+    <ClInclude Include="terasca\ShaderProgram.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
