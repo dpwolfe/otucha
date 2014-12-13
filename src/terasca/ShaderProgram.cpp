@@ -18,7 +18,7 @@ ShaderProgram::~ShaderProgram()
 
 void ShaderProgram::initShaders()
 {
-	for (int i = 0; i < _shaderCount, i++)
+	for (int i = 0; i < _shaderCount; i++)
 	{
 		if (loadShaderSource(_shaders[i]))
 		{
