@@ -1,6 +1,6 @@
 #include "Block.h"
 
-Block::Block()
+Block::Block(float x, float y, float z, float lengthX, float lengthY, float lengthZ)
 {
 }
 
