@@ -28,4 +28,7 @@ private:
 	int _id;
 	int _shaderCount;
 	std::unique_ptr<Shader[]> _shaders;
+
+	void initShaders();
+	bool loadShaderSource(Shader shader);
 };
