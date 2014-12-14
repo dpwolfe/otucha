@@ -15,9 +15,11 @@ public:
 
 	static void setShaderSources(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
 
+protected:
+	static GLuint _shaderProgramId;
+
 private:
 	static std::string _vertexShaderPath, _fragmentShaderPath;
 	static ShaderProgram* _shaderProgram;
-	static GLuint _shaderProgramId;
 	static int _instanceCount;
 };
