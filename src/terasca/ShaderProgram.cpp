@@ -37,7 +37,7 @@ void ShaderProgram::initialize()
 	}
 }
 
-void ShaderProgram::loadShaderSource(Shader shader)
+void ShaderProgram::loadShaderSource(Shader& shader)
 {
 	std::ifstream in(shader.path, std::ios::in | std::ios::binary);
 	if (in)
@@ -56,7 +56,7 @@ void ShaderProgram::loadShaderSource(Shader shader)
 	}
 }
 
-void ShaderProgram::compileShader(Shader shader)
+void ShaderProgram::compileShader(Shader& shader)
 {
 	shader.id = glCreateShader(shader.type);
 	const char* src = shader.source.c_str();

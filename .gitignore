@@ -34,3 +34,4 @@ src/Debug/
 *.opensdf
 *.sdf
 *.suo
+*.user

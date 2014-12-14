@@ -190,7 +190,12 @@ void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
 
 	glfwMakeContextCurrent(_window);
 
+	// set glewExperimental to true in order to avoid a GL_INVALID_ENUM error from calling glewInit
+	// https://www.opengl.org/wiki/OpenGL_Loading_Library, this error can still occur
+	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
+	// clearing the error code caused by glew that still happens even with glewExperimental
+	glGetError();
 	if (GLEW_OK != err)
 	{
 		std::cerr << "GLEW failed to initialize" << std::hex << err;

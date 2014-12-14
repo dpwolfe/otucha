@@ -30,8 +30,8 @@ private:
 	std::unique_ptr<Shader[]> _shaders;
 
 	void initialize();
-	void loadShaderSource(Shader shader);
+	void loadShaderSource(Shader& shader);
 	void dispose();
-	void compileShader(Shader shader);
+	void compileShader(Shader& shader);
 	void readFailLog(GLint id);
 };
