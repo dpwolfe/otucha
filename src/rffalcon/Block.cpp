@@ -7,3 +7,8 @@ Block::Block(float x, float y, float z, float lengthX, float lengthY, float leng
 Block::~Block()
 {
 }
+
+void Block::render()
+{
+
+}

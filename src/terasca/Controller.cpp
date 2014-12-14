@@ -82,7 +82,7 @@ bool Controller::checkForErrors(std::ostream& os, const std::string& context)
 		os << "Controller::checkForErrors [" << context << "]:";
 		while (e != GL_NO_ERROR)
 		{
-			os << " " << std::hex << e;
+			os << " 0x" << std::hex << e;
 			e = glGetError();
 		}
 		os << std::endl;
@@ -111,5 +111,18 @@ void Controller::setClearFlags(int rcFlags)
 	if ((rcFlags & RenderingContextBit::STENCIL) != 0)
 	{
 		glClearFlags |= GL_STENCIL_BUFFER_BIT;
+	}
+}
+
+void Controller::addModel(ModelView* modelView)
+{
+	if (modelView != nullptr)
+	{
+		models.push_back(modelView);
+	}
+	else
+	{
+		std::cerr << "Attempted to add a null model." << std::endl;
+		throw(errno);
 	}
 }

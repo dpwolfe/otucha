@@ -31,6 +31,7 @@ public:
 	void getOverallMCBoundingBox(double* xyzLimits) const;
 	virtual void redraw() const {}
 	void setClearFlags(int rcFlags);
+	void addModel(ModelView* modelView);
 
 protected:
 	virtual void reportWindowInterfaceVersion(std::ostream& os) const = 0;

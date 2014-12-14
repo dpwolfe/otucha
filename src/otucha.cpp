@@ -2,6 +2,8 @@
 #include "ModelView.h"
 #include "AffinePoint.h"
 #include "AffineVector.h"
+#include "ModelViewWithShader.h"
+#include "Block.h"
 
 void set3DViewingInformation(double xyz[6])
 {
@@ -26,6 +28,9 @@ int main(int argc, char* argv[])
 {
 	GLFWController c("otucha", Controller::RenderingContextBit::DEPTH);
 	c.reportVersions(std::cout);
+	ModelViewWithShader::setShaderSources("", "");
+	c.addModel(new Block(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f));
+
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	double xyz[6];
 	c.getOverallMCBoundingBox(xyz);
