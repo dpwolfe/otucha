@@ -16,4 +16,5 @@ void Block::render()
 	glUseProgram(_shaderProgramId);
 
 	s1::Matrix4x4 mc_ec, ec_ds;
+	getMatrices(mc_ec, ec_ds);
 }

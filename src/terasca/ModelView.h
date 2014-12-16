@@ -3,6 +3,7 @@
 #include "AffinePoint.h"
 #include "AffineVector.h"
 #include "ProjectionType.h"
+#include "Matrix4x4.h"
 
 class ModelView
 {
@@ -20,6 +21,8 @@ public:
 	static void setEyeCoordinatesZMinZMax(double zMin, double zMax);
 
 protected:
+	static void getMatrices(s1::Matrix4x4& mc_ec, s1::Matrix4x4& ec_ds);
+
 	static double _mcRegionOfInterest[6];
 	static s1::AffinePoint _eye, _center;
 	static s1::AffineVector _up;

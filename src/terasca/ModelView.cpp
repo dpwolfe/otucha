@@ -1,4 +1,5 @@
 #include "ModelView.h"
+#include "Matrix4x4.h"
 
 double ModelView::_mcRegionOfInterest[6] = { -1.0, 1.0, -1.0, 1.0, -1.0, 1.0 };
 s1::AffinePoint ModelView::_eye(0, 0, 2);
@@ -46,4 +47,9 @@ void ModelView::setEyeCoordinatesZMinZMax(double zMin, double zMax)
 {
 	_eyeCoordinatesZMin = zMin;
 	_eyeCoordinatesZMax = zMax;
+}
+
+void ModelView::getMatrices(s1::Matrix4x4& mc_ec, s1::Matrix4x4& ec_ds)
+{
+	mc_ec = s1::Matrix4x4::Identity;
 }
