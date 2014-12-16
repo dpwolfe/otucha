@@ -49,7 +49,8 @@ void ModelView::setEyeCoordinatesZMinZMax(double zMin, double zMax)
 	_eyeCoordinatesZMax = zMax;
 }
 
-void ModelView::getMatrices(s1::Matrix4x4& mc_ec, s1::Matrix4x4& ec_ds)
+void ModelView::getMatrices(s1::Matrix4x4& wc_ec, s1::Matrix4x4& ec_dc)
 {
-	mc_ec = s1::Matrix4x4::Identity;
+	wc_ec = s1::Matrix4x4::Identity;
+	ec_dc = s1::Matrix4x4::Identity;
 }
