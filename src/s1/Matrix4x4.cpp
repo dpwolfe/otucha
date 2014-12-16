@@ -43,6 +43,15 @@ Matrix4x4 Matrix4x4::operator=(const Matrix4x4& rhs)
 	return *this;
 }
 
+Matrix4x4 Matrix4x4::orthogonal(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax)
+{
+	return Matrix4x4(
+		2.0 / (xmax - xmin), 0.0, 0.0, -(xmax + xmin) / (xmax - xmin),
+		0.0, 2.0 / (ymax - ymin), 0.0, -(ymax + ymin) / (ymax - ymin),
+		0.0, 0.0, 2.0 / (zmax - zmin), (zmax + zmin) / (zmax - zmin),
+		0.0, 0.0, 0.0, 1.0);
+}
+
 void Matrix4x4::_copyFrom(const Matrix4x4& m)
 {
 	memcpy((void*)_value, (void*)m._value, 16 * sizeof(double));
