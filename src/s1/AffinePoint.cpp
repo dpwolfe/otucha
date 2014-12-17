@@ -14,9 +14,21 @@ namespace s1 {
 		_z = z;
 	}
 
+	AffinePoint::AffinePoint(const AffinePoint& p)
+	{
+		_x = p._x;
+		_y = p._y;
+		_z = p._z;
+	}
+
 	AffinePoint::~AffinePoint()
 	{
 
+	}
+
+	AffineVector AffinePoint::operator-(AffinePoint& rhs)
+	{
+		return AffineVector(_x - rhs._x, _y - rhs._y, _z - rhs._z);
 	}
 
 }
