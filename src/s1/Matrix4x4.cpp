@@ -52,6 +52,25 @@ Matrix4x4 Matrix4x4::orthogonal(double xmin, double xmax, double ymin, double ym
 		0.0, 0.0, 0.0, 1.0);
 }
 
+Matrix4x4 Matrix4x4::lookAt(AffinePoint& eye, AffinePoint& center, AffineVector& up)
+{
+	s1::AffineVector v, w;
+	w = eye - center;
+	w.normalize();
+	s1::AffineVector parallelPart = w * w.dot(up);
+	v = w - parallelPart;
+	v.normalize();
+	s1::AffineVector u = v.cross(w);
+	double tx = -u.dot(eye);
+	double ty = -v.dot(eye);
+	double tz = -w.dot(eye);
+	return Matrix4x4(
+		u[0], u[1], u[2], tx,
+		v[0], v[1], v[2], ty,
+		w[0], w[1], w[2], tz,
+		0.0,  0.0,  0.0,  1.0);
+}
+
 void Matrix4x4::_copyFrom(const Matrix4x4& m)
 {
 	memcpy((void*)_value, (void*)m._value, 16 * sizeof(double));

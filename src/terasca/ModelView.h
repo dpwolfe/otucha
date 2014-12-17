@@ -21,7 +21,7 @@ public:
 	static void setEyeCoordinatesZMinZMax(double zMin, double zMax);
 
 protected:
-	static void getMatrices(s1::Matrix4x4& wc_ec, s1::Matrix4x4& ec_dc);
+	static void getMatrices(s1::Matrix4x4& mc_ec, s1::Matrix4x4& ec_dc);
 
 	static double _mcRegionOfInterest[6];
 	static s1::AffinePoint _eye, _center;
