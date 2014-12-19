@@ -52,5 +52,6 @@ void ModelView::setEyeCoordinatesZMinZMax(double zMin, double zMax)
 void ModelView::getMatrices(s1::Matrix4x4& mc_ec, s1::Matrix4x4& ec_dc)
 {
 	mc_ec = s1::Matrix4x4::lookAt(_eye, _center, _up);
-	ec_dc = s1::Matrix4x4::Identity;
+	ec_dc = s1::Matrix4x4::perspective(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
+		_mcRegionOfInterest[4], _mcRegionOfInterest[5], _zProjectionPlane);
 }

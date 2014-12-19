@@ -52,6 +52,15 @@ Matrix4x4 Matrix4x4::orthogonal(double xmin, double xmax, double ymin, double ym
 		0.0, 0.0, 0.0, 1.0);
 }
 
+Matrix4x4 Matrix4x4::perspective(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, double zpp)
+{
+	return Matrix4x4(
+		-2.0*zpp / (xmax - xmin), 0.0, (xmax + xmin) / (xmax - xmin), 0.0,
+		0.0, -2.0*zpp / (ymax - ymin), (ymax + ymin) / (ymax - ymin), 0.0,
+		0.0, 0.0, (zmax + zmin) / (zmax - zmin), -2.0 * zmin * zmax / (zmax - zmin),
+		0.0, 0.0, -1.0, 0.0);
+}
+
 Matrix4x4 Matrix4x4::lookAt(AffinePoint& eye, AffinePoint& center, AffineVector& up)
 {
 	s1::AffineVector v, w;

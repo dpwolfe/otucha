@@ -20,6 +20,7 @@ namespace s1
 		Matrix4x4 operator=(const Matrix4x4& rhs);
 
 		static Matrix4x4 orthogonal(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax);
+		static Matrix4x4 perspective(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, double zpp);
 		static Matrix4x4 lookAt(AffinePoint& eye, AffinePoint& center, AffineVector& up);
 
 		static const Matrix4x4 Identity;
