@@ -44,6 +44,18 @@ Matrix4x4 Matrix4x4::operator=(const Matrix4x4& rhs)
 	return *this;
 }
 
+void Matrix4x4::copyToColumnMajor(float matrix[16])
+{
+	int i = 0;
+	for (int col = 0; col < 4; col++)
+	{
+		for (int row = 0; row < 4; row++)
+		{
+			matrix[i++] = static_cast<float>(this->_value[row][col]);
+		}
+	}
+}
+
 Matrix4x4 Matrix4x4::orthogonal(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax)
 {
 	assert(xmin < xmax && ymin < ymax && zmin < zmax);
@@ -51,7 +63,7 @@ Matrix4x4 Matrix4x4::orthogonal(double xmin, double xmax, double ymin, double ym
 	return Matrix4x4(
 		2.0 / (xmax - xmin), 0.0, 0.0, -(xmax + xmin) / (xmax - xmin),
 		0.0, 2.0 / (ymax - ymin), 0.0, -(ymax + ymin) / (ymax - ymin),
-		0.0, 0.0, 2.0 / (zmax - zmin), (zmax + zmin) / (zmax - zmin),
+		0.0, 0.0, -2.0 / (zmax - zmin), (zmax + zmin) / (zmax - zmin),
 		0.0, 0.0, 0.0, 1.0);
 }
 
@@ -72,7 +84,7 @@ Matrix4x4 Matrix4x4::lookAt(AffinePoint& eye, AffinePoint& center, AffineVector&
 	w = eye - center;
 	w.normalize();
 	s1::AffineVector parallelPart = w * w.dot(up);
-	v = w - parallelPart;
+	v = up - parallelPart;
 	v.normalize();
 	s1::AffineVector u = v.cross(w);
 	double tx = -u.dot(eye);
