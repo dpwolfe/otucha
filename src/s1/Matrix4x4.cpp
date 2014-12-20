@@ -81,15 +81,15 @@ Matrix4x4 Matrix4x4::perspective(double xmin, double xmax, double ymin, double y
 Matrix4x4 Matrix4x4::lookAt(AffinePoint& eye, AffinePoint& center, AffineVector& up)
 {
 	s1::AffineVector v, w;
-	w = eye - center;
+	w = center - eye;
 	w.normalize();
 	s1::AffineVector parallelPart = w * w.dot(up);
 	v = up - parallelPart;
 	v.normalize();
 	s1::AffineVector u = v.cross(w);
-	double tx = -u.dot(eye);
-	double ty = -v.dot(eye);
-	double tz = -w.dot(eye);
+	double tx = u.dot(eye);
+	double ty = v.dot(eye);
+	double tz = w.dot(eye);
 	return Matrix4x4(
 		u[0], u[1], u[2], tx,
 		v[0], v[1], v[2], ty,
