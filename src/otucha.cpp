@@ -19,7 +19,7 @@ void set3DViewingInformation(double xyz[6])
 	double zmin = -2.0;
 	double zmax = -0.01;
 
-	ModelView::setProjection(PERSPECTIVE);
+	ModelView::setProjectionType(PERSPECTIVE);
 	ModelView::setZProjectionPlane(zpp);
 	ModelView::setEyeCoordinatesZMinZMax(zmin, zmax);
 }
