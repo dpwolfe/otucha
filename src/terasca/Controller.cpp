@@ -1,5 +1,7 @@
 #include "Controller.h"
 
+#include <assert.h>
+
 #include <GL/glew.h>
 #include <GL/gl.h>
 
@@ -11,7 +13,7 @@ Controller::Controller() : glClearFlags(GL_COLOR_BUFFER_BIT)
 {
 	_instance = this;
 
-	// set default values for overallMCBoundingBox
+	// set default values for overallMCBoundingBox as intentionally invalid
 	overallMCBoundingBox[0] = overallMCBoundingBox[2] = overallMCBoundingBox[4] = 1.0;
 	overallMCBoundingBox[1] = overallMCBoundingBox[3] = overallMCBoundingBox[5] = -1.0;
 }
@@ -116,13 +118,40 @@ void Controller::setClearFlags(int rcFlags)
 
 void Controller::addModel(ModelView* modelView)
 {
+	assert(modelView != nullptr);
 	if (modelView != nullptr)
 	{
 		models.push_back(modelView);
+		_updateMCBoundingBox(modelView);
 	}
-	else
-	{
-		std::cerr << "Attempted to add a null model." << std::endl;
-		throw(errno);
+}
+
+void Controller::_updateMCBoundingBox(ModelView* modelView)
+{
+	assert(modelView != nullptr);
+	if (modelView != nullptr) {
+		// check to see if the default box is unchanged
+		if (overallMCBoundingBox[0] > overallMCBoundingBox[1])
+		{
+			// initialize with this model's
+			modelView->getMCBoundingBox(overallMCBoundingBox);
+		}
+		else
+		{
+			// update the current to include this box
+			double xyz[6];
+			modelView->getMCBoundingBox(xyz);
+			for (int i = 0; i < 5; i += 2)
+			{
+				if (xyz[i] < overallMCBoundingBox[i])
+				{
+					overallMCBoundingBox[i] = xyz[i];
+				}
+				if (xyz[i + 1] > overallMCBoundingBox[i + 1])
+				{
+					overallMCBoundingBox[i + 1] = xyz[i + 1];
+				}
+			}
+		}
 	}
 }

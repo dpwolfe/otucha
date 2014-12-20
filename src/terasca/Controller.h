@@ -50,4 +50,7 @@ protected:
 	static Controller* _instance;
 	static int initialWindowWidth, initialWindowHeight;
 	static bool checkForErrors(std::ostream& os, const std::string& context);
+
+private:
+	void _updateMCBoundingBox(ModelView* modelView);
 };

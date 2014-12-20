@@ -9,5 +9,9 @@ public:
 	virtual ~Block();
 
 	virtual void render();
+	virtual void getMCBoundingBox(double* xyzBounds) const;
+
+private:
+	double _xmin, _xmax, _ymin, _ymax, _zmin, _zmax;
 };
 
