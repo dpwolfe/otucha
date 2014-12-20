@@ -1,5 +1,9 @@
 #pragma once
 
+#include <string>
+#include <GL/glew.h>
+#include <GL/gl.h>
+
 #include "AffinePoint.h"
 #include "AffineVector.h"
 #include "ProjectionType.h"
@@ -17,12 +21,14 @@ public:
 
 	static void setMCRegionOfInterest(double xyz[6]);
 	static void setEyeCenterUp(s1::AffinePoint eye, s1::AffinePoint center, s1::AffineVector up);
-	static void setProjection(ProjectionType type);
+	static void setProjectionType(ProjectionType type);
 	static void setZProjectionPlane(double zpp);
 	static void setEyeCoordinatesZMinZMax(double zMin, double zMax);
 
 protected:
-	static void getMatrices(s1::Matrix4x4& mc_ec, s1::Matrix4x4& ec_dc);
+	static void _getMatrices(s1::Matrix4x4& mc_ec, s1::Matrix4x4& ec_dc);
+	static GLint _getUniformLocation(GLuint programId, const std::string& name);
+	static GLint _getAttribLocation(GLuint progrmId, const std::string& name);
 
 	static double _mcRegionOfInterest[6];
 	static s1::AffinePoint _eye, _center;

@@ -18,6 +18,7 @@ namespace s1
 		virtual ~Matrix4x4();
 
 		Matrix4x4 operator=(const Matrix4x4& rhs);
+		void copyToColumnMajor(float matrix[16]);
 
 		static Matrix4x4 orthogonal(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax);
 		static Matrix4x4 perspective(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, double zpp);
