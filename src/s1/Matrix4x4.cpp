@@ -1,6 +1,7 @@
 #include "Matrix4x4.h"
 
 #include <memory>
+#include <assert.h>
 
 using namespace s1;
 
@@ -45,6 +46,8 @@ Matrix4x4 Matrix4x4::operator=(const Matrix4x4& rhs)
 
 Matrix4x4 Matrix4x4::orthogonal(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax)
 {
+	assert(xmin < xmax && ymin < ymax && zmin < zmax);
+
 	return Matrix4x4(
 		2.0 / (xmax - xmin), 0.0, 0.0, -(xmax + xmin) / (xmax - xmin),
 		0.0, 2.0 / (ymax - ymin), 0.0, -(ymax + ymin) / (ymax - ymin),
@@ -54,6 +57,8 @@ Matrix4x4 Matrix4x4::orthogonal(double xmin, double xmax, double ymin, double ym
 
 Matrix4x4 Matrix4x4::perspective(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, double zpp)
 {
+	assert(xmin < xmax && ymin < ymax && zmin < zmax && zmax < 0 && zpp < 0);
+
 	return Matrix4x4(
 		-2.0*zpp / (xmax - xmin), 0.0, (xmax + xmin) / (xmax - xmin), 0.0,
 		0.0, -2.0*zpp / (ymax - ymin), (ymax + ymin) / (ymax - ymin), 0.0,
