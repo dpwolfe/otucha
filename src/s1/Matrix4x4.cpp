@@ -72,28 +72,27 @@ Matrix4x4 Matrix4x4::perspective(double xmin, double xmax, double ymin, double y
 	assert(xmin < xmax && ymin < ymax && zmin < zmax && zmax < 0 && zpp < 0);
 
 	return Matrix4x4(
-		-2.0*zpp / (xmax - xmin), 0.0, (xmax + xmin) / (xmax - xmin), 0.0,
-		0.0, -2.0*zpp / (ymax - ymin), (ymax + ymin) / (ymax - ymin), 0.0,
-		0.0, 0.0, (zmax + zmin) / (zmax - zmin), -2.0 * zmin * zmax / (zmax - zmin),
-		0.0, 0.0, -1.0, 0.0);
+		-2.0*zpp/(xmax-xmin), 0.0,                 (xmax+xmin)/(xmax-xmin),  0.0,
+		0.0,                 -2.0*zpp/(ymax-ymin), (ymax+ymin)/(ymax-ymin),  0.0,
+		0.0,                  0.0,                 (zmax+zmin)/(zmax-zmin), -2.0*zmin*zmax/(zmax-zmin),
+		0.0,                  0.0,                 -1.0,                      0.0);
 }
 
 Matrix4x4 Matrix4x4::lookAt(AffinePoint& eye, AffinePoint& center, AffineVector& up)
 {
-	s1::AffineVector v, w;
+	s1::AffineVector u, v, w;
 	w = center - eye;
 	w.normalize();
-	s1::AffineVector parallelPart = w * w.dot(up);
-	v = up - parallelPart;
-	v.normalize();
-	s1::AffineVector u = v.cross(w);
+	u = w.cross(up);
+	u.normalize();
+	v = u.cross(w);
 	double tx = u.dot(eye);
 	double ty = v.dot(eye);
 	double tz = w.dot(eye);
 	return Matrix4x4(
 		u[0], u[1], u[2], tx,
 		v[0], v[1], v[2], ty,
-		w[0], w[1], w[2], tz,
+		-w[0], -w[1], -w[2], tz,
 		0.0,  0.0,  0.0,  1.0);
 }
 

@@ -46,30 +46,45 @@ void Block::render()
 
 void Block::getMCBoundingBox(double* xyzBounds) const
 {
-	xyzBounds[0] = _xmin;
-	xyzBounds[1] = _xmax;
-	xyzBounds[2] = _ymin;
-	xyzBounds[3] = _ymax;
-	xyzBounds[4] = _zmin;
-	xyzBounds[5] = _zmax;
+	int buffer = 0.25;
+	xyzBounds[0] = _xmin - buffer;
+	xyzBounds[1] = _xmax + buffer;
+	xyzBounds[2] = _ymin - buffer;
+	xyzBounds[3] = _ymax + buffer;
+	xyzBounds[4] = _zmin - buffer;
+	xyzBounds[5] = _zmax + buffer;
 }
 
-void Block::_renderBlock(float* color)
+void Block::_renderBlock(float color[3])
 {
 	glBindVertexArray(_vao[0]);
-	glUniform3fv(_ppuLoc_kd, 1, color);
 
+	glUniform3fv(_ppuLoc_kd, 1, color);
 	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, 0.0, 1.0);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+	float color2[] = { 0.8f, 0.8f, 0.0f };
+	glUniform3fv(_ppuLoc_kd, 1, color2);
 	glVertexAttrib3f(_pvaLoc_mcNormal, 1.0, 0.0, 0.0);
 	glDrawArrays(GL_TRIANGLE_STRIP, 2, 4);
+
+	float color3[] = { 0.0f, 0.8f, 0.0f };
+	glUniform3fv(_ppuLoc_kd, 1, color3);
 	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, 0.0, -1.0);
 	glDrawArrays(GL_TRIANGLE_STRIP, 4, 4);
 
+	float color4[] = { 0.8f, 0.0f, 0.0f };
+	glUniform3fv(_ppuLoc_kd, 1, color4);
 	glVertexAttrib3f(_pvaLoc_mcNormal, -1.0, 0.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, _indices_xmin);
+
+	float color5[] = { 0.8f, 0.0f, 0.8f };
+	glUniform3fv(_ppuLoc_kd, 1, color5);
 	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, -1.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, _indices_ymin);
+
+	float color6[] = { 0.0f, 0.8f, 0.8f };
+	glUniform3fv(_ppuLoc_kd, 1, color6);
 	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, 1.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, _indices_ymax);
 }
