@@ -46,7 +46,7 @@ void Block::render()
 
 void Block::getMCBoundingBox(double* xyzBounds) const
 {
-	int buffer = 0.25;
+	double buffer = 0.25;
 	xyzBounds[0] = _xmin - buffer;
 	xyzBounds[1] = _xmax + buffer;
 	xyzBounds[2] = _ymin - buffer;
