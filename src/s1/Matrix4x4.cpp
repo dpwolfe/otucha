@@ -61,10 +61,10 @@ Matrix4x4 Matrix4x4::orthogonal(double xmin, double xmax, double ymin, double ym
 	assert(xmin < xmax && ymin < ymax && zmin < zmax);
 
 	return Matrix4x4(
-		2.0 / (xmax - xmin), 0.0, 0.0, -(xmax + xmin) / (xmax - xmin),
-		0.0, 2.0 / (ymax - ymin), 0.0, -(ymax + ymin) / (ymax - ymin),
-		0.0, 0.0, -2.0 / (zmax - zmin), (zmax + zmin) / (zmax - zmin),
-		0.0, 0.0, 0.0, 1.0);
+		2.0/(xmax-xmin), 0.0,              0.0,             -(xmax+xmin)/(xmax-xmin),
+		0.0,             2.0/(ymax-ymin),  0.0,             -(ymax+ymin)/(ymax-ymin),
+		0.0,             0.0,             -2.0/(zmax-zmin),  (zmax+zmin)/(zmax-zmin),
+		0.0,             0.0,              0.0,              1.0);
 }
 
 Matrix4x4 Matrix4x4::perspective(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, double zpp)
