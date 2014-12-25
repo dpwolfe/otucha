@@ -161,7 +161,7 @@ void GLFWController::cursorPosCB(GLFWwindow* window, double x, double y)
 void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
 {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 	if ((rcFlags & RenderingContextBit::DEPTH) == 0)
 	{
 		glfwWindowHint(GLFW_DEPTH_BITS, 0);
@@ -203,5 +203,10 @@ void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
 	else
 	{
 		std::cout << "GLEW initialized with version " << glewGetString(GLEW_VERSION);
+	}
+
+	if ((rcFlags & RenderingContextBit::DEPTH) == RenderingContextBit::DEPTH)
+	{
+		glEnable(GL_DEPTH_TEST);
 	}
 }
