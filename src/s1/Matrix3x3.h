@@ -12,7 +12,10 @@ namespace s1 {
 
 		virtual ~Matrix3x3();
 
+		Matrix3x3 operator=(const Matrix3x3& rhs);
 		double determinant() const;
+		Matrix3x3 transpose() const;
+		Matrix3x3 inverse() const;
 
 		static const Matrix3x3 Identity;
 

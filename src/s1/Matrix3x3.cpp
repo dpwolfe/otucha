@@ -34,6 +34,12 @@ Matrix3x3::~Matrix3x3()
 
 }
 
+Matrix3x3 Matrix3x3::operator=(const Matrix3x3& rhs)
+{
+	this->_copyFrom(rhs);
+	return *this;
+}
+
 double Matrix3x3::determinant() const
 {
 	double det = _value[0][0] * (_value[1][1] * _value[2][2] - _value[2][1] * _value[1][2]);
@@ -45,4 +51,28 @@ double Matrix3x3::determinant() const
 void Matrix3x3::_copyFrom(const Matrix3x3& m)
 {
 	memcpy((void*)_value, (void*)m._value, 9 * sizeof(double));
+}
+
+Matrix3x3 Matrix3x3::transpose() const
+{
+	return Matrix3x3(
+		this->_value[0][0], this->_value[1][0], this->_value[2][0],
+		this->_value[0][1], this->_value[1][1], this->_value[2][1],
+		this->_value[0][2], this->_value[1][2], this->_value[2][2]);
+}
+
+Matrix3x3 Matrix3x3::inverse() const
+{
+	double recDet = 1.0/determinant();
+	return Matrix3x3(
+		(_value[1][1] * _value[2][2] - _value[2][1] * _value[1][2]) * recDet,
+		(_value[0][2] * _value[2][1] - _value[2][2] * _value[0][1]) * recDet,
+		(_value[0][1] * _value[1][2] - _value[1][1] * _value[0][2]) * recDet,
+		(_value[1][2] * _value[2][0] - _value[2][2] * _value[1][0]) * recDet,
+		(_value[0][0] * _value[2][2] - _value[2][0] * _value[0][2]) * recDet,
+		(_value[0][2] * _value[1][0] - _value[1][2] * _value[0][0]) * recDet,
+		(_value[1][0] * _value[2][1] - _value[2][0] * _value[1][1]) * recDet,
+		(_value[0][1] * _value[2][0] - _value[2][1] * _value[0][0]) * recDet,
+		(_value[0][0] * _value[1][1] - _value[1][0] * _value[0][1]) * recDet
+		);
 }
