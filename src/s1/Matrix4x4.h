@@ -8,6 +8,16 @@ namespace s1
 	class Matrix4x4
 	{
 	public:
+		class Matrix4x4Row
+		{
+		public:
+			Matrix4x4Row(const Matrix4x4& parent, int row);
+			double operator[](int column) const;
+		private:
+			const Matrix4x4& _parent;
+			int _row;
+		};
+
 		Matrix4x4();
 		Matrix4x4(const Matrix4x4& m);
 		Matrix4x4(
@@ -18,7 +28,8 @@ namespace s1
 		virtual ~Matrix4x4();
 
 		Matrix4x4 operator=(const Matrix4x4& rhs);
-		void copyToColumnMajor(float matrix[16]);
+		Matrix4x4Row operator[](int row) const;
+		void copyToColumnMajor(float matrix[16]) const;
 
 		static Matrix4x4 orthogonal(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax);
 		static Matrix4x4 perspective(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, double zpp);
@@ -27,8 +38,11 @@ namespace s1
 		static const Matrix4x4 Identity;
 
 	private:
+		friend class Matrix4x4Row;
+
 		double _value[4][4];
 
 		void _copyFrom(const Matrix4x4& m);
+		double _get(int row, int column) const;
 	};
 }
