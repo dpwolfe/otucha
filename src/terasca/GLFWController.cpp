@@ -205,7 +205,7 @@ void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
 		std::cout << "GLEW initialized with version " << glewGetString(GLEW_VERSION);
 	}
 
-	if ((rcFlags & RenderingContextBit::DEPTH) == RenderingContextBit::DEPTH)
+	if ((rcFlags & RenderingContextBit::DEPTH) != 0)
 	{
 		glEnable(GL_DEPTH_TEST);
 	}
