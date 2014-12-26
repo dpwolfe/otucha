@@ -29,6 +29,13 @@ Matrix3x3::Matrix3x3(
 	_value[2][0] = r3c1; _value[2][1] = r3c2; _value[2][2] = r3c3;
 }
 
+Matrix3x3::Matrix3x3(const Matrix4x4& m)
+{
+	_value[0][0] = m[0][0]; _value[0][1] = m[0][1]; _value[0][2] = m[0][2];
+	_value[1][0] = m[1][0]; _value[1][1] = m[1][1]; _value[1][2] = m[1][2];
+	_value[2][0] = m[2][0]; _value[2][1] = m[2][1]; _value[2][2] = m[2][2];
+}
+
 Matrix3x3::~Matrix3x3()
 {
 
@@ -75,4 +82,16 @@ Matrix3x3 Matrix3x3::inverse() const
 		(_value[0][1] * _value[2][0] - _value[2][1] * _value[0][0]) * recDet,
 		(_value[0][0] * _value[1][1] - _value[1][0] * _value[0][1]) * recDet
 		);
+}
+
+void Matrix3x3::copyToColumnMajor(float matrix[9]) const
+{
+	int i = 0;
+	for (int col = 0; col < 3; col++)
+	{
+		for (int row = 0; row < 3; row++)
+		{
+			matrix[i++] = static_cast<float>(this->_value[row][col]);
+		}
+	}
 }

@@ -5,6 +5,13 @@
 
 using namespace s1;
 
+Matrix4x4::Matrix4x4Row::Matrix4x4Row(const Matrix4x4& parent, int row)
+	: _parent(parent), _row(row) {}
+
+double Matrix4x4::Matrix4x4Row::operator[](int column) const {
+	return _parent._get(_row, column);
+}
+
 const Matrix4x4 Matrix4x4::Identity = Matrix4x4(
 	1.0, 0.0, 0.0, 0.0,
 	0.0, 1.0, 0.0, 0.0,
@@ -44,7 +51,12 @@ Matrix4x4 Matrix4x4::operator=(const Matrix4x4& rhs)
 	return *this;
 }
 
-void Matrix4x4::copyToColumnMajor(float matrix[16])
+Matrix4x4::Matrix4x4Row Matrix4x4::operator[](int row) const
+{
+	return Matrix4x4Row(*this, row);
+}
+
+void Matrix4x4::copyToColumnMajor(float matrix[16]) const
 {
 	int i = 0;
 	for (int col = 0; col < 4; col++)
@@ -99,4 +111,9 @@ Matrix4x4 Matrix4x4::lookAt(AffinePoint& eye, AffinePoint& center, AffineVector&
 void Matrix4x4::_copyFrom(const Matrix4x4& m)
 {
 	memcpy((void*)_value, (void*)m._value, 16 * sizeof(double));
+}
+
+double Matrix4x4::_get(int row, int column) const
+{
+	return _value[row][column];
 }
