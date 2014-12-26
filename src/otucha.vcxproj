@@ -72,6 +72,7 @@
     <ClCompile Include="rffalcon\Block.cpp" />
     <ClCompile Include="s1\AffinePoint.cpp" />
     <ClCompile Include="s1\AffineVector.cpp" />
+    <ClCompile Include="s1\Matrix3x3.cpp" />
     <ClCompile Include="s1\Matrix4x4.cpp" />
     <ClCompile Include="terasca\Controller.cpp" />
     <ClCompile Include="terasca\GLFWController.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="rffalcon\Block.h" />
     <ClInclude Include="s1\AffinePoint.h" />
     <ClInclude Include="s1\AffineVector.h" />
+    <ClInclude Include="s1\Matrix3x3.h" />
     <ClInclude Include="s1\Matrix4x4.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="terasca\Controller.h" />
@@ -91,6 +93,10 @@
     <ClInclude Include="terasca\ModelViewWithShader.h" />
     <ClInclude Include="terasca\ProjectionType.h" />
     <ClInclude Include="terasca\ShaderProgram.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="simple.fsh" />
+    <None Include="simple.vsh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
