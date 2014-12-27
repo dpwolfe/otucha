@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{84124C6A-608A-4F14-A4B5-7B581B16EA9E}</ProjectGuid>
-    <RootNamespace>otucha</RootNamespace>
+    <ProjectGuid>{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}</ProjectGuid>
+    <RootNamespace>s1</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -38,19 +38,15 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>../external/lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;../external/include;terasca;s1;rffalcon</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;glfw3.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,32 +64,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="otucha.cpp" />
-    <ClCompile Include="rffalcon\Block.cpp" />
-    <ClCompile Include="terasca\Controller.cpp" />
-    <ClCompile Include="terasca\GLFWController.cpp" />
-    <ClCompile Include="terasca\ModelView.cpp" />
-    <ClCompile Include="terasca\ModelViewWithShader.cpp" />
-    <ClCompile Include="terasca\ShaderProgram.cpp" />
+    <ClInclude Include="AffinePoint.h" />
+    <ClInclude Include="AffineVector.h" />
+    <ClInclude Include="Matrix3x3.h" />
+    <ClInclude Include="Matrix4x4.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="rffalcon\Block.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="terasca\Controller.h" />
-    <ClInclude Include="terasca\GLFWController.h" />
-    <ClInclude Include="terasca\ModelView.h" />
-    <ClInclude Include="terasca\ModelViewWithShader.h" />
-    <ClInclude Include="terasca\ProjectionType.h" />
-    <ClInclude Include="terasca\ShaderProgram.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="simple.fsh" />
-    <None Include="simple.vsh" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="s1\s1.vcxproj">
-      <Project>{3a2c9d07-63fd-4565-b7bd-a8784699b1a2}</Project>
-    </ProjectReference>
+    <ClCompile Include="AffinePoint.cpp" />
+    <ClCompile Include="AffineVector.cpp" />
+    <ClCompile Include="Matrix3x3.cpp" />
+    <ClCompile Include="Matrix4x4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
