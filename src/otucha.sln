@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "otucha", "otucha.vcxproj", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "s1", "s1\s1.vcxproj", "{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "tests\tests.vcxproj", "{7E45B567-BC00-41E1-B023-4D4A32A63C4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -24,6 +26,10 @@ Global
 		{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}.Debug|Win32.Build.0 = Debug|Win32
 		{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}.Release|Win32.ActiveCfg = Release|Win32
 		{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}.Release|Win32.Build.0 = Release|Win32
+		{7E45B567-BC00-41E1-B023-4D4A32A63C4F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7E45B567-BC00-41E1-B023-4D4A32A63C4F}.Debug|Win32.Build.0 = Debug|Win32
+		{7E45B567-BC00-41E1-B023-4D4A32A63C4F}.Release|Win32.ActiveCfg = Release|Win32
+		{7E45B567-BC00-41E1-B023-4D4A32A63C4F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
