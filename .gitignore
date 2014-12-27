@@ -35,3 +35,5 @@ src/Debug/
 *.sdf
 *.suo
 *.user
+external/gtest-1.7.0/
+src/s1/Debug/

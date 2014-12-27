@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "otucha", "otucha.vcxproj", "{84124C6A-608A-4F14-A4B5-7B581B16EA9E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3A2C9D07-63FD-4565-B7BD-A8784699B1A2} = {3A2C9D07-63FD-4565-B7BD-A8784699B1A2}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "s1", "s1\s1.vcxproj", "{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{84124C6A-608A-4F14-A4B5-7B581B16EA9E}.Debug|Win32.Build.0 = Debug|Win32
 		{84124C6A-608A-4F14-A4B5-7B581B16EA9E}.Release|Win32.ActiveCfg = Release|Win32
 		{84124C6A-608A-4F14-A4B5-7B581B16EA9E}.Release|Win32.Build.0 = Release|Win32
+		{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}.Debug|Win32.Build.0 = Debug|Win32
+		{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}.Release|Win32.ActiveCfg = Release|Win32
+		{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

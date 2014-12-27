@@ -1,5 +1,6 @@
 #include "Block.h"
 #include "Matrix4x4.h"
+#include "Matrix3x3.h"
 
 typedef float vec3[3];
 
@@ -38,6 +39,11 @@ void Block::render()
 	float ec_dc_cm[16];
 	ec_dc.copyToColumnMajor(ec_dc_cm);
 	glUniformMatrix4fv(_ppuLoc_ec_dc, 1, GL_FALSE, ec_dc_cm);
+
+	s1::Matrix3x3 normal_mat = s1::Matrix3x3(mc_ec).inverse().transpose();
+	float normal_mat_cm[9];
+	normal_mat.copyToColumnMajor(normal_mat_cm);
+	glUniformMatrix3fv(_ppuLoc_normal_mat, 1, GL_FALSE, normal_mat_cm);
 
 	float color[] = { 0.0f, 0.0f, 0.8f };
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

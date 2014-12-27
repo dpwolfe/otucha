@@ -27,12 +27,6 @@
     <ClCompile Include="terasca\ModelView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="s1\AffinePoint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="s1\AffineVector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="terasca\ModelViewWithShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -40,12 +34,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="terasca\ShaderProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="s1\Matrix4x4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="s1\Matrix3x3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,12 +50,6 @@
     <ClInclude Include="terasca\ModelView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="s1\AffinePoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="s1\AffineVector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="terasca\ProjectionType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -78,12 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="terasca\ShaderProgram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="s1\Matrix4x4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="s1\Matrix3x3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
