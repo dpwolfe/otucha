@@ -4,6 +4,13 @@
 
 using namespace s1;
 
+Matrix3x3::Matrix3x3Row::Matrix3x3Row(const Matrix3x3& parent, int row)
+	: _parent(parent), _row(row) {}
+
+double Matrix3x3::Matrix3x3Row::operator[](int column) const {
+	return _parent._get(_row, column);
+}
+
 const Matrix3x3 Matrix3x3::Identity = Matrix3x3(
 	1.0, 0.0, 0.0,
 	0.0, 1.0, 0.0,
@@ -45,6 +52,20 @@ Matrix3x3 Matrix3x3::operator=(const Matrix3x3& rhs)
 {
 	this->_copyFrom(rhs);
 	return *this;
+}
+
+Matrix3x3::Matrix3x3Row Matrix3x3::operator[](int row) const
+{
+	return Matrix3x3Row(*this, row);
+}
+
+bool Matrix3x3::operator==(const Matrix3x3& rhs)
+{
+	int n = 8;
+	while (n >= 0 && _value[n] == rhs._value[n]) {
+		n--;
+	}
+	return n == -1;
 }
 
 double Matrix3x3::determinant() const
@@ -94,4 +115,9 @@ void Matrix3x3::copyToColumnMajor(float matrix[9]) const
 			matrix[i++] = static_cast<float>(this->_value[row][col]);
 		}
 	}
+}
+
+double Matrix3x3::_get(int row, int column) const
+{
+	return _value[row][column];
 }

@@ -5,6 +5,16 @@
 namespace s1 {
 	class Matrix3x3 {
 	public:
+		class Matrix3x3Row
+		{
+		public:
+			Matrix3x3Row(const Matrix3x3& parent, int row);
+			double operator[](int column) const;
+		private:
+			const Matrix3x3& _parent;
+			int _row;
+		};
+
 		Matrix3x3();
 		Matrix3x3(const Matrix3x3& m);
 		Matrix3x3(
@@ -16,6 +26,8 @@ namespace s1 {
 		virtual ~Matrix3x3();
 
 		Matrix3x3 operator=(const Matrix3x3& rhs);
+		Matrix3x3Row operator[](int row) const;
+		bool operator==(const Matrix3x3& rhs);
 		double determinant() const;
 		Matrix3x3 transpose() const;
 		Matrix3x3 inverse() const;
@@ -27,5 +39,6 @@ namespace s1 {
 		double _value[3][3];
 
 		void _copyFrom(const Matrix3x3& m);
+		double _get(int row, int column) const;
 	};
 }
