@@ -28,6 +28,7 @@ namespace s1 {
 		Matrix3x3 operator=(const Matrix3x3& rhs);
 		Matrix3x3Row operator[](int row) const;
 		bool operator==(const Matrix3x3& rhs);
+		bool operator!=(const Matrix3x3& rhs);
 		double determinant() const;
 		Matrix3x3 transpose() const;
 		Matrix3x3 inverse() const;
