@@ -29,6 +29,13 @@ TEST_CASE("Matrix3x3 not equal", "[operators]") {
 	REQUIRE(m1 != m2);
 }
 
+TEST_CASE("Matrix3x3 inverse multiplied by original equals identity", "[operators]") {
+	s1::Matrix3x3 m1(1, 1, 2, 3, 1, 5, 6, 2, 8);
+	s1::Matrix3x3 m2(-0.5, -1, 0.75, 1.5, -1, 0.25, 0, 1, -0.5);
+	s1::Matrix3x3 m3 = m1 * m2;
+	REQUIRE(s1::Matrix3x3::Identity == m3);
+}
+
 TEST_CASE("Matrix3x3 transpose", "[methods]") {
 	s1::Matrix3x3 m1(0, 1, 2, 3, 4, 5, 6, 7, 8);
 	s1::Matrix3x3 m2 = m1.transpose();

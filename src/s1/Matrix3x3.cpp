@@ -59,7 +59,7 @@ Matrix3x3::Matrix3x3Row Matrix3x3::operator[](int row) const
 	return Matrix3x3Row(*this, row);
 }
 
-bool Matrix3x3::operator==(const Matrix3x3& rhs)
+bool Matrix3x3::operator==(const Matrix3x3& rhs) const
 {
 	bool equal = true;
 	for (int row = 0; row < 3 && equal; row++)
@@ -75,9 +75,27 @@ bool Matrix3x3::operator==(const Matrix3x3& rhs)
 	return equal;
 }
 
-bool Matrix3x3::operator!=(const Matrix3x3& rhs)
+bool Matrix3x3::operator!=(const Matrix3x3& rhs) const
 {
 	return !(*this == rhs);
+}
+
+Matrix3x3 Matrix3x3::operator*(const Matrix3x3& rhs) const
+{
+	Matrix3x3 result;
+	for (int row = 0; row < 3; row++)
+	{
+		for (int column = 0; column < 3; column++)
+		{
+			double sum = 0.0;
+			for (int i = 0; i < 3; i++)
+			{
+				sum += _value[row][i] * rhs._value[i][column];
+			}
+			result._value[row][column] = sum;
+		}
+	}
+	return result;
 }
 
 double Matrix3x3::determinant() const
