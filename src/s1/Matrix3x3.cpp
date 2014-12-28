@@ -61,11 +61,23 @@ Matrix3x3::Matrix3x3Row Matrix3x3::operator[](int row) const
 
 bool Matrix3x3::operator==(const Matrix3x3& rhs)
 {
-	int n = 8;
-	while (n >= 0 && _value[n] == rhs._value[n]) {
-		n--;
+	bool equal = true;
+	for (int row = 0; row < 3 && equal; row++)
+	{
+		for (int column = 0; column < 3 && equal; column++)
+		{
+			if (_value[row][column] != rhs._value[row][column])
+			{
+				equal = false;
+			}
+		}
 	}
-	return n == -1;
+	return equal;
+}
+
+bool Matrix3x3::operator!=(const Matrix3x3& rhs)
+{
+	return !(*this == rhs);
 }
 
 double Matrix3x3::determinant() const
