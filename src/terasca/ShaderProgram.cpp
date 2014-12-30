@@ -26,6 +26,10 @@ void ShaderProgram::initialize()
 		compileShader(_shaders[i]);
 		glAttachShader(_id, _shaders[i].id);
 	}
+}
+
+void ShaderProgram::link()
+{
 	glLinkProgram(_id);
 	GLint linked;
 	glGetProgramiv(_id, GL_LINK_STATUS, &linked);

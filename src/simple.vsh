@@ -26,6 +26,6 @@ void main()
 {
 	vec4 p_ecPosition = mc_ec * vec4(mcPosition, 1.0);
 	vec3 ec_nHat = normalize(normal_mat * mcNormal);
-	colorToFS = vec3(0.8, 0.0, 0.0); //evaluateLightingModel(p_ecPosition.xyz, ec_nHat);
+	colorToFS = evaluateLightingModel(p_ecPosition.xyz, ec_nHat);
 	gl_Position = ec_dc * p_ecPosition;
 }

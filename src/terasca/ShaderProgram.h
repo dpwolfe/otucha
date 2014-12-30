@@ -13,6 +13,7 @@ public:
 	virtual ~ShaderProgram();
 
 	int getId() const { return _id; }
+	void link();
 
 private:
 	struct Shader
