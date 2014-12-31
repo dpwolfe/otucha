@@ -3,12 +3,21 @@ C_FLAGS = -g -c -DGL_GLEXT_PROTOTYPES $(INC)
 
 LINK = $(CXX) -v -fPIC -g
 LOCAL_UTIL_LIBRARIES = -L../external/lib
-OGL_LIBRARIES = -lglew32 -lglfw3 -lGlU32
 
 OBJS = otucha.o Controller.o GLFWController.o ModelView.o ModelViewWithShader.o ShaderProgram.o AffinePoint.o AffineVector.o Matrix3x3.o Matrix4x4.o Block.o
 
+ifeq ($(CXX),emcc)
+	OUT_FILE = otucha.html
+	ADDITIONAL_ARGS = -s USE_GLFW=3 --embed-file simple.vsh --embed-file simple.fsh
+	OGL_LIBRARIES = -lglew32 -lglfw3 -lGlU32
+else
+	OUT_FILE = otucha
+	ADDITIONAL_ARGS = 
+	OGL_LIBRARIES = -lglew -lglfw3 -lGlU
+endif
+
 otucha: $(OBJS)
-	$(LINK) $(OBJS) $(LOCAL_UTIL_LIBRARIES) $(OGL_LIBRARIES) -s USE_GLFW=3 -o otucha.html --embed-file simple.vsh --embed-file simple.fsh
+	$(LINK) $(OBJS) $(LOCAL_UTIL_LIBRARIES) $(OGL_LIBRARIES) -o $(OUT_FILE) $(ADDITIONAL_ARGS)
 	
 otucha.o: otucha.cpp
 	$(CXX) $(C_FLAGS) otucha.cpp
