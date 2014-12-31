@@ -4,7 +4,11 @@
 #include <memory>
 
 #include <GL/glew.h>
-#include <GL/GL.h>
+#ifdef _WIN32
+    #include <GL/gl.h>
+#elif __APPLE__
+    #include <OpenGL/gl.h>
+#endif
 
 class ShaderProgram
 {

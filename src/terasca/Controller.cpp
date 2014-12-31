@@ -3,7 +3,11 @@
 #include <assert.h>
 
 #include <GL/glew.h>
-#include <GL/gl.h>
+#ifdef _WIN32
+    #include <GL/gl.h>
+#elif __APPLE__
+    #include <OpenGL/gl.h>
+#endif
 
 Controller* Controller::_instance = nullptr;
 int Controller::initialWindowWidth = 512;

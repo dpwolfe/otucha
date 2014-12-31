@@ -1,4 +1,4 @@
-INC = -I. -Iterasca -Is1 -Irffalcon
+INC = -I. -Iterasca -Is1 -Irffalcon -I../external/include
 C_FLAGS = -g -c -DGL_GLEXT_PROTOTYPES $(INC)
 
 LINK = $(CXX) -v -fPIC -g
