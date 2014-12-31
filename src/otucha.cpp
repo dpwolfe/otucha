@@ -26,7 +26,7 @@ void set3DViewingInformation(double xyz[6])
 
 int main(int argc, char* argv[])
 {
-	GLFWController c("otucha", Controller::RenderingContextBit::DEPTH);
+	GLFWController c("otucha", Controller::DEPTH);
 	c.reportVersions(std::cout);
 	ModelViewWithShader::setShaderSources("simple.vsh", "simple.fsh");
 	c.addModel(new Block(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f));

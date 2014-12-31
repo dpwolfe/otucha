@@ -106,11 +106,11 @@ void Controller::screenSpaceToDeviceSpace(int x, int y, double& dsX, double& dxY
 void Controller::setClearFlags(int rcFlags)
 {
 	glClearFlags = GL_COLOR_BUFFER_BIT;
-	if ((rcFlags & RenderingContextBit::DEPTH) != 0)
+	if ((rcFlags & DEPTH) != 0)
 	{
 		glClearFlags |= GL_DEPTH_BUFFER_BIT;
 	}
-	if ((rcFlags & RenderingContextBit::STENCIL) != 0)
+	if ((rcFlags & STENCIL) != 0)
 	{
 		glClearFlags |= GL_STENCIL_BUFFER_BIT;
 	}

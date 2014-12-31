@@ -87,6 +87,7 @@
     <ClInclude Include="terasca\ShaderProgram.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Makefile" />
     <None Include="simple.fsh" />
     <None Include="simple.vsh" />
   </ItemGroup>
