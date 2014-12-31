@@ -70,5 +70,6 @@
     <None Include="simple.vsh">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Makefile" />
   </ItemGroup>
 </Project>

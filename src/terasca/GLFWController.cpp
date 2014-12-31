@@ -86,18 +86,18 @@ void GLFWController::mouseButtonCB(GLFWwindow*, int button, int action, int mods
 {
 	if (_instance != nullptr)
 	{
-		Controller::MouseButton mButton;
+		MouseButton mButton;
 		if (button == GLFW_MOUSE_BUTTON_LEFT)
 		{
-			mButton = Controller::LEFT_BUTTON;
+			mButton = LEFT_BUTTON;
 		}
 		else if (button == GLFW_MOUSE_BUTTON_RIGHT)
 		{
-			mButton = Controller::RIGHT_BUTTON;
+			mButton = RIGHT_BUTTON;
 		}
 		else
 		{
-			mButton = Controller::MIDDLE_BUTTON;
+			mButton = MIDDLE_BUTTON;
 		}
 
 		bool isPressed = (action == GLFW_PRESS);
@@ -111,15 +111,15 @@ int GLFWController::mapMods(int glfwMods)
 	int controllerMods = 0;
 	if ((glfwMods & GLFW_MOD_ALT) != 0)
 	{
-		controllerMods |= ModifierBit::ALT;
+		controllerMods |= ALT;
 	}
 	if ((glfwMods & GLFW_MOD_CONTROL) != 0)
 	{
-		controllerMods |= ModifierBit::CONTROL;
+		controllerMods |= CONTROL;
 	}
 	if ((glfwMods & GLFW_MOD_SHIFT) != 0)
 	{
-		controllerMods |= ModifierBit::SHIFT;
+		controllerMods |= SHIFT;
 	}
 	return controllerMods;
 }
@@ -162,7 +162,7 @@ void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
 {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
-	if ((rcFlags & RenderingContextBit::DEPTH) == 0)
+	if ((rcFlags & DEPTH) == 0)
 	{
 		glfwWindowHint(GLFW_DEPTH_BITS, 0);
 	}
@@ -205,7 +205,7 @@ void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
 		std::cout << "GLEW initialized with version " << glewGetString(GLEW_VERSION);
 	}
 
-	if ((rcFlags & RenderingContextBit::DEPTH) != 0)
+	if ((rcFlags & DEPTH) != 0)
 	{
 		glEnable(GL_DEPTH_TEST);
 	}
