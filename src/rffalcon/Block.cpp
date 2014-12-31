@@ -46,7 +46,9 @@ void Block::render()
 	glUniformMatrix3fv(_ppuLoc_normal_mat, 1, GL_FALSE, normal_mat_cm);
 
 	float color[] = { 0.0f, 0.0f, 0.8f };
+#ifndef __EMSCRIPTEN__
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+#endif
 	_renderBlock(color);
 }
 
