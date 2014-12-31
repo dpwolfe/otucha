@@ -4,10 +4,10 @@
 #include <GL/glew.h>
 #include <GL/gl.h>
 
-#include "AffinePoint.h"
-#include "AffineVector.h"
-#include "ProjectionType.h"
-#include "Matrix4x4.h"
+#include "AffinePoint.hpp"
+#include "AffineVector.hpp"
+#include "ProjectionType.hpp"
+#include "Matrix4x4.hpp"
 
 class ModelView
 {

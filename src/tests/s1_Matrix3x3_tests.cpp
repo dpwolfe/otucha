@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "Matrix3x3.h"
+#include "Matrix3x3.hpp"
 
 TEST_CASE("Matrix3x3 equality with default constructor", "[constructors]") {
 	s1::Matrix3x3 m;

@@ -1,4 +1,4 @@
-#include "AffinePoint.h"
+#include "AffinePoint.hpp"
 
 namespace s1 {
 

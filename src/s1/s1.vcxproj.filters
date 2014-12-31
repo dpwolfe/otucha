@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\AffineVector.h">
+    <ClInclude Include="..\AffineVector.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\AffinePoint.h">
+    <ClInclude Include="..\AffinePoint.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Matrix4x4.h">
+    <ClInclude Include="..\Matrix4x4.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Matrix3x3.h">
+    <ClInclude Include="..\Matrix3x3.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

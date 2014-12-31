@@ -1,8 +1,8 @@
-#include "AffineVector.h"
+#include "AffineVector.hpp"
 
 #include <math.h>
 
-#include "AffinePoint.h"
+#include "AffinePoint.hpp"
 
 namespace s1 {
 

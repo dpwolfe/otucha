@@ -77,14 +77,13 @@
     <ClCompile Include="terasca\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="rffalcon\Block.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="terasca\Controller.h" />
-    <ClInclude Include="terasca\GLFWController.h" />
-    <ClInclude Include="terasca\ModelView.h" />
-    <ClInclude Include="terasca\ModelViewWithShader.h" />
-    <ClInclude Include="terasca\ProjectionType.h" />
-    <ClInclude Include="terasca\ShaderProgram.h" />
+    <ClInclude Include="rffalcon\Block.hpp" />
+    <ClInclude Include="terasca\Controller.hpp" />
+    <ClInclude Include="terasca\GLFWController.hpp" />
+    <ClInclude Include="terasca\ModelView.hpp" />
+    <ClInclude Include="terasca\ModelViewWithShader.hpp" />
+    <ClInclude Include="terasca\ProjectionType.hpp" />
+    <ClInclude Include="terasca\ShaderProgram.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />

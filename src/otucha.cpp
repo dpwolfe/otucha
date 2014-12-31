@@ -1,9 +1,9 @@
-#include "GLFWController.h"
-#include "ModelView.h"
-#include "AffinePoint.h"
-#include "AffineVector.h"
-#include "ModelViewWithShader.h"
-#include "Block.h"
+#include "GLFWController.hpp"
+#include "ModelView.hpp"
+#include "AffinePoint.hpp"
+#include "AffineVector.hpp"
+#include "ModelViewWithShader.hpp"
+#include "Block.hpp"
 
 void set3DViewingInformation(double xyz[6])
 {
