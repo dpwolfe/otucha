@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include "ModelView.h"
-#include "ShaderProgram.h"
+#include "ModelView.hpp"
+#include "ShaderProgram.hpp"
 
 class ModelViewWithShader : public ModelView
 {

@@ -1,8 +1,8 @@
 #include <iostream>
 
 
-#include "ModelView.h"
-#include "Matrix4x4.h"
+#include "ModelView.hpp"
+#include "Matrix4x4.hpp"
 
 double ModelView::_mcRegionOfInterest[6] = { -1.0, 1.0, -1.0, 1.0, -1.0, 1.0 };
 s1::AffinePoint ModelView::_eye(0, 0, 2);

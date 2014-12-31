@@ -1,6 +1,6 @@
-#include "Block.h"
-#include "Matrix4x4.h"
-#include "Matrix3x3.h"
+#include "Block.hpp"
+#include "Matrix4x4.hpp"
+#include "Matrix3x3.hpp"
 
 typedef float vec3[3];
 

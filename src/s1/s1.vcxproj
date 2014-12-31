@@ -64,10 +64,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AffinePoint.h" />
-    <ClInclude Include="AffineVector.h" />
-    <ClInclude Include="Matrix3x3.h" />
-    <ClInclude Include="Matrix4x4.h" />
+    <ClInclude Include="AffinePoint.hpp" />
+    <ClInclude Include="AffineVector.hpp" />
+    <ClInclude Include="Matrix3x3.hpp" />
+    <ClInclude Include="Matrix4x4.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AffinePoint.cpp" />

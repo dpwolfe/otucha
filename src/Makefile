@@ -13,25 +13,25 @@ otucha: $(OBJS)
 otucha.o: otucha.cpp
 	$(CXX) $(C_FLAGS) otucha.cpp
 	
-Controller.o: terasca/Controller.h terasca/Controller.cpp
+Controller.o: terasca/Controller.hpp terasca/Controller.cpp
 	$(CXX) $(C_FLAGS) terasca/Controller.cpp
-GLFWController.o: terasca/GLFWController.h terasca/GLFWController.cpp
+GLFWController.o: terasca/GLFWController.hpp terasca/GLFWController.cpp
 	$(CXX) $(C_FLAGS) terasca/GLFWController.cpp
-ModelView.o: terasca/ModelView.h terasca/ModelView.cpp
+ModelView.o: terasca/ModelView.hpp terasca/ModelView.cpp
 	$(CXX) $(C_FLAGS) terasca/ModelView.cpp
-ModelViewWithShader.o: terasca/ModelViewWithShader.h terasca/ModelViewWithShader.cpp
+ModelViewWithShader.o: terasca/ModelViewWithShader.hpp terasca/ModelViewWithShader.cpp
 	$(CXX) $(C_FLAGS) terasca/ModelViewWithShader.cpp
-ShaderProgram.o: terasca/ShaderProgram.h terasca/ShaderProgram.cpp
+ShaderProgram.o: terasca/ShaderProgram.hpp terasca/ShaderProgram.cpp
 	$(CXX) $(C_FLAGS) terasca/ShaderProgram.cpp
  
-AffinePoint.o: s1/AffinePoint.h s1/AffinePoint.cpp
+AffinePoint.o: s1/AffinePoint.hpp s1/AffinePoint.cpp
 	$(CXX) $(C_FLAGS) s1/AffinePoint.cpp
-AffineVector.o: s1/AffineVector.h s1/AffineVector.cpp
+AffineVector.o: s1/AffineVector.hpp s1/AffineVector.cpp
 	$(CXX) $(C_FLAGS) s1/AffineVector.cpp
-Matrix3x3.o: s1/Matrix3x3.h s1/Matrix3x3.cpp
+Matrix3x3.o: s1/Matrix3x3.hpp s1/Matrix3x3.cpp
 	$(CXX) $(C_FLAGS) s1/Matrix3x3.cpp
-Matrix4x4.o: s1/Matrix4x4.h s1/Matrix4x4.cpp
+Matrix4x4.o: s1/Matrix4x4.hpp s1/Matrix4x4.cpp
 	$(CXX) $(C_FLAGS) s1/Matrix4x4.cpp
 	
-Block.o: rffalcon/Block.h rffalcon/Block.cpp
+Block.o: rffalcon/Block.hpp rffalcon/Block.cpp
 	$(CXX) $(C_FLAGS) rffalcon/Block.cpp

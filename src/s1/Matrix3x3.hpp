@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Matrix4x4.h"
+#include "Matrix4x4.hpp"
 
 namespace s1 {
 	class Matrix3x3 {

@@ -1,4 +1,4 @@
-#include "ModelViewWithShader.h"
+#include "ModelViewWithShader.hpp"
 
 std::string ModelViewWithShader::_vertexShaderPath = "";
 std::string ModelViewWithShader::_fragmentShaderPath = "";

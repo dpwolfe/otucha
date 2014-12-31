@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AffineVector.h"
+#include "AffineVector.hpp"
 
 namespace s1 {
 

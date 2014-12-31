@@ -1,4 +1,4 @@
-#include "GLFWController.h"
+#include "GLFWController.hpp"
 
 bool GLFWController::glfwInitialized = false;
 

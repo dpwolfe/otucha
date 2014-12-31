@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ModelViewWithShader.h"
+#include "ModelViewWithShader.hpp"
 
 class Block : public ModelViewWithShader
 {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "AffinePoint.h"
-#include "AffineVector.h"
+#include "AffinePoint.hpp"
+#include "AffineVector.hpp"
 
 namespace s1
 {

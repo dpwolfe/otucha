@@ -38,28 +38,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="terasca\GLFWController.h">
+    <ClInclude Include="terasca\GLFWController.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="terasca\Controller.h">
+    <ClInclude Include="terasca\Controller.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="terasca\ModelView.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="terasca\ModelView.h">
+    <ClInclude Include="terasca\ProjectionType.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="terasca\ProjectionType.h">
+    <ClInclude Include="terasca\ModelViewWithShader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="terasca\ModelViewWithShader.h">
+    <ClInclude Include="rffalcon\Block.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rffalcon\Block.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="terasca\ShaderProgram.h">
+    <ClInclude Include="terasca\ShaderProgram.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
