@@ -11,7 +11,7 @@ This is currently developed with Visual Studio 2013 Ultimate.
 4. Copy the \lib-msvc120\glfw3.lib to the /external/lib directory
 5. TODO: Steps for dlls
 
-### Environment for Makefile
+##### Environment for Makefile
 
 1. Define the CXX environment variable depending on desired compilation.
    - _emcc_ for Emscripten compilation
