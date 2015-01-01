@@ -18,10 +18,12 @@ A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 5. Copy the compiled lib/glew32.a binary to otucha/external/lib
 6. Build the GLEW source in Visual Studio with the Release configuration
 7. Copy the compiled lib/Release/Win32/glew32.lib to otucha/external/lib
-8. Download the GLFW 32-bit Windows binaries from [here](http://www.glfw.org/download.html)
-9. Copy \lib-mingw\libglfw3.a to otucha/external/lib
-10. Copy \lib-msvc120\glfw3.lib to otucha/external/lib
-11. From the MingW install directory, copy /lib/libglu32.a to otucha/external/lib
+8. Copy the compiled bin/Release/Win32/glew32.dll to otucha/external/lib
+9. Download the GLFW 32-bit Windows binaries from [here](http://www.glfw.org/download.html)
+10. Copy \lib-mingw\libglfw3.a to otucha/external/lib
+11. Copy \lib-msvc120\glfw3.lib to otucha/external/lib
+12. Copy \lib-msvc120\glfw3.dll to otucha/external/lib
+13. From the MingW install directory, copy /lib/libglu32.a to otucha/external/lib
 
 ##### Environment for Makefile
 1. Define the CXX environment variable depending on desired compilation.
