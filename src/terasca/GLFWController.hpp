@@ -13,6 +13,8 @@ public:
 
 	void run();
 
+	static void runLoopIter();
+
 protected:
 	void reportWindowInterfaceVersion(std::ostream& os) const;
 	void establishInitialCallbacksForRC();
