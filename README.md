@@ -3,8 +3,6 @@ A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 
 
 ## Developer Setup
-This is currently developed with Visual Studio 2013 Ultimate.
-
 1. Download and install Emscripten from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
 2. Download the GLEW distributable zip from [here](http://glew.sourceforge.net/)
 2. Copy the glew32.lib to the ./external/lib directory
