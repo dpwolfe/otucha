@@ -1,4 +1,8 @@
 #include "GLFWController.hpp"
+#ifdef __EMSCRIPTEN__
+#include "emscripten.h"
+#include "html5.h"
+#endif
 
 bool GLFWController::glfwInitialized = false;
 
@@ -19,16 +23,34 @@ GLFWController::~GLFWController()
 
 }
 
+void one_iter() {
+	GLFWController::runLoopIter();
+}
+
 void GLFWController::run()
 {
 	establishInitialCallbacksForRC();
+#ifdef __EMSCRIPTEN__
+	// void emscripten_set_main_loop(em_callback_func func, int fps, int simulate_infinite_loop);
+	emscripten_set_main_loop(one_iter, 0, 1);
+#else
 	while (!glfwWindowShouldClose(_window))
 	{
-		handleDisplay();
-		glfwWaitEvents();
+		one_iter();
 	}
+#endif
 	glfwDestroyWindow(_window);
 	_window = nullptr;
+}
+
+void GLFWController::runLoopIter()
+{
+	if (_instance != nullptr)
+	{
+		GLFWController* controller = dynamic_cast<GLFWController*>(_instance);
+		controller->handleDisplay();
+		glfwWaitEvents();
+	}
 }
 
 void GLFWController::reportWindowInterfaceVersion(std::ostream& os) const
