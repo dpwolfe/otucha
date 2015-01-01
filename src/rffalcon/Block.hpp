@@ -14,11 +14,11 @@ public:
 private:
 	float _xmin, _xmax, _ymin, _ymax, _zmin, _zmax;
 	GLuint _vao[1];
-	GLuint _vbo[1];
+	GLuint _vbo[2];
 
 	void _renderBlock(float* color);
 	void _initBlock();
 
-	static GLuint _indices_xmin[4], _indices_ymin[4], _indices_ymax[4];
+	static GLuint _element_indices[12];
 };
 
