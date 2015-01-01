@@ -224,7 +224,7 @@ void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
 	}
 	else
 	{
-		std::cout << "GLEW initialized with version " << glewGetString(GLEW_VERSION);
+		std::cout << "GLEW initialized with version " << glewGetString(GLEW_VERSION) << std::endl;
 	}
 
 	if ((rcFlags & DEPTH) != 0)
