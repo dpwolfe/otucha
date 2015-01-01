@@ -26,7 +26,7 @@ A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 ##### Environment for Makefile
 1. Define the CXX environment variable depending on desired compilation.
    - _emcc_ for Emscripten compilation
-   - _cpp_, _gcc_, _clang++_, etc. for c++ compilation.
+   - _clang++_ for c++ compilation.
 
 #### Building with Emscripten
 1. Run the following command from the src directory:
