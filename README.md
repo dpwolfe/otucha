@@ -1,16 +1,10 @@
 # otucha
 A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 
-
 ## Developer Setup
+- Support is for Windows currently.  Mac support is close.
 
-#### Setup for Windows compilation
-1. Install Visual Studio 2013
-
-#### Building in Windows
-1. Open the sln and build.
-
-#### Setup for Emscripten compilation
+#### Setup
 1. Download and install Emscripten from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
 2. Download and install [MingW](http://mingw.org/) from [here](http://mingw.org/download/installer)
 3. Download the [GLEW](http://glew.sourceforge.net/) 1.11.0 source zip from [here](http://sourceforge.net/projects/glew/files/glew/1.11.0/)
@@ -25,10 +19,15 @@ A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 12. Copy \lib-msvc120\glfw3.dll to otucha/external/lib
 13. From the MingW install directory, copy /lib/libglu32.a to otucha/external/lib
 
-##### Environment for Makefile
+##### Building with Makefile
+- This currently supports Emscripten on Windows, but clang++ and Mac support is close.
 1. Define the CXX environment variable depending on desired compilation.
    - _emcc_ for Emscripten compilation
    - _clang++_ for c++ compilation.
+
+#### Building with Visual Studio
+- This is tested with Ultimate, but that edition it is likely not required.
+1. Open the sln and build.
 
 #### Building with Emscripten
 1. Run the following command from the src directory:
