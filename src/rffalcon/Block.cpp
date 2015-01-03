@@ -67,7 +67,7 @@ void Block::_renderBlock(float color[3])
 	glBindVertexArray(_vao[0]);
 
 	glUniform3fv(_ppuLoc_kd, 1, color);
-	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, 0.0, 1.0);
+	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, 0.0, -1.0);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 	float color2[] = { 0.8f, 0.8f, 0.0f };
