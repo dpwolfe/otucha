@@ -18,7 +18,11 @@ varying vec3 colorToFS;
 
 vec3 evaluateLightingModel(in vec3 ec_q, in vec3 ec_nHat)
 {
-	float factor = abs(dot(normalize(lightSourceDir), ec_nHat));
+	float factor = dot(normalize(lightSourceDir), ec_nHat);
+	if (factor < 0.0)
+	{
+		factor = 0.0;
+	}
 	return factor * kd;
 }
 
