@@ -41,4 +41,5 @@ protected:
 	static double _zProjectionPlane;
 	static double _eyeCoordinatesZMin;
 	static double _eyeCoordinatesZMax;
+	static s1::Matrix4x4 _dynamicView;
 };
