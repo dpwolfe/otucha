@@ -16,7 +16,7 @@ private:
 	GLuint _vao[1];
 	GLuint _vbo[2];
 
-	void _renderBlock(float* color);
+	void _renderBlock();
 	void _initBlock();
 
 	static GLuint _element_indices[12];

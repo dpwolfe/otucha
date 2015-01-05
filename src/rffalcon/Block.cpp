@@ -44,11 +44,10 @@ void Block::render()
 	normal_mat.copyToColumnMajor(normal_mat_cm);
 	glUniformMatrix3fv(_ppuLoc_normal_mat, 1, GL_FALSE, normal_mat_cm);
 
-	float color[] = { 0.0f, 0.0f, 0.8f };
 #ifndef __EMSCRIPTEN__
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 #endif
-	_renderBlock(color);
+	_renderBlock();
 }
 
 void Block::getMCBoundingBox(double* xyzBounds) const
@@ -62,38 +61,46 @@ void Block::getMCBoundingBox(double* xyzBounds) const
 	xyzBounds[5] = _zmax + buffer;
 }
 
-void Block::_renderBlock(float color[3])
+void Block::_renderBlock()
 {
 	glBindVertexArray(_vao[0]);
 
-	glUniform3fv(_ppuLoc_kd, 1, color);
-	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, 0.0, -1.0);
+	float ka[3] = { 0.24725f, 0.1995f, 0.0745f };
+	glUniform3fv(_ppuLoc_ka, 1, ka);
+	float kd[3] = { 0.75164f, 0.60648f, 0.22648f };
+	glUniform3fv(_ppuLoc_kd, 1, kd);
+	float ks[3] = { 0.628281f, 0.555802f, 0.366065f };
+	glUniform3fv(_ppuLoc_ks, 1, ks);
+	glUniform1f(_ppuLoc_m, 51.2f);
+	glUniform1f(_ppuLoc_a, 1.0f);
+
+	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, 0.0, 1.0);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-	float color2[] = { 0.8f, 0.8f, 0.0f };
-	glUniform3fv(_ppuLoc_kd, 1, color2);
+	//float color2[] = { 0.8f, 0.8f, 0.0f };
+	//glUniform3fv(_ppuLoc_kd, 1, color2);
 	glVertexAttrib3f(_pvaLoc_mcNormal, 1.0, 0.0, 0.0);
 	glDrawArrays(GL_TRIANGLE_STRIP, 2, 4);
 
-	float color3[] = { 0.0f, 0.8f, 0.0f };
-	glUniform3fv(_ppuLoc_kd, 1, color3);
+	//float color3[] = { 0.0f, 0.8f, 0.0f };
+	//glUniform3fv(_ppuLoc_kd, 1, color3);
 	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, 0.0, -1.0);
 	glDrawArrays(GL_TRIANGLE_STRIP, 4, 4);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vbo[1]);
 	
-	float color4[] = { 0.8f, 0.0f, 0.0f };
-	glUniform3fv(_ppuLoc_kd, 1, color4);
+	//float color4[] = { 0.8f, 0.0f, 0.0f };
+	//glUniform3fv(_ppuLoc_kd, 1, color4);
 	glVertexAttrib3f(_pvaLoc_mcNormal, -1.0, 0.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, (void*)0);
 
-	float color5[] = { 0.8f, 0.0f, 0.8f };
-	glUniform3fv(_ppuLoc_kd, 1, color5);
+	//float color5[] = { 0.8f, 0.0f, 0.8f };
+	//glUniform3fv(_ppuLoc_kd, 1, color5);
 	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, -1.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, (void*)(4 * sizeof(int)));
 
-	float color6[] = { 0.0f, 0.8f, 0.8f };
-	glUniform3fv(_ppuLoc_kd, 1, color6);
+	//float color6[] = { 0.0f, 0.8f, 0.8f };
+	//glUniform3fv(_ppuLoc_kd, 1, color6);
 	glVertexAttrib3f(_pvaLoc_mcNormal, 0.0, 1.0, 0.0);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, (void*)(8 * sizeof(int)));
 }

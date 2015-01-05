@@ -7,27 +7,47 @@ precision highp float;
 varying vec3 ec_nHat;
 varying vec3 ecPosition;
 
-const vec3 ka = vec3(0.0, 0.3, 0.0);
+uniform vec3 ka;
 uniform vec3 kd;
-const vec3 ks = vec3(1.0, 1.0, 1.0);
-const float m = 4.0;
-const float la = 1.0;
+uniform vec3 ks;
+uniform float m;
+uniform float a;
 
-const vec3 lightPos = vec3(1.0, 1.0, 1.0);
+const vec3 lightPos1 = vec3(0.3, 0.8, -1.5);
+const vec3 lightPos2 = vec3(0.8, -0.5, -1.5);
+const vec3 lightPos3 = vec3(-0.8, -0.3, -1.5);
+const float la = 1.0;
 const float li = 1.0;
 
-void main() {
+vec3 viewDir;
+
+void modelLight(in vec3 lightPos, out float lambertian, out float specular)
+{
     vec3 lightDir = normalize(lightPos - ecPosition);
-    vec3 reflectDir = reflect(-lightDir, ec_nHat);
-    vec3 viewDir = normalize(-ecPosition);
+	vec3 reflectDir = reflect(-lightDir, ec_nHat);
+	lambertian = max(dot(lightDir, ec_nHat), 0.0);
+	specular = 0.0;
+	if (lambertian > 0.0)
+	{
+		float specAngle = max(dot(reflectDir, viewDir), 0.0);
+		specular = pow(specAngle, m);
+	}
+}
 
-    float lambertian = max(dot(lightDir, ec_nHat), 0.0);
-    float specular = 0.0;
+void main() {
+    viewDir = normalize(-ecPosition);
 
-    if(lambertian > 0.0) {
-       float specAngle = max(dot(reflectDir, viewDir), 0.0);
-       specular = pow(specAngle, m);
-    }
+	float lambertian, specular, lambertianSum, specularSum;
 
-    gl_FragColor = vec4(ka*la + li*(kd*lambertian + ks*specular), 1.0);
+    modelLight(lightPos1, lambertianSum, specularSum);
+
+	modelLight(lightPos2, lambertian, specular);
+	lambertianSum += lambertian;
+	specularSum += specular;
+
+	modelLight(lightPos3, lambertian, specular);
+	lambertianSum += lambertian;
+	specularSum += specular;
+
+    gl_FragColor = vec4(ka*la + li*(kd*lambertianSum + ks*specularSum), a);
 }
