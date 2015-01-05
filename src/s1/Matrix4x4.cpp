@@ -56,6 +56,24 @@ Matrix4x4::Matrix4x4Row Matrix4x4::operator[](int row) const
 	return Matrix4x4Row(*this, row);
 }
 
+Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const
+{
+	Matrix4x4 result;
+	for (int row = 0; row < 4; row++)
+	{
+		for (int column = 0; column < 4; column++)
+		{
+			double sum = 0.0;
+			for (int i = 0; i < 4; i++)
+			{
+				sum += _value[row][i] * rhs._value[i][column];
+			}
+			result._value[row][column] = sum;
+		}
+	}
+	return result;
+}
+
 void Matrix4x4::copyToColumnMajor(float matrix[16]) const
 {
 	int i = 0;

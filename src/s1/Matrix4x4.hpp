@@ -29,6 +29,7 @@ namespace s1
 
 		Matrix4x4 operator=(const Matrix4x4& rhs);
 		Matrix4x4Row operator[](int row) const;
+		Matrix4x4 operator*(const Matrix4x4& rhs) const;
 		void copyToColumnMajor(float matrix[16]) const;
 
 		static Matrix4x4 orthogonal(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax);

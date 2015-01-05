@@ -12,6 +12,7 @@ ProjectionType ModelView::_projectionType = PERSPECTIVE;
 double ModelView::_zProjectionPlane = -1.0;
 double ModelView::_eyeCoordinatesZMin = -2.0;
 double ModelView::_eyeCoordinatesZMax = -0.01;
+s1::Matrix4x4 ModelView::_dynamicView;
 
 ModelView::ModelView()
 {
