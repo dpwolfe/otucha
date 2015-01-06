@@ -65,11 +65,32 @@ void Block::_renderBlock()
 {
 	glBindVertexArray(_vao[0]);
 
-	float ka[3] = { 0.24725f, 0.1995f, 0.0745f };
+	// gold
+	//float ka[3] = { 0.24725f, 0.1995f, 0.0745f };
+	//glUniform3fv(_ppuLoc_ka, 1, ka);
+	//float kd[3] = { 0.75164f, 0.60648f, 0.22648f };
+	//glUniform3fv(_ppuLoc_kd, 1, kd);
+	//float ks[3] = { 0.628281f, 0.555802f, 0.366065f };
+	//glUniform3fv(_ppuLoc_ks, 1, ks);
+	//glUniform1f(_ppuLoc_m, 51.2f);
+	//glUniform1f(_ppuLoc_a, 1.0f);
+
+	// copper
+	//float ka[3] = { 0.19125f, 0.0735f, 0.0225f };
+	//glUniform3fv(_ppuLoc_ka, 1, ka);
+	//float kd[3] = { 0.7038f, 0.27048f, 0.0828f };
+	//glUniform3fv(_ppuLoc_kd, 1, kd);
+	//float ks[3] = { 0.256777f, 0.137622f, 0.086014f };
+	//glUniform3fv(_ppuLoc_ks, 1, ks);
+	//glUniform1f(_ppuLoc_m, 12.8f);
+	//glUniform1f(_ppuLoc_a, 1.0f);
+
+	// polished copper
+	float ka[3] = { 0.2295f, 0.08825f, 0.0275f };
 	glUniform3fv(_ppuLoc_ka, 1, ka);
-	float kd[3] = { 0.75164f, 0.60648f, 0.22648f };
+	float kd[3] = { 0.5508f, 0.2118f, 0.066f };
 	glUniform3fv(_ppuLoc_kd, 1, kd);
-	float ks[3] = { 0.628281f, 0.555802f, 0.366065f };
+	float ks[3] = { 0.580594f, 0.223257f, 0.0695701f };
 	glUniform3fv(_ppuLoc_ks, 1, ks);
 	glUniform1f(_ppuLoc_m, 51.2f);
 	glUniform1f(_ppuLoc_a, 1.0f);
