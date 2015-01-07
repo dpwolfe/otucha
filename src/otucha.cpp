@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 	ModelViewWithShader::setShaderSources("simple.vsh", "simple.fsh");
 	c.addModel(new Block(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f));
 
-	glClearColor(0.9, 0.9, 0.9, 1.0);
+	glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
 	double xyz[6];
 	c.getOverallMCBoundingBox(xyz);
 	set3DViewingInformation(xyz);

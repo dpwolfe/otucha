@@ -4,13 +4,22 @@ ifeq ($(EMCC),1)
 	ADDITIONAL_ARGS = -s USE_GLFW=3 --embed-file simple.vsh --embed-file simple.fsh
 	OGL_LIBRARIES = -lglew32 -lglfw3 -lGlU32
 	EXTERNAL_INC = 
+	ADDITIONAL_FLAGS = 
 else
-	OUT_FILE = otucha
+	ifdef MINGW
+		ADDITIONAL_FLAGS = -DGLEW_NO_GLU -DMINGW
+		OUT_FILE = otucha.exe
+		EXTERNAL_INC = -I../external/include -I"$(MINGW)/include"
+	else ifdef LINUX
+		ADDITIONAL_FLAGS = 
+		OUT_FILE = otucha
+		EXTERNAL_INC = -I../external/include
+	endif
 	ADDITIONAL_ARGS = 
 	OGL_LIBRARIES = -lglew -lglfw3 -lGlU
-	EXTERNAL_INC = -I../external/include
 endif
-C_FLAGS = -g -c -DGL_GLEXT_PROTOTYPES $(INC) $(EXTERNAL_INC)
+
+C_FLAGS = -g -c -DGL_GLEXT_PROTOTYPES $(ADDITIONAL_FLAGS) $(INC) $(EXTERNAL_INC)
 
 LINK = $(CXX) -v -fPIC -g
 LOCAL_UTIL_LIBRARIES = -L../external/lib -L../external/lib
