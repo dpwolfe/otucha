@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}</ProjectGuid>
-    <RootNamespace>s1</RootNamespace>
+    <ProjectGuid>{B6D78F58-C1F0-47FC-B886-69D9474E77AA}</ProjectGuid>
+    <RootNamespace>terasca</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;../../external/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../external/include;../s1;../rffalcon</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -65,16 +65,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AffinePoint.hpp" />
-    <ClInclude Include="AffineVector.hpp" />
-    <ClInclude Include="Matrix3x3.hpp" />
-    <ClInclude Include="Matrix4x4.hpp" />
+    <ClInclude Include="Controller.hpp" />
+    <ClInclude Include="GLFWController.hpp" />
+    <ClInclude Include="ModelView.hpp" />
+    <ClInclude Include="ModelViewWithShader.hpp" />
+    <ClInclude Include="ProjectionType.hpp" />
+    <ClInclude Include="ShaderProgram.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AffinePoint.cpp" />
-    <ClCompile Include="AffineVector.cpp" />
-    <ClCompile Include="Matrix3x3.cpp" />
-    <ClCompile Include="Matrix4x4.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="GLFWController.cpp" />
+    <ClCompile Include="ModelView.cpp" />
+    <ClCompile Include="ModelViewWithShader.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\rffalcon\rffalcon.vcxproj">
+      <Project>{aeed0e4e-4d71-4a1e-a2cb-12e485dea248}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\s1\s1.vcxproj">
+      <Project>{3a2c9d07-63fd-4565-b7bd-a8784699b1a2}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

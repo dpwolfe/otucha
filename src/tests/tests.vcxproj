@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.;../../external/include;../terasca;../s1;../rffalcon</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..;../../external/include;../terasca;../s1;../rffalcon</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

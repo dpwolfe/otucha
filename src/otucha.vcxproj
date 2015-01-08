@@ -69,21 +69,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="otucha.cpp" />
-    <ClCompile Include="rffalcon\Block.cpp" />
-    <ClCompile Include="terasca\Controller.cpp" />
-    <ClCompile Include="terasca\GLFWController.cpp" />
-    <ClCompile Include="terasca\ModelView.cpp" />
-    <ClCompile Include="terasca\ModelViewWithShader.cpp" />
-    <ClCompile Include="terasca\ShaderProgram.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="rffalcon\Block.hpp" />
-    <ClInclude Include="terasca\Controller.hpp" />
-    <ClInclude Include="terasca\GLFWController.hpp" />
-    <ClInclude Include="terasca\ModelView.hpp" />
-    <ClInclude Include="terasca\ModelViewWithShader.hpp" />
-    <ClInclude Include="terasca\ProjectionType.hpp" />
-    <ClInclude Include="terasca\ShaderProgram.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
@@ -91,8 +76,14 @@
     <None Include="simple.vsh" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="rffalcon\rffalcon.vcxproj">
+      <Project>{aeed0e4e-4d71-4a1e-a2cb-12e485dea248}</Project>
+    </ProjectReference>
     <ProjectReference Include="s1\s1.vcxproj">
       <Project>{3a2c9d07-63fd-4565-b7bd-a8784699b1a2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="terasca\terasca.vcxproj">
+      <Project>{b6d78f58-c1f0-47fc-b886-69d9474e77aa}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

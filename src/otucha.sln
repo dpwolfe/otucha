@@ -6,12 +6,17 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "otucha", "otucha.vcxproj", "{84124C6A-608A-4F14-A4B5-7B581B16EA9E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3A2C9D07-63FD-4565-B7BD-A8784699B1A2} = {3A2C9D07-63FD-4565-B7BD-A8784699B1A2}
+		{B6D78F58-C1F0-47FC-B886-69D9474E77AA} = {B6D78F58-C1F0-47FC-B886-69D9474E77AA}
 		{7E45B567-BC00-41E1-B023-4D4A32A63C4F} = {7E45B567-BC00-41E1-B023-4D4A32A63C4F}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "s1", "s1\s1.vcxproj", "{3A2C9D07-63FD-4565-B7BD-A8784699B1A2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "tests\tests.vcxproj", "{7E45B567-BC00-41E1-B023-4D4A32A63C4F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rffalcon", "rffalcon\rffalcon.vcxproj", "{AEED0E4E-4D71-4A1E-A2CB-12E485DEA248}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "terasca", "terasca\terasca.vcxproj", "{B6D78F58-C1F0-47FC-B886-69D9474E77AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +36,14 @@ Global
 		{7E45B567-BC00-41E1-B023-4D4A32A63C4F}.Debug|Win32.Build.0 = Debug|Win32
 		{7E45B567-BC00-41E1-B023-4D4A32A63C4F}.Release|Win32.ActiveCfg = Release|Win32
 		{7E45B567-BC00-41E1-B023-4D4A32A63C4F}.Release|Win32.Build.0 = Release|Win32
+		{AEED0E4E-4D71-4A1E-A2CB-12E485DEA248}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AEED0E4E-4D71-4A1E-A2CB-12E485DEA248}.Debug|Win32.Build.0 = Debug|Win32
+		{AEED0E4E-4D71-4A1E-A2CB-12E485DEA248}.Release|Win32.ActiveCfg = Release|Win32
+		{AEED0E4E-4D71-4A1E-A2CB-12E485DEA248}.Release|Win32.Build.0 = Release|Win32
+		{B6D78F58-C1F0-47FC-B886-69D9474E77AA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B6D78F58-C1F0-47FC-B886-69D9474E77AA}.Debug|Win32.Build.0 = Debug|Win32
+		{B6D78F58-C1F0-47FC-B886-69D9474E77AA}.Release|Win32.ActiveCfg = Release|Win32
+		{B6D78F58-C1F0-47FC-B886-69D9474E77AA}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
