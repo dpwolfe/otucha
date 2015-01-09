@@ -1,10 +1,9 @@
 # otucha
 A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 
-## Developer Setup
-- Support is for Windows currently.  Mac support is close.
+- Support is for Windows currently, but I'm going to learn CMake to get rid of managing makefiles and project files for the various platforms this should compile on.
 
-#### Setup
+#### Developer Setup
 1. Download and install Emscripten from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
 2. Download and install [MingW](http://mingw.org/) from [here](http://mingw.org/download/installer)
 3. Download the [GLEW](http://glew.sourceforge.net/) 1.11.0 source zip from [here](http://sourceforge.net/projects/glew/files/glew/1.11.0/)
