@@ -1,7 +1,10 @@
 # otucha
 A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 
-- Support is for Windows currently, but I'm going to learn CMake to get rid of managing makefiles and project files for the various platforms this should compile on.
+#### Current Status
+
+- Support is currently for Windows
+- Switching to CMake asap
 
 #### Developer Setup
 1. Download and install Emscripten from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
