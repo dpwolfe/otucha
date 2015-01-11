@@ -16,7 +16,7 @@ include_directories (
 	"${PROJECT_SOURCE_DIR}/rffalcon"
 	"${PROJECT_SOURCE_DIR}/s1"
 	"${PROJECT_SOURCE_DIR}/terasca"
-	"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include/GLFW"
+	"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
 	"${PROJECT_SOURCE_DIR}/external/glew-1.11.0/include"
 )
 
