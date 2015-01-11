@@ -1,5 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 project (otucha)
+find_package(OpenGL REQUIRED)
 # The version number
 set (otucha_VERSION_MAJOR 0)
 set (otucha_VERSION_MINOR 1)
@@ -8,15 +9,19 @@ set (otucha_VERSION_MINOR 1)
 configure_file (
 	"${PROJECT_SOURCE_DIR}/otuchaConfig.h.in"
 	"${PROJECT_BINARY_DIR}/otuchaConfig.h"
-	)
+)
 
-include_directories ("${PROJECT_BINARY_DIR}")
-include_directories ("${PROJECT_SOURCE_DIR}/rffalcon")
-include_directories ("${PROJECT_SOURCE_DIR}/s1")
-include_directories ("${PROJECT_SOURCE_DIR}/terasca")
+include_directories (
+	"${PROJECT_BINARY_DIR}"
+	"${PROJECT_SOURCE_DIR}/rffalcon"
+	"${PROJECT_SOURCE_DIR}/s1"
+	"${PROJECT_SOURCE_DIR}/terasca"
+	"${PROJECT_SOURCE_DIR}/../external/include"
+)
+
 add_subdirectory (rffalcon)
 add_subdirectory (s1)
 add_subdirectory (terasca)
 
 add_executable (otucha otucha.cpp)
-target_link_libraries (otucha rffalcon s1 terasca)
+target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY})
