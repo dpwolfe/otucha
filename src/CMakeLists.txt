@@ -28,4 +28,4 @@ add_subdirectory (terasca)
 add_subdirectory (external)
 
 add_executable (otucha otucha.cpp)
-target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY} GLFW_304 GLEW_1110)
+target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY} GLEW_1110)

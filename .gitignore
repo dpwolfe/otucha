@@ -66,3 +66,9 @@ src/rffalcon/INSTALL.vcxproj.filters
 src/rffalcon/INSTALL.vcxproj
 src/INSTALL.vcxproj
 src/INSTALL.vcxproj.filters
+src/external/GLEW_1110.dir/Debug/GLEW_1110.tlog/custombuild.read.1.tlog
+src/external/GLEW_1110.dir/
+src/external/GLEW_1110.vcxproj
+src/external/GLEW_1110.vcxproj.filters
+src/external/INSTALL.vcxproj
+src/external/INSTALL.vcxproj.filters
