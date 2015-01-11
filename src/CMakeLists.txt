@@ -16,12 +16,16 @@ include_directories (
 	"${PROJECT_SOURCE_DIR}/rffalcon"
 	"${PROJECT_SOURCE_DIR}/s1"
 	"${PROJECT_SOURCE_DIR}/terasca"
-	"${PROJECT_SOURCE_DIR}/../external/include"
+	"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include/GLFW/"
+	"${PROJECT_SOURCE_DIR}/external/glew-1.11.0/include/"
 )
 
 add_subdirectory (rffalcon)
 add_subdirectory (s1)
 add_subdirectory (terasca)
 
+# Compile external dependencies 
+add_subdirectory (external)
+
 add_executable (otucha otucha.cpp)
-target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY})
+target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY} GLFW_304 GLEW_1110)
