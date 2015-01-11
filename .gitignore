@@ -58,3 +58,11 @@ src/ALL_BUILD.vcxproj
 src/ALL_BUILD.vcxproj.filters
 src/CMakeCache.txt
 src/Win32/
+src/terasca/INSTALL.vcxproj.filters
+src/terasca/INSTALL.vcxproj
+src/s1/INSTALL.vcxproj.filters
+src/s1/INSTALL.vcxproj
+src/rffalcon/INSTALL.vcxproj.filters
+src/rffalcon/INSTALL.vcxproj
+src/INSTALL.vcxproj
+src/INSTALL.vcxproj.filters
