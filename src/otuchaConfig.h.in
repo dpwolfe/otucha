@@ -1,0 +1,3 @@
+// the configured options and settings for otucha
+#define otucha_VERSION_MAJOR @otucha_VERSION_MAJOR@
+#define otucha_VESRION_MINOR @otucha_VERSION_MINOR@

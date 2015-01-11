@@ -4,6 +4,7 @@
 #include "AffineVector.hpp"
 #include "ModelViewWithShader.hpp"
 #include "Block.hpp"
+#include "otuchaConfig.h"
 
 void set3DViewingInformation(double xyz[6])
 {
@@ -26,6 +27,7 @@ void set3DViewingInformation(double xyz[6])
 
 int main(int argc, char* argv[])
 {
+	fprintf(stdout, "%s Version %d.%d\n", argv[0], otucha_VERSION_MAJOR, otucha_VERSION_MINOR);
 	GLFWController c("otucha", Controller::DEPTH);
 	c.reportVersions(std::cout);
 	ModelViewWithShader::setShaderSources("simple.vsh", "simple.fsh");
