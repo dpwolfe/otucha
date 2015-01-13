@@ -22,7 +22,7 @@ A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 13. From the MingW install directory, copy /lib/libglu32.a to otucha/external/lib
 
 ##### Building with Makefile
-- This currently supports Emscripten on Windows, but clang++ and Mac support is close.
+- This currently supports Emscripten on Windows.
 1. Define the CXX environment variable depending on desired compilation.
    - _emcc_ for Emscripten compilation
    - _clang++_ for c++ compilation.
