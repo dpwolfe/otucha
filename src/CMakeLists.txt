@@ -11,6 +11,13 @@ configure_file (
 	"${PROJECT_BINARY_DIR}/otuchaConfig.h"
 )
 
+add_definitions(
+	-DGL_GLEXT_PROTOTYPES
+	-DGLEW_STATIC
+	-DGLEW_NO_GLU
+	-D_CRT_SECURE_NO_WARNINGS
+)
+
 include_directories (
 	"${PROJECT_BINARY_DIR}"
 	"${PROJECT_SOURCE_DIR}/rffalcon"
