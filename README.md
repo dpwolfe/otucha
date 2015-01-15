@@ -11,7 +11,7 @@ A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 1. Download and install [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
 2. Download and install [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
 
-##### Building with Emscripten
+#### Building with Emscripten
 Support is currently for Windows
 
 1. Define the CXX environment variable as _emcc_
