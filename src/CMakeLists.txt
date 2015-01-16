@@ -5,6 +5,28 @@ find_package(OpenGL REQUIRED)
 set (otucha_VERSION_MAJOR 0)
 set (otucha_VERSION_MINOR 1)
 
+# Attempt to get Emscripten location
+if ("${EMSCRIPTEN_ROOT_PATH}" STREQUAL "")
+	set(EMSCRIPTEN_ROOT_PATH "$ENV{EMSCRIPTEN}")
+endif()
+
+# Fail if Emscripten not found
+if ("${EMSCRIPTEN_ROOT_PATH}" STREQUAL "")
+	message(FATAL_ERROR "Could not locate Emscripten compiler.  Either set the EMSCRIPTEN environment variable, or pass -DEMSCRIPTEN_ROOT_PATH=xxx to CMake to specify the location.")
+endif()
+
+# Check Emscripten version
+set(EMSCRIPTEN_REQUIRED_VERSION 1.26.0)
+if(EXISTS "${EMSCRIPTEN_ROOT_PATH}/emscripten-version.txt")
+	file(READ "${EMSCRIPTEN_ROOT_PATH}/emscripten-version.txt" EMSCRIPTEN_VERSION)
+	# string replace only to clean up console output, not otherwise required
+	string(REPLACE "\n" "" EMSCRIPTEN_VERSION "${EMSCRIPTEN_VERSION}")
+	message(STATUS "Found Emscripten ${EMSCRIPTEN_VERSION}")
+	if(EMSCRIPTEN_VERSION VERSION_LESS ${EMSCRIPTEN_REQUIRED_VERSION})
+		message(FATAL_ERROR "Emscripten version >= ${EMSCRIPTEN_REQUIRED_VERSION} is required.")
+	endif()
+endif()
+
 # Header to pass some of the CMake settings to the source code
 configure_file (
 	"${PROJECT_SOURCE_DIR}/otuchaConfig.h.in"
