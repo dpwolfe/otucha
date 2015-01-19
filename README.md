@@ -16,10 +16,14 @@ Support is currently for Windows
 
 1. Define the CXX environment variable as _emcc_
 2. Run the following command from the src directory:
-  - emmake make EMCC=1
+```
+emmake make EMCC=1
+```
 
 #### Building with Visual Studio
 1. Run the following command from the src directory:
-  - cmake .
+```
+cmake .
+```
 2. Open otucha.sln, where you can build and run
 
