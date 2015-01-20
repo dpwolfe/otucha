@@ -25,5 +25,13 @@ emmake make EMCC=1
 ```
 cmake .
 ```
-2. Open otucha.sln, where you can build and run
+2. Open otucha.sln
+3. Build and run the otucha project
+4. 
+
+#### What you'll see
+
+A perspective view of a cube with copper material properties and three lights in positions that produce specular highlights.
+
+![Copper Cube](https://onedrive.live.com/embed?cid=EB3994E07F023E78&resid=EB3994E07F023E78%2142597&authkey=AAuP3j8_a2lGV1A)
 
