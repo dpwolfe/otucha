@@ -5,7 +5,7 @@ A sample OpenGL program that compiles from C++ to JavaScript using Emscripten
 
 - Supports building and running on Windows with CMake
 - Supports building Emscripten using a Makefile
-- Next: Emscripten via CMake
+- Next: Emscripten makefile with CMake
 
 #### Developer Setup
 1. Download and install [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
