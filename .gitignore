@@ -72,3 +72,6 @@ src/external/GLEW_1110.vcxproj
 src/external/GLEW_1110.vcxproj.filters
 src/external/INSTALL.vcxproj
 src/external/INSTALL.vcxproj.filters
+*.sln
+*.vcxproj
+*.filters
