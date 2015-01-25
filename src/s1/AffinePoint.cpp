@@ -2,10 +2,7 @@
 
 namespace s1 {
 
-	AffinePoint::AffinePoint()
-	{
-
-	}
+	AffinePoint::AffinePoint() { }
 
 	AffinePoint::AffinePoint(double x, double y, double z)
 	{
@@ -21,10 +18,7 @@ namespace s1 {
 		_z = p._z;
 	}
 
-	AffinePoint::~AffinePoint()
-	{
-
-	}
+	AffinePoint::~AffinePoint() { }
 
 	AffineVector AffinePoint::operator-(AffinePoint& rhs)
 	{
