@@ -37,14 +37,21 @@
 src/Debug/
 src/s1/Debug/
 src/tests/Debug/
-src/otucha.html
-src/otucha.js
 src/rffalcon/Debug/
 src/terasca/Debug/
+src/otucha.html
+src/otucha.js
+src/otuchaConfig.h
+
+# CMake output
+*.sln
+*.vcxproj
+*.filters
+src/CMakeCache.txt
+src/Win32/
 src/otucha.dir/
 *.depend
 *.cmake
-src/otuchaConfig.h
 *.stamp
 src/s1/s1.dir/
 src/rffalcon/rffalcon.dir/
@@ -52,9 +59,4 @@ src/CMakeFiles/generate.stamp.list
 src/CMakeFiles/cmake.check_cache
 src/CMakeFiles/
 src/terasca/terasca.dir/
-src/CMakeCache.txt
-src/Win32/
 src/external/GLEW_1110.dir/
-*.sln
-*.vcxproj
-*.filters
