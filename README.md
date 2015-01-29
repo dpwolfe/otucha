@@ -22,12 +22,12 @@ emmake make EMCC=1
 
 #### Building with Visual Studio
 1. Run the following command from the src directory:
-```
-cmake .
-```
+
+  ```
+  cmake .
+  ```
 2. Open otucha.sln
 3. Build and run the otucha project
-4. 
 
 #### What you'll see
 
