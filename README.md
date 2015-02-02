@@ -17,7 +17,7 @@ Support is currently for Windows
 1. Define the CXX environment variable as _emcc_
 2. Run the following command from the src directory:
 ```
-emmake cmake EMCC=1
+emmake make EMCC=1
 ```
 
 #### Building with Emscripten using CMake
@@ -25,7 +25,7 @@ Suppport is not complete yet
 
 1. Run the following command from the src directory:
 ```
-emcmake make .
+emcmake cmake .
 ```
 
 #### Building with Visual Studio
