@@ -3,8 +3,8 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
 
 #### Current Status
 
-- Supports building and running on Windows with CMake
-- Supports building Emscripten using a Makefile
+- Builds and runs on Windows
+- Builds with Emscripten using checked in Makefile
 - Next: Emscripten build from CMake
 
 #### Developer Setup
