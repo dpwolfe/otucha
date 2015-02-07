@@ -16,17 +16,17 @@ Support is currently for Windows
 
 1. Define the CXX environment variable as _emcc_
 2. Run the following command from the src directory:
-```
-emmake make EMCC=1
-```
+  ```
+  emmake make EMCC=1
+  ```
 
 #### Building with Emscripten using CMake
 Suppport is not complete yet
 
 1. Run the following command from the src directory:
-```
-emcmake cmake .
-```
+  ```
+  emcmake cmake .
+  ```
 
 #### Building with Visual Studio
 1. Run the following command from the src directory:
