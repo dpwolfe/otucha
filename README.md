@@ -29,6 +29,11 @@ Suppport is not complete yet
   ```
   emcmake cmake .
   ```
+2. Run the following command after the first completes:
+
+  ```
+  make
+  ```
 
 #### Building with Visual Studio
 1. Run the following command from the src directory:
