@@ -14,10 +14,7 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
 #### Building with Emscripten using existing Makefile
 Support is currently for Windows
 
-1. Define the CXX environment variable as
-```
-emcc
-```
+1. Define the CXX environment variable as _emcc_
 
 2. Run the following command from the src directory:
 
