@@ -25,14 +25,10 @@ Support is currently for Windows
 #### Building with Emscripten using CMake
 Suppport is not complete yet
 
-1. Run the following command from the src directory:
+1. Run the following commands from the src directory:
 
   ```
   emcmake cmake .
-  ```
-2. Run the following command after the first completes:
-
-  ```
   make
   ```
 
