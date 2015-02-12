@@ -23,7 +23,7 @@ Support is currently for Windows
   ```
 
 #### Building with Emscripten using CMake
-Suppport is not complete
+Suppport is incomplete
 
 1. Run the following commands from the src directory:
 
