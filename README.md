@@ -1,7 +1,7 @@
 # otucha
 An OpenGL program that compiles from C++ to JavaScript using Emscripten
 
-#### Current Status
+#### Status
 
 - Builds and runs on Windows with CMake
 - Builds with Emscripten using checked in Makefile
