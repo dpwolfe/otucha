@@ -32,8 +32,8 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	endif()
 	
 	# Emscripten compiler options
-	set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc")
-	set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++")
+	set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
+	set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++.bat")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 --memory-init-file 0")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 --memory-init-file 0")
 	set(CMAKE_MODULE_PATH "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules")
