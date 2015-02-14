@@ -34,10 +34,15 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	# Emscripten compiler options
 	set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
 	set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++.bat")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 --memory-init-file 0")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 --memory-init-file 0")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file simple.vsh --embed-file simple.fsh --memory-init-file 0")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file simple.vsh --embed-file simple.fsh --memory-init-file 0")
 	set(CMAKE_MODULE_PATH "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules")
 	set(CMAKE_TOOLCHAIN_FILE "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules/Platform/Emscripten.cmake")
+else()
+	include_directories (
+		"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
+		"${PROJECT_SOURCE_DIR}/external/glew-1.11.0/include"
+	)
 endif()
 
 # Header to pass some of the CMake settings to the source code
@@ -58,8 +63,6 @@ include_directories (
 	"${PROJECT_SOURCE_DIR}/rffalcon"
 	"${PROJECT_SOURCE_DIR}/s1"
 	"${PROJECT_SOURCE_DIR}/terasca"
-	"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
-	"${PROJECT_SOURCE_DIR}/external/glew-1.11.0/include"
 )
 
 add_subdirectory (rffalcon)
@@ -72,4 +75,8 @@ if(!OTUCHA_EMSCRIPTEN_ENABLED)
 endif()
 
 add_executable (otucha otucha.cpp)
-target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY} glfw GLEW_1110)
+if(OTUCHA_EMSCRIPTEN_ENABLED)
+	target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY})
+else()
+	target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY} glfw GLEW_1110)
+endif()
