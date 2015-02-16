@@ -6,6 +6,7 @@ set (otucha_VERSION_MAJOR 0)
 set (otucha_VERSION_MINOR 1)
 
 option(OTUCHA_EMSCRIPTEN_ENABLED "Enable building with Emscripten" ON)
+
 if(OTUCHA_EMSCRIPTEN_ENABLED)
 	message(STATUS "Enabling Emscripten compile")
 
@@ -44,6 +45,13 @@ else()
 		"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
 		"${PROJECT_SOURCE_DIR}/external/glew-1.11.0/include"
 	)
+	
+	# Copy of shader files
+	file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/*.*sh")
+	
+	foreach(file ${shaderFiles})
+		execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${file} ${PROJECT_BINARY_DIR})
+	endforeach()
 endif()
 
 # Header to pass some of the CMake settings to the source code
