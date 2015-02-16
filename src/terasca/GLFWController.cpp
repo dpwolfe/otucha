@@ -183,7 +183,12 @@ void GLFWController::cursorPosCB(GLFWwindow* window, double x, double y)
 void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
 {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#ifdef __APPLE_CC__
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#else
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+#endif
+	
 	if ((rcFlags & DEPTH) == 0)
 	{
 		glfwWindowHint(GLFW_DEPTH_BITS, 0);
