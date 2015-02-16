@@ -21,7 +21,7 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
 1. Run the following command from the src directory:
 
   ```
-  cmake .
+  cmake . -DOTUCHA_EMSCRIPTEN_ENABLED=OFF
   ```
 2. Open otucha.sln
 3. Build and run the otucha project
