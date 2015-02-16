@@ -70,7 +70,7 @@ add_subdirectory (rffalcon)
 add_subdirectory (s1)
 add_subdirectory (terasca)
 
-if(!OTUCHA_EMSCRIPTEN_ENABLED)
+if(NOT OTUCHA_EMSCRIPTEN_ENABLED)
 	# Compile external dependencies
 	add_subdirectory (external)
 endif()
