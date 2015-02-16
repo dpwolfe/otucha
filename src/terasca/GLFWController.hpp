@@ -2,6 +2,10 @@
 
 #include "Controller.hpp"
 
+#ifdef __APPLE_CC__
+#define GLFW_INCLUDE_GLCOREARB
+#endif
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
