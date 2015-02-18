@@ -3,7 +3,7 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
 
 #### Status
 
-- Builds and runs on Windows
+- Builds and runs on Windows natively and in browser with Emscripten
 
 #### Developer Setup
 1. Install [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
@@ -16,7 +16,7 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
   ```
   mkdir embuild
   cd embuild
-  emcmake cmake ..\src
+  emcmake cmake ../src
   make
   ```
 
@@ -26,9 +26,9 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
   ```
   mkdir build
   cd build
-  cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF ..\src
+  cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF ../src
   ```
-2. Build, for example, open the otucha.sln and build if developing on Windows with Visual Studio
+2. Build. For example, open the otucha.sln and build if developing on Windows with Visual Studio
 
 #### What you'll see
 
