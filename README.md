@@ -16,7 +16,7 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
   ```
   mkdir embuild
   cd embuild
-  emcmake cmake ..\src
+  emcmake cmake ../src
   make
   ```
 
@@ -26,7 +26,7 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
   ```
   mkdir build
   cd build
-  cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF ..\src
+  cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF ../src
   ```
 2. Build, for example, open the otucha.sln and build if developing on Windows with Visual Studio
 
