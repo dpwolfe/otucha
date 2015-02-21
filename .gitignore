@@ -34,11 +34,9 @@
 *.user
 
 # Build folders
-src/Debug/
-src/s1/Debug/
-src/tests/Debug/
-src/rffalcon/Debug/
-src/terasca/Debug/
+build/
+node_modules/
+embuild/
 
 # Emscripten build output
 src/otucha.html
@@ -51,12 +49,3 @@ src/otucha.js
 *.depend
 *.cmake
 *.stamp
-src/CMakeCache.txt
-src/CMakeFiles/
-src/rffalcon/rffalcon.dir/
-src/s1/s1.dir/
-src/terasca/terasca.dir/
-src/external/GLEW_1110.dir/
-src/otucha.dir/
-src/Win32/
-src/otuchaConfig.h
