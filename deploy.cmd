@@ -112,7 +112,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\Gruntfile.js" (
 	pushd "%DEPLOYMENT_TARGET%"
 	call :ExecuteCmd !NPM_CMD! install grunt-cli
 	if !ERRORLEVEL! NEQ 0 goto error
-	call :ExecuteCmd ./node_modules/.bin/grunt build:js
+	call :ExecuteCmd ./node_modules/.bin/grunt build:js --jsUseDist
 	if !ERRORLEVEL! NEQ 0 goto error
 	popd
 )

@@ -62,6 +62,15 @@ module.exports = function (grunt) {
                 files: {
                     'otucha.js': 'otucha.js',
                 }
+            },
+            dist: {
+                options: {
+                    srcPrefix: 'dist',
+                    destPrefix: 'www'
+                },
+                files: {
+                    'otucha.js': 'otucha.js'
+                }
             }
         },
         uglify: {
@@ -90,14 +99,18 @@ module.exports = function (grunt) {
         grunt.task.run(['shell:native']);
     });
     grunt.registerTask('build:js', function () {
-        if (!grunt.file.exists('embuild/CMakeCache.txt')) {
-            grunt.file.mkdir('embuild');
-            grunt.task.run('shell:emscripten_cmake');
-            grunt.task.run('shell:emscripten_cmake');
+        if (grunt.option('jsUseDist')) {
+            grunt.task.run(['bowercopy:dist']);
+        } else {
+            if (!grunt.file.exists('embuild/CMakeCache.txt')) {
+                grunt.file.mkdir('embuild');
+                grunt.task.run('shell:emscripten_cmake');
+                grunt.task.run('shell:emscripten_cmake');
+            }
+            grunt.task.run('shell:emscripten_make');
         }
-        grunt.task.run('shell:emscripten_make');
         grunt.task.run(['bowercopy:server', 'bowercopy:html']);
-        if (grunt.option('minify')) {
+        if (grunt.option('jsMin')) {
             grunt.task.run('uglify');
         } else {
             grunt.task.run('bowercopy:js');
