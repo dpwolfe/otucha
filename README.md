@@ -10,7 +10,8 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
 2. Install [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
 3. Install [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/)
 4. Install [Grunt](http://gruntjs.com/) from [here](http://gruntjs.com/getting-started)
-5. Run the following command from the repository root:
+5. Install [Bower](http://bower.io/)
+6. Run the following command from the repository root:
 
    ```
    npm install
@@ -20,10 +21,7 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
 1. Run the following command from the repository root:
 
   ```
-  mkdir embuild
-  cd embuild
-  emcmake cmake ../src
-  make
+  grunt build:js
   ```
 
 #### Building native
