@@ -20,10 +20,7 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
 1. Run the following command from the repository root:
 
   ```
-  mkdir embuild
-  cd embuild
-  emcmake cmake ../src
-  make
+  grunt build:js
   ```
 
 #### Building native
