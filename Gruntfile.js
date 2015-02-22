@@ -47,14 +47,22 @@ module.exports = function (grunt) {
                     'server.js': 'server.js'
                 }
             },
-            app: {
+            html: {
                 options: {
                     srcPrefix: 'embuild',
                     destPrefix: 'www'
                 },
                 files: {
-                    'otucha-full.js': 'otucha.js',
                     'index.html': 'otucha.html'
+                }
+            },
+            js: {
+                options: {
+                    srcPrefix: 'embuild',
+                    destPrefix: 'www'
+                },
+                files: {
+                    'otucha.js': 'otucha.js',
                 }
             }
         },
@@ -63,12 +71,12 @@ module.exports = function (grunt) {
                 sourceMap: false,
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyy-mm-dd-HH-MM-ss") %> */\n',
                 compress: true,
-                mangle: false
+                mangle: true
             },
             build: {
                 files: {
                     'www/otucha.js': [
-                        'www/otucha-full.js'
+                        'embuild/otucha.js'
                     ]
                 }
             }
@@ -85,8 +93,13 @@ module.exports = function (grunt) {
     });
     grunt.registerTask('build:js', function () {
         grunt.file.mkdir('embuild');
-        grunt.task.run(['shell:emscripten_step1']);
-        grunt.task.run(['shell:emscripten_step2']);
-        grunt.task.run(['bowercopy', 'uglify']);
+        grunt.task.run('shell:emscripten_step1');
+        grunt.task.run('shell:emscripten_step2');
+        grunt.task.run(['bowercopy:server', 'bowercopy:html']);
+        if (grunt.option('minify')) {
+            grunt.task.run('uglify');
+        } else {
+            grunt.task.run('bowercopy:js');
+        }
     })
 }
