@@ -86,23 +86,41 @@ goto :EOF
 :: ----------
 
 :Deployment
-echo Handling node.js deployment.
+echo Handling node.js grunt deployment.
 
-:: 1. KuduSync
-IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
-  IF !ERRORLEVEL! NEQ 0 goto error
-)
-
-:: 2. Select node version
+:: 1. Select node version
 call :SelectNodeVersion
 
-:: 3. Install npm packages
+:: 2. Install npm packages
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! install --production
+  call :ExecuteCmd !NPM_CMD! install
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
+)
+
+:: 3. Install bower packages
+IF EXIST "%DEPLOYMENT_TARGET%\bower.json" (
+	pushd "%DEPLOYMENT_TARGET%"
+	call :ExecuteCmd !NPM_CMD! install bower
+	if !ERRORLEVEL! NEQ 0 goto error
+	popd
+)
+
+:: 4. Install and run grunt
+IF EXIST "%DEPLOYMENT_TARGET%\Gruntfile.js" (
+	pushd "%DEPLOYMENT_TARGET%"
+	call :ExecuteCmd !NPM_CMD! install grunt-cli
+	if !ERRORLEVEL! NEQ 0 goto error
+	call :ExecuteCmd ./node_modules/.bin/grunt build:js
+	if !ERRORLEVEL! NEQ 0 goto error
+	popd
+)
+
+:: 5. KuduSync
+IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%/www" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
+  IF !ERRORLEVEL! NEQ 0 goto error
 )
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
