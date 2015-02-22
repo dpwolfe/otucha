@@ -30,9 +30,7 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
 1. Run the following command from the repository root:
 
   ```
-  mkdir build
-  cd build
-  cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF ../src
+  grunt
   ```
 2. Build. For example, open the otucha.sln and build if developing on Windows with Visual Studio
 
