@@ -20,13 +20,12 @@ module.exports = function (grunt) {
             }
     });
 
+    grunt.registerTask('default', function () {
+        grunt.task.run(['build']);
+    });
     grunt.registerTask('build', ['build:native']);
     grunt.registerTask('build:native', function () {
         grunt.file.mkdir('build');
         grunt.task.run(['shell:native']);
-    });
-    grunt.registerTask('default', function () {
-        grunt.log.writeln('Running "default" task.');
-        grunt.task.run(['build']);
     });
 }
