@@ -26,7 +26,8 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
 2. Open the index.html in the /www directory in Firefox or Chrome
 
 ##### Grunt options
-**--minify** - Runs uglify (mangle + compress) on the output Emscripten JS.
+**--jsMin** - Runs uglify (mangle + compress) on the output Emscripten JS.
+**--jsUseDist** - Uses the otucha.js and index.html from the dist folder instead of building Emscripten.  Useful for git deploy on a server that does not have CMake and Emscripten available.
 
 #### Building native
 1. Run the following command from the repository root:
