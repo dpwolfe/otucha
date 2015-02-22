@@ -69,7 +69,8 @@ module.exports = function (grunt) {
                     destPrefix: 'www'
                 },
                 files: {
-                    'otucha.js': 'otucha.js'
+                    'otucha.js': 'otucha.js',
+                    'index.html': 'index.html'
                 }
             }
         },
@@ -108,12 +109,13 @@ module.exports = function (grunt) {
                 grunt.task.run('shell:emscripten_cmake');
             }
             grunt.task.run('shell:emscripten_make');
+            grunt.task.run('bowercopy:html');
+            if (grunt.option('jsMin')) {
+                grunt.task.run('uglify');
+            } else {
+                grunt.task.run('bowercopy:js');
+            }
         }
-        grunt.task.run(['bowercopy:server', 'bowercopy:html']);
-        if (grunt.option('jsMin')) {
-            grunt.task.run('uglify');
-        } else {
-            grunt.task.run('bowercopy:js');
-        }
-    })
+        grunt.task.run('bowercopy:server');
+    });
 }
