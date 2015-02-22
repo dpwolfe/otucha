@@ -1,9 +1,4 @@
 cmake_minimum_required (VERSION 2.6)
-project (otucha)
-find_package(OpenGL REQUIRED)
-# The version number
-set (otucha_VERSION_MAJOR 0)
-set (otucha_VERSION_MINOR 1)
 
 option(OTUCHA_EMSCRIPTEN_ENABLED "Enable building with Emscripten" ON)
 
@@ -34,7 +29,9 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	
 	# Emscripten compiler options
 	set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
+	set(CMAKE_C_COMPILER_ENV_VAR "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
 	set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++.bat")
+	set(CMAKE_CXX_COMPILER_ENV_VAR "${EMSCRIPTEN_ROOT_PATH}/em++.bat")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file ${PROJECT_SOURCE_DIR}/simple.vsh --embed-file ${PROJECT_SOURCE_DIR}/simple.fsh --memory-init-file 0")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file ${PROJECT_SOURCE_DIR}/simple.vsh --embed-file ${PROJECT_SOURCE_DIR}/simple.fsh --memory-init-file 0")
 	set(CMAKE_MODULE_PATH "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules")
@@ -53,6 +50,12 @@ else()
 		execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${file} ${PROJECT_BINARY_DIR})
 	endforeach()
 endif()
+
+project (otucha)
+find_package(OpenGL REQUIRED)
+# The version number
+set (otucha_VERSION_MAJOR 0)
+set (otucha_VERSION_MINOR 1)
 
 # Header to pass some of the CMake settings to the source code
 configure_file (
