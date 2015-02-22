@@ -29,9 +29,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	
 	# Emscripten compiler options
 	set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
-	set(CMAKE_C_COMPILER_ENV_VAR "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
 	set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++.bat")
-	set(CMAKE_CXX_COMPILER_ENV_VAR "${EMSCRIPTEN_ROOT_PATH}/em++.bat")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file ${PROJECT_SOURCE_DIR}/simple.vsh --embed-file ${PROJECT_SOURCE_DIR}/simple.fsh --memory-init-file 0")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file ${PROJECT_SOURCE_DIR}/simple.vsh --embed-file ${PROJECT_SOURCE_DIR}/simple.fsh --memory-init-file 0")
 	set(CMAKE_MODULE_PATH "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules")
