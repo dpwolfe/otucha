@@ -34,7 +34,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=1 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file ${PROJECT_SOURCE_DIR}/simple.vsh --embed-file ${PROJECT_SOURCE_DIR}/simple.fsh --memory-init-file 0")
 	set(CMAKE_MODULE_PATH "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules")
 	set(CMAKE_TOOLCHAIN_FILE "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules/Platform/Emscripten.cmake")
-	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -o otucha.html")
+	set(CMAKE_EXE_LINKER_FLAGS "-o otucha.html ${CMAKE_EXE_LINKER_FLAGS}")
 else()
 	include_directories (
 		"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
