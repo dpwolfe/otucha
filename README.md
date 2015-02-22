@@ -23,6 +23,10 @@ An OpenGL program that compiles from C++ to JavaScript using Emscripten
   ```
   grunt build:js
   ```
+2. Open the index.html in the /www directory in Firefox or Chrome
+
+##### Grunt options
+**--minify** - Runs uglify (mangle + compress) on the output Emscripten JS.
 
 #### Building native
 1. Run the following command from the repository root:
