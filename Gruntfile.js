@@ -19,20 +19,18 @@ module.exports = function (grunt) {
                     'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF ../src'
                 ].join('&&')
             },
-            emscripten_step1: {
+            emscripten_cmake: {
                 options: {
                     failOnError: false
                 },
                 command: [
-                    'echo Building JavaScript',
                     'cd embuild',
                     'emcmake cmake ../src'
                 ].join('&&')
             },
-            emscripten_step2: {
+            emscripten_make: {
                 command: [
                     'cd embuild',
-                    'emcmake cmake ../src',
                     'make'
                 ].join('&&')
             }
@@ -92,9 +90,12 @@ module.exports = function (grunt) {
         grunt.task.run(['shell:native']);
     });
     grunt.registerTask('build:js', function () {
-        grunt.file.mkdir('embuild');
-        grunt.task.run('shell:emscripten_step1');
-        grunt.task.run('shell:emscripten_step2');
+        if (!grunt.file.exists('embuild/CMakeCache.txt')) {
+            grunt.file.mkdir('embuild');
+            grunt.task.run('shell:emscripten_cmake');
+            grunt.task.run('shell:emscripten_cmake');
+        }
+        grunt.task.run('shell:emscripten_make');
         grunt.task.run(['bowercopy:server', 'bowercopy:html']);
         if (grunt.option('minify')) {
             grunt.task.run('uglify');
