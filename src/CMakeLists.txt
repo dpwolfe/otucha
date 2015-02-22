@@ -35,18 +35,6 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	set(CMAKE_MODULE_PATH "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules")
 	set(CMAKE_TOOLCHAIN_FILE "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules/Platform/Emscripten.cmake")
 	set(CMAKE_EXE_LINKER_FLAGS "-o otucha.html ${CMAKE_EXE_LINKER_FLAGS}")
-else()
-	include_directories (
-		"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
-		"${PROJECT_SOURCE_DIR}/external/glew-1.11.0/include"
-	)
-	
-	# Copy of shader files
-	file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/*.*sh")
-	
-	foreach(file ${shaderFiles})
-		execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${file} ${PROJECT_BINARY_DIR})
-	endforeach()
 endif()
 
 project (otucha)
@@ -74,6 +62,18 @@ include_directories (
 	"${PROJECT_SOURCE_DIR}/s1"
 	"${PROJECT_SOURCE_DIR}/terasca"
 )
+if(NOT OTUCHA_EMSCRIPTEN_ENABLED)
+	include_directories (
+		"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
+		"${PROJECT_SOURCE_DIR}/external/glew-1.11.0/include"
+	)
+	# Copy of shader files
+	file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/*.*sh")
+	
+	foreach(file ${shaderFiles})
+		execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${file} ${PROJECT_BINARY_DIR})
+	endforeach()
+endif()
 
 add_subdirectory (rffalcon)
 add_subdirectory (s1)
