@@ -94,6 +94,7 @@ call :SelectNodeVersion
 :: 2. Install npm packages
 IF EXIST "%DEPLOYMENT_SOURCE%\site\repository\package.json" (
   pushd "%DEPLOYMENT_SOURCE%\site\repository"
+  echo Installing npm packages.
   call :ExecuteCmd !NPM_CMD! install
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
@@ -101,20 +102,23 @@ IF EXIST "%DEPLOYMENT_SOURCE%\site\repository\package.json" (
 
 :: 3. Install bower packages
 IF EXIST "%DEPLOYMENT_SOURCE%\site\repository\bower.json" (
-	pushd "%DEPLOYMENT_SOURCE%\site\repository"
-	call :ExecuteCmd !NPM_CMD! install bower
-	IF !ERRORLEVEL! NEQ 0 goto error
-	popd
+  echo Installing npm packages.
+  pushd "%DEPLOYMENT_SOURCE%\site\repository"
+  call :ExecuteCmd !NPM_CMD! install bower
+  if !ERRORLEVEL! NEQ 0 goto error
+  popd
 )
 
 :: 4. Install and run grunt
 IF EXIST "%DEPLOYMENT_SOURCE%\site\repository\Gruntfile.js" (
-	pushd "%DEPLOYMENT_SOURCE%\site\repository"
-	call :ExecuteCmd !NPM_CMD! install grunt-cli
-	IF !ERRORLEVEL! NEQ 0 goto error
-	call :ExecuteCmd ./node_modules/.bin/grunt build:js --jsUseDist
-	IF !ERRORLEVEL! NEQ 0 goto error
-	popd
+  echo Installing grunt.
+  pushd "%DEPLOYMENT_SOURCE%\site\repository"
+  call :ExecuteCmd !NPM_CMD! install grunt-cli
+  if !ERRORLEVEL! NEQ 0 goto error
+  echo Running grunt.
+  call :ExecuteCmd ./node_modules/.bin/grunt build:js --jsUseDist
+  if !ERRORLEVEL! NEQ 0 goto error
+  popd
 )
 
 :: 5. KuduSync
