@@ -102,7 +102,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
 
 :: 3. Install bower packages
 IF EXIST "%DEPLOYMENT_SOURCE%\bower.json" (
-  echo Installing npm packages.
+  echo Installing bower packages.
   pushd "%DEPLOYMENT_SOURCE%"
   call :ExecuteCmd !NPM_CMD! install bower
   if !ERRORLEVEL! NEQ 0 goto error
