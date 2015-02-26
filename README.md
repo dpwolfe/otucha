@@ -43,3 +43,5 @@ Builds and runs on Windows natively and in browser with Emscripten
 A perspective view of a cube with copper material properties and three lights in positions selected in order to produce specular highlights.
 
 [Image of Copper Cube](https://onedrive.live.com/embed?cid=EB3994E07F023E78&resid=EB3994E07F023E78%2142597&authkey=AAuP3j8_a2lGV1A)
+
+[Live Demo](http://spritegeist.azurewebsites.net/)
