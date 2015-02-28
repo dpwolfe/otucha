@@ -19,6 +19,13 @@ module.exports = function (grunt) {
                     'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF ../src'
                 ].join('&&')
             },
+            xcode: {
+                command: [
+                    'echo Building Xcode',
+                    'cd xbuild',
+                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -G Xcode ../src'
+                ].join('&&')
+            },
             emscripten_cmake: {
                 options: {
                     failOnError: false
@@ -98,6 +105,10 @@ module.exports = function (grunt) {
     grunt.registerTask('build:native', function () {
         grunt.file.mkdir('build');
         grunt.task.run(['shell:native']);
+    });
+    grunt.registerTask('build:xcode', function () {
+        grunt.file.mkdir('xbuild');
+        grunt.task.run(['shell:xcode']);
     });
     grunt.registerTask('build:js', function () {
         if (grunt.option('jsUseDist')) {
