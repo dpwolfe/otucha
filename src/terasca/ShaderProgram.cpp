@@ -4,7 +4,7 @@
 #include <iostream>
 
 ShaderProgram::ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
-	: _shaderCount(2), _id(0), _shaders(new Shader[2], std::default_delete<Shader[]>())
+    : _id(0), _shaderCount(2), _shaders(new Shader[2], std::default_delete<Shader[]>())
 {
 	_shaders[0].path = vertexShaderPath;
 	_shaders[0].type = GL_VERTEX_SHADER;
