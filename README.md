@@ -17,7 +17,7 @@ Builds and runs on Windows natively and in browser with Emscripten
    npm install
    ```
 
-#### Building with Emscripten using CMake
+#### Building with Emscripten
 1. Run the following command from the repository root:
 
   ```
