@@ -1,6 +1,5 @@
 #include <iostream>
 
-
 #include "ModelView.hpp"
 #include "Matrix4x4.hpp"
 
