@@ -6,6 +6,7 @@ set (otucha_VERSION_MAJOR 0)
 set (otucha_VERSION_MINOR 1)
 
 option(OTUCHA_EMSCRIPTEN_ENABLED "Enable building with Emscripten" ON)
+option(OTUCHA_DO_NOT_WARN_GL_H "Turn off the warning for gl.h and gl3.h both begin defined on Mac" OFF)
 
 if(OTUCHA_EMSCRIPTEN_ENABLED)
 	message(STATUS "Enabling Emscripten compile")
@@ -45,6 +46,10 @@ else()
 		"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
 		"${PROJECT_SOURCE_DIR}/external/glew-1.11.0/include"
 	)
+	if(OTUCHA_DO_NOT_WARN_GL_H)
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
+	endif()
 endif()
 
 
