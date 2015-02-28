@@ -16,14 +16,14 @@ module.exports = function (grunt) {
                 command: [
                     'echo Building native',
                     'cd build',
-                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF ../src'
+                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON ../src'
                 ].join('&&')
             },
             xcode: {
                 command: [
                     'echo Building Xcode',
                     'cd xbuild',
-                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -G Xcode ../src'
+                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -G Xcode ../src'
                 ].join('&&')
             },
             emscripten_cmake: {
