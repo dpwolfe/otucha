@@ -199,8 +199,8 @@ void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
 	}
 	setClearFlags(rcFlags);
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	int minor = 8;
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	int minor = 3;
 	_window = nullptr;
 	while ((_window == nullptr) && (minor > 0))
 	{
@@ -210,7 +210,7 @@ void GLFWController::createWindow(const std::string& windowTitle, int rcFlags)
 	}
 	if (_window == nullptr)
 	{
-		std::cerr << "Unable to create a 4.x rendering context!" << std::endl;
+		std::cerr << "Unable to create a 3.x rendering context!" << std::endl;
 		glfwTerminate();
 		glfwInitialized = false;
 	}
