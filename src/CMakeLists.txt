@@ -77,7 +77,6 @@ include_directories (
 	"${PROJECT_SOURCE_DIR}/rffalcon"
 	"${PROJECT_SOURCE_DIR}/s1"
 	"${PROJECT_SOURCE_DIR}/terasca"
-	"${PROJECT_SOURCE_DIR}/external/include"
 )
 
 add_subdirectory (rffalcon)
@@ -87,6 +86,10 @@ add_subdirectory (terasca)
 if(NOT OTUCHA_EMSCRIPTEN_ENABLED)
 	# Compile external dependencies
 	add_subdirectory (external)
+        include_directories(
+		"${PROJECT_SOURCE_DIR}/external/include"
+		"${gtest_SOURCE_DIR}/include"
+	)
 	add_subdirectory (tests)
 endif()
 
