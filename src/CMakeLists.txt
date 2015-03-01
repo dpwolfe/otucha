@@ -77,11 +77,13 @@ include_directories (
 	"${PROJECT_SOURCE_DIR}/rffalcon"
 	"${PROJECT_SOURCE_DIR}/s1"
 	"${PROJECT_SOURCE_DIR}/terasca"
+	"${PROJECT_SOURCE_DIR}/warbler"
 )
 
-add_subdirectory (rffalcon)
-add_subdirectory (s1)
-add_subdirectory (terasca)
+add_subdirectory(rffalcon)
+add_subdirectory(s1)
+add_subdirectory(terasca)
+add_subdirectory(warbler)
 
 if(NOT OTUCHA_EMSCRIPTEN_ENABLED)
 	# Compile external dependencies
@@ -94,9 +96,9 @@ endif()
 
 add_executable (otucha otucha.cpp)
 if(OTUCHA_EMSCRIPTEN_ENABLED)
-	target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY})
+	target_link_libraries (otucha rffalcon s1 terasca warbler ${OPENGL_LIBRARY})
 else()
-	target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY} glfw GLEW_1110)
+	target_link_libraries (otucha rffalcon s1 terasca warbler ${OPENGL_LIBRARY} glfw GLEW_1110)
 endif()
 
 # Copy shader files during pre-build
