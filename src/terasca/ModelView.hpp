@@ -2,11 +2,6 @@
 
 #include <string>
 #include <GL/glew.h>
-#ifdef _WIN32
-    #include <GL/gl.h>
-#elif __APPLE__
-    #include <OpenGL/gl.h>
-#endif
 
 #include "AffinePoint.hpp"
 #include "AffineVector.hpp"
