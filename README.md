@@ -36,7 +36,15 @@ Builds and runs on Windows natively and in browser with Emscripten
   ```
   grunt
   ```
-2. Build using the generated project files.  For example, if developing on Windows with Visual Studio, open the otucha.sln, build and run.
+2. Build using the generated project files.  For example, if developing on Windows with Visual Studio, open the otucha.sln, build and run.  If developing on Mac or Linux, this will generate a Makefile.
+
+#### Building with Xcode
+1. Run the following command from the repository root:
+
+  ```
+  grunt build:xcode
+  ```
+2. Open the generated xcodeproj in the xbuild directory.
 
 #### What you'll see
 
