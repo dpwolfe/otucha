@@ -1,5 +1,5 @@
 # otucha
-An OpenGL program that compiles from C++ to JavaScript using Emscripten
+A cross-platform C++ OpenGL program that runs natively and compiles to JavaScript using Emscripten.
 
 #### Status
 
