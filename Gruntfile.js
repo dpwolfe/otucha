@@ -23,7 +23,8 @@ module.exports = function (grunt) {
                 command: [
                     'echo Building Xcode',
                     'cd xbuild',
-                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -G Xcode ../src'
+                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -G Xcode ../src',
+                    'open -a Xcode otucha.xcodeproj'
                 ].join('&&')
             },
             emscripten_cmake: {
