@@ -12,12 +12,12 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	message(STATUS "Enabling Emscripten compile")
 
 	# Attempt to get Emscripten location
-	if ("${EMSCRIPTEN_ROOT_PATH}" STREQUAL "")
+	if("${EMSCRIPTEN_ROOT_PATH}" STREQUAL "")
 		set(EMSCRIPTEN_ROOT_PATH "$ENV{EMSCRIPTEN}")
 	endif()
 
 	# Fail if Emscripten not found
-	if ("${EMSCRIPTEN_ROOT_PATH}" STREQUAL "")
+	if("${EMSCRIPTEN_ROOT_PATH}" STREQUAL "")
 		message(FATAL_ERROR "Could not locate Emscripten compiler.  Either set the EMSCRIPTEN environment variable, or pass -DEMSCRIPTEN_ROOT_PATH=xxx to CMake to specify the location.")
 	endif()
 	
@@ -34,8 +34,13 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	endif()
 	
 	# Emscripten compiler options
-	set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
-	set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++.bat")
+	if(WIN32)
+		set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
+		set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++.bat")
+	else()
+		set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc")
+		set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++")
+	endif()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=0 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file simple.vsh --embed-file simple.fsh --memory-init-file 0")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=0 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file simple.vsh --embed-file simple.fsh --memory-init-file 0")
 	set(CMAKE_MODULE_PATH "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules")
@@ -51,13 +56,6 @@ else()
 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
 	endif()
 endif()
-
-
-# Copy of shader files
-file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/*.*sh")
-foreach(file ${shaderFiles})
-	execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${file} ${PROJECT_BINARY_DIR})
-endforeach()
 
 # Header to pass some of the CMake settings to the source code
 configure_file (
@@ -94,3 +92,13 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 else()
 	target_link_libraries (otucha rffalcon s1 terasca ${OPENGL_LIBRARY} glfw GLEW_1110)
 endif()
+
+# Copy shader files during pre-build
+file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/*.*sh")
+foreach(file ${shaderFiles})
+	add_custom_command(TARGET otucha PRE_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different ${file}
+                ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}
+                COMMENT "Copying ${file} to ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}")
+endforeach()
+
