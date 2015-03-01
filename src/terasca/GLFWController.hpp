@@ -2,11 +2,11 @@
 
 #include "Controller.hpp"
 
+#include <GL/glew.h>
+
 #ifdef __APPLE_CC__
 #define GLFW_INCLUDE_GLCOREARB
 #endif
-
-#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 class GLFWController : public Controller
