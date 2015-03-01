@@ -46,6 +46,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	set(CMAKE_MODULE_PATH "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules")
 	set(CMAKE_TOOLCHAIN_FILE "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules/Platform/Emscripten.cmake")
 	set(CMAKE_EXE_LINKER_FLAGS "-o otucha.html ${CMAKE_EXE_LINKER_FLAGS}")
+	set(OTUCHA_SHADER_COPY_BUILD_STAGE "PRE_BUILD")
 else()
 	include_directories (
 		"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
@@ -55,6 +56,7 @@ else()
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
 	endif()
+	set(OTUCHA_SHADER_COPY_BUILD_STAGE "POST_BUILD")
 endif()
 
 # Header to pass some of the CMake settings to the source code
@@ -96,7 +98,7 @@ endif()
 # Copy shader files during pre-build
 file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/*.*sh")
 foreach(file ${shaderFiles})
-	add_custom_command(TARGET otucha PRE_BUILD
+	add_custom_command(TARGET otucha ${OTUCHA_SHADER_COPY_BUILD_STAGE}
 		COMMAND ${CMAKE_COMMAND} -E copy_if_different ${file}
                 ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}
                 COMMENT "Copying ${file} to ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}")
