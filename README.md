@@ -1,11 +1,13 @@
 # otucha
-An OpenGL program that compiles from C++ to JavaScript using Emscripten
+A cross-platform C++ OpenGL program that runs natively and compiles to JavaScript using Emscripten.
 
 #### Status
 
-Builds and runs on Windows natively and in browser with Emscripten
+Builds and runs on Mac OS X and Windows natively and in browser with Emscripten
 
 #### Developer Setup
+Follow these steps for Windows or Mac development.  Pay careful attention to any platform specific instructions each vendor provides.
+
 1. Install [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
 2. Install [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
 3. Install [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/)
@@ -36,7 +38,15 @@ Builds and runs on Windows natively and in browser with Emscripten
   ```
   grunt
   ```
-2. Build using the generated project files.  For example, if developing on Windows with Visual Studio, open the otucha.sln, build and run.
+2. Build using the generated project files.  For example, if developing on Windows with Visual Studio, open the otucha.sln, build and run.  If developing on Mac or Linux, this will generate a Makefile.
+
+#### Building with Xcode
+1. Run the following command from the repository root:
+
+  ```
+  grunt build:xcode
+  ```
+2. Open the generated xcodeproj in the xbuild directory.
 
 #### What you'll see
 
