@@ -18,9 +18,8 @@ add_subdirectory(glfw-3.0.4)
 add_subdirectory(gtest-1.7.0)
 
 include_directories(
-	glfw-3.0.4/include/GLFW
-	glew-1.11.0/include
-	${gtest_SOURCE_DIR}/include
+	"glfw-3.0.4/include/GLFW"
+	"glew-1.11.0/include"
 )
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
