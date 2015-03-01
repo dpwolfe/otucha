@@ -87,7 +87,6 @@ if(NOT OTUCHA_EMSCRIPTEN_ENABLED)
 	# Compile external dependencies
 	add_subdirectory (external)
         include_directories(
-		"${PROJECT_SOURCE_DIR}/external/include"
 		"${gtest_SOURCE_DIR}/include"
 	)
 	add_subdirectory (tests)
