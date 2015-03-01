@@ -54,7 +54,7 @@ void ShaderProgram::loadShaderSource(Shader& shader)
 	}
 	else
 	{
-		std::cerr << "Could not open file for reading: " + shader.path;
+        std::cerr << "Could not open file for reading: " + shader.path << std::endl;
 		dispose();
 		throw(errno);
 	}
