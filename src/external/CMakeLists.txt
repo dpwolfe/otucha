@@ -14,11 +14,13 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW documentation")
 
-add_subdirectory (glfw-3.0.4)
+add_subdirectory(glfw-3.0.4)
+add_subdirectory(gtest-1.7.0)
 
 include_directories(
-	glfw-3.0.4/include/GLFW/
-	glew-1.11.0/include/
+	glfw-3.0.4/include/GLFW
+	glew-1.11.0/include
+	${gtest_SOURCE_DIR}/include
 )
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
