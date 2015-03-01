@@ -83,11 +83,11 @@ include_directories (
 add_subdirectory (rffalcon)
 add_subdirectory (s1)
 add_subdirectory (terasca)
-add_subdirectory (tests)
 
 if(NOT OTUCHA_EMSCRIPTEN_ENABLED)
 	# Compile external dependencies
 	add_subdirectory (external)
+	add_subdirectory (tests)
 endif()
 
 add_executable (otucha otucha.cpp)
