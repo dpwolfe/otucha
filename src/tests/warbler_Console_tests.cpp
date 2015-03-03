@@ -5,6 +5,15 @@
 
 using namespace warbler;
 
+class ConsoleTest
+{
+public:
+    static void noopCommandHandler(const std::shared_ptr<const std::vector<ConsoleArg>> &args) {};
+    static const std::shared_ptr<std::vector<ConsoleArgType>> args;
+};
+
+const std::shared_ptr<std::vector<ConsoleArgType>> ConsoleTest::args = std::make_shared<std::vector<ConsoleArgType>>();
+
 TEST(constructor, default_constructor)
 {
     Console c;
@@ -13,14 +22,17 @@ TEST(constructor, default_constructor)
 TEST(methods, registerCommand)
 {
     Console c;
-    auto func = [] (const std::vector<ConsoleArg> &args) { };
-    std::vector<ConsoleArgType> args;
-    c.registerCommand("test", func, args);
+    c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args);
 }
 
 TEST(methods, registerCommand_null_func_throws)
 {
     Console c;
-    std::vector<ConsoleArgType> args;
-    ASSERT_ANY_THROW(c.registerCommand("test", nullptr, args));
+    ASSERT_ANY_THROW(c.registerCommand("test", nullptr, ConsoleTest::args));
+}
+
+TEST(methods, registerCommand_empty_name_throws)
+{
+    Console c;
+    ASSERT_ANY_THROW(c.registerCommand("", ConsoleTest::noopCommandHandler, ConsoleTest::args));
 }
