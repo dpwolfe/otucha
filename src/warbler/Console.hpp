@@ -2,6 +2,8 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <memory>
 
 namespace warbler {
     enum ConsoleArgType
@@ -19,6 +21,9 @@ namespace warbler {
         std::string &stringValue;
     };
     
+    typedef void (*commandHandlerType)(const std::shared_ptr<const std::vector<ConsoleArg>> &args);
+    typedef std::unordered_map<std::string, const std::shared_ptr<std::vector<commandHandlerType>>> commandHandlerMapType;
+    
     class Console
     {
     public:
@@ -26,6 +31,9 @@ namespace warbler {
         Console(Console& rhs);
         virtual ~Console();
     
-        void registerCommand(const std::string &name, void (*handler)(const std::vector<ConsoleArg> &args), const std::vector<ConsoleArgType> &argTypes);
+        void registerCommand(const std::string &name, commandHandlerType, const std::shared_ptr<const std::vector<ConsoleArgType>> &argTypes);
+        
+    private:
+        commandHandlerMapType _commandHandlerMap = commandHandlerMapType();
     };
 }
