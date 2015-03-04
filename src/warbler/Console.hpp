@@ -6,6 +6,7 @@
 #include <memory>
 
 namespace warbler {
+    
     enum ConsoleArgType
     {
         STRING,
@@ -21,8 +22,22 @@ namespace warbler {
         std::string &stringValue;
     };
     
-    typedef void (*commandHandlerType)(const std::shared_ptr<const std::vector<ConsoleArg>> &args);
-    typedef std::unordered_map<std::string, const std::shared_ptr<std::vector<commandHandlerType>>> commandHandlerMapType;
+    typedef void (*t_commandHandler)(const std::shared_ptr<const std::vector<ConsoleArg>> &args);
+    typedef const std::shared_ptr<const std::vector<ConsoleArgType>> t_argTypes;
+    
+    struct ConsoleCommand
+    {
+        ConsoleCommand(t_commandHandler handler, t_argTypes argTypes) : handler(handler), argTypes(argTypes)
+        {
+        }
+        
+        t_commandHandler handler;
+        t_argTypes argTypes;
+    };
+    
+    typedef std::vector<ConsoleCommand> t_commandHandlers;
+    typedef std::shared_ptr<t_commandHandlers> t_commandHandlers_ptr;
+    typedef std::unordered_map<std::string, t_commandHandlers_ptr> t_commandHandlerMap;
     
     class Console
     {
@@ -31,9 +46,9 @@ namespace warbler {
         Console(Console& rhs);
         virtual ~Console();
     
-        void registerCommand(const std::string &name, commandHandlerType, const std::shared_ptr<const std::vector<ConsoleArgType>> &argTypes);
+        void registerCommand(const std::string &name, t_commandHandler, t_argTypes &argTypes);
         
     private:
-        commandHandlerMapType _commandHandlerMap = commandHandlerMapType();
+        t_commandHandlerMap _commandHandlerMap = t_commandHandlerMap();
     };
 }
