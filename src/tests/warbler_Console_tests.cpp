@@ -16,13 +16,13 @@ const std::shared_ptr<std::vector<ConsoleArgType>> ConsoleTest::args = std::make
 
 TEST(constructor, default_constructor)
 {
-    Console c;
+    ASSERT_NO_THROW(Console c);
 }
 
 TEST(methods, registerCommand)
 {
     Console c;
-    c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args);
+    ASSERT_NO_THROW(c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args));
 }
 
 TEST(methods, registerCommand_null_func_throws)
