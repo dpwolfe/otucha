@@ -17,8 +17,9 @@ Console::~Console()
 }
 
 
-void Console::registerCommand(const std::string &name, commandHandlerType handler, const std::shared_ptr<const std::vector<ConsoleArgType>> &argTypes)
+void Console::registerCommand(const std::string &name, t_commandHandler handler, const std::shared_ptr<const std::vector<ConsoleArgType>> &argTypes)
 {
+    // pre-conditions
     if (name.length() == 0)
     {
         throw std::exception();
@@ -29,15 +30,27 @@ void Console::registerCommand(const std::string &name, commandHandlerType handle
         throw std::exception();
     }
     
-    std::shared_ptr<std::vector<commandHandlerType>> handlerVector;
+    // get or create handler vector for command name
+    t_commandHandlers_ptr handlers;
     if (_commandHandlerMap.count(name) != 0)
     {
-        handlerVector = _commandHandlerMap.find(name)->second;
+        handlers = _commandHandlerMap.find(name)->second;
     }
     else
     {
-        handlerVector = std::make_shared<std::vector<commandHandlerType>>();
-        _commandHandlerMap.insert(std::make_pair(name, handlerVector));
+        handlers = std::make_shared<t_commandHandlers>();
+        _commandHandlerMap.insert(std::make_pair(name, handlers));
     }
-    handlerVector->push_back(handler);
+    
+    // check to make sure a handler with same number of args does not exist
+    for (auto it = handlers->begin(); it != handlers->end(); ++it)
+    {
+        if (it->argTypes->size() == argTypes->size()) {
+            throw std::exception();
+        }
+    }
+    
+    // add the command
+    auto command = ConsoleCommand(handler, argTypes);
+    handlers->push_back(command);
 }
