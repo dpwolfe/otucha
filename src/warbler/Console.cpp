@@ -1,6 +1,7 @@
 #include "Console.hpp"
 
 #include <utility>
+#include <sstream>
 
 using namespace warbler;
 
@@ -53,4 +54,25 @@ void Console::registerCommand(const std::string &name, t_commandHandler handler,
     // add the command
     auto command = ConsoleCommand(handler, argTypes);
     handlers->push_back(command);
+}
+
+void Console::executeCommand(const std::string command) const
+{
+    // pre-conditions
+    if (command.length() == 0)
+    {
+        throw std::exception();
+    }
+    
+    std::stringstream commandStream(command);
+    std::string name;
+    commandStream >> name;
+    
+    // get handler
+    if (_commandHandlerMap.count(name) == 0)
+    {
+        throw std::exception();
+    }
+    
+    t_commandHandlers_ptr handler = _commandHandlerMap.find(name)->second;
 }

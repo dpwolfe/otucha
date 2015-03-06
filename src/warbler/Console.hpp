@@ -47,6 +47,7 @@ namespace warbler {
         virtual ~Console();
     
         void registerCommand(const std::string &name, t_commandHandler, t_argTypes &argTypes);
+        void executeCommand(const std::string command) const;
         
     private:
         t_commandHandlerMap _commandHandlerMap = t_commandHandlerMap();
