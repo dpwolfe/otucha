@@ -68,11 +68,34 @@ void Console::executeCommand(const std::string command) const
     std::string name;
     commandStream >> name;
     
-    // get handler
+    // get handlers for given name
     if (_commandHandlerMap.count(name) == 0)
     {
         throw std::exception();
     }
+    t_commandHandlers_ptr handlers = _commandHandlerMap.find(name)->second;
     
-    t_commandHandlers_ptr handler = _commandHandlerMap.find(name)->second;
+    // count arguments
+    std::string arg;
+    int argCount = 0;
+    while (!commandStream.eof())
+    {
+        argCount++;
+        commandStream >> arg;
+    }
+    
+    // get handler matching param count
+    t_commandHandler handler = nullptr;
+    for (auto it = handlers->begin(); it != handlers->end(); ++it)
+    {
+        if (it->argTypes->size() == argCount)
+        {
+            handler = it->handler;
+        }
+    }
+    
+    if (handler == nullptr)
+    {
+        throw std::exception();
+    }
 }

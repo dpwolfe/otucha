@@ -79,3 +79,24 @@ TEST(executeCommand, throws_when_given_empty_string)
     Console c;
     ASSERT_ANY_THROW(c.executeCommand(""));
 }
+
+TEST(executeCommand, throws_when_no_command_matching_parameter_count_found)
+{
+    Console c;
+    c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args0);
+    ASSERT_ANY_THROW(c.executeCommand("test arg1"));
+}
+
+TEST(executeCommand, finds_command_with_matching_parameter_cound_0params)
+{
+    Console c;
+    c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args0);
+    c.executeCommand("test");
+}
+
+TEST(executeCommand, finds_command_with_matching_parameter_cound_1param)
+{
+    Console c;
+    c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args1);
+    c.executeCommand("test arg1");
+}
