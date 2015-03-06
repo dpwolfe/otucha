@@ -53,7 +53,7 @@ TEST(registerCommand, second_handler_same_signature_throws)
     ASSERT_ANY_THROW(c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args0));
 }
 
-TEST(executeCommand, third_handler_same_signature_as_first_throws)
+TEST(registerCommand, third_handler_same_signature_as_first_throws)
 {
     Console c;
     c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args0);
@@ -61,9 +61,21 @@ TEST(executeCommand, third_handler_same_signature_as_first_throws)
     ASSERT_ANY_THROW(c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args0));
 }
 
-TEST(executeCommand, second_handler_same_signature_but_different_name)
+TEST(registerCommand, second_handler_same_signature_but_different_name)
 {
     Console c;
     c.registerCommand("test1", ConsoleTest::noopCommandHandler, ConsoleTest::args0);
     c.registerCommand("test2", ConsoleTest::noopCommandHandler, ConsoleTest::args0);
+}
+
+TEST(executeCommand, throws_when_no_command_found)
+{
+    Console c;
+    ASSERT_ANY_THROW(c.executeCommand("test"));
+}
+
+TEST(executeCommand, throws_when_given_empty_string)
+{
+    Console c;
+    ASSERT_ANY_THROW(c.executeCommand(""));
 }
