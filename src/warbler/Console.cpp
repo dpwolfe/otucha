@@ -17,8 +17,7 @@ Console::~Console()
 {
 }
 
-
-void Console::registerCommand(const std::string &name, t_commandHandler handler, const std::shared_ptr<const std::vector<ConsoleArgType>> &argTypes)
+void Console::registerCommand(const std::string &name, t_commandHandler handler, t_consoleArgTypes_ptr argTypes)
 {
     // pre-conditions
     if (name.length() == 0)

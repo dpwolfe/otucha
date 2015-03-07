@@ -8,13 +8,13 @@ using namespace warbler;
 class ConsoleTest
 {
 public:
-    static void noopCommandHandler(const std::shared_ptr<const std::vector<ConsoleArg>> &args) {};
-    static const std::shared_ptr<std::vector<ConsoleArgType>> args0;
-    static const std::shared_ptr<std::vector<ConsoleArgType>> args1;
+    static void noopCommandHandler(const t_consoleArgs_ptr args) {};
+    static const t_consoleArgTypes_ptr args0;
+    static const t_consoleArgTypes_ptr args1;
 };
 
-const std::shared_ptr<std::vector<ConsoleArgType>> ConsoleTest::args0 = std::make_shared<std::vector<ConsoleArgType>>();
-const std::shared_ptr<std::vector<ConsoleArgType>> ConsoleTest::args1 = std::make_shared<std::vector<ConsoleArgType>>(1, ConsoleArgType::STRING);
+const t_consoleArgTypes_ptr ConsoleTest::args0 = std::make_shared<t_consoleArgTypes>();
+const t_consoleArgTypes_ptr ConsoleTest::args1 = std::make_shared<t_consoleArgTypes>(1, ConsoleArgType::STRING);
 
 TEST(constructor, default_constructor)
 {
@@ -99,4 +99,12 @@ TEST(executeCommand, finds_command_with_matching_parameter_count_1param)
     Console c;
     c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args1);
     c.executeCommand("test arg1");
+}
+
+TEST(executeCommand, executes)
+{
+    Console c;
+    //bool called = false;
+    //c.registerCommand("test", [&] (t_consoleArgs_ptr args) { called = true; }, ConsoleTest::args0);
+    //ASSERT_TRUE(called);
 }

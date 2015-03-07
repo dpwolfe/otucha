@@ -22,20 +22,23 @@ namespace warbler {
         std::string &stringValue;
     };
     
-    typedef void (*t_commandHandler)(const std::shared_ptr<const std::vector<ConsoleArg>> &args);
-    typedef const std::shared_ptr<const std::vector<ConsoleArgType>> t_argTypes;
+    typedef std::vector<const ConsoleArg> t_consoleArgs;
+    typedef std::shared_ptr<t_consoleArgs> t_consoleArgs_ptr;
+    typedef void (*t_commandHandler)(t_consoleArgs_ptr args);
+    typedef std::vector<ConsoleArgType> t_consoleArgTypes;
+    typedef std::shared_ptr<t_consoleArgTypes> t_consoleArgTypes_ptr;
     
     struct ConsoleCommand
     {
-        ConsoleCommand(t_commandHandler handler, t_argTypes argTypes) : handler(handler), argTypes(argTypes)
+        ConsoleCommand(t_commandHandler handler, t_consoleArgTypes_ptr argTypes) : handler(handler), argTypes(argTypes)
         {
         }
         
         t_commandHandler handler;
-        t_argTypes argTypes;
+        t_consoleArgTypes_ptr argTypes;
     };
     
-    typedef std::vector<ConsoleCommand> t_commandHandlers;
+    typedef std::vector<const ConsoleCommand> t_commandHandlers;
     typedef std::shared_ptr<t_commandHandlers> t_commandHandlers_ptr;
     typedef std::unordered_map<std::string, t_commandHandlers_ptr> t_commandHandlerMap;
     
@@ -46,7 +49,7 @@ namespace warbler {
         Console(Console& rhs);
         virtual ~Console();
     
-        void registerCommand(const std::string &name, t_commandHandler, t_argTypes &argTypes);
+        void registerCommand(const std::string &name, t_commandHandler, t_consoleArgTypes_ptr argTypes);
         void executeCommand(const std::string command) const;
         
     private:
