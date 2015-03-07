@@ -104,7 +104,8 @@ TEST(executeCommand, finds_command_with_matching_parameter_count_1param)
 TEST(executeCommand, executes)
 {
     Console c;
-    //bool called = false;
-    //c.registerCommand("test", [&] (t_consoleArgs_ptr args) { called = true; }, ConsoleTest::args0);
-    //ASSERT_TRUE(called);
+    bool called = false;
+    c.registerCommand("test", [&] (t_consoleArgs_ptr args) { called = true; }, ConsoleTest::args0);
+    c.executeCommand("test");
+    ASSERT_TRUE(called);
 }

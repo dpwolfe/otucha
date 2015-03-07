@@ -24,7 +24,7 @@ namespace warbler {
     
     typedef std::vector<const ConsoleArg> t_consoleArgs;
     typedef std::shared_ptr<t_consoleArgs> t_consoleArgs_ptr;
-    typedef void (*t_commandHandler)(t_consoleArgs_ptr args);
+    typedef std::function<void(t_consoleArgs_ptr)> t_commandHandler;
     typedef std::vector<ConsoleArgType> t_consoleArgTypes;
     typedef std::shared_ptr<t_consoleArgTypes> t_consoleArgTypes_ptr;
     
