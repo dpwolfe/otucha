@@ -87,14 +87,14 @@ TEST(executeCommand, throws_when_no_command_matching_parameter_count_found)
     ASSERT_ANY_THROW(c.executeCommand("test arg1"));
 }
 
-TEST(executeCommand, finds_command_with_matching_parameter_cound_0params)
+TEST(executeCommand, finds_command_with_matching_parameter_count_0params)
 {
     Console c;
     c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args0);
     c.executeCommand("test");
 }
 
-TEST(executeCommand, finds_command_with_matching_parameter_cound_1param)
+TEST(executeCommand, finds_command_with_matching_parameter_count_1param)
 {
     Console c;
     c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args1);
