@@ -92,9 +92,10 @@ void Console::executeCommand(const std::string command) const
             handler = it->handler;
         }
     }
-    
+     
     if (handler == nullptr)
     {
         throw std::exception();
     }
+    handler(std::make_shared<t_consoleArgs>());
 }
