@@ -118,19 +118,19 @@ void Console::executeCommand(const std::string command) const
         argStream >> consoleArg.stringValue;
         if (consoleArg.type == ConsoleArgType::FLOAT)
         {
-            if (!Console::_isNumber(consoleArg.stringValue))
-            {
-                throw std::ex   ception();
-            }
-            consoleArg.floatValue = std::stof(consoleArg.stringValue);
-        }
-        else if (consoleArg.type == ConsoleArgType::INT)
-        {
-            if (!Console::_isInteger(consoleArg.stringValue))
+            consoleArg.floatValue = std::stod(consoleArg.stringValue);
+            if (consoleArg.floatValue == 0.0 && consoleArg.stringValue[0] != '0')
             {
                 throw std::exception();
             }
+        }
+        else if (consoleArg.type == ConsoleArgType::INT)
+        {
             consoleArg.intValue = std::stoi(consoleArg.stringValue);
+            if (consoleArg.intValue == 0 && consoleArg.stringValue[0] != '0')
+            {
+                throw std::exception();
+            }
         }
         args->push_back(consoleArg);
         ++argTypeIt;
@@ -138,14 +138,4 @@ void Console::executeCommand(const std::string command) const
     
     // execute handler
     handler(args);
-}
-
-bool Console::_isInteger(const std::string &input)
-{
-    return std::regex_match(input, std::regex("[(-|+)|][0-9]+"));
-}
-
-bool Console::_isNumber(const std::string &input)
-{
-    return std::regex_match(input, std::regex("[(-|+)|][0-9]+(\\.[0-9]+)?"));
 }
