@@ -11,10 +11,14 @@ public:
     static void noopCommandHandler(const t_consoleArgs_ptr args) {};
     static const t_consoleArgTypes_ptr args0;
     static const t_consoleArgTypes_ptr args1;
+    static const t_consoleArgTypes_ptr args1i;
+    static const t_consoleArgTypes_ptr args1f;
 };
 
 const t_consoleArgTypes_ptr ConsoleTest::args0 = std::make_shared<t_consoleArgTypes>();
 const t_consoleArgTypes_ptr ConsoleTest::args1 = std::make_shared<t_consoleArgTypes>(1, ConsoleArgType::STRING);
+const t_consoleArgTypes_ptr ConsoleTest::args1i = std::make_shared<t_consoleArgTypes>(1, ConsoleArgType::INT);
+const t_consoleArgTypes_ptr ConsoleTest::args1f = std::make_shared<t_consoleArgTypes>(1, ConsoleArgType::FLOAT);
 
 TEST(constructor, default_constructor)
 {
@@ -104,8 +108,56 @@ TEST(executeCommand, finds_command_with_matching_parameter_count_1param)
 TEST(executeCommand, executes)
 {
     Console c;
-    bool called = false;
-    c.registerCommand("test", [&] (t_consoleArgs_ptr args) { called = true; }, ConsoleTest::args0);
+    bool success = false;
+    c.registerCommand("test", [&] (t_consoleArgs_ptr args) { success = true; }, ConsoleTest::args0);
     c.executeCommand("test");
-    ASSERT_TRUE(called);
+    ASSERT_TRUE(success);
+}
+
+TEST(executeCommand, executes_with_string_arg)
+{
+    Console c;
+    bool success = false;
+    c.registerCommand("test", [&] (t_consoleArgs_ptr args) { if ((*args)[0].stringValue == "arg") { success = true; }}, ConsoleTest::args1);
+    c.executeCommand("test arg");
+    ASSERT_TRUE(success);
+}
+
+TEST(executeCommand, executes_with_int_arg)
+{
+    Console c;
+    bool success = false;
+    c.registerCommand("test", [&] (t_consoleArgs_ptr args) { if ((*args)[0].intValue == 1) { success = true; }}, ConsoleTest::args1i);
+    c.executeCommand("test 1");
+    ASSERT_TRUE(success);
+}
+
+TEST(executeCommand, executes_with_float_arg)
+{
+    Console c;
+    bool success = false;
+    c.registerCommand("test", [&] (t_consoleArgs_ptr args) {
+        auto floatValue = (*args)[0].floatValue;
+        if (floatValue <= std::nextafter(1.1, 2.0) && floatValue >= std::nextafter(1.1, 1.0)) { success = true; }
+    }, ConsoleTest::args1f);
+    c.executeCommand("test 1.1");
+    ASSERT_TRUE(success);
+}
+
+TEST(executeCommand, cannot_parse_int)
+{
+    Console c;
+    bool success = true;
+    c.registerCommand("test", [&] (t_consoleArgs_ptr args) { success = false; }, ConsoleTest::args1i);
+    ASSERT_ANY_THROW(c.executeCommand("test x"));
+    ASSERT_TRUE(success);
+}
+
+TEST(executeCommand, cannot_parse_float)
+{
+    Console c;
+    bool success = true;
+    c.registerCommand("test", [&] (t_consoleArgs_ptr args) { success = false; }, ConsoleTest::args1f);
+    ASSERT_ANY_THROW(c.executeCommand("test y"));
+    ASSERT_TRUE(success);
 }

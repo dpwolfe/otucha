@@ -16,10 +16,12 @@ namespace warbler {
     
     struct ConsoleArg
     {
+        ConsoleArg(): intValue(0), floatValue(0.0) {}
+        
         ConsoleArgType type;
         int intValue;
-        double doubleValue;
-        std::string &stringValue;
+        double floatValue;
+        std::string stringValue;
     };
     
     typedef std::vector<const ConsoleArg> t_consoleArgs;
@@ -54,5 +56,8 @@ namespace warbler {
         
     private:
         t_commandHandlerMap _commandHandlerMap = t_commandHandlerMap();
+        
+        static bool _isNumber(const std::string &input);
+        static bool _isInteger(const std::string &input);
     };
 }
