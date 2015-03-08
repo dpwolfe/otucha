@@ -57,7 +57,6 @@ else()
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
 	endif()
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++11")
 	set(OTUCHA_SHADER_COPY_BUILD_STAGE "POST_BUILD")
 endif()
 
@@ -102,6 +101,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 else()
 	target_link_libraries (otucha rffalcon s1 terasca warbler ${OPENGL_LIBRARY} glfw GLEW_1110)
 endif()
+set_property(TARGET otucha PROPERTY CXX_STANDARD 11)
 
 # Copy shader files during pre-build
 file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/*.*sh")
