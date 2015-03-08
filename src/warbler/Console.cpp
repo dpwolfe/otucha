@@ -56,59 +56,77 @@ void Console::registerCommand(const std::string &name, t_commandHandler handler,
     handlers->push_back(command);
 }
 
-void Console::executeCommand(const std::string command) const
+void Console::executeCommand(const std::string input) const
 {
     // pre-conditions
-    if (command.length() == 0)
+    if (input.length() == 0)
     {
         throw std::exception();
     }
     
-    std::stringstream commandStream(command);
-    std::string name;
-    commandStream >> name;
-    
-    // get handlers for given name
+    auto signature = _getCommandSignature(input);
+    ConsoleCommand command = _getConsoleCommand(signature);
+    t_consoleArgs_ptr args = _getConsoleArgs(input, command);
+    command.handler(args);
+}
+
+t_commandHandlers_ptr Console::_getHandlersByName(const std::string &name) const
+{    // get handlers for given name
     if (_commandHandlerMap.count(name) == 0)
     {
         throw std::exception();
     }
-    t_commandHandlers_ptr handlers = _commandHandlerMap.find(name)->second;
+    return _commandHandlerMap.find(name)->second;
+}
+
+ConsoleCommandSignature Console::_getCommandSignature(const std::string &input) const
+{
+    ConsoleCommandSignature signature;
+    std::stringstream commandStream(input);
+    
+    commandStream >> signature.name;
     
     // count arguments
     std::string arg;
-    int argCount = 0;
     while (!commandStream.eof())
     {
-        argCount++;
+        signature.argCount++;
         commandStream >> arg;
     }
     
-    // get handler matching param count
-    t_commandHandler handler;
+    return signature;
+}
+
+ConsoleCommand Console::_getConsoleCommand(const ConsoleCommandSignature &signature) const
+{
+    ConsoleCommand command;
+    t_commandHandlers_ptr handlers = _getHandlersByName(signature.name);
     t_consoleArgTypes_ptr argTypes;
     for (auto it = handlers->begin(); it != handlers->end(); ++it)
     {
-        if (it->argTypes->size() == argCount)
+        if (it->argTypes->size() == signature.argCount)
         {
-            handler = it->handler;
-            argTypes = it->argTypes;
+            command = *it;
         }
     }
-    if (handler == nullptr)
+    
+    if (command.handler == nullptr || command.argTypes == nullptr)
     {
         throw std::exception();
     }
     
-    // build up arg vector to pass to handler
-    std::stringstream argStream(command);
-    //std::string arg;
+    return command;
+}
+
+t_consoleArgs_ptr Console::_getConsoleArgs(const std::string &input, const ConsoleCommand command) const
+{    t_consoleArgs_ptr args = std::make_shared<t_consoleArgs>();
+    std::stringstream argStream(input);
+    std::string arg;
     argStream >> arg; // skip command name
-    t_consoleArgs_ptr args = std::make_shared<t_consoleArgs>();
-    auto argTypeIt = argTypes->begin();
+    auto argTypeIt = command.argTypes->begin();
     while (!argStream.eof())
     {
-        if (argTypes->end() == argTypeIt)
+        if (command.argTypes->end() == argTypeIt)
         {
             throw std::exception();
         }
@@ -135,7 +153,5 @@ void Console::executeCommand(const std::string command) const
         args->push_back(consoleArg);
         ++argTypeIt;
     }
-    
-    // execute handler
-    handler(args);
+    return args;
 }
