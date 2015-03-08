@@ -2,6 +2,7 @@
 
 #include <utility>
 #include <sstream>
+#include <regex>
 
 using namespace warbler;
 
@@ -84,18 +85,67 @@ void Console::executeCommand(const std::string command) const
     }
     
     // get handler matching param count
-    t_commandHandler handler = nullptr;
+    t_commandHandler handler;
+    t_consoleArgTypes_ptr argTypes;
     for (auto it = handlers->begin(); it != handlers->end(); ++it)
     {
         if (it->argTypes->size() == argCount)
         {
             handler = it->handler;
+            argTypes = it->argTypes;
         }
     }
-     
     if (handler == nullptr)
     {
         throw std::exception();
     }
-    handler(std::make_shared<t_consoleArgs>());
+    
+    // build up arg vector to pass to handler
+    std::stringstream argStream(command);
+    //std::string arg;
+    argStream >> arg; // skip command name
+    t_consoleArgs_ptr args = std::make_shared<t_consoleArgs>();
+    auto argTypeIt = argTypes->begin();
+    while (!argStream.eof())
+    {
+        if (argTypes->end() == argTypeIt)
+        {
+            throw std::exception();
+        }
+        
+        ConsoleArg consoleArg;
+        consoleArg.type = *argTypeIt;
+        argStream >> consoleArg.stringValue;
+        if (consoleArg.type == ConsoleArgType::FLOAT)
+        {
+            if (!Console::_isNumber(consoleArg.stringValue))
+            {
+                throw std::ex   ception();
+            }
+            consoleArg.floatValue = std::stof(consoleArg.stringValue);
+        }
+        else if (consoleArg.type == ConsoleArgType::INT)
+        {
+            if (!Console::_isInteger(consoleArg.stringValue))
+            {
+                throw std::exception();
+            }
+            consoleArg.intValue = std::stoi(consoleArg.stringValue);
+        }
+        args->push_back(consoleArg);
+        ++argTypeIt;
+    }
+    
+    // execute handler
+    handler(args);
+}
+
+bool Console::_isInteger(const std::string &input)
+{
+    return std::regex_match(input, std::regex("[(-|+)|][0-9]+"));
+}
+
+bool Console::_isNumber(const std::string &input)
+{
+    return std::regex_match(input, std::regex("[(-|+)|][0-9]+(\\.[0-9]+)?"));
 }
