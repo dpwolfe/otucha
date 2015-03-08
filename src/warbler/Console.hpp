@@ -16,7 +16,7 @@ namespace warbler {
     
     struct ConsoleArg
     {
-        ConsoleArg(): intValue(0), floatValue(0.0) {}
+        ConsoleArg() : intValue(0), floatValue(0.0) {}
         
         ConsoleArgType type;
         int intValue;
@@ -32,12 +32,21 @@ namespace warbler {
     
     struct ConsoleCommand
     {
+        ConsoleCommand() : handler(nullptr), argTypes(nullptr) {}
         ConsoleCommand(t_commandHandler handler, t_consoleArgTypes_ptr argTypes) : handler(handler), argTypes(argTypes)
         {
         }
         
         t_commandHandler handler;
         t_consoleArgTypes_ptr argTypes;
+    };
+    
+    struct ConsoleCommandSignature
+    {
+        ConsoleCommandSignature(): argCount(0) {}
+        
+        std::string name;
+        int argCount;
     };
     
     typedef std::vector<const ConsoleCommand> t_commandHandlers;
@@ -55,6 +64,11 @@ namespace warbler {
         void executeCommand(const std::string command) const;
         
     private:
+        t_commandHandlers_ptr _getHandlersByName(const std::string &name) const;
+        ConsoleCommandSignature _getCommandSignature(const std::string &input) const;
+        ConsoleCommand _getConsoleCommand(const ConsoleCommandSignature &signature) const;
+        t_consoleArgs_ptr _getConsoleArgs(const std::string &input, const ConsoleCommand command) const;
+        
         t_commandHandlerMap _commandHandlerMap = t_commandHandlerMap();
         
         static bool _isNumber(const std::string &input);
