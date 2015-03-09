@@ -21,48 +21,42 @@ Console::~Console()
 void Console::registerCommand(const std::string &name, t_commandHandler handler, t_consoleArgTypes_ptr argTypes)
 {
     // pre-conditions
-    if (name.length() == 0)
-    {
-        throw std::exception();
-    }
+    if (name.length() == 0) { throw std::exception(); }
+    if (handler == nullptr) { throw std::exception(); }
     
-    if (handler == nullptr)
-    {
-        throw std::exception();
-    }
-    
-    // get or create handler vector for command name
-    t_commandHandlers_ptr handlers;
-    if (_commandHandlerMap.count(name) != 0)
-    {
-        handlers = _commandHandlerMap.find(name)->second;
-    }
-    else
-    {
-        handlers = std::make_shared<t_commandHandlers>();
-        _commandHandlerMap.insert(std::make_pair(name, handlers));
-    }
-    
-    // check to make sure a handler with same number of args does not exist
+	auto handlers = _getOrCreateHandlerVector(name);
+	_validateHandlerIsUnique(handlers, argTypes->size());
+    handlers->push_back(ConsoleCommand(handler, argTypes));
+}
+
+t_commandHandlers_ptr Console::_getOrCreateHandlerVector(const std::string &name)
+{
+	t_commandHandlers_ptr handlers;
+	if (_commandHandlerMap.count(name) != 0)
+	{
+		handlers = _commandHandlerMap.find(name)->second;
+	}
+	else
+	{
+		handlers = std::make_shared<t_commandHandlers>();
+		_commandHandlerMap.insert(std::make_pair(name, handlers));
+	}
+	return handlers;
+}
+
+void Console::_validateHandlerIsUnique(t_commandHandlers_ptr handlers, int argCount)
+{
     for (auto it = handlers->begin(); it != handlers->end(); ++it)
     {
-        if (it->argTypes->size() == argTypes->size()) {
+        if (it->argTypes->size() == argCount) {
             throw std::exception();
         }
     }
-    
-    // add the command
-    auto command = ConsoleCommand(handler, argTypes);
-    handlers->push_back(command);
 }
 
 void Console::executeCommand(const std::string input) const
 {
-    // pre-conditions
-    if (input.length() == 0)
-    {
-        throw std::exception();
-    }
+    if (input.length() == 0) { throw std::exception(); }
     
     auto signature = _getCommandSignature(input);
     ConsoleCommand command = _getConsoleCommand(signature);
@@ -71,11 +65,8 @@ void Console::executeCommand(const std::string input) const
 }
 
 t_commandHandlers_ptr Console::_getHandlersByName(const std::string &name) const
-{    // get handlers for given name
-    if (_commandHandlerMap.count(name) == 0)
-    {
-        throw std::exception();
-    }
+{
+    if (_commandHandlerMap.count(name) == 0) { throw std::exception(); }
     return _commandHandlerMap.find(name)->second;
 }
 
@@ -119,7 +110,8 @@ ConsoleCommand Console::_getConsoleCommand(const ConsoleCommandSignature &signat
 }
 
 t_consoleArgs_ptr Console::_getConsoleArgs(const std::string &input, const ConsoleCommand command) const
-{    t_consoleArgs_ptr args = std::make_shared<t_consoleArgs>();
+{
+	t_consoleArgs_ptr args = std::make_shared<t_consoleArgs>();
     std::stringstream argStream(input);
     std::string arg;
     argStream >> arg; // skip command name

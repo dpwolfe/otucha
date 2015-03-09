@@ -64,7 +64,9 @@ namespace warbler {
         void registerCommand(const std::string &name, t_commandHandler, t_consoleArgTypes_ptr argTypes);
         void executeCommand(const std::string command) const;
         
-    private:
+	private:
+		t_commandHandlers_ptr _getOrCreateHandlerVector(const std::string &name);
+		void _validateHandlerIsUnique(t_commandHandlers_ptr handlers, int argCount);
         t_commandHandlers_ptr _getHandlersByName(const std::string &name) const;
         ConsoleCommandSignature _getCommandSignature(const std::string &input) const;
         ConsoleCommand _getConsoleCommand(const ConsoleCommandSignature &signature) const;
