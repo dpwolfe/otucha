@@ -2,9 +2,8 @@ cmake_minimum_required (VERSION 2.6)
 project (otucha)
 find_package(OpenGL REQUIRED)
 # The version number
-set (otucha_VERSION_MAJOR 0)
-set (otucha_VERSION_MINOR 1)
-set (EMSCRIPTEN_ON_WINDOWS ${WIN32})
+set(otucha_VERSION_MAJOR 0)
+set(otucha_VERSION_MINOR 1)
 
 option(OTUCHA_EMSCRIPTEN_ENABLED "Enable building with Emscripten" ON)
 option(OTUCHA_DO_NOT_WARN_GL_H "Turn off the warning for gl.h and gl3.h both begin defined on Mac" OFF)
@@ -35,7 +34,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	endif()
 	
 	# Emscripten compiler options
-	if(EMSCRIPTEN_ON_WINDOWS)
+	if(EXISTS "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
 		set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
 		set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++.bat")
 	else()
