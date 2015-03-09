@@ -34,7 +34,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	endif()
 	
 	# Emscripten compiler options
-	if(EXISTS "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
+	if(NOT EXISTS "${EMSCRIPTEN_ROOT_PATH}/emcc")
 		set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc.bat")
 		set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++.bat")
 	else()
