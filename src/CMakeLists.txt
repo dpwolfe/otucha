@@ -87,6 +87,8 @@ add_subdirectory(terasca)
 add_subdirectory(warbler)
 
 if(NOT OTUCHA_EMSCRIPTEN_ENABLED)
+	# /MD for gtest
+	set(gtest_force_shared_crt ON)
 	# Compile external dependencies
 	add_subdirectory (external)
         include_directories(
