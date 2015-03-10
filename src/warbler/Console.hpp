@@ -73,8 +73,5 @@ namespace warbler {
         t_consoleArgs_ptr _getConsoleArgs(const std::string &input, const ConsoleCommand command) const;
         
         t_commandHandlerMap _commandHandlerMap;
-        
-        static bool _isNumber(const std::string &input);
-        static bool _isInteger(const std::string &input);
     };
 }
