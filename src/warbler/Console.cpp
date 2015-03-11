@@ -12,6 +12,7 @@ Console::Console()
 
 Console::Console(Console& rhs)
 {
+    _commandHandlerMap = rhs._commandHandlerMap;
 }
 
 Console::~Console()

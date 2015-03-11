@@ -161,3 +161,19 @@ TEST(executeCommand, cannot_parse_float)
     ASSERT_ANY_THROW(c.executeCommand("test y"));
     ASSERT_TRUE(success);
 }
+
+TEST(constructor, copy)
+{
+    Console c;
+    c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args0);
+    Console c2(c);
+    c2.executeCommand("test");
+}
+
+TEST(constructor, copy_via_equals)
+{
+    Console c;
+    c.registerCommand("test", ConsoleTest::noopCommandHandler, ConsoleTest::args0);
+    Console c2 = c;
+    c2.executeCommand("test");
+}
