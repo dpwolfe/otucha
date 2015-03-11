@@ -4,7 +4,13 @@
 #include "AffineVector.hpp"
 #include "ModelViewWithShader.hpp"
 #include "Block.hpp"
+#include "DependencyContainer.hpp"
 #include "otuchaConfig.h"
+
+#include <memory>
+#include <iostream>
+
+using namespace otucha;
 
 void set3DViewingInformation(double xyz[6])
 {
@@ -40,6 +46,12 @@ int main(int argc, char* argv[])
 	double xyz[6];
 	c.getOverallMCBoundingBox(xyz);
 	set3DViewingInformation(xyz);
+
+	DependencyContainer::getSingleton()->getConsole()->registerCommand("test", [](warbler::t_consoleArgs_ptr args) {
+		std::cout << "Console online" << std::endl;
+	}, std::make_shared<warbler::t_consoleArgTypes>());
+
+	DependencyContainer::getSingleton()->getConsole()->executeCommand("test");
 
 	c.run();
 
