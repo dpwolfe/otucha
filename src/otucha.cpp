@@ -30,7 +30,10 @@ int main(int argc, char* argv[])
 	fprintf(stdout, "%s Version %d.%d\n", argv[0], otucha_VERSION_MAJOR, otucha_VERSION_MINOR);
 	GLFWController c("otucha", Controller::DEPTH);
 	c.reportVersions(std::cout);
-	ModelViewWithShader::setShaderSources("simple.vsh", "simple.fsh");
+	std::string appPath(argv[0]);
+	unsigned found = appPath.find_last_of("/\\");
+	std::string appDir = appPath.substr(0, found + 1);
+	ModelViewWithShader::setShaderSources(appDir + "simple.vsh", appDir + "simple.fsh");
 	c.addModel(new Block(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f));
 
 	glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
