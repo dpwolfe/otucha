@@ -56,3 +56,15 @@ A perspective view of a cube with copper material properties and three lights in
 [Image of Copper Cube](https://onedrive.live.com/embed?cid=EB3994E07F023E78&resid=EB3994E07F023E78%2142597&authkey=AAuP3j8_a2lGV1A)
 
 [Live Demo](http://spritegeist.azurewebsites.net/)
+
+
+#### Code names
+The code names have no special meaning and are picked using the random page feature on Wikipedia.  They are used for namespaces of discrete areas of the app that have separate concerns at the moment. Those are:
+
+**RFFalcon**: Short for red-footed falcon.  Model classes.
+
+**S1**: Point and matrix classes.
+
+**Terasca**: MVC classes.
+
+**Warbler**: Console component classes.
