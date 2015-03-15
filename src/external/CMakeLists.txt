@@ -16,11 +16,7 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW documentation")
 
 add_subdirectory(glfw-3.0.4)
 add_subdirectory(gtest-1.7.0)
-
-include_directories(
-	"glfw-3.0.4/include/GLFW"
-	"glew-1.11.0/include"
-)
+add_subdirectory(freetype-2.5.5)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 set(OPENGL_LIBRARY
