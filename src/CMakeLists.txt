@@ -32,7 +32,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 			message(FATAL_ERROR "Emscripten version >= ${EMSCRIPTEN_REQUIRED_VERSION} is required.")
 		endif()
 	endif()
-	
+
 	# Emscripten compiler options
 	if("$ENV{OS}" STREQUAL Windows_NT)
 		message(STATUS "Using Emscripten bat files")
@@ -57,7 +57,9 @@ else()
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
 	endif()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++11")
+	if(NOT MSVC)
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++11")
+	endif()
 	set(OTUCHA_SHADER_COPY_BUILD_STAGE "POST_BUILD")
 endif()
 
@@ -80,6 +82,7 @@ include_directories (
 	"${PROJECT_SOURCE_DIR}/s1"
 	"${PROJECT_SOURCE_DIR}/terasca"
 	"${PROJECT_SOURCE_DIR}/warbler"
+	"${PROJECT_SOURCE_DIR}/external/freetype-2.5.5/include"
 )
 
 add_subdirectory(rffalcon)
@@ -92,7 +95,7 @@ if(NOT OTUCHA_EMSCRIPTEN_ENABLED)
 	set(gtest_force_shared_crt ON)
 	# Compile external dependencies
 	add_subdirectory (external)
-        include_directories(
+	include_directories(
 		"${gtest_SOURCE_DIR}/include"
 	)
 	add_subdirectory (tests)
@@ -100,9 +103,9 @@ endif()
 
 add_executable (otucha otucha.cpp DependencyContainer.cpp)
 if(OTUCHA_EMSCRIPTEN_ENABLED)
-	target_link_libraries (otucha rffalcon s1 terasca warbler ${OPENGL_LIBRARY})
+	target_link_libraries (otucha rffalcon s1 terasca warbler ${OPENGL_LIBRARY} freetype)
 else()
-	target_link_libraries (otucha rffalcon s1 terasca warbler ${OPENGL_LIBRARY} glfw GLEW_1110)
+	target_link_libraries (otucha rffalcon s1 terasca warbler ${OPENGL_LIBRARY} glfw GLEW_1110 freetype)
 endif()
 set_property(TARGET otucha PROPERTY CXX_STANDARD 11)
 
@@ -111,7 +114,7 @@ file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/*.*sh")
 foreach(file ${shaderFiles})
 	add_custom_command(TARGET otucha ${OTUCHA_SHADER_COPY_BUILD_STAGE}
 		COMMAND ${CMAKE_COMMAND} -E copy_if_different ${file}
-                ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}
-                COMMENT "Copying ${file} to ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}")
+				${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}
+				COMMENT "Copying ${file} to ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}")
 endforeach()
 
