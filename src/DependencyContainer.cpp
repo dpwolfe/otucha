@@ -35,7 +35,7 @@ void DependencyContainer::_initializeFreeType()
 {
 	_freeType = std::make_shared<FT_Library>();
 	FT_Error error = FT_Init_FreeType(&*_freeType);
-	if (error)
+	if (error != FT_Err_Ok)
 	{
 		std::cout << "Error occurred during FreeType initialization: " << error << std::endl;
 	}
