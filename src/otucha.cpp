@@ -6,8 +6,6 @@
 #include "Block.hpp"
 #include "DependencyContainer.hpp"
 #include "otuchaConfig.h"
-#include "ft2build.h"
-#include FT_FREETYPE_H
 
 #include <memory>
 #include <iostream>
@@ -55,19 +53,6 @@ int main(int argc, char* argv[])
 	}, std::make_shared<warbler::t_consoleArgTypes>());
 	DependencyContainer::getSingleton()->getConsole()->executeCommand("test");
 	// end test console code
-
-	// test freetype code to be removed later
-	FT_Library library;
-	FT_Error error = FT_Init_FreeType(&library);
-	if (error)
-	{
-		std::cout << "Error occurred during FreeType initialization: " << error << std::endl;
-	}
-	else
-	{
-		std::cout << "FreeType initialized" << std::endl;
-	}
-	// end test freetype code
 
 	c.run();
 
