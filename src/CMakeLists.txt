@@ -42,12 +42,12 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 		set(CMAKE_C_COMPILER "${EMSCRIPTEN_ROOT_PATH}/emcc")
 		set(CMAKE_CXX_COMPILER "${EMSCRIPTEN_ROOT_PATH}/em++")
 	endif()
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=0 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file simple.vsh --embed-file simple.fsh --memory-init-file 0")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=0 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file simple.vsh --embed-file simple.fsh --memory-init-file 0")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=0 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file simple.vsh --embed-file simple.fsh --embed-file DejaVuSansMono.ttf --memory-init-file 0")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-warn-absolute-paths -s ALLOW_MEMORY_GROWTH=0 -s ASSERTIONS=1 -s USE_GLFW=3 --embed-file simple.vsh --embed-file simple.fsh --embed-file DejaVuSansMono.ttf --memory-init-file 0")
 	set(CMAKE_MODULE_PATH "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules")
 	set(CMAKE_TOOLCHAIN_FILE "${EMSCRIPTEN_ROOT_PATH}/cmake/Modules/Platform/Emscripten.cmake")
 	set(CMAKE_EXE_LINKER_FLAGS "-o otucha.html ${CMAKE_EXE_LINKER_FLAGS}")
-	set(OTUCHA_SHADER_COPY_BUILD_STAGE "PRE_BUILD")
+	set(OTUCHA_RESOURCE_COPY_BUILD_STAGE "PRE_BUILD")
 else()
 	include_directories (
 		"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
@@ -111,12 +111,17 @@ else()
 endif()
 set_property(TARGET otucha PROPERTY CXX_STANDARD 11)
 
-# Copy shader files during pre-build
+# Copy shader files during build
 file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/*.*sh")
 foreach(file ${shaderFiles})
-	add_custom_command(TARGET otucha ${OTUCHA_SHADER_COPY_BUILD_STAGE}
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different ${file}
-				${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}
+	add_custom_command(TARGET otucha ${OTUCHA_RESOURCE_COPY_BUILD_STAGE}
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different "${file}"
+				"${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}"
 				COMMENT "Copying ${file} to ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}")
 endforeach()
 
+# Copy font file during build
+add_custom_command(TARGET otucha ${OTUCHA_RESOURCE_COPY_BUILD_STAGE}
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PROJECT_SOURCE_DIR}/external/dejavu-fonts-ttf-2.34/ttf/DejaVuSansMono.ttf"
+			${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}
+			COMMENT "Copying ${PROJECT_SOURCE_DIR}/external/dejavu-fonts-ttf-2.34/ttf/DejaVuSansMono.ttf to ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}")
