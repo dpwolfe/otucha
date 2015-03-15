@@ -1,5 +1,5 @@
-cmake_minimum_required (VERSION 2.6)
-project (otucha)
+cmake_minimum_required(VERSION 2.6)
+project(otucha)
 find_package(OpenGL REQUIRED)
 # The version number
 set(otucha_VERSION_MAJOR 0)
@@ -90,7 +90,9 @@ add_subdirectory(s1)
 add_subdirectory(terasca)
 add_subdirectory(warbler)
 
-if(NOT OTUCHA_EMSCRIPTEN_ENABLED)
+if(OTUCHA_EMSCRIPTEN_ENABLED)
+	add_subdirectory("external/freetype-2.5.5")
+else()
 	# /MD for gtest
 	set(gtest_force_shared_crt ON)
 	# Compile external dependencies
