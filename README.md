@@ -4,7 +4,7 @@ A cross-platform C++ OpenGL program that runs natively and compiles to JavaScrip
 #### Status
 
 - Builds and runs on Mac OS X and Windows natively as well as in browser using Emscripten.
-- Currently developing an input console.
+- Currently working on text support.
 
 #### Developer Setup
 Follow these steps for Windows or Mac development.  Pay careful attention to any platform specific instructions each vendor provides.
