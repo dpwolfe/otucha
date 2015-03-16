@@ -39,6 +39,7 @@ int main(int argc, char* argv[])
 	std::string appPath(argv[0]);
 	unsigned found = appPath.find_last_of("/\\");
 	std::string appDir = appPath.substr(0, found + 1);
+	DependencyContainer::getSingleton()->setAppDir(appDir);
 	ModelViewWithShader::setShaderSources(appDir + "simple.vsh", appDir + "simple.fsh");
 	c.addModel(new Block(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f));
 
@@ -53,6 +54,8 @@ int main(int argc, char* argv[])
 	}, std::make_shared<warbler::t_consoleArgTypes>());
 	DependencyContainer::getSingleton()->getConsole()->executeCommand("test");
 	// end test console code
+
+	auto fontFace = DependencyContainer::getSingleton()->getFontFace();
 
 	c.run();
 
