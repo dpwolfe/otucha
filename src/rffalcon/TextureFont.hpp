@@ -19,6 +19,8 @@ namespace rffalcon
 		TextureFont(TextureAtlas atlas, const float pointSize, const std::string &filename);
 		~TextureFont();
 
+		float getHeight() const;
+
 	private:
 		void _initialize(const std::string &filename);
 		void _loadFace(FT_Library *library, FT_Face *face, const std::string &filename);
