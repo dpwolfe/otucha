@@ -1,1 +1,3 @@
-add_library (rffalcon Block.cpp)
+add_library (rffalcon Block.cpp Block.hpp
+					  TextureAtlas.cpp TextureAtlas.hpp
+					  TextureFont.cpp TextureFont.hpp)
