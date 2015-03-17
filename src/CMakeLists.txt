@@ -103,7 +103,7 @@ else()
 	add_subdirectory (tests)
 endif()
 
-add_executable (otucha otucha.cpp DependencyContainer.cpp)
+add_executable (otucha otucha.cpp DependencyContainer.cpp DependencyContainer.hpp)
 if(OTUCHA_EMSCRIPTEN_ENABLED)
 	target_link_libraries (otucha rffalcon s1 terasca warbler ${OPENGL_LIBRARY} freetype)
 else()

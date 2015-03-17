@@ -1,1 +1,1 @@
-add_library (warbler Console.cpp)
+add_library (warbler Console.cpp Console.hpp)
