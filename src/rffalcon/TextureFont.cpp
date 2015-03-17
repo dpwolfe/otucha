@@ -15,6 +15,11 @@ TextureFont::~TextureFont()
 {
 }
 
+float TextureFont::getHeight() const
+{
+	return _height;
+}
+
 void TextureFont::_initialize(const std::string &filename)
 {
 	FT_Library library;
