@@ -5,10 +5,10 @@ using namespace rffalcon;
 #define POINT_RES 64
 #define DPI 72
 
-TextureFont::TextureFont(TextureAtlas atlas, const float pointSize, const std::string &filename)
-	: _atlas(atlas), _pointSize(pointSize)
+TextureFont::TextureFont(std::shared_ptr<TextureAtlas> atlas, const float pointSize, const std::string &filename)
+	: _atlas(atlas), _pointSize(pointSize), _filename(filename)
 {
-	_initialize(filename);
+	_initialize();
 }
 
 TextureFont::~TextureFont()
@@ -22,12 +22,16 @@ float TextureFont::getHeight() const
 
 void TextureFont::loadGlyphs(const std::string &text)
 {
-	int width = _atlas.getWidth();
-	int height = _atlas.getHeight();
-	int depth = _atlas.getDepth();
+	FT_Library library;
+	FT_Face face;
+	int width = _atlas->getWidth();
+	int height = _atlas->getHeight();
+	int depth = _atlas->getDepth();
+
+	_loadFace(&library, &face);
 }
 
-void TextureFont::_initialize(const std::string &filename)
+void TextureFont::_initialize()
 {
 	FT_Library library;
 	FT_Face face;
@@ -39,20 +43,20 @@ void TextureFont::_initialize(const std::string &filename)
 		throw new std::exception();
 	}
 
-	_loadFace(&library, &face, filename);
+	_loadFace(&library, &face, _pointSize * 100.0f);
 	metrics = face->size->metrics;
-	_ascender = (metrics.ascender >> 6) / 100.0;
-	_descender = (metrics.descender >> 6) / 100.0;
-	_height = (metrics.height >> 6) / 100.0;
+	_ascender = (metrics.ascender >> 6) / 100.0f;
+	_descender = (metrics.descender >> 6) / 100.0f;
+	_height = (metrics.height >> 6) / 100.0f;
 	_linegap = _height - _ascender + _descender;
 
 	FT_Done_Face(face);
 	FT_Done_FreeType(library);
 }
 
-void TextureFont::_loadFace(FT_Library *library, FT_Face *face, const std::string &filename)
+void TextureFont::_loadFace(FT_Library *library, FT_Face *face, float pointSize)
 {
-	FT_Error error = FT_New_Face(*library, filename.c_str(), 0, face);
+	FT_Error error = FT_New_Face(*library, _filename.c_str(), 0, face);
 	if (error != FT_Err_Ok)
 	{
 		throw new std::exception();
@@ -64,7 +68,7 @@ void TextureFont::_loadFace(FT_Library *library, FT_Face *face, const std::strin
 		throw new std::exception();
 	}
 
-	error = FT_Set_Char_Size(*face, (int)(_pointSize * 100.0 * POINT_RES), 0, DPI * POINT_RES, DPI);
+	error = FT_Set_Char_Size(*face, (int)(pointSize * POINT_RES), 0, DPI * POINT_RES, DPI);
 	if (error)
 	{
 		throw new std::exception();
@@ -78,4 +82,9 @@ void TextureFont::_loadFace(FT_Library *library, FT_Face *face, const std::strin
 	};
 
 	FT_Set_Transform(*face, &matrix, nullptr);
+}
+
+void TextureFont::_loadFace(FT_Library *library, FT_Face *face)
+{
+	_loadFace(library, face, _pointSize);
 }

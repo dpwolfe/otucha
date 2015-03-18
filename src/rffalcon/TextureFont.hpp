@@ -3,6 +3,7 @@
 #include "TextureAtlas.hpp"
 #include <vector>
 #include <string>
+#include <memory>
 #include "ft2build.h"
 #include FT_FREETYPE_H
 
@@ -16,22 +17,25 @@ namespace rffalcon
 	class TextureFont
 	{
 	public:
-		TextureFont(TextureAtlas atlas, const float pointSize, const std::string &filename);
+		TextureFont(std::shared_ptr<TextureAtlas> atlas, const float pointSize, const std::string &filename);
 		~TextureFont();
 
 		float getHeight() const;
 		void loadGlyphs(const std::string &text);
 
 	private:
-		void _initialize(const std::string &filename);
-		void _loadFace(FT_Library *library, FT_Face *face, const std::string &filename);
+		void _initialize();
+		void _loadFace(FT_Library *library, FT_Face *face);
+		void _loadFace(FT_Library *library, FT_Face *face, float pointSize);
+		void _getFace(FT_Library *library, FT_Face *face);
 
-		TextureAtlas _atlas;
+		std::shared_ptr<TextureAtlas> _atlas;
 		float _pointSize;
 		std::vector<TextureGlyph> _glyphs;
 		float _height = 0;
 		float _ascender = 0;
 		float _descender = 0;
 		float _linegap = 0;
+		std::string _filename;
 	};
 }
