@@ -20,6 +20,13 @@ float TextureFont::getHeight() const
 	return _height;
 }
 
+void TextureFont::loadGlyphs(const std::string &text)
+{
+	int width = _atlas.getWidth();
+	int height = _atlas.getHeight();
+	int depth = _atlas.getDepth();
+}
+
 void TextureFont::_initialize(const std::string &filename)
 {
 	FT_Library library;

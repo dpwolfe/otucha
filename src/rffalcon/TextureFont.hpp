@@ -20,6 +20,7 @@ namespace rffalcon
 		~TextureFont();
 
 		float getHeight() const;
+		void loadGlyphs(const std::string &text);
 
 	private:
 		void _initialize(const std::string &filename);
