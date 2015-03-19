@@ -22,13 +22,23 @@ float TextureFont::getHeight() const
 
 void TextureFont::loadGlyphs(const std::string &text)
 {
-	FT_Library library;
-	FT_Face face;
 	int width = _atlas->getWidth();
 	int height = _atlas->getHeight();
 	int depth = _atlas->getDepth();
 
+	FT_Library library;
+	FT_Face face;
 	_loadFace(&library, &face);
+	int length = text.length();
+	// Load the glyph for each character in the string
+	for (int i = 0; i < length; ++i)
+	{
+		// Skip glyphs that have already been loaded
+		for (int j = 0; j < _glyphs.size(); ++j)
+		{
+			
+		}
+	}
 }
 
 void TextureFont::_initialize()

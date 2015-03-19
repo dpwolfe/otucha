@@ -36,6 +36,8 @@ namespace rffalcon
 		float _ascender = 0;
 		float _descender = 0;
 		float _linegap = 0;
+		int _outlineType = 0;
+		float _outlineThickness = 0.0;
 		std::string _filename;
 	};
 }
