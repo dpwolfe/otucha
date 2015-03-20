@@ -31,7 +31,7 @@ namespace rffalcon
 
 		std::shared_ptr<TextureAtlas> _atlas;
 		float _pointSize;
-		std::vector<TextureGlyph> _glyphs;
+		std::vector<std::shared_ptr<TextureGlyph>> _glyphs;
 		float _height = 0;
 		float _ascender = 0;
 		float _descender = 0;
