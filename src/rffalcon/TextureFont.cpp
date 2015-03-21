@@ -29,14 +29,47 @@ void TextureFont::loadGlyphs(const std::string &text)
 	FT_Library library;
 	FT_Face face;
 	_loadFace(&library, &face);
+
+	FT_Int32 flags = _getFlags();
 	int length = text.length();
 	// Load the glyph for each character in the string
 	for (int i = 0; i < length; ++i)
 	{
-		if (_shouldLoadGlyph(text[i]))
+		char charCode = text[i];
+		if (_shouldLoadGlyph(charCode))
 		{
+			FT_UInt glyphIndex = FT_Get_Char_Index(face, charCode);
 		}
 	}
+}
+
+FT_Int32 TextureFont::_getFlags()
+{
+	FT_Int32 flags = 0;
+	if (_outlineType > 0)
+	{
+		flags |= FT_LOAD_NO_BITMAP;
+	}
+	else
+	{
+		flags |= FT_LOAD_RENDER;
+	}
+
+	if (!_hinting)
+	{
+		flags |= FT_LOAD_NO_HINTING | FT_LOAD_NO_AUTOHINT;
+	}
+	else
+	{
+		flags |= FT_LOAD_FORCE_AUTOHINT;
+	}
+
+	if (_atlas->getDepth() == 3)
+	{
+		flags |= FT_LOAD_TARGET_LCD;
+	}
+
+	return flags;
 }
 
 bool TextureFont::_shouldLoadGlyph(const char charCode)
