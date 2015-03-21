@@ -32,6 +32,7 @@ void TextureFont::loadGlyphs(const std::string &text)
 	int height = _atlas->getHeight();
 	int depth = _atlas->getDepth();
 
+	FT_Error error;
 	FT_Library library;
 	FT_Face face;
 	_loadFace(&library, &face);
@@ -46,8 +47,13 @@ void TextureFont::loadGlyphs(const std::string &text)
 		{
 			_setFiltering(&library);
 			FT_UInt glyphIndex = FT_Get_Char_Index(face, charCode);
+			error = FT_Load_Glyph(face, glyphIndex, flags);
+			if (error) { throw new std::exception(); }
 		}
 	}
+
+	FT_Done_Face(face);
+	FT_Done_FreeType(library);
 }
 
 void TextureFont::_setFiltering(FT_Library *library)
