@@ -30,11 +30,12 @@ void TextureFont::loadGlyphs(const std::string &text)
 	FT_Face face;
 	_loadFace(&library, &face);
 	int length = text.length();
+	int sizeGlyphs = static_cast<int>(_glyphs.size());
 	// Load the glyph for each character in the string
 	for (int i = 0; i < length; ++i)
 	{
 		// Skip glyphs that have already been loaded
-		for (int j = 0; j < _glyphs.size(); ++j)
+		for (int j = 0; j < sizeGlyphs; ++j)
 		{
 			TextureGlyph glyph = _glyphs[j];
 			if (glyph.charCode == text[i])
