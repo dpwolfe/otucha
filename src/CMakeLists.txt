@@ -94,7 +94,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	add_subdirectory("external/freetype-2.5.5")
 else()
 	# /MD for gtest
-	set(gtest_force_shared_crt ON)
+	set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib.")
 	# Compile external dependencies
 	add_subdirectory (external)
 	include_directories(
