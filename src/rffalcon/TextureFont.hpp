@@ -32,6 +32,7 @@ namespace rffalcon
 		void _getFace(FT_Library *library, FT_Face *face);
 		bool _shouldLoadGlyph(const char charCode);
 		FT_Int32 _getFlags();
+		void _setFiltering(FT_Library *library);
 
 		std::shared_ptr<TextureAtlas> _atlas;
 		float _pointSize;
@@ -44,5 +45,7 @@ namespace rffalcon
 		float _outlineThickness = 0.0;
 		std::string _filename;
 		bool _hinting = true;
+		bool _filtering = true;
+		unsigned char _lcdWeights[5];
 	};
 }
