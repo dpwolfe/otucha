@@ -49,6 +49,14 @@ void TextureFont::loadGlyphs(const std::string &text)
 			FT_UInt glyphIndex = FT_Get_Char_Index(face, charCode);
 			error = FT_Load_Glyph(face, glyphIndex, flags);
 			if (error) { throw new std::exception(); }
+
+			if (_outlineType == 0)
+			{
+				FT_GlyphSlot slot = face->glyph;
+				FT_Bitmap bitmap = slot->bitmap;
+				int top = slot->bitmap_top;
+				int left = slot->bitmap_left;
+			}
 		}
 	}
 
