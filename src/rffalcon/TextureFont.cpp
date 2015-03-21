@@ -1,4 +1,5 @@
 #include "TextureFont.hpp"
+#include FT_LCD_FILTER_H
 
 using namespace rffalcon;
 
@@ -8,6 +9,11 @@ using namespace rffalcon;
 TextureFont::TextureFont(std::shared_ptr<TextureAtlas> atlas, const float pointSize, const std::string &filename)
 	: _atlas(atlas), _pointSize(pointSize), _filename(filename)
 {
+	_lcdWeights[0] = 0x10;
+	_lcdWeights[0] = 0x40;
+	_lcdWeights[0] = 0x70;
+	_lcdWeights[0] = 0x40;
+	_lcdWeights[0] = 0x10;
 	_initialize();
 }
 
@@ -39,6 +45,18 @@ void TextureFont::loadGlyphs(const std::string &text)
 		if (_shouldLoadGlyph(charCode))
 		{
 			FT_UInt glyphIndex = FT_Get_Char_Index(face, charCode);
+		}
+	}
+}
+
+void TextureFont::_setFiltering(FT_Library *library)
+{
+	if (_atlas->getDepth() == 3)
+	{
+		FT_Library_SetLcdFilter(*library, FT_LCD_FILTER_LIGHT);
+		if (_filtering)
+		{
+			FT_Library_SetLcdFilterWeights(*library, _lcdWeights);
 		}
 	}
 }
