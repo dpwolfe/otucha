@@ -12,6 +12,8 @@ namespace rffalcon
 	struct TextureGlyph
 	{
         char charCode;
+		float outlineType;
+		float outlineThickness;
 	};
 
 	class TextureFont
@@ -28,10 +30,11 @@ namespace rffalcon
 		void _loadFace(FT_Library *library, FT_Face *face);
 		void _loadFace(FT_Library *library, FT_Face *face, float pointSize);
 		void _getFace(FT_Library *library, FT_Face *face);
+		bool _shouldLoadGlyph(const char charCode);
 
 		std::shared_ptr<TextureAtlas> _atlas;
 		float _pointSize;
-		std::vector<TextureGlyph> _glyphs;
+		std::vector<std::shared_ptr<TextureGlyph>> _glyphs;
 		float _height = 0;
 		float _ascender = 0;
 		float _descender = 0;
