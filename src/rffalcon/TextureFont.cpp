@@ -44,6 +44,7 @@ void TextureFont::loadGlyphs(const std::string &text)
 		char charCode = text[i];
 		if (_shouldLoadGlyph(charCode))
 		{
+			_setFiltering(&library);
 			FT_UInt glyphIndex = FT_Get_Char_Index(face, charCode);
 		}
 	}
