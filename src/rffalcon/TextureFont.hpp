@@ -11,7 +11,7 @@ namespace rffalcon
 {
 	struct TextureGlyph
 	{
-
+        char charCode;
 	};
 
 	class TextureFont
@@ -31,7 +31,7 @@ namespace rffalcon
 
 		std::shared_ptr<TextureAtlas> _atlas;
 		float _pointSize;
-		std::vector<std::shared_ptr<TextureGlyph>> _glyphs;
+		std::vector<TextureGlyph> _glyphs;
 		float _height = 0;
 		float _ascender = 0;
 		float _descender = 0;
