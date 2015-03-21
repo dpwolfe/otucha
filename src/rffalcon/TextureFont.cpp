@@ -1,5 +1,4 @@
 #include "TextureFont.hpp"
-#include "TextureGlyph.hpp"
 
 using namespace rffalcon;
 
@@ -37,8 +36,8 @@ void TextureFont::loadGlyphs(const std::string &text)
 		// Skip glyphs that have already been loaded
 		for (int j = 0; j < _glyphs.size(); ++j)
 		{
-			std::shared_ptr<TextureGlyph> glyph = _glyphs[j];
-			if (glyph->getCharCode() == text[i])
+			TextureGlyph glyph = _glyphs[j];
+			if (glyph.charCode == text[i])
 			{
 
 			}
