@@ -35,7 +35,7 @@ void TextureFont::loadGlyphs(const std::string &text)
 	FT_Error error;
 	FT_Library library;
 	FT_Face face;
-	_loadFace(&library, &face);
+	_loadFace(library, face);
 
 	FT_Int32 flags = _getFlags();
 	int length = text.length();
@@ -45,18 +45,11 @@ void TextureFont::loadGlyphs(const std::string &text)
 		char charCode = text[i];
 		if (_shouldLoadGlyph(charCode))
 		{
-			_setFiltering(&library);
+			_setFiltering(library);
 			FT_UInt glyphIndex = FT_Get_Char_Index(face, charCode);
 			error = FT_Load_Glyph(face, glyphIndex, flags);
 			if (error) { throw new std::exception(); }
-
-			if (_outlineType == 0)
-			{
-				FT_GlyphSlot slot = face->glyph;
-				FT_Bitmap bitmap = slot->bitmap;
-				int top = slot->bitmap_top;
-				int left = slot->bitmap_left;
-			}
+			GlyphBitmap glyphBitmap = _getGlyphBitmap(face);
 		}
 	}
 
@@ -64,14 +57,32 @@ void TextureFont::loadGlyphs(const std::string &text)
 	FT_Done_FreeType(library);
 }
 
-void TextureFont::_setFiltering(FT_Library *library)
+GlyphBitmap TextureFont::_getGlyphBitmap(FT_Face face)
+{
+	GlyphBitmap glyphBitmap;
+	if (_outlineType == 0)
+	{
+		FT_GlyphSlot slot = face->glyph;
+		glyphBitmap.bitmap = slot->bitmap;
+		glyphBitmap.top = slot->bitmap_top;
+		glyphBitmap.left = slot->bitmap_left;
+	}
+	else
+	{
+
+	}
+
+	return glyphBitmap;
+}
+
+void TextureFont::_setFiltering(FT_Library library)
 {
 	if (_atlas->getDepth() == 3)
 	{
-		FT_Library_SetLcdFilter(*library, FT_LCD_FILTER_LIGHT);
+		FT_Library_SetLcdFilter(library, FT_LCD_FILTER_LIGHT);
 		if (_filtering)
 		{
-			FT_Library_SetLcdFilterWeights(*library, _lcdWeights);
+			FT_Library_SetLcdFilterWeights(library, _lcdWeights);
 		}
 	}
 }
@@ -136,7 +147,7 @@ void TextureFont::_initialize()
 		throw new std::exception();
 	}
 
-	_loadFace(&library, &face, _pointSize * 100.0f);
+	_loadFace(library, face, _pointSize * 100.0f);
 	metrics = face->size->metrics;
 	_ascender = (metrics.ascender >> 6) / 100.0f;
 	_descender = (metrics.descender >> 6) / 100.0f;
@@ -147,21 +158,21 @@ void TextureFont::_initialize()
 	FT_Done_FreeType(library);
 }
 
-void TextureFont::_loadFace(FT_Library *library, FT_Face *face, float pointSize)
+void TextureFont::_loadFace(FT_Library library, FT_Face face, float pointSize)
 {
-	FT_Error error = FT_New_Face(*library, _filename.c_str(), 0, face);
+	FT_Error error = FT_New_Face(library, _filename.c_str(), 0, &face);
 	if (error != FT_Err_Ok)
 	{
 		throw new std::exception();
 	}
 
-	error = FT_Select_Charmap(*face, FT_ENCODING_UNICODE);
+	error = FT_Select_Charmap(face, FT_ENCODING_UNICODE);
 	if (error)
 	{
 		throw new std::exception();
 	}
 
-	error = FT_Set_Char_Size(*face, (int)(pointSize * POINT_RES), 0, DPI * POINT_RES, DPI);
+	error = FT_Set_Char_Size(face, (int)(pointSize * POINT_RES), 0, DPI * POINT_RES, DPI);
 	if (error)
 	{
 		throw new std::exception();
@@ -174,10 +185,10 @@ void TextureFont::_loadFace(FT_Library *library, FT_Face *face, float pointSize)
 		0x10000L
 	};
 
-	FT_Set_Transform(*face, &matrix, nullptr);
+	FT_Set_Transform(face, &matrix, nullptr);
 }
 
-void TextureFont::_loadFace(FT_Library *library, FT_Face *face)
+void TextureFont::_loadFace(FT_Library library, FT_Face face)
 {
 	_loadFace(library, face, _pointSize);
 }
