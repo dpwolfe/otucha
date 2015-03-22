@@ -1,5 +1,6 @@
 #include "TextureFont.hpp"
 #include FT_LCD_FILTER_H
+#include FT_STROKER_H
 
 using namespace rffalcon;
 
@@ -49,7 +50,7 @@ void TextureFont::loadGlyphs(const std::string &text)
 			FT_UInt glyphIndex = FT_Get_Char_Index(face, charCode);
 			error = FT_Load_Glyph(face, glyphIndex, flags);
 			if (error) { throw new std::exception(); }
-			GlyphBitmap glyphBitmap = _getGlyphBitmap(face);
+			GlyphLocation glyphLocation = _getGlyphLocation(library, face);
 		}
 	}
 
@@ -57,22 +58,63 @@ void TextureFont::loadGlyphs(const std::string &text)
 	FT_Done_FreeType(library);
 }
 
-GlyphBitmap TextureFont::_getGlyphBitmap(FT_Face face)
+GlyphLocation TextureFont::_getGlyphLocation(FT_Library library, FT_Face face)
 {
-	GlyphBitmap glyphBitmap;
+	GlyphLocation glyphLocation;
+	FT_Bitmap bitmap;
+	int depth = _atlas->getDepth();
 	if (_outlineType == 0)
 	{
 		FT_GlyphSlot slot = face->glyph;
-		glyphBitmap.bitmap = slot->bitmap;
-		glyphBitmap.top = slot->bitmap_top;
-		glyphBitmap.left = slot->bitmap_left;
+		bitmap = slot->bitmap;
+		glyphLocation.top = slot->bitmap_top;
+		glyphLocation.left = slot->bitmap_left;
 	}
 	else
 	{
+		FT_Stroker stroker;
+		FT_BitmapGlyph bitmapGlyph;
+		
+		FT_Error error = FT_Stroker_New(library, &stroker);
+		if (error) { throw new std::exception(); }
+		
+		FT_Stroker_Set(stroker, static_cast<int>(_outlineThickness * POINT_RES),
+			FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
+		
+		FT_Glyph glyph;
+		error = FT_Get_Glyph(face->glyph, &glyph);
+		if (error) { throw new std::exception(); }
 
+		if (_outlineType == 1)
+		{
+			error = FT_Glyph_Stroke(&glyph, stroker, 1);
+		}
+		else if (_outlineType == 2)
+		{
+			error = FT_Glyph_StrokeBorder(&glyph, stroker, 0, 1);
+		}
+		else if (_outlineType == 3)
+		{
+			error = FT_Glyph_StrokeBorder(&glyph, stroker, 1, 1);
+		}
+
+		if (error) { throw new std::exception(); }
+
+		FT_Render_Mode renderMode = _atlas->getDepth() == 1 ? FT_RENDER_MODE_NORMAL : FT_RENDER_MODE_LCD;
+		error = FT_Glyph_To_Bitmap(&glyph, renderMode, 0, 1);
+		if (error) { throw new std::exception(); }
+
+		bitmapGlyph = reinterpret_cast<FT_BitmapGlyph>(glyph);
+		bitmap = bitmapGlyph->bitmap;
+		glyphLocation.left = bitmapGlyph->left;
+		glyphLocation.top = bitmapGlyph->top;
+		FT_Stroker_Done(stroker);
 	}
 
-	return glyphBitmap;
+	glyphLocation.width = bitmap.width / depth;
+	glyphLocation.height = bitmap.rows;
+
+	return glyphLocation;
 }
 
 void TextureFont::_setFiltering(FT_Library library)
