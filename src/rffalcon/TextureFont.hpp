@@ -16,6 +16,13 @@ namespace rffalcon
 		float outlineThickness;
 	};
 
+	struct GlyphBitmap
+	{
+		FT_Bitmap bitmap;
+		int top;
+		int left;
+	};
+
 	class TextureFont
 	{
 	public:
@@ -27,12 +34,13 @@ namespace rffalcon
 
 	private:
 		void _initialize();
-		void _loadFace(FT_Library *library, FT_Face *face);
-		void _loadFace(FT_Library *library, FT_Face *face, float pointSize);
-		void _getFace(FT_Library *library, FT_Face *face);
+		void _loadFace(FT_Library library, FT_Face face);
+		void _loadFace(FT_Library library, FT_Face face, float pointSize);
+		void _getFace(FT_Library library, FT_Face face);
 		bool _shouldLoadGlyph(const char charCode);
 		FT_Int32 _getFlags();
-		void _setFiltering(FT_Library *library);
+		void _setFiltering(FT_Library library);
+		GlyphBitmap _getGlyphBitmap(FT_Face face);
 
 		std::shared_ptr<TextureAtlas> _atlas;
 		float _pointSize;
