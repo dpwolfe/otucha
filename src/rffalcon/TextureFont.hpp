@@ -6,6 +6,7 @@
 #include <memory>
 #include "ft2build.h"
 #include FT_FREETYPE_H
+#include "vec.hpp"
 
 namespace rffalcon
 {
@@ -35,8 +36,8 @@ namespace rffalcon
 
 	private:
 		void _initialize();
-		void _loadFace(FT_Library library, FT_Face face);
-		void _loadFace(FT_Library library, FT_Face face, float pointSize);
+		void _loadFace(FT_Library library, FT_Face *face);
+		void _loadFace(FT_Library library, FT_Face *face, float pointSize);
 		void _getFace(FT_Library library, FT_Face face);
 		bool _shouldLoadGlyph(const char charCode);
 		FT_Int32 _getFlags();
