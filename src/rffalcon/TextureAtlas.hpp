@@ -13,6 +13,7 @@ namespace rffalcon {
 		int getWidth() const;
 		int getHeight() const;
 		int getDepth() const;
+		s1::ivec4 getRegion(int width, int height);
 
 	private:
 		std::vector<s1::ivec3> _nodes;

@@ -31,3 +31,18 @@ int TextureAtlas::getDepth() const
 {
 	return _depth;
 }
+
+s1::ivec4 TextureAtlas::getRegion(int width, int height)
+{
+	int bestHeight = INT_MAX;
+	int bestWidth = INT_MAX;
+	int bestIndex = -1;
+	int nodesSize = static_cast<int>(_nodes.size());
+
+	for (int i = 0; i < nodesSize; ++i)
+	{
+
+	}
+
+	throw new std::exception();
+}
