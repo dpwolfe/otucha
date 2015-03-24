@@ -32,17 +32,41 @@ int TextureAtlas::getDepth() const
 	return _depth;
 }
 
-s1::ivec4 TextureAtlas::getRegion(int width, int height)
+s1::ivec4 TextureAtlas::getRegion(const int width, const int height)
 {
 	int bestHeight = INT_MAX;
 	int bestWidth = INT_MAX;
 	int bestIndex = -1;
 	int nodesSize = static_cast<int>(_nodes.size());
 
-	for (int i = 0; i < nodesSize; ++i)
+	for (int index = 0; index < nodesSize; ++index)
 	{
-
+		int y = _fit(index, width, height);
 	}
 
 	throw new std::exception();
+}
+
+int TextureAtlas::_fit(const int index, const int width, const int height)
+{
+	s1::ivec3 node = _nodes[index];
+	int x = node.x;
+	int y = node.y;
+	int widthLeft = width;
+	int curIndex = index;
+	if ((x + width) > (_width - 1)) { return -1; }
+	y = node.y;
+	while (widthLeft > 0)
+	{
+		node = _nodes[curIndex];
+		if (node.y > y)
+		{
+			y = node.y;
+		}
+		
+		if ((y + height) > (_height - 1)) { return -1; }
+		widthLeft -= node.z;
+		++curIndex;
+	}
+	return y;
 }
