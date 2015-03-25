@@ -54,19 +54,35 @@ int TextureAtlas::_fit(const int index, const int width, const int height)
 	int y = node.y;
 	int widthLeft = width;
 	int curIndex = index;
-	if ((x + width) > (_width - 1)) { return -1; }
-	y = node.y;
-	while (widthLeft > 0)
+	int result = -1;
+	
+	// if adding this node, left-aligned, would not go outside right edge of the texture
+	if ((x + width) <= (_width - 1))
 	{
-		node = _nodes[curIndex];
-		if (node.y > y)
+		y = node.y;
+		while (widthLeft > 0)
 		{
-			y = node.y;
+			node = _nodes[curIndex];
+			// push the node lower if it would overlap this one
+			if (node.y > y)
+			{
+				y = node.y;
+			}
+
+			// if adding this node below the current node would not go outside the bottom edge of the texture
+			if ((y + height) <= (_height - 1))
+			{
+				widthLeft -= node.z;
+				++curIndex;
+			}
+			else
+			{
+				y = -1;
+				break;
+			}
 		}
-		
-		if ((y + height) > (_height - 1)) { return -1; }
-		widthLeft -= node.z;
-		++curIndex;
+		result = y;
 	}
-	return y;
+
+	return result;
 }
