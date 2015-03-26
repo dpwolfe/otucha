@@ -61,9 +61,9 @@ A perspective view of a cube with copper material properties and three lights in
 #### Code names
 Like otucha, these code names have no special meaning and are picked using the random page feature on Wikipedia.  They are used for namespaces of discrete areas of the app that have separate concerns at the moment. They are:
 
-**RFFalcon**: Short for red-footed falcon.  Model and text classes
+**RFFalcon**: Short for red-footed falcon.  Model and text classes.
 
-**S1**: Point and matrix classes.
+**S1**: Point and matrix classes, vec union structs.
 
 **Terasca**: MVC classes.
 
