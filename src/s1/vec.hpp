@@ -47,6 +47,13 @@ namespace s1 {
 		};
 		struct
 		{
+			float x_;
+			float y_;
+			float width;
+			float height;
+		};
+		struct
+		{
 			float r;
 			float g;
 			float b;
@@ -113,6 +120,13 @@ namespace s1 {
 			int y;
 			int z;
 			int w;
+		};
+		struct
+		{
+			int x_;
+			int y_;
+			int width;
+			int height;
 		};
 		struct
 		{
