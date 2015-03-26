@@ -99,6 +99,12 @@ namespace s1 {
 		};
 		struct
 		{
+			int x_;
+			int yNext;
+			int width;
+		};
+		struct
+		{
 			int r;
 			int g;
 			int b;
