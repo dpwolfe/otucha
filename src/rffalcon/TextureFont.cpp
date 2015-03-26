@@ -61,8 +61,6 @@ void TextureFont::loadGlyphs(const std::string &text)
 	FT_Done_FreeType(library);
 }
 
-
-
 GlyphLocation TextureFont::_getGlyphLocation(FT_Library library, FT_Face face)
 {
 	GlyphLocation glyphLocation;
