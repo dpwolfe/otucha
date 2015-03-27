@@ -31,7 +31,7 @@ Follow these steps for Windows or Mac development.  Pay careful attention to any
 #### Grunt options
 **--jsMin** - Runs uglify (mangle + compress) on the output Emscripten JS.
 
-**--jsUseDist** - Uses the otucha.js and index.html from the dist folder instead of building Emscripten.  Useful for git deploy on a server that does not have CMake and Emscripten available.
+**--jsUseDist** - Uses the otucha.js and index.html from the dist directory instead of building them with Emscripten.  Used for git deploy on a server that does not have CMake and Emscripten available.
 
 #### Building native
 1. Run the following command from the repository root:
