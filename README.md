@@ -4,7 +4,7 @@ A cross-platform C++ OpenGL program that runs natively and compiles to JavaScrip
 #### Status
 
 - Builds and runs on Mac OS X and Windows natively as well as in browser using Emscripten.
-- Currently working on text support.
+- Currently working on text rendering support.
 
 #### Developer Setup
 Follow these steps for Windows or Mac development.  Pay careful attention to any platform specific instructions each vendor provides.
@@ -31,7 +31,7 @@ Follow these steps for Windows or Mac development.  Pay careful attention to any
 #### Grunt options
 **--jsMin** - Runs uglify (mangle + compress) on the output Emscripten JS.
 
-**--jsUseDist** - Uses the otucha.js and index.html from the dist folder instead of building Emscripten.  Useful for git deploy on a server that does not have CMake and Emscripten available.
+**--jsUseDist** - Uses the otucha.js and index.html from the dist directory instead of building them with Emscripten.  Used for git deploy on a server that does not have CMake and Emscripten available.
 
 #### Building native
 1. Run the following command from the repository root:
@@ -67,4 +67,4 @@ Like otucha, these code names have no special meaning and are picked using the r
 
 **Terasca**: MVC classes.
 
-**Warbler**: Console component classes.
+**Warbler**: Console implementation.
