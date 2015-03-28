@@ -67,4 +67,4 @@ Like otucha, these code names have no special meaning and are picked using the r
 
 **Terasca**: MVC classes.
 
-**Warbler**: Console component classes.
+**Warbler**: Console implementation.
