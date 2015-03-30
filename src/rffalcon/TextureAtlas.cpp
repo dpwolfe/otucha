@@ -38,7 +38,7 @@ s1::ivec4 TextureAtlas::getRegion(const int width, const int height)
 	int bestWidth = INT_MAX;
 	int bestIndex = -1;
 	int nodeCount = static_cast<int>(_nodes.size());
-	s1::ivec4 region = { { 0, 0, width, height } };
+	s1::ivec4 region = { { -1, -1, width, height } };
 
 	for (int index = 0; index < nodeCount; ++index)
 	{
@@ -56,9 +56,16 @@ s1::ivec4 TextureAtlas::getRegion(const int width, const int height)
 		}
 	}
 
-	if (bestIndex == -1)
+	if (bestIndex != -1)
 	{
-		throw new std::exception();
+		// Add node to envelope
+		s1::ivec3 node;
+		node.x = region.x;
+		node.yNext = region.y + height;
+		node.width = width;
+		_nodes.insert(_nodes.begin() + bestIndex, node);
+
+		// Remove nodes that are no longer part of the envelope
 	}
 
 	return region;
