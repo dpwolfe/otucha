@@ -66,9 +66,53 @@ s1::ivec4 TextureAtlas::getRegion(const int width, const int height)
 		_nodes.insert(_nodes.begin() + bestIndex, node);
 
 		// Remove nodes that are no longer part of the envelope
+		for (int index = bestIndex + 1; index < static_cast<int>(_nodes.size()); ++index)
+		{
+			s1::ivec3 curNode = _nodes[index];
+			s1::ivec3 prevNode = _nodes[index - 1];
+			if (curNode.x < (prevNode.x + prevNode.width))
+			{
+				_nodes.erase(_nodes.begin() + index);
+				int widthReduction = prevNode.x + prevNode.width - curNode.x;
+				curNode.width -= widthReduction;
+				if (curNode.width <= 0)
+				{
+					--index;
+				}
+				else
+				{
+					curNode.x += widthReduction;
+					_nodes.insert(_nodes.begin() + index, curNode);
+					// reduced width of the curNode, rest of envelope will be unaffected
+					break;
+				}
+			}
+			else
+			{
+				// rest of envelope unaffected
+				break;
+			}
+		}
 	}
 
+	_merge();
 	return region;
+}
+
+// merges adjacent nodes on the envelope at the same yNext value
+void TextureAtlas::_merge()
+{
+	for (int index = 0; index < _nodes.size() - 1; ++index)
+	{
+		s1::ivec3 curNode = _nodes[index];
+		s1::ivec3 nextNode = _nodes[index + 1];
+		if (curNode.yNext == nextNode.yNext)
+		{
+			curNode.width += nextNode.width;
+			_nodes.erase(_nodes.begin() + index + 1);
+			--index;
+		}
+	}
 }
 
 int TextureAtlas::_fit(const int index, const int width, const int height)
