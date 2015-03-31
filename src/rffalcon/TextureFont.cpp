@@ -54,7 +54,7 @@ void TextureFont::loadGlyphs(const std::string &text)
 			error = FT_Load_Glyph(face, glyphIndex, flags);
 			if (error) { throw new std::exception(); }
 			GlyphLocation glyphLocation = _getGlyphLocation(library, face);
-			s1::ivec4 region = _atlas->getRegion(glyphLocation.width, glyphLocation.height);
+			s1::ivec4 region = _atlas->getRegion(glyphLocation.width + 1, glyphLocation.height + 1);
 			if (region.x < 0)
 			{
 				std::cerr << "Texture Atlas is full." << std::endl;
