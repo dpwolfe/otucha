@@ -1,6 +1,7 @@
 #include "TextureFont.hpp"
 #include FT_LCD_FILTER_H
 #include FT_STROKER_H
+#include <iostream>
 
 using namespace rffalcon;
 
@@ -54,6 +55,14 @@ void TextureFont::loadGlyphs(const std::string &text)
 			if (error) { throw new std::exception(); }
 			GlyphLocation glyphLocation = _getGlyphLocation(library, face);
 			s1::ivec4 region = _atlas->getRegion(glyphLocation.width, glyphLocation.height);
+			if (region.x < 0)
+			{
+				std::cerr << "Texture Atlas is full." << std::endl;
+			}
+			else
+			{
+
+			}
 		}
 	}
 
