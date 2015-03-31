@@ -17,7 +17,9 @@ namespace rffalcon {
 
 	private:
 		int _fit(const int index, const int width, const int height);
-		void _merge();
+		void _addNode(s1::ivec4 region, int index);
+		void _reduceNodes(int startIndex);
+		void _mergeNodes();
 
 		std::vector<s1::ivec3> _nodes;
 		int _width;

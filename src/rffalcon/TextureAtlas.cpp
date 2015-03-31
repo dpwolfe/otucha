@@ -58,51 +58,60 @@ s1::ivec4 TextureAtlas::getRegion(const int width, const int height)
 
 	if (bestIndex != -1)
 	{
-		// Add node to envelope
-		s1::ivec3 node;
-		node.x = region.x;
-		node.yNext = region.y + height;
-		node.width = width;
-		_nodes.insert(_nodes.begin() + bestIndex, node);
-
-		// Remove nodes that are no longer part of the envelope
-		for (int index = bestIndex + 1; index < static_cast<int>(_nodes.size()); ++index)
-		{
-			s1::ivec3 curNode = _nodes[index];
-			s1::ivec3 prevNode = _nodes[index - 1];
-			if (curNode.x < (prevNode.x + prevNode.width))
-			{
-				_nodes.erase(_nodes.begin() + index);
-				int widthReduction = prevNode.x + prevNode.width - curNode.x;
-				curNode.width -= widthReduction;
-				if (curNode.width <= 0)
-				{
-					--index;
-				}
-				else
-				{
-					curNode.x += widthReduction;
-					_nodes.insert(_nodes.begin() + index, curNode);
-					// reduced width of the curNode, rest of envelope will be unaffected
-					break;
-				}
-			}
-			else
-			{
-				// rest of envelope unaffected
-				break;
-			}
-		}
+		_addNode(region, bestIndex);
+		_reduceNodes(bestIndex);
+		_mergeNodes();
 	}
 
-	_merge();
 	return region;
 }
 
-// merges adjacent nodes on the envelope at the same yNext value
-void TextureAtlas::_merge()
+// Add node to envelope
+void TextureAtlas::_addNode(s1::ivec4 region, int index)
 {
-	for (int index = 0; index < _nodes.size() - 1; ++index)
+	s1::ivec3 node;
+	node.x = region.x;
+	node.yNext = region.y + region.height;
+	node.width = region.width;
+	_nodes.insert(_nodes.begin() + index, node);
+}
+
+// Remove nodes that are no longer part of the envelope
+void TextureAtlas::_reduceNodes(int startIndex)
+{
+	for (int index = startIndex + 1; index < static_cast<int>(_nodes.size()); ++index)
+	{
+		s1::ivec3 curNode = _nodes[index];
+		s1::ivec3 prevNode = _nodes[index - 1];
+		if (curNode.x < (prevNode.x + prevNode.width))
+		{
+			_nodes.erase(_nodes.begin() + index);
+			int widthReduction = prevNode.x + prevNode.width - curNode.x;
+			curNode.width -= widthReduction;
+			if (curNode.width <= 0)
+			{
+				--index;
+			}
+			else
+			{
+				curNode.x += widthReduction;
+				_nodes.insert(_nodes.begin() + index, curNode);
+				// reduced width of the curNode, rest of envelope will be unaffected
+				break;
+			}
+		}
+		else
+		{
+			// rest of envelope unaffected
+			break;
+		}
+	}
+}
+
+// Merge adjacent nodes on the envelope that have the same yNext value
+void TextureAtlas::_mergeNodes()
+{
+	for (int index = 0; index < static_cast<int>(_nodes.size()) - 1; ++index)
 	{
 		s1::ivec3 curNode = _nodes[index];
 		s1::ivec3 nextNode = _nodes[index + 1];
