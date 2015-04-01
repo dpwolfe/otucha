@@ -168,3 +168,8 @@ int TextureAtlas::_fit(const int index, const int width, const int height)
 
 	return result;
 }
+
+void TextureAtlas::setRegion(GlyphData glyphData)
+{
+
+}

@@ -17,14 +17,6 @@ namespace rffalcon
 		float outlineThickness;
 	};
 
-	struct GlyphLocation
-	{
-		int width;
-		int height;
-		int top;
-		int left;
-	};
-
 	class TextureFont
 	{
 	public:
@@ -42,7 +34,7 @@ namespace rffalcon
 		bool _shouldLoadGlyph(const char charCode);
 		FT_Int32 _getFlags();
 		void _setFiltering(FT_Library library);
-		GlyphLocation _getGlyphLocation(FT_Library library, FT_Face face);
+		GlyphData _getGlyphLocation(FT_Library library, FT_Face face);
 
 		std::shared_ptr<TextureAtlas> _atlas;
 		float _pointSize;

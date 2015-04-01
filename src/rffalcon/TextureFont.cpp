@@ -53,15 +53,15 @@ void TextureFont::loadGlyphs(const std::string &text)
 			FT_UInt glyphIndex = FT_Get_Char_Index(face, charCode);
 			error = FT_Load_Glyph(face, glyphIndex, flags);
 			if (error) { throw new std::exception(); }
-			GlyphLocation glyphLocation = _getGlyphLocation(library, face);
-			s1::ivec4 region = _atlas->getRegion(glyphLocation.width + 1, glyphLocation.height + 1);
+			GlyphData glyphData = _getGlyphLocation(library, face);
+			s1::ivec4 region = _atlas->getRegion(glyphData.width + 1, glyphData.height + 1);
 			if (region.x < 0)
 			{
-				std::cerr << "Texture Atlas is full." << std::endl;
+				std::cerr << "Texture Atlas is full. Skipping glyph: " << charCode << std::endl;
 			}
 			else
 			{
-
+				_atlas->setRegion(glyphData);
 			}
 		}
 	}
@@ -70,17 +70,17 @@ void TextureFont::loadGlyphs(const std::string &text)
 	FT_Done_FreeType(library);
 }
 
-GlyphLocation TextureFont::_getGlyphLocation(FT_Library library, FT_Face face)
+GlyphData TextureFont::_getGlyphLocation(FT_Library library, FT_Face face)
 {
-	GlyphLocation glyphLocation;
+	GlyphData glyphData;
 	FT_Bitmap bitmap;
 	int depth = _atlas->getDepth();
 	if (_outlineType == 0)
 	{
 		FT_GlyphSlot slot = face->glyph;
 		bitmap = slot->bitmap;
-		glyphLocation.top = slot->bitmap_top;
-		glyphLocation.left = slot->bitmap_left;
+		glyphData.top = slot->bitmap_top;
+		glyphData.left = slot->bitmap_left;
 	}
 	else
 	{
@@ -118,15 +118,17 @@ GlyphLocation TextureFont::_getGlyphLocation(FT_Library library, FT_Face face)
 
 		bitmapGlyph = reinterpret_cast<FT_BitmapGlyph>(glyph);
 		bitmap = bitmapGlyph->bitmap;
-		glyphLocation.left = bitmapGlyph->left;
-		glyphLocation.top = bitmapGlyph->top;
+		glyphData.left = bitmapGlyph->left;
+		glyphData.top = bitmapGlyph->top;
 		FT_Stroker_Done(stroker);
 	}
 
-	glyphLocation.width = bitmap.width / depth;
-	glyphLocation.height = bitmap.rows;
+	glyphData.width = bitmap.width / depth;
+	glyphData.height = bitmap.rows;
+	glyphData.buffer = bitmap.buffer;
+	glyphData.pitch = bitmap.pitch;
 
-	return glyphLocation;
+	return glyphData;
 }
 
 void TextureFont::_setFiltering(FT_Library library)
