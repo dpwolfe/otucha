@@ -10,11 +10,14 @@ TextureAtlas::TextureAtlas(const int width, const int height, const int depth)
 	// contains padding in atlas to avoid sampling artifacts
 	s1::ivec3 paddingNode = { { 1, 1, width - 2 } };
 	_nodes.push_back(paddingNode);
+	_data = new unsigned char[width * height * depth];
 }
 
 
 TextureAtlas::~TextureAtlas()
 {
+	delete _data;
+	_data = nullptr;
 }
 
 int TextureAtlas::getWidth() const
@@ -169,7 +172,14 @@ int TextureAtlas::_fit(const int index, const int width, const int height)
 	return result;
 }
 
-void TextureAtlas::setRegion(GlyphData glyphData)
+void TextureAtlas::setRegion(s1::ivec4 region, GlyphData glyphData)
 {
-
+	int depth = getDepth();
+	int width = getWidth();
+	int charSize = sizeof(char);
+	for (int i = 0; i < glyphData.height; ++i)
+	{
+		memcpy(_data + ((region.y + i) * width + region.x) * charSize * depth,
+			   _data + (i*glyphData.pitch) * charSize, width * charSize * depth);
+	}
 }

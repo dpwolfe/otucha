@@ -25,7 +25,7 @@ namespace rffalcon
 		int getHeight() const;
 		int getDepth() const;
 		s1::ivec4 getRegion(const int width, const int height);
-		void setRegion(GlyphData glyphData);
+		void setRegion(s1::ivec4 region, GlyphData glyphData);
 
 	private:
 		int _fit(const int index, const int width, const int height);
@@ -38,6 +38,7 @@ namespace rffalcon
 		int _height;
 		int _depth;
 		int _glTextureId = 0;
+		unsigned char *_data;
 	};
 }
 
