@@ -16,7 +16,7 @@ TextureAtlas::TextureAtlas(const int width, const int height, const int depth)
 
 TextureAtlas::~TextureAtlas()
 {
-	delete _data;
+	delete [] _data;
 	_data = nullptr;
 }
 
