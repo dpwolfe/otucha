@@ -61,7 +61,7 @@ void TextureFont::loadGlyphs(const std::string &text)
 			}
 			else
 			{
-				_atlas->setRegion(glyphData);
+				_atlas->setRegion(region, glyphData);
 			}
 		}
 	}
