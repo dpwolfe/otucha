@@ -3,7 +3,18 @@
 #include <vector>
 #include "vec.hpp"
 
-namespace rffalcon {
+namespace rffalcon
+{
+	struct GlyphData
+	{
+		int width;
+		int height;
+		int top;
+		int left;
+		unsigned char* buffer;
+		int pitch;
+	};
+
 	class TextureAtlas
 	{
 	public:
@@ -14,6 +25,7 @@ namespace rffalcon {
 		int getHeight() const;
 		int getDepth() const;
 		s1::ivec4 getRegion(const int width, const int height);
+		void setRegion(GlyphData glyphData);
 
 	private:
 		int _fit(const int index, const int width, const int height);
