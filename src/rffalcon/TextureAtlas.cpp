@@ -180,6 +180,6 @@ void TextureAtlas::setRegion(s1::ivec4 region, GlyphData glyphData)
 	for (int i = 0; i < glyphData.height; ++i)
 	{
 		memcpy(_data + ((region.y + i) * width + region.x) * charSize * depth,
-			   _data + (i*glyphData.pitch) * charSize, width * charSize * depth);
+			   _data + (i * glyphData.pitch * charSize), width * charSize * depth);
 	}
 }
