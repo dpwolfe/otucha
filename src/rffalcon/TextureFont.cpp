@@ -62,6 +62,18 @@ void TextureFont::loadGlyphs(const std::string &text)
 			else
 			{
 				_atlas->setRegion(region, glyphData);
+				TextureGlyph glyph;
+				glyph.charCode = text[i];
+				glyph.width = glyphData.width;
+				glyph.height = glyphData.height;
+				glyph.outlineType = _outlineType;
+				glyph.outlineThickness = _outlineThickness;
+				glyph.offsetX = glyphData.left;
+				glyph.offsetY = glyphData.top;
+				glyph.s0 = region.x / static_cast<float>(glyphData.width);
+				glyph.t0 = region.y / static_cast<float>(glyphData.height);
+				glyph.s1 = (region.x + glyphData.width) / static_cast<float>(width);
+				glyph.t1 = (region.y + glyphData.height) / static_cast<float>(height);
 			}
 		}
 	}
