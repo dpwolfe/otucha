@@ -15,6 +15,14 @@ namespace rffalcon
         char charCode;
 		float outlineType;
 		float outlineThickness;
+		int width;
+		int height;
+		int offsetX;
+		int offsetY;
+		float s0;
+		float t0;
+		float s1;
+		float t1;
 	};
 
 	class TextureFont
