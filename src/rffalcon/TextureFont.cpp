@@ -54,17 +54,7 @@ void TextureFont::loadGlyphs(const std::string &text)
 			FT_UInt glyphIndex = FT_Get_Char_Index(face, charCode);
 			error = FT_Load_Glyph(face, glyphIndex, flags);
 			if (error) { throw new std::exception(); }
-			GlyphData glyphData = _getGlyphLocation(library, face);
-			s1::ivec4 region = _atlas->getRegion(glyphData.width + 1, glyphData.height + 1);
-			if (region.x < 0)
-			{
-				std::cerr << "Texture Atlas is full. Skipping glyph: " << charCode << std::endl;
-			}
-			else
-			{
-				_atlas->setRegion(region, glyphData);
-				_addTextureGlyph(text[i], glyphData, region, face, glyphIndex);
-			}
+			GlyphData glyphData = _getGlyphData(library, face, charCode, glyphIndex);
 		}
 	}
 
@@ -72,7 +62,7 @@ void TextureFont::loadGlyphs(const std::string &text)
 	FT_Done_FreeType(library);
 }
 
-void TextureFont::_addTextureGlyph(char charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, int glyphIndex)
+void TextureFont::_addTextureGlyph(char charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, FT_UInt glyphIndex)
 {
 	std::shared_ptr<TextureGlyph> glyph = std::make_shared<TextureGlyph>();
 	glyph->charCode = charCode;
@@ -96,10 +86,11 @@ void TextureFont::_addTextureGlyph(char charCode, GlyphData glyphData, s1::ivec4
 	_glyphs.push_back(glyph);
 }
 
-GlyphData TextureFont::_getGlyphLocation(FT_Library library, FT_Face face)
+GlyphData TextureFont::_getGlyphData(FT_Library library, FT_Face face, char charCode, FT_UInt glyphIndex)
 {
 	GlyphData glyphData;
 	FT_Bitmap bitmap;
+	FT_Glyph glyph = nullptr;
 	int depth = _atlas->getDepth();
 	if (_outlineType == 0)
 	{
@@ -119,7 +110,6 @@ GlyphData TextureFont::_getGlyphLocation(FT_Library library, FT_Face face)
 		FT_Stroker_Set(stroker, static_cast<int>(_outlineThickness * POINT_RES),
 			FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
 		
-		FT_Glyph glyph;
 		error = FT_Get_Glyph(face->glyph, &glyph);
 		if (error) { throw new std::exception(); }
 
@@ -153,8 +143,28 @@ GlyphData TextureFont::_getGlyphLocation(FT_Library library, FT_Face face)
 	glyphData.height = bitmap.rows;
 	glyphData.buffer = bitmap.buffer;
 	glyphData.pitch = bitmap.pitch;
+	
+	_renderToAtlas(glyphData, charCode, face, glyphIndex);
+
+	if (glyph != nullptr) {
+		FT_Done_Glyph(glyph);
+	}
 
 	return glyphData;
+}
+
+void TextureFont::_renderToAtlas(GlyphData glyphData, char charCode, FT_Face face, FT_UInt glyphIndex)
+{
+	s1::ivec4 region = _atlas->getRegion(glyphData.width + 1, glyphData.height + 1);
+	if (region.x < 0)
+	{
+		std::cerr << "Texture Atlas is full. Skipping glyph: " << charCode << std::endl;
+	}
+	else
+	{
+		_atlas->setRegion(region, glyphData);
+		_addTextureGlyph(charCode, glyphData, region, face, glyphIndex);
+	}
 }
 
 void TextureFont::_setFiltering(FT_Library library)
