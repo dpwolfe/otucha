@@ -182,4 +182,13 @@ void TextureAtlas::setRegion(s1::ivec4 region, GlyphData glyphData)
 		memcpy(_data + ((region.y + i) * width + region.x) * charSize * depth,
 			   _data + (i * glyphData.pitch * charSize), width * charSize * depth);
 	}
+	
+}
+
+void TextureAtlas::upload()
+{
+	if (_glTextureId == 0)
+	{
+		glGenTextures(1, &_glTextureId);
+	}
 }
