@@ -5,8 +5,9 @@
 
 using namespace rffalcon;
 
-#define POINT_RES 64
-#define DPI 72
+#define POINT_RES  64
+#define POINT_RESf 64.f
+#define DPI        72
 
 TextureFont::TextureFont(std::shared_ptr<TextureAtlas> atlas, const float pointSize, const std::string &filename)
 	: _atlas(atlas), _pointSize(pointSize), _filename(filename)
@@ -62,24 +63,37 @@ void TextureFont::loadGlyphs(const std::string &text)
 			else
 			{
 				_atlas->setRegion(region, glyphData);
-				TextureGlyph glyph;
-				glyph.charCode = text[i];
-				glyph.width = glyphData.width;
-				glyph.height = glyphData.height;
-				glyph.outlineType = _outlineType;
-				glyph.outlineThickness = _outlineThickness;
-				glyph.offsetX = glyphData.left;
-				glyph.offsetY = glyphData.top;
-				glyph.s0 = region.x / static_cast<float>(glyphData.width);
-				glyph.t0 = region.y / static_cast<float>(glyphData.height);
-				glyph.s1 = (region.x + glyphData.width) / static_cast<float>(width);
-				glyph.t1 = (region.y + glyphData.height) / static_cast<float>(height);
+				_addTextureGlyph(text[i], glyphData, region, face, glyphIndex);
 			}
 		}
 	}
 
 	FT_Done_Face(face);
 	FT_Done_FreeType(library);
+}
+
+void TextureFont::_addTextureGlyph(char charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, int glyphIndex)
+{
+	std::shared_ptr<TextureGlyph> glyph = std::make_shared<TextureGlyph>();
+	glyph->charCode = charCode;
+	glyph->width = glyphData.width;
+	glyph->height = glyphData.height;
+	glyph->outlineType = _outlineType;
+	glyph->outlineThickness = _outlineThickness;
+	glyph->offsetX = glyphData.left;
+	glyph->offsetY = glyphData.top;
+	glyph->s0 = region.x / static_cast<float>(glyphData.width);
+	glyph->t0 = region.y / static_cast<float>(glyphData.height);
+	glyph->s1 = (region.x + glyphData.width) / static_cast<float>(_atlas->getWidth());
+	glyph->t1 = (region.y + glyphData.height) / static_cast<float>(_atlas->getHeight());
+
+	// get advance
+	FT_Load_Glyph(face, glyphIndex, FT_LOAD_RENDER | FT_LOAD_NO_HINTING);
+	FT_GlyphSlot slot = face->glyph;
+	glyph->advanceX = slot->advance.x / POINT_RESf;
+	glyph->advanceY = slot->advance.y / POINT_RESf;
+
+	_glyphs.push_back(glyph);
 }
 
 GlyphData TextureFont::_getGlyphLocation(FT_Library library, FT_Face face)

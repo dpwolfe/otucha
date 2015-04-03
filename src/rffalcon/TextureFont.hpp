@@ -13,7 +13,7 @@ namespace rffalcon
 	struct TextureGlyph
 	{
         char charCode;
-		float outlineType;
+		int outlineType;
 		float outlineThickness;
 		int width;
 		int height;
@@ -23,6 +23,8 @@ namespace rffalcon
 		float t0;
 		float s1;
 		float t1;
+		float advanceX;
+		float advanceY;
 	};
 
 	class TextureFont
@@ -43,6 +45,7 @@ namespace rffalcon
 		FT_Int32 _getFlags();
 		void _setFiltering(FT_Library library);
 		GlyphData _getGlyphLocation(FT_Library library, FT_Face face);
+		void _addTextureGlyph(char charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, int glyphIndex);
 
 		std::shared_ptr<TextureAtlas> _atlas;
 		float _pointSize;
