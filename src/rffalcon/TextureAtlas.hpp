@@ -2,6 +2,10 @@
 
 #include <vector>
 #include "vec.hpp"
+#include <GL/glew.h>
+#include "ft2build.h"
+#include FT_FREETYPE_H
+#include FT_GLYPH_H
 
 namespace rffalcon
 {
@@ -13,6 +17,7 @@ namespace rffalcon
 		int left = 0;
 		unsigned char* buffer = nullptr;
 		int pitch = 0;
+		FT_Glyph glyph;
 	};
 
 	class TextureAtlas
@@ -26,6 +31,7 @@ namespace rffalcon
 		int getDepth() const;
 		s1::ivec4 getRegion(const int width, const int height);
 		void setRegion(s1::ivec4 region, GlyphData glyphData);
+		void upload();
 
 	private:
 		int _fit(const int index, const int width, const int height);
@@ -37,7 +43,7 @@ namespace rffalcon
 		int _width;
 		int _height;
 		int _depth;
-		int _glTextureId = 0;
+		GLuint _glTextureId = 0;
 		unsigned char *_data;
 	};
 }

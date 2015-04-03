@@ -54,12 +54,14 @@ void TextureFont::loadGlyphs(const std::string &text)
 			FT_UInt glyphIndex = FT_Get_Char_Index(face, charCode);
 			error = FT_Load_Glyph(face, glyphIndex, flags);
 			if (error) { throw new std::exception(); }
-			GlyphData glyphData = _getGlyphData(library, face, charCode, glyphIndex);
+			GlyphData glyphData = _getGlyphData(library, face);
+			_renderToAtlas(glyphData, charCode, face, glyphIndex);
 		}
 	}
 
 	FT_Done_Face(face);
 	FT_Done_FreeType(library);
+	_atlas->upload();
 }
 
 void TextureFont::_addTextureGlyph(char charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, FT_UInt glyphIndex)
@@ -86,11 +88,10 @@ void TextureFont::_addTextureGlyph(char charCode, GlyphData glyphData, s1::ivec4
 	_glyphs.push_back(glyph);
 }
 
-GlyphData TextureFont::_getGlyphData(FT_Library library, FT_Face face, char charCode, FT_UInt glyphIndex)
+GlyphData TextureFont::_getGlyphData(FT_Library library, FT_Face face)
 {
 	GlyphData glyphData;
 	FT_Bitmap bitmap;
-	FT_Glyph glyph = nullptr;
 	int depth = _atlas->getDepth();
 	if (_outlineType == 0)
 	{
@@ -110,29 +111,29 @@ GlyphData TextureFont::_getGlyphData(FT_Library library, FT_Face face, char char
 		FT_Stroker_Set(stroker, static_cast<int>(_outlineThickness * POINT_RES),
 			FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
 		
-		error = FT_Get_Glyph(face->glyph, &glyph);
+		error = FT_Get_Glyph(face->glyph, &glyphData.glyph);
 		if (error) { throw new std::exception(); }
 
 		if (_outlineType == 1)
 		{
-			error = FT_Glyph_Stroke(&glyph, stroker, 1);
+			error = FT_Glyph_Stroke(&glyphData.glyph, stroker, 1);
 		}
 		else if (_outlineType == 2)
 		{
-			error = FT_Glyph_StrokeBorder(&glyph, stroker, 0, 1);
+			error = FT_Glyph_StrokeBorder(&glyphData.glyph, stroker, 0, 1);
 		}
 		else if (_outlineType == 3)
 		{
-			error = FT_Glyph_StrokeBorder(&glyph, stroker, 1, 1);
+			error = FT_Glyph_StrokeBorder(&glyphData.glyph, stroker, 1, 1);
 		}
 
 		if (error) { throw new std::exception(); }
 
 		FT_Render_Mode renderMode = _atlas->getDepth() == 1 ? FT_RENDER_MODE_NORMAL : FT_RENDER_MODE_LCD;
-		error = FT_Glyph_To_Bitmap(&glyph, renderMode, 0, 1);
+		error = FT_Glyph_To_Bitmap(&glyphData.glyph, renderMode, 0, 1);
 		if (error) { throw new std::exception(); }
 
-		bitmapGlyph = reinterpret_cast<FT_BitmapGlyph>(glyph);
+		bitmapGlyph = reinterpret_cast<FT_BitmapGlyph>(glyphData.glyph);
 		bitmap = bitmapGlyph->bitmap;
 		glyphData.left = bitmapGlyph->left;
 		glyphData.top = bitmapGlyph->top;
@@ -143,12 +144,6 @@ GlyphData TextureFont::_getGlyphData(FT_Library library, FT_Face face, char char
 	glyphData.height = bitmap.rows;
 	glyphData.buffer = bitmap.buffer;
 	glyphData.pitch = bitmap.pitch;
-	
-	_renderToAtlas(glyphData, charCode, face, glyphIndex);
-
-	if (glyph != nullptr) {
-		FT_Done_Glyph(glyph);
-	}
 
 	return glyphData;
 }
@@ -163,6 +158,10 @@ void TextureFont::_renderToAtlas(GlyphData glyphData, char charCode, FT_Face fac
 	else
 	{
 		_atlas->setRegion(region, glyphData);
+		if (glyphData.glyph != nullptr) {
+			FT_Done_Glyph(glyphData.glyph);
+			glyphData.glyph = nullptr;
+		}
 		_addTextureGlyph(charCode, glyphData, region, face, glyphIndex);
 	}
 }

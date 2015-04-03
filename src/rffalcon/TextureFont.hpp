@@ -44,7 +44,7 @@ namespace rffalcon
 		bool _shouldLoadGlyph(const char charCode);
 		FT_Int32 _getFlags();
 		void _setFiltering(FT_Library library);
-		GlyphData _getGlyphData(FT_Library library, FT_Face face, char charCode, FT_UInt glyphIndex);
+		GlyphData _getGlyphData(FT_Library library, FT_Face face);
 		void _addTextureGlyph(char charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, FT_UInt glyphIndex);
 		void _renderToAtlas(GlyphData glyphData, char charCode, FT_Face face, FT_UInt glyphIndex);
 
