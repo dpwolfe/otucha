@@ -7,12 +7,12 @@ namespace rffalcon
 {
 	struct GlyphData
 	{
-		int width;
-		int height;
-		int top;
-		int left;
-		unsigned char* buffer;
-		int pitch;
+		int width = 0;
+		int height = 0;
+		int top = 0;
+		int left = 0;
+		unsigned char* buffer = nullptr;
+		int pitch = 0;
 	};
 
 	class TextureAtlas
