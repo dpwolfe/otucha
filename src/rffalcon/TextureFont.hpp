@@ -42,6 +42,7 @@ namespace rffalcon
 
 		float getHeight() const;
 		void loadGlyphs(const std::string &text);
+		std::shared_ptr<TextureGlyph> getGlyph(const wchar_t charCode);
 
 	private:
 		void _initialize();
@@ -54,6 +55,7 @@ namespace rffalcon
 		void _addTextureGlyph(wchar_t charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, FT_UInt glyphIndex);
 		void _renderToAtlas(GlyphData glyphData, wchar_t charCode, FT_Face face, FT_UInt glyphIndex);
 		void _generateKerning();
+		std::shared_ptr<TextureGlyph> _tryGetGlyph(const wchar_t charCode);
 
 		std::shared_ptr<TextureAtlas> _atlas;
 		float _pointSize;
