@@ -61,6 +61,17 @@ void TextureFont::loadGlyphs(const std::string &text)
 	_generateKerning();
 }
 
+std::shared_ptr<TextureGlyph> TextureFont::getGlyph(const wchar_t charCode)
+{
+	std::shared_ptr<TextureGlyph> glyph = _tryGetGlyph(charCode);
+	if (glyph == nullptr)
+	{
+
+	}
+
+	return glyph;
+}
+
 void TextureFont::_generateKerning()
 {
 	FT_Library library;
@@ -68,13 +79,14 @@ void TextureFont::_generateKerning()
 
 	_loadFace(&library, &face);
 
-	for (int outerIndex = 0; outerIndex < static_cast<int>(_glyphs.size()); ++outerIndex)
+	// indices start at 1 to skip the special -1 background glyph which is always at index 0
+	for (int outerIndex = 1; outerIndex < static_cast<int>(_glyphs.size()); ++outerIndex)
 	{
 		std::shared_ptr<TextureGlyph> rightGlyph = _glyphs[outerIndex];
 		FT_UInt rightGlyphIndex = FT_Get_Char_Index(face, rightGlyph->charCode);
 		rightGlyph->kerning.clear();
 
-		for (int innerIndex = 0; innerIndex < static_cast<int>(_glyphs.size()); ++innerIndex)
+		for (int innerIndex = 1; innerIndex < static_cast<int>(_glyphs.size()); ++innerIndex)
 		{
 			std::shared_ptr<TextureGlyph> leftGlyph = _glyphs[innerIndex];
 			FT_UInt leftGlyphIndex = FT_Get_Char_Index(face, leftGlyph->charCode);
@@ -237,21 +249,29 @@ FT_Int32 TextureFont::_getFlags()
 
 bool TextureFont::_shouldLoadGlyph(const wchar_t charCode)
 {
+	std::shared_ptr<TextureGlyph> glyph = _tryGetGlyph(charCode);
+	return (glyph == nullptr);
+}
+
+std::shared_ptr<TextureGlyph> TextureFont::_tryGetGlyph(const wchar_t charCode)
+{
 	// Skip glyphs that have already been loaded
-	bool skip = false;
+	std::shared_ptr<TextureGlyph> glyph = nullptr;
 	int sizeGlyphs = static_cast<int>(_glyphs.size());
 	for (int j = 0; j < sizeGlyphs; ++j)
 	{
-		auto glyph = _glyphs[j];
-		if (glyph->charCode == charCode &&
-			(glyph->outlineType == _outlineType && glyph->outlineThickness == _outlineThickness))
+		std::shared_ptr<TextureGlyph> curGlyph = _glyphs[j];
+		// -1 is a special background glyph where outline does not matter
+		if (curGlyph->charCode == charCode &&
+			((charCode == static_cast<wchar_t>(-1)) ||
+			(curGlyph->outlineType == _outlineType && curGlyph->outlineThickness == _outlineThickness)))
 		{
-			skip = true;
+			glyph = curGlyph;
 			break;
 		}
 	}
 	
-	return skip;
+	return glyph;
 }
 
 void TextureFont::_initialize()
@@ -272,6 +292,9 @@ void TextureFont::_initialize()
 
 	FT_Done_Face(face);
 	FT_Done_FreeType(library);
+
+	// load the special -1 background glyph at index 0
+	getGlyph(-1);
 }
 
 void TextureFont::_loadFace(FT_Library *library, FT_Face *face, float pointSize)
