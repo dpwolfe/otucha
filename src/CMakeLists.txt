@@ -20,7 +20,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	if("${EMSCRIPTEN_ROOT_PATH}" STREQUAL "")
 		message(FATAL_ERROR "Could not locate Emscripten compiler.  Either set the EMSCRIPTEN environment variable, or pass -DEMSCRIPTEN_ROOT_PATH=xxx to CMake to specify the location.")
 	endif()
-	
+
 	# Check Emscripten version
 	set(EMSCRIPTEN_REQUIRED_VERSION 1.25.0)
 	if(EXISTS "${EMSCRIPTEN_ROOT_PATH}/emscripten-version.txt")
