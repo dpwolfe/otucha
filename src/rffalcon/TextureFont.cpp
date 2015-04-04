@@ -31,10 +31,6 @@ float TextureFont::getHeight() const
 
 void TextureFont::loadGlyphs(const std::string &text)
 {
-	int width = _atlas->getWidth();
-	int height = _atlas->getHeight();
-	int depth = _atlas->getDepth();
-
 	FT_Library library;
 	FT_Face face;
 	FT_Error error = FT_Init_FreeType(&library);
