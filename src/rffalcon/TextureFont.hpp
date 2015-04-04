@@ -10,9 +10,15 @@
 
 namespace rffalcon
 {
+	struct GlyphKerning
+	{
+		wchar_t charCode;
+		float kerning;
+	};
+
 	struct TextureGlyph
 	{
-        char charCode;
+        wchar_t charCode;
 		int outlineType;
 		float outlineThickness;
 		int width;
@@ -25,6 +31,7 @@ namespace rffalcon
 		float t1;
 		float advanceX;
 		float advanceY;
+		std::vector<GlyphKerning> kerning;
 	};
 
 	class TextureFont
@@ -38,15 +45,15 @@ namespace rffalcon
 
 	private:
 		void _initialize();
-		void _loadFace(FT_Library library, FT_Face *face);
-		void _loadFace(FT_Library library, FT_Face *face, float pointSize);
-		void _getFace(FT_Library library, FT_Face face);
-		bool _shouldLoadGlyph(const char charCode);
+		void _loadFace(FT_Library *library, FT_Face *face);
+		void _loadFace(FT_Library *library, FT_Face *face, float pointSize);
+		bool _shouldLoadGlyph(const wchar_t charCode);
 		FT_Int32 _getFlags();
 		void _setFiltering(FT_Library library);
 		GlyphData _getGlyphData(FT_Library library, FT_Face face);
-		void _addTextureGlyph(char charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, FT_UInt glyphIndex);
-		void _renderToAtlas(GlyphData glyphData, char charCode, FT_Face face, FT_UInt glyphIndex);
+		void _addTextureGlyph(wchar_t charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, FT_UInt glyphIndex);
+		void _renderToAtlas(GlyphData glyphData, wchar_t charCode, FT_Face face, FT_UInt glyphIndex);
+		void _generateKerning();
 
 		std::shared_ptr<TextureAtlas> _atlas;
 		float _pointSize;

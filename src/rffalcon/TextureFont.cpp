@@ -40,14 +40,14 @@ void TextureFont::loadGlyphs(const std::string &text)
 	FT_Error error = FT_Init_FreeType(&library);
 	if (error != FT_Err_Ok) { throw new std::exception(); }
 
-	_loadFace(library, &face);
+	_loadFace(&library, &face);
 
 	FT_Int32 flags = _getFlags();
 	int length = text.length();
 	// Load the glyph for each character in the string
 	for (int i = 0; i < length; ++i)
 	{
-		char charCode = text[i];
+		wchar_t charCode = text[i];
 		if (_shouldLoadGlyph(charCode))
 		{
 			_setFiltering(library);
@@ -62,9 +62,41 @@ void TextureFont::loadGlyphs(const std::string &text)
 	FT_Done_Face(face);
 	FT_Done_FreeType(library);
 	_atlas->upload();
+	_generateKerning();
 }
 
-void TextureFont::_addTextureGlyph(char charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, FT_UInt glyphIndex)
+void TextureFont::_generateKerning()
+{
+	FT_Library library;
+	FT_Face face;
+
+	_loadFace(&library, &face);
+
+	for (int outerIndex = 0; outerIndex < static_cast<int>(_glyphs.size()); ++outerIndex)
+	{
+		std::shared_ptr<TextureGlyph> rightGlyph = _glyphs[outerIndex];
+		FT_UInt rightGlyphIndex = FT_Get_Char_Index(face, rightGlyph->charCode);
+		rightGlyph->kerning.clear();
+
+		for (int innerIndex = 0; innerIndex < static_cast<int>(_glyphs.size()); ++innerIndex)
+		{
+			std::shared_ptr<TextureGlyph> leftGlyph = _glyphs[innerIndex];
+			FT_UInt leftGlyphIndex = FT_Get_Char_Index(face, leftGlyph->charCode);
+			FT_Vector kerning;
+			FT_Get_Kerning(face, leftGlyphIndex, rightGlyphIndex, FT_KERNING_UNFITTED, &kerning);
+			if (kerning.x)
+			{
+				GlyphKerning glyphKerning = { leftGlyph->charCode, kerning.x / (float)(POINT_RESf*POINT_RESf) };
+				rightGlyph->kerning.push_back(glyphKerning);
+			}
+		}
+	}
+
+	FT_Done_Face(face);
+	FT_Done_FreeType(library);
+}
+
+void TextureFont::_addTextureGlyph(wchar_t charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, FT_UInt glyphIndex)
 {
 	std::shared_ptr<TextureGlyph> glyph = std::make_shared<TextureGlyph>();
 	glyph->charCode = charCode;
@@ -148,7 +180,7 @@ GlyphData TextureFont::_getGlyphData(FT_Library library, FT_Face face)
 	return glyphData;
 }
 
-void TextureFont::_renderToAtlas(GlyphData glyphData, char charCode, FT_Face face, FT_UInt glyphIndex)
+void TextureFont::_renderToAtlas(GlyphData glyphData, wchar_t charCode, FT_Face face, FT_UInt glyphIndex)
 {
 	s1::ivec4 region = _atlas->getRegion(glyphData.width + 1, glyphData.height + 1);
 	if (region.x < 0)
@@ -207,7 +239,7 @@ FT_Int32 TextureFont::_getFlags()
 	return flags;
 }
 
-bool TextureFont::_shouldLoadGlyph(const char charCode)
+bool TextureFont::_shouldLoadGlyph(const wchar_t charCode)
 {
 	// Skip glyphs that have already been loaded
 	bool skip = false;
@@ -235,7 +267,7 @@ void TextureFont::_initialize()
 	FT_Error error = FT_Init_FreeType(&library);
 	if (error != FT_Err_Ok) { throw new std::exception(); }
 
-	_loadFace(library, &face, _pointSize * 100.0f);
+	_loadFace(&library, &face, _pointSize * 100.0f);
 	metrics = face->size->metrics;
 	_ascender = (metrics.ascender >> 6) / 100.0f;
 	_descender = (metrics.descender >> 6) / 100.0f;
@@ -246,9 +278,9 @@ void TextureFont::_initialize()
 	FT_Done_FreeType(library);
 }
 
-void TextureFont::_loadFace(FT_Library library, FT_Face *face, float pointSize)
+void TextureFont::_loadFace(FT_Library *library, FT_Face *face, float pointSize)
 {
-	FT_Error error = FT_New_Face(library, _filename.c_str(), 0, face);
+	FT_Error error = FT_New_Face(*library, _filename.c_str(), 0, face);
 	if (error != FT_Err_Ok)
 	{
 		throw new std::exception();
@@ -276,7 +308,7 @@ void TextureFont::_loadFace(FT_Library library, FT_Face *face, float pointSize)
 	FT_Set_Transform(*face, &matrix, nullptr);
 }
 
-void TextureFont::_loadFace(FT_Library library, FT_Face *face)
+void TextureFont::_loadFace(FT_Library *library, FT_Face *face)
 {
 	_loadFace(library, face, _pointSize);
 }

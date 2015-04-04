@@ -191,4 +191,28 @@ void TextureAtlas::upload()
 	{
 		glGenTextures(1, &_glTextureId);
 	}
+
+	glBindTexture(GL_TEXTURE_2D, _glTextureId);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	GLenum pixelDataType;
+	int internalFormat;
+	if (_depth == 4)
+	{
+#ifdef GL_UNSIGNED_INT_8_8_8_8_REV
+		pixelDataType = GL_UNSIGNED_INT_8_8_8_8_REV;
+#else
+		pixelDataType = GL_UNSIGNED_BYTE;
+#endif
+		internalFormat = GL_RGBA;
+	}
+	else {
+		pixelDataType = GL_UNSIGNED_BYTE;
+		internalFormat = (_depth == 3) ? GL_RGB : GL_RED;
+	}
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, internalFormat, pixelDataType, _data);
 }
