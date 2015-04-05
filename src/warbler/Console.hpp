@@ -22,7 +22,7 @@ namespace warbler {
         ConsoleArgType type;
         int intValue;
         double floatValue;
-        std::string stringValue;
+        std::wstring stringValue;
     };
     
     typedef std::vector<const ConsoleArg> t_consoleArgs;
@@ -46,13 +46,13 @@ namespace warbler {
     {
         ConsoleCommandSignature(): argCount(0) {}
         
-        std::string name;
+        std::wstring name;
         int argCount;
     };
     
     typedef std::vector<const ConsoleCommand> t_commandHandlers;
     typedef std::shared_ptr<t_commandHandlers> t_commandHandlers_ptr;
-    typedef std::unordered_map<std::string, t_commandHandlers_ptr> t_commandHandlerMap;
+    typedef std::unordered_map<std::wstring, t_commandHandlers_ptr> t_commandHandlerMap;
     
     class Console
     {
@@ -61,16 +61,16 @@ namespace warbler {
         Console(Console& rhs);
         virtual ~Console();
     
-        void registerCommand(const std::string &name, t_commandHandler, t_consoleArgTypes_ptr argTypes);
-        void executeCommand(const std::string command) const;
+        void registerCommand(const std::wstring &name, t_commandHandler, t_consoleArgTypes_ptr argTypes);
+        void executeCommand(const std::wstring command) const;
         
 	private:
-		t_commandHandlers_ptr _getOrCreateHandlerVector(const std::string &name);
+		t_commandHandlers_ptr _getOrCreateHandlerVector(const std::wstring &name);
 		void _validateHandlerIsUnique(t_commandHandlers_ptr handlers, int argCount);
-        t_commandHandlers_ptr _getHandlersByName(const std::string &name) const;
-        ConsoleCommandSignature _getCommandSignature(const std::string &input) const;
+        t_commandHandlers_ptr _getHandlersByName(const std::wstring &name) const;
+        ConsoleCommandSignature _getCommandSignature(const std::wstring &input) const;
         ConsoleCommand _getConsoleCommand(const ConsoleCommandSignature &signature) const;
-        t_consoleArgs_ptr _getConsoleArgs(const std::string &input, const ConsoleCommand command) const;
+        t_consoleArgs_ptr _getConsoleArgs(const std::wstring &input, const ConsoleCommand command) const;
         
         t_commandHandlerMap _commandHandlerMap;
     };
