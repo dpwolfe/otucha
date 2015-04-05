@@ -19,6 +19,11 @@ VertexBuffer::VertexBuffer(const std::string &format) : _format(format)
 	{
 		formatParts.push_back(formatPart);
 	}
+
+	for (int index = 0; index < MAX_VERTEX_ATTRIBUTES && index < static_cast<int>(formatParts.size()); ++index)
+	{
+		std::shared_ptr<VertexAttribute> attribute = VertexAttribute::parse(formatParts[index]);
+	}
 }
 
 VertexBuffer::~VertexBuffer()

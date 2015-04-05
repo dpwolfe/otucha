@@ -34,7 +34,7 @@ std::shared_ptr<VertexAttribute> VertexAttribute::parse(const std::string &forma
 		char typeChar = formatParts[1][1];
 		GLenum type = _getType(typeChar);
 		GLboolean normalized = formatParts[1].length() > 2 && formatParts[1][2] == 'n' ? 1 : 0;
-		attribute = std::make_shared<VertexAttribute>(name, size, type, normalized, 0, 0);
+		attribute = std::make_shared<VertexAttribute>(name, size, type, normalized);
 	}
 	else
 	{
