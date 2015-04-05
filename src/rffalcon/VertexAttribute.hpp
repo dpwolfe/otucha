@@ -13,10 +13,11 @@ namespace rffalcon
 	public:
 		VertexAttribute(const std::string &name, GLint size, GLenum type, GLboolean normalized);
 		~VertexAttribute();
-		std::shared_ptr<VertexAttribute> parse(const std::string &part);
+
+		static std::shared_ptr<VertexAttribute> parse(const std::string &part);
 
 	private:
-		GLenum _getType(char typeChar);
+		static GLenum _getType(char typeChar);
 
 		GLuint _index = -1;
 		std::string _name;
