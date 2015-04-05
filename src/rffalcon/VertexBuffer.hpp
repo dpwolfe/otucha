@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 #include <GL/glew.h>
 #include "VertexAttribute.hpp"
 #include "vec.hpp"
