@@ -49,10 +49,10 @@ int main(int argc, char* argv[])
 	set3DViewingInformation(xyz);
 
 	// test console code to be removed later
-	DependencyContainer::getSingleton()->getConsole()->registerCommand("test", [](warbler::t_consoleArgs_ptr args) {
+	DependencyContainer::getSingleton()->getConsole()->registerCommand(L"test", [](warbler::t_consoleArgs_ptr args) {
 		std::cout << "Console online" << std::endl;
 	}, std::make_shared<warbler::t_consoleArgTypes>());
-	DependencyContainer::getSingleton()->getConsole()->executeCommand("test");
+	DependencyContainer::getSingleton()->getConsole()->executeCommand(L"test");
 	// end test console code
 
 	auto fontFace = DependencyContainer::getSingleton()->getFontFace();
