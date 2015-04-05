@@ -1,7 +1,7 @@
 #include "VertexBuffer.hpp"
 
 #include <vector>
-#include <sstream>j
+#include <sstream>
 
 using namespace rffalcon;
 
