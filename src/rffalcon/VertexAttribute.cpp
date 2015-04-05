@@ -44,6 +44,32 @@ std::shared_ptr<VertexAttribute> VertexAttribute::parse(const std::string &forma
 	return attribute;
 }
 
+int VertexAttribute::getSize()
+{
+	return _size;
+}
+
+int VertexAttribute::getTypeSize()
+{
+	switch (_type)
+	{
+	case GL_BOOL: return sizeof(GLboolean);
+	case GL_BYTE: return sizeof(GLbyte);
+	case GL_UNSIGNED_BYTE: return sizeof(GLubyte);
+	case GL_SHORT: return sizeof(GLshort);
+	case GL_UNSIGNED_SHORT: return sizeof(GLushort);
+	case GL_INT: return sizeof(GLint);
+	case GL_UNSIGNED_INT: return sizeof(GLuint);
+	case GL_FLOAT: return sizeof(GLfloat);
+	default: return 0;
+	}
+}
+
+void VertexAttribute::setStride(int stride)
+{
+	_stride = stride;
+}
+
 GLenum VertexAttribute::_getType(char typeChar)
 {
 	switch (typeChar)

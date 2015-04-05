@@ -148,6 +148,13 @@ namespace s1 {
 			int blue;
 			int alpha;
 		};
+		struct
+		{
+			float vstart;
+			float vcount;
+			float istart;
+			float icount;
+		};
 	} ivec4;
 
 }
