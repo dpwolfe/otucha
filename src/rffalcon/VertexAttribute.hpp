@@ -15,6 +15,9 @@ namespace rffalcon
 		~VertexAttribute();
 
 		static std::shared_ptr<VertexAttribute> parse(const std::string &part);
+		int getSize();
+		int getTypeSize();
+		void setStride(int stride);
 
 	private:
 		static GLenum _getType(char typeChar);
