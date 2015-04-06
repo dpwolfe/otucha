@@ -33,10 +33,10 @@ namespace rffalcon
 		float advanceY;
 		std::vector<GlyphKerning> kerning;
 
-		float getKerning(char kerningCharCode)
+		float getKerning(wchar_t kerningCharCode)
 		{
-			int result = 0;
-			for (int index = 0; index < kerning.size(); ++index)
+			float result = 0.0f;
+			for (int index = 0; index < static_cast<int>(kerning.size()); ++index)
 			{
 				GlyphKerning k = kerning[index];
 				if (k.charCode == kerningCharCode)
