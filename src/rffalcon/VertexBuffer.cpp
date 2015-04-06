@@ -35,6 +35,28 @@ VertexBuffer::~VertexBuffer()
 	}
 }
 
+void VertexBuffer::push(const std::shared_ptr<std::vector<void *>> vertices, const std::shared_ptr<std::vector<GLuint>> indices)
+{
+	int vertexCount = vertices->size();
+	int indexCount = indices->size();
+	_state = FROZEN;
+	// push vertices
+	int vstart = _vertices.size();
+	_pushVertices(vertices);
+	// push indices
+	int istart = _indices.size();
+	_pushIndices(indices);
+	// update indices based on new location in buffer
+	for (int index = 0; index < indexCount; ++index)
+	{
+		_indices[istart + index] += static_cast<GLuint>(vstart);
+	}
+	// insert item
+	s1::ivec4 item = { { vstart, vertexCount, istart, indexCount } };
+	_items.push_back(item);
+	_state = DIRTY;
+}
+
 int VertexBuffer::_parseAttributes(const std::vector<std::string> &formatParts)
 {
 	int stride = 0;
@@ -52,4 +74,14 @@ int VertexBuffer::_parseAttributes(const std::vector<std::string> &formatParts)
 		_attributes[index]->setStride(stride);
 	}
 	return stride;
+}
+
+void VertexBuffer::_pushVertices(const std::shared_ptr<std::vector<void *>> vertices)
+{
+	_state |= DIRTY;
+}
+
+void VertexBuffer::_pushIndices(const std::shared_ptr<std::vector<GLuint>> indices)
+{
+	_state |= DIRTY;
 }
