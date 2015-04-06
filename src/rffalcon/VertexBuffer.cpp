@@ -19,7 +19,7 @@ VertexBuffer::VertexBuffer(const std::string &format) : _format(format)
 	{
 		formatParts.push_back(formatPart);
 	}
-	int stride = _parseAttributes(formatParts);
+	_parseAttributes(formatParts);
 	_vertices = std::vector<char*>();
 	_indices = std::vector<GLuint>();
 	_items = std::vector<s1::ivec4>();
@@ -35,7 +35,7 @@ VertexBuffer::~VertexBuffer()
 	}
 }
 
-void VertexBuffer::push(const std::shared_ptr<std::vector<void *>> vertices, const std::shared_ptr<std::vector<GLuint>> indices)
+void VertexBuffer::push(const std::shared_ptr<std::vector<void*>> vertices, const std::shared_ptr<std::vector<GLuint>> indices)
 {
 	int vertexCount = vertices->size();
 	int indexCount = indices->size();
@@ -57,31 +57,39 @@ void VertexBuffer::push(const std::shared_ptr<std::vector<void *>> vertices, con
 	_state = DIRTY;
 }
 
-int VertexBuffer::_parseAttributes(const std::vector<std::string> &formatParts)
+void VertexBuffer::_parseAttributes(const std::vector<std::string> &formatParts)
 {
-	int stride = 0;
 	int pointer = 0;
 	for (int index = 0; index < MAX_VERTEX_ATTRIBUTES && index < static_cast<int>(formatParts.size()); ++index)
 	{
 		std::shared_ptr<VertexAttribute> attribute = VertexAttribute::parse(formatParts[index]);
 		int typeSizeDelta = attribute->getSize() * attribute->getTypeSize();
-		stride += typeSizeDelta;
+		_stride += typeSizeDelta;
 		pointer += typeSizeDelta;
 		_attributes[index] = attribute;
 	}
 	for (int index = 0; index < MAX_VERTEX_ATTRIBUTES && index < static_cast<int>(formatParts.size()); ++index)
 	{
-		_attributes[index]->setStride(stride);
+		_attributes[index]->setStride(_stride);
 	}
-	return stride;
 }
 
-void VertexBuffer::_pushVertices(const std::shared_ptr<std::vector<void *>> vertices)
+void VertexBuffer::_pushVertices(const std::shared_ptr<std::vector<void*>> vertices)
 {
+	for (int index = 0; index < static_cast<int>(vertices->size()); ++index)
+	{
+		char *vertex = new char[_stride];
+		memcpy(vertex, (*vertices)[index], _stride);
+		_vertices.push_back(vertex);
+	}
 	_state |= DIRTY;
 }
 
 void VertexBuffer::_pushIndices(const std::shared_ptr<std::vector<GLuint>> indices)
 {
+	for (int index = 0; index < static_cast<int>(indices->size()); ++index)
+	{
+		_indices.push_back((*indices)[index]);
+	}
 	_state |= DIRTY;
 }

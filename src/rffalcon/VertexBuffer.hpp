@@ -17,16 +17,17 @@ namespace rffalcon {
 		VertexBuffer(const std::string &format);
 		~VertexBuffer();
 
-		void push(const std::shared_ptr<std::vector<void *>> vertices, const std::shared_ptr<std::vector<GLuint>> indices);
+		void push(const std::shared_ptr<std::vector<void*>> vertices, const std::shared_ptr<std::vector<GLuint>> indices);
 
 	private:
-		int _parseAttributes(const std::vector<std::string> &formatParts);
-		void _pushVertices(const std::shared_ptr<std::vector<void *>> vertices);
+		void _parseAttributes(const std::vector<std::string> &formatParts);
+		void _pushVertices(const std::shared_ptr<std::vector<void*>> vertices);
 		void _pushIndices(const std::shared_ptr<std::vector<GLuint>> indices);
 
 		std::string _format;
 		std::shared_ptr<VertexAttribute> _attributes[MAX_VERTEX_ATTRIBUTES];
 		std::vector<char*> _vertices;
+		int _stride = 0;
 		std::vector<GLuint> _indices;
 		std::vector<s1::ivec4> _items;
 		GLuint _verticesId = 0;
