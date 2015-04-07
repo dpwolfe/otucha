@@ -22,6 +22,13 @@ TextureFont::TextureFont(std::shared_ptr<TextureAtlas> atlas, const float pointS
 
 TextureFont::~TextureFont()
 {
+	_atlas = nullptr;
+	for (int index = 0; index < static_cast<int>(_glyphs.size()); ++index)
+	{
+		_glyphs[index]->kerning.clear();
+	}
+	_glyphs.clear();
+	_filename = nullptr;
 }
 
 float TextureFont::getHeight() const
