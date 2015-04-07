@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <GL/glew.h>
+#include "ModelViewWithShader.hpp"
 #include "VertexAttribute.hpp"
 #include "vec.hpp"
 
@@ -12,12 +13,15 @@
 #define FROZEN 2
 
 namespace rffalcon {
-	class VertexBuffer {
+	class VertexBuffer : public ModelViewWithShader {
 	public:
 		VertexBuffer(const std::string &format);
 		~VertexBuffer();
 
 		void push(const std::shared_ptr<std::vector<void*>> vertices, const std::shared_ptr<std::vector<GLuint>> indices);
+		virtual void render();
+		virtual void handleCommand(unsigned char key, double ldsX, double ldsY) { }
+		virtual void getMCBoundingBox(double *xyzBounds) const;
 
 	private:
 		void _parseAttributes(const std::vector<std::string> &formatParts);

@@ -93,3 +93,18 @@ void VertexBuffer::_pushIndices(const std::shared_ptr<std::vector<GLuint>> indic
 	}
 	_state |= DIRTY;
 }
+
+void VertexBuffer::render()
+{
+
+}
+
+void VertexBuffer::getMCBoundingBox(double *xyzBounds) const
+{
+	xyzBounds[0] = -100;
+	xyzBounds[1] = 100;
+	xyzBounds[2] = -100;
+	xyzBounds[3] = 100;
+	xyzBounds[4] = -100;
+	xyzBounds[5] = 100;
+}
