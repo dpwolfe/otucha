@@ -31,9 +31,9 @@ void ShaderProgram::initialize()
 void ShaderProgram::link()
 {
 	glLinkProgram(_id);
-	GLint linked;
-	glGetProgramiv(_id, GL_LINK_STATUS, &linked);
-	if (!linked)
+	GLint linkStatus;
+	glGetProgramiv(_id, GL_LINK_STATUS, &linkStatus);
+	if (linkStatus == GL_FALSE)
 	{
 		std::cerr << "Shader program failed to link." << std::endl;
 		readFailLog(_id);
