@@ -29,6 +29,7 @@ namespace rffalcon
 		int getWidth() const;
 		int getHeight() const;
 		int getDepth() const;
+		GLuint getGLTextureId() const;
 		s1::ivec4 getRegion(const int width, const int height);
 		void setRegion(s1::ivec4 region, GlyphData glyphData);
 		void upload();
