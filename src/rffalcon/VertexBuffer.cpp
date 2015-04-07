@@ -101,10 +101,10 @@ void VertexBuffer::render()
 
 void VertexBuffer::getMCBoundingBox(double *xyzBounds) const
 {
-	xyzBounds[0] = -100;
-	xyzBounds[1] = 100;
-	xyzBounds[2] = -100;
-	xyzBounds[3] = 100;
-	xyzBounds[4] = -100;
-	xyzBounds[5] = 100;
+	xyzBounds[0] = 0;
+	xyzBounds[1] = 512;
+	xyzBounds[2] = 0;
+	xyzBounds[3] = 512;
+	xyzBounds[4] = -1;
+	xyzBounds[5] = 1;
 }
