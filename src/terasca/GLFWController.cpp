@@ -154,9 +154,9 @@ void GLFWController::handleDisplay()
 	glViewport(0, 0, width, height);
 	glClear(glClearFlags);
 	// draw the models
-	for (std::vector<ModelView*>::iterator it = models.begin(); it < models.end(); it++)
+	for (int index = 0; index < static_cast<int>(models.size()); ++index)
 	{
-		(*it)->render();
+		models[index]->render();
 	}
 
 	glfwSwapBuffers(_window);

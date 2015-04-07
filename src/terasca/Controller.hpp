@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <memory>
 
 #include "ModelView.hpp"
 
@@ -31,7 +32,7 @@ public:
 	void getOverallMCBoundingBox(double* xyzLimits) const;
 	virtual void redraw() const {}
 	void setClearFlags(int rcFlags);
-	void addModel(ModelView* modelView);
+	void addModel(std::shared_ptr<ModelView> modelView);
 
 protected:
 	virtual void reportWindowInterfaceVersion(std::ostream& os) const = 0;
@@ -45,12 +46,12 @@ protected:
 
 	double overallMCBoundingBox[6];
 	int glClearFlags;
-	std::vector<ModelView*> models;
+	std::vector<std::shared_ptr<ModelView>> models;
 
 	static Controller* _instance;
 	static int initialWindowWidth, initialWindowHeight;
 	static bool checkForErrors(std::ostream& os, const std::string& context);
 
 private:
-	void _updateMCBoundingBox(ModelView* modelView);
+	void _updateMCBoundingBox(std::shared_ptr<ModelView> modelView);
 };

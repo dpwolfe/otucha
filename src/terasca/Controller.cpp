@@ -60,9 +60,9 @@ void Controller::handleAsciiChar(unsigned char theChar, int x, int y)
 	double dsX, dsY;
 	screenSpaceToDeviceSpace(x, y, dsX, dsY);
 
-	for (std::vector<ModelView*>::iterator it = models.begin(); it < models.end(); it++)
+	for (int index = 0; index < static_cast<int>(models.size()); ++index)
 	{
-		(*it)->handleCommand(theChar, dsX, dsY);
+		models[index]->handleCommand(theChar, dsX, dsY);
 	}
 
 	redraw();
@@ -115,7 +115,7 @@ void Controller::setClearFlags(int rcFlags)
 	}
 }
 
-void Controller::addModel(ModelView* modelView)
+void Controller::addModel(std::shared_ptr<ModelView> modelView)
 {
 	assert(modelView != nullptr);
 	if (modelView != nullptr)
@@ -125,7 +125,7 @@ void Controller::addModel(ModelView* modelView)
 	}
 }
 
-void Controller::_updateMCBoundingBox(ModelView* modelView)
+void Controller::_updateMCBoundingBox(std::shared_ptr<ModelView> modelView)
 {
 	assert(modelView != nullptr);
 	if (modelView != nullptr) {
