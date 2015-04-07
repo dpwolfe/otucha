@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 	std::string appDir = appPath.substr(0, found + 1);
 	DependencyContainer::getSingleton()->setAppDir(appDir);
 	ModelViewWithShader::setShaderSources(appDir + "simple.vsh", appDir + "simple.fsh");
-	c.addModel(new Block(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f));
+	c.addModel(std::make_shared<Block>(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f));
 
 	glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
 	double xyz[6];
