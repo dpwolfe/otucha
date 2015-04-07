@@ -86,7 +86,7 @@ void Matrix4x4::copyToColumnMajor(float matrix[16]) const
 	}
 }
 
-Matrix4x4 Matrix4x4::orthogonal(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax)
+Matrix4x4 Matrix4x4::orthographic(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax)
 {
 	assert(xmin < xmax && ymin < ymax && zmin < zmax);
 

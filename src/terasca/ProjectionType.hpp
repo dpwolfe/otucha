@@ -3,5 +3,5 @@
 enum ProjectionType
 {
 	PERSPECTIVE,
-	ORTHOGONAL
+	ORTHOGRAPHIC
 };
