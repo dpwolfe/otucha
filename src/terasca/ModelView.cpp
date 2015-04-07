@@ -61,9 +61,9 @@ void ModelView::_getMatrices(s1::Matrix4x4& mc_ec, s1::Matrix4x4& ec_dc)
 		ec_dc = s1::Matrix4x4::perspective(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
 			_eyeCoordinatesZMin, _eyeCoordinatesZMax, _zProjectionPlane);
 	}
-	else if (_projectionType == ORTHOGONAL)
+	else if (_projectionType == ORTHOGRAPHIC)
 	{
-		ec_dc = s1::Matrix4x4::orthogonal(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
+		ec_dc = s1::Matrix4x4::orthographic(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
 			_mcRegionOfInterest[4], _mcRegionOfInterest[5]);
 	}
 }
