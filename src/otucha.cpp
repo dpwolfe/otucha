@@ -16,9 +16,9 @@ void set3DViewingInformation(double xyz[6])
 {
 	ModelView::setMCRegionOfInterest(xyz);
 
-	s1::AffinePoint eye(1.0, 1.0, 1.0);
-	s1::AffinePoint center(0, 0, 0);
-	s1::AffineVector up(0, 1, 0);
+	rffalcon::AffinePoint eye(1.0, 1.0, 1.0);
+	rffalcon::AffinePoint center(0, 0, 0);
+	rffalcon::AffineVector up(0, 1, 0);
 
 	ModelView::setEyeCenterUp(eye, center, up);
 
