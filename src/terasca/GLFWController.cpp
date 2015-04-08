@@ -154,7 +154,7 @@ void GLFWController::handleDisplay()
 	glViewport(0, 0, width, height);
 	glClear(glClearFlags);
 	// draw the models
-	for (int index = 0; index < static_cast<int>(models.size()); ++index)
+	for (size_t index = 0; index < models.size(); ++index)
 	{
 		models[index]->render();
 	}

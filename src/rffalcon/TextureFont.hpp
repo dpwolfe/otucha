@@ -36,7 +36,7 @@ namespace rffalcon
 		float getKerning(wchar_t kerningCharCode)
 		{
 			float result = 0.0f;
-			for (int index = 0; index < static_cast<int>(kerning.size()); ++index)
+			for (size_t index = 0; index < kerning.size(); ++index)
 			{
 				GlyphKerning k = kerning[index];
 				if (k.charCode == kerningCharCode)

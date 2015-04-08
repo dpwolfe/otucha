@@ -60,7 +60,7 @@ void Controller::handleAsciiChar(unsigned char theChar, int x, int y)
 	double dsX, dsY;
 	screenSpaceToDeviceSpace(x, y, dsX, dsY);
 
-	for (int index = 0; index < static_cast<int>(models.size()); ++index)
+	for (size_t index = 0; index < models.size(); ++index)
 	{
 		models[index]->handleCommand(theChar, dsX, dsY);
 	}

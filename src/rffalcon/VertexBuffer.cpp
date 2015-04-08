@@ -60,7 +60,7 @@ void VertexBuffer::push(const std::shared_ptr<std::vector<void*>> vertices, cons
 void VertexBuffer::_parseAttributes(const std::vector<std::string> &formatParts)
 {
 	int pointer = 0;
-	for (int index = 0; index < MAX_VERTEX_ATTRIBUTES && index < static_cast<int>(formatParts.size()); ++index)
+	for (size_t index = 0; index < MAX_VERTEX_ATTRIBUTES && index < formatParts.size(); ++index)
 	{
 		std::shared_ptr<VertexAttribute> attribute = VertexAttribute::parse(formatParts[index]);
 		int typeSizeDelta = attribute->getSize() * attribute->getTypeSize();
@@ -68,7 +68,7 @@ void VertexBuffer::_parseAttributes(const std::vector<std::string> &formatParts)
 		pointer += typeSizeDelta;
 		_attributes[index] = attribute;
 	}
-	for (int index = 0; index < MAX_VERTEX_ATTRIBUTES && index < static_cast<int>(formatParts.size()); ++index)
+	for (size_t index = 0; index < MAX_VERTEX_ATTRIBUTES && index < formatParts.size(); ++index)
 	{
 		_attributes[index]->setStride(_stride);
 	}
@@ -76,7 +76,7 @@ void VertexBuffer::_parseAttributes(const std::vector<std::string> &formatParts)
 
 void VertexBuffer::_pushVertices(const std::shared_ptr<std::vector<void*>> vertices)
 {
-	for (int index = 0; index < static_cast<int>(vertices->size()); ++index)
+	for (size_t index = 0; index < vertices->size(); ++index)
 	{
 		char *vertex = new char[_stride];
 		memcpy(vertex, (*vertices)[index], _stride);
@@ -87,7 +87,7 @@ void VertexBuffer::_pushVertices(const std::shared_ptr<std::vector<void*>> verti
 
 void VertexBuffer::_pushIndices(const std::shared_ptr<std::vector<GLuint>> indices)
 {
-	for (int index = 0; index < static_cast<int>(indices->size()); ++index)
+	for (size_t index = 0; index < indices->size(); ++index)
 	{
 		_indices.push_back((*indices)[index]);
 	}
@@ -96,7 +96,8 @@ void VertexBuffer::_pushIndices(const std::shared_ptr<std::vector<GLuint>> indic
 
 void VertexBuffer::render()
 {
-
+	size_t vCount = _vertices.size();
+	size_t iCount = _indices.size();
 }
 
 void VertexBuffer::getMCBoundingBox(double *xyzBounds) const

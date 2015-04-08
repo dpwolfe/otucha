@@ -45,10 +45,10 @@ s1::ivec4 TextureAtlas::getRegion(const int width, const int height)
 	int bestY = INT_MAX;
 	int bestWidth = INT_MAX;
 	int bestIndex = -1;
-	int nodeCount = static_cast<int>(_nodes.size());
+	size_t nodeCount = _nodes.size();
 	s1::ivec4 region = { { -1, -1, width, height } };
 
-	for (int index = 0; index < nodeCount; ++index)
+	for (size_t index = 0; index < nodeCount; ++index)
 	{
 		int y = _fit(index, width, height);
 		if (y >= 0) {
@@ -87,7 +87,7 @@ void TextureAtlas::_addNode(s1::ivec4 region, int index)
 // Remove nodes that are no longer part of the envelope
 void TextureAtlas::_reduceNodes(int startIndex)
 {
-	for (int index = startIndex + 1; index < static_cast<int>(_nodes.size()); ++index)
+	for (size_t index = startIndex + 1; index < _nodes.size(); ++index)
 	{
 		s1::ivec3 curNode = _nodes[index];
 		s1::ivec3 prevNode = _nodes[index - 1];
@@ -119,7 +119,7 @@ void TextureAtlas::_reduceNodes(int startIndex)
 // Merge adjacent nodes on the envelope that have the same yNext value
 void TextureAtlas::_mergeNodes()
 {
-	for (int index = 0; index < static_cast<int>(_nodes.size()) - 1; ++index)
+	for (size_t index = 0; index < _nodes.size() - 1; ++index)
 	{
 		s1::ivec3 curNode = _nodes[index];
 		s1::ivec3 nextNode = _nodes[index + 1];
