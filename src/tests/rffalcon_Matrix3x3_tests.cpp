@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "Matrix3x3.hpp"
 
-using namespace s1;
+using namespace rffalcon;
 
 TEST(Matrix3x3Constructors, equality_with_default_constructor) {
     Matrix3x3 m;

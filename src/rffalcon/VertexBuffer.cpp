@@ -22,7 +22,7 @@ VertexBuffer::VertexBuffer(const std::string &format) : _format(format)
 	_parseAttributes(formatParts);
 	_vertices = std::vector<char*>();
 	_indices = std::vector<GLuint>();
-	_items = std::vector<s1::ivec4>();
+	_items = std::vector<rffalcon::ivec4>();
 }
 
 VertexBuffer::~VertexBuffer()
@@ -52,7 +52,7 @@ void VertexBuffer::push(const std::shared_ptr<std::vector<void*>> vertices, cons
 		_indices[istart + index] += static_cast<GLuint>(vstart);
 	}
 	// insert item
-	s1::ivec4 item = { { vstart, vertexCount, istart, indexCount } };
+	rffalcon::ivec4 item = { { vstart, vertexCount, istart, indexCount } };
 	_items.push_back(item);
 	_state = DIRTY;
 }

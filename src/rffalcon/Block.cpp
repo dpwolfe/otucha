@@ -30,7 +30,7 @@ void Block::render()
 	glGetIntegerv(GL_CURRENT_PROGRAM, &programId);
 	glUseProgram(_shaderProgramId);
 
-	s1::Matrix4x4 mc_ec, ec_dc;
+	rffalcon::Matrix4x4 mc_ec, ec_dc;
 	_getMatrices(mc_ec, ec_dc);
 	float mc_ec_cm[16];
 	mc_ec.copyToColumnMajor(mc_ec_cm);
@@ -39,7 +39,7 @@ void Block::render()
 	ec_dc.copyToColumnMajor(ec_dc_cm);
 	glUniformMatrix4fv(_ppuLoc_ec_dc, 1, GL_FALSE, ec_dc_cm);
 
-	s1::Matrix3x3 normal_mat = s1::Matrix3x3(mc_ec).inverse().transpose();
+	rffalcon::Matrix3x3 normal_mat = rffalcon::Matrix3x3(mc_ec).inverse().transpose();
 	float normal_mat_cm[9];
 	normal_mat.copyToColumnMajor(normal_mat_cm);
 	glUniformMatrix3fv(_ppuLoc_normal_mat, 1, GL_FALSE, normal_mat_cm);

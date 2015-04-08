@@ -2,7 +2,7 @@
 
 #include "AffineVector.hpp"
 
-namespace s1 {
+namespace rffalcon {
 
 	class AffinePoint
 	{

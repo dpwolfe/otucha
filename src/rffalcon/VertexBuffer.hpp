@@ -33,7 +33,7 @@ namespace rffalcon {
 		std::vector<char*> _vertices;
 		int _stride = 0;
 		std::vector<GLuint> _indices;
-		std::vector<s1::ivec4> _items;
+		std::vector<rffalcon::ivec4> _items;
 		GLuint _verticesId = 0;
 		int _gpuVSize = 0;
 		GLuint _indicesId = 0;

@@ -2,7 +2,7 @@
 
 #include <memory>
 
-using namespace s1;
+using namespace rffalcon;
 
 Matrix3x3::Matrix3x3Row::Matrix3x3Row(const Matrix3x3& parent, int row)
 	: _parent(parent), _row(row) {}

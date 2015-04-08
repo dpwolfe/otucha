@@ -66,8 +66,8 @@ namespace rffalcon
 		FT_Int32 _getFlags();
 		void _setFiltering(FT_Library library);
 		GlyphData _getGlyphData(FT_Library library, FT_Face face);
-		void _addTextureGlyph(wchar_t charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, FT_UInt glyphIndex);
-		s1::ivec4 _renderToAtlas(GlyphData glyphData, const wchar_t charCode, FT_Face face, FT_UInt glyphIndex);
+		void _addTextureGlyph(wchar_t charCode, GlyphData glyphData, rffalcon::ivec4 region, FT_Face face, FT_UInt glyphIndex);
+		rffalcon::ivec4 _renderToAtlas(GlyphData glyphData, const wchar_t charCode, FT_Face face, FT_UInt glyphIndex);
 		void _generateKerning();
 		std::shared_ptr<TextureGlyph> _tryGetGlyph(const wchar_t charCode);
 
