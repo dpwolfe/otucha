@@ -23,7 +23,7 @@ TextureFont::TextureFont(std::shared_ptr<TextureAtlas> atlas, const float pointS
 TextureFont::~TextureFont()
 {
 	_atlas = nullptr;
-	for (int index = 0; index < static_cast<int>(_glyphs.size()); ++index)
+	for (size_t index = 0; index < _glyphs.size(); ++index)
 	{
 		_glyphs[index]->kerning.clear();
 	}
@@ -126,13 +126,13 @@ void TextureFont::_generateKerning()
 	_loadFace(&library, &face);
 
 	// indices start at 1 to skip the special -1 background glyph which is always at index 0
-	for (int outerIndex = 1; outerIndex < static_cast<int>(_glyphs.size()); ++outerIndex)
+	for (size_t outerIndex = 1; outerIndex < _glyphs.size(); ++outerIndex)
 	{
 		std::shared_ptr<TextureGlyph> rightGlyph = _glyphs[outerIndex];
 		FT_UInt rightGlyphIndex = FT_Get_Char_Index(face, rightGlyph->charCode);
 		rightGlyph->kerning.clear();
 
-		for (int innerIndex = 1; innerIndex < static_cast<int>(_glyphs.size()); ++innerIndex)
+		for (size_t innerIndex = 1; innerIndex < _glyphs.size(); ++innerIndex)
 		{
 			std::shared_ptr<TextureGlyph> leftGlyph = _glyphs[innerIndex];
 			FT_UInt leftGlyphIndex = FT_Get_Char_Index(face, leftGlyph->charCode);
@@ -311,8 +311,8 @@ std::shared_ptr<TextureGlyph> TextureFont::_tryGetGlyph(const wchar_t charCode)
 {
 	// Skip glyphs that have already been loaded
 	std::shared_ptr<TextureGlyph> glyph = nullptr;
-	int sizeGlyphs = static_cast<int>(_glyphs.size());
-	for (int j = 0; j < sizeGlyphs; ++j)
+	size_t glyphCount = _glyphs.size();
+	for (size_t j = 0; j < glyphCount; ++j)
 	{
 		std::shared_ptr<TextureGlyph> curGlyph = _glyphs[j];
 		// -1 is a special background glyph where outline does not matter
