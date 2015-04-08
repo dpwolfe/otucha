@@ -3,7 +3,7 @@
 #include <memory>
 #include <assert.h>
 
-using namespace s1;
+using namespace rffalcon;
 
 Matrix4x4::Matrix4x4Row::Matrix4x4Row(const Matrix4x4& parent, int row)
 	: _parent(parent), _row(row) {}
@@ -110,7 +110,7 @@ Matrix4x4 Matrix4x4::perspective(double xmin, double xmax, double ymin, double y
 
 Matrix4x4 Matrix4x4::lookAt(AffinePoint& eye, AffinePoint& center, AffineVector& up)
 {
-	s1::AffineVector u, v, w;
+	rffalcon::AffineVector u, v, w;
 	w = center - eye;
 	w.normalize();
 	u = w.cross(up);

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace s1 {
+namespace rffalcon {
 
 	typedef union
 	{

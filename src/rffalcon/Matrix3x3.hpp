@@ -2,7 +2,7 @@
 
 #include "Matrix4x4.hpp"
 
-namespace s1 {
+namespace rffalcon {
 	class Matrix3x3 {
 	public:
 		class Matrix3x3Row

@@ -79,14 +79,12 @@ add_definitions(
 include_directories (
 	"${PROJECT_BINARY_DIR}"
 	"${PROJECT_SOURCE_DIR}/rffalcon"
-	"${PROJECT_SOURCE_DIR}/s1"
 	"${PROJECT_SOURCE_DIR}/terasca"
 	"${PROJECT_SOURCE_DIR}/warbler"
 	"${PROJECT_SOURCE_DIR}/external/freetype-2.5.5/include"
 )
 
 add_subdirectory(rffalcon)
-add_subdirectory(s1)
 add_subdirectory(terasca)
 add_subdirectory(warbler)
 
@@ -105,9 +103,9 @@ endif()
 
 add_executable (otucha otucha.cpp DependencyContainer.cpp DependencyContainer.hpp)
 if(OTUCHA_EMSCRIPTEN_ENABLED)
-	target_link_libraries (otucha rffalcon s1 terasca warbler ${OPENGL_LIBRARY} freetype)
+	target_link_libraries (otucha rffalcon terasca warbler ${OPENGL_LIBRARY} freetype)
 else()
-	target_link_libraries (otucha rffalcon s1 terasca warbler ${OPENGL_LIBRARY} glfw GLEW_1110 freetype)
+	target_link_libraries (otucha rffalcon terasca warbler ${OPENGL_LIBRARY} glfw GLEW_1110 freetype)
 endif()
 set_property(TARGET otucha PROPERTY CXX_STANDARD 11)
 

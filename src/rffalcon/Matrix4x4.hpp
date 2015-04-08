@@ -3,7 +3,7 @@
 #include "AffinePoint.hpp"
 #include "AffineVector.hpp"
 
-namespace s1
+namespace rffalcon
 {
 	class Matrix4x4
 	{

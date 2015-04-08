@@ -4,7 +4,7 @@
 
 #include "AffinePoint.hpp"
 
-namespace s1 {
+namespace rffalcon {
 
 	AffineVector::AffineVector()
 	{

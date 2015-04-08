@@ -60,7 +60,7 @@ int TextureFont::loadGlyphs(const std::wstring &text)
 			error = FT_Load_Glyph(face, glyphIndex, flags);
 			if (error) { throw new std::exception(); }
 			GlyphData glyphData = _getGlyphData(library, face);
-			s1::ivec4 region = _renderToAtlas(glyphData, charCode, face, glyphIndex);
+			rffalcon::ivec4 region = _renderToAtlas(glyphData, charCode, face, glyphIndex);
 			if (region.x < 0) {
 				missed++;
 			}
@@ -93,7 +93,7 @@ std::shared_ptr<TextureGlyph> TextureFont::getGlyph(const wchar_t charCode)
 			glyphData.width = 4;
 			glyphData.height = 4;
 
-			s1::ivec4 region = _renderToAtlas(glyphData, charCode, nullptr, 0);
+			rffalcon::ivec4 region = _renderToAtlas(glyphData, charCode, nullptr, 0);
 			int width = _atlas->getWidth();
 			int height = _atlas->getHeight();
 			glyph = std::make_shared<TextureGlyph>();
@@ -150,7 +150,7 @@ void TextureFont::_generateKerning()
 	FT_Done_FreeType(library);
 }
 
-void TextureFont::_addTextureGlyph(wchar_t charCode, GlyphData glyphData, s1::ivec4 region, FT_Face face, FT_UInt glyphIndex)
+void TextureFont::_addTextureGlyph(wchar_t charCode, GlyphData glyphData, rffalcon::ivec4 region, FT_Face face, FT_UInt glyphIndex)
 {
 	std::shared_ptr<TextureGlyph> glyph = std::make_shared<TextureGlyph>();
 	glyph->charCode = charCode;
@@ -234,9 +234,9 @@ GlyphData TextureFont::_getGlyphData(FT_Library library, FT_Face face)
 	return glyphData;
 }
 
-s1::ivec4 TextureFont::_renderToAtlas(GlyphData glyphData, const wchar_t charCode, FT_Face face, FT_UInt glyphIndex)
+rffalcon::ivec4 TextureFont::_renderToAtlas(GlyphData glyphData, const wchar_t charCode, FT_Face face, FT_UInt glyphIndex)
 {
-	s1::ivec4 region = _atlas->getRegion(glyphData.width + 1, glyphData.height + 1);
+	rffalcon::ivec4 region = _atlas->getRegion(glyphData.width + 1, glyphData.height + 1);
 
 	if (region.x < 0)
 	{

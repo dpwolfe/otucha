@@ -4,14 +4,14 @@
 #include "Matrix4x4.hpp"
 
 double ModelView::_mcRegionOfInterest[6] = { -1.0, 1.0, -1.0, 1.0, -1.0, 1.0 };
-s1::AffinePoint ModelView::_eye(0, 0, 2);
-s1::AffinePoint ModelView::_center(0, 0, 0);
-s1::AffineVector ModelView::_up(0, 1, 0);
+rffalcon::AffinePoint ModelView::_eye(0, 0, 2);
+rffalcon::AffinePoint ModelView::_center(0, 0, 0);
+rffalcon::AffineVector ModelView::_up(0, 1, 0);
 ProjectionType ModelView::_projectionType = PERSPECTIVE;
 double ModelView::_zProjectionPlane = -1.0;
 double ModelView::_eyeCoordinatesZMin = -2.0;
 double ModelView::_eyeCoordinatesZMax = -0.01;
-s1::Matrix4x4 ModelView::_dynamicView;
+rffalcon::Matrix4x4 ModelView::_dynamicView;
 
 ModelView::ModelView()
 {
@@ -29,7 +29,7 @@ void ModelView::setMCRegionOfInterest(double xyz[6])
 	}
 }
 
-void ModelView::setEyeCenterUp(s1::AffinePoint eye, s1::AffinePoint center, s1::AffineVector up)
+void ModelView::setEyeCenterUp(rffalcon::AffinePoint eye, rffalcon::AffinePoint center, rffalcon::AffineVector up)
 {
 	_eye = eye;
 	_center = center;
@@ -52,18 +52,18 @@ void ModelView::setEyeCoordinatesZMinZMax(double zMin, double zMax)
 	_eyeCoordinatesZMax = zMax;
 }
 
-void ModelView::_getMatrices(s1::Matrix4x4& mc_ec, s1::Matrix4x4& ec_dc)
+void ModelView::_getMatrices(rffalcon::Matrix4x4& mc_ec, rffalcon::Matrix4x4& ec_dc)
 {
-	mc_ec = s1::Matrix4x4::lookAt(_eye, _center, _up);
+	mc_ec = rffalcon::Matrix4x4::lookAt(_eye, _center, _up);
 
 	if (_projectionType == PERSPECTIVE)
 	{
-		ec_dc = s1::Matrix4x4::perspective(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
+		ec_dc = rffalcon::Matrix4x4::perspective(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
 			_eyeCoordinatesZMin, _eyeCoordinatesZMax, _zProjectionPlane);
 	}
 	else if (_projectionType == ORTHOGRAPHIC)
 	{
-		ec_dc = s1::Matrix4x4::orthographic(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
+		ec_dc = rffalcon::Matrix4x4::orthographic(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
 			_mcRegionOfInterest[4], _mcRegionOfInterest[5]);
 	}
 }
