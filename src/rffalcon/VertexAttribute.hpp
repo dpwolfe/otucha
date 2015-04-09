@@ -15,9 +15,11 @@ namespace rffalcon
 		~VertexAttribute();
 
 		static std::shared_ptr<VertexAttribute> parse(const std::string &part);
-		int getSize();
+		GLint getSize();
 		int getTypeSize();
 		void setStride(int stride);
+		void setPointer(GLchar *pointer);
+		void enable();
 
 	private:
 		static GLenum _getType(char typeChar);
@@ -28,6 +30,6 @@ namespace rffalcon
 		GLenum _type;
 		GLboolean _normalized;
 		GLsizei _stride = 0;
-		GLvoid *pointer = 0;
+		GLchar *_pointer = 0;
 	};
 }
