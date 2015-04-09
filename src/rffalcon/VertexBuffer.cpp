@@ -59,10 +59,11 @@ void VertexBuffer::push(const std::shared_ptr<std::vector<void*>> vertices, cons
 
 void VertexBuffer::_parseAttributes(const std::vector<std::string> &formatParts)
 {
-	int pointer = 0;
+	GLchar *pointer = 0;
 	for (size_t index = 0; index < MAX_VERTEX_ATTRIBUTES && index < formatParts.size(); ++index)
 	{
 		std::shared_ptr<VertexAttribute> attribute = VertexAttribute::parse(formatParts[index]);
+		attribute->setPointer(pointer);
 		int typeSizeDelta = attribute->getSize() * attribute->getTypeSize();
 		_stride += typeSizeDelta;
 		pointer += typeSizeDelta;
@@ -98,6 +99,98 @@ void VertexBuffer::render()
 {
 	size_t vCount = _vertices.size();
 	size_t iCount = _indices.size();
+	_renderSetup();
+	if (iCount > 0)
+	{
+		glDrawElements(_mode, iCount, GL_UNSIGNED_INT, 0);
+	}
+	else
+	{
+		glDrawArrays(_mode, 0, vCount);
+	}
+	_renderFinish();
+}
+
+void VertexBuffer::_renderSetup()
+{
+	if (_state != CLEAN)
+	{
+		_upload();
+		_state = CLEAN;
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, _verticesId);
+	for (int index = 0; index < MAX_VERTEX_ATTRIBUTES; ++index)
+	{
+		std::shared_ptr<VertexAttribute> attribute = _attributes[index];
+		if (attribute != nullptr)
+		{
+			attribute->enable();
+		}
+	}
+
+	if (_indices.size() > 0)
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indicesId);
+	}
+}
+
+void VertexBuffer::_renderFinish()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void VertexBuffer::_upload()
+{
+	if (_state != FROZEN)
+	{
+		if (!_verticesId)
+		{
+			glGenBuffers(1, &_verticesId);
+		}
+
+		if (!_indicesId)
+		{
+			glGenBuffers(1, &_indicesId);
+		}
+
+		// Upload vertices first to guarantee indices always point to valid data
+		_uploadVertices();
+		_uploadIndices();
+	}
+}
+
+void VertexBuffer::_uploadVertices()
+{
+	size_t vSize = _vertices.size() * _stride;
+	glBindBuffer(GL_ARRAY_BUFFER, _verticesId);
+	if (vSize != _gpuVSize)
+	{
+		glBufferData(GL_ARRAY_BUFFER, vSize, _vertices.data(), GL_DYNAMIC_DRAW);
+		_gpuVSize = vSize;
+	}
+	else
+	{
+		glBufferSubData(GL_ARRAY_BUFFER, 0, vSize, _vertices.data());
+	}
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void VertexBuffer::_uploadIndices()
+{
+	size_t iSize = _indices.size() * sizeof(GLuint);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indicesId);
+	if (iSize != _gpuISize)
+	{
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize, _indices.data(), GL_DYNAMIC_DRAW);
+		_gpuISize = iSize;
+	}
+	else
+	{
+		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, iSize, _indices.data());
+	}
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void VertexBuffer::getMCBoundingBox(double *xyzBounds) const

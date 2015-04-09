@@ -44,7 +44,7 @@ std::shared_ptr<VertexAttribute> VertexAttribute::parse(const std::string &forma
 	return attribute;
 }
 
-int VertexAttribute::getSize()
+GLint VertexAttribute::getSize()
 {
 	return _size;
 }
@@ -70,6 +70,11 @@ void VertexAttribute::setStride(int stride)
 	_stride = stride;
 }
 
+void VertexAttribute::setPointer(GLchar *pointer)
+{
+	_pointer = pointer;
+}
+
 GLenum VertexAttribute::_getType(char typeChar)
 {
 	switch (typeChar)
@@ -82,5 +87,24 @@ GLenum VertexAttribute::_getType(char typeChar)
 	case 'I': return GL_UNSIGNED_INT;
 	case 'f': return GL_FLOAT;
 	default: return 0;
+	}
+}
+
+void VertexAttribute::enable()
+{
+	if (_index == -1)
+	{
+		GLint program;
+		glGetIntegerv(GL_CURRENT_PROGRAM, &program);
+		if (program != 0)
+		{
+			_index = glGetAttribLocation(program, _name.c_str());
+		}
+	}
+
+	if (_index != -1)
+	{
+		glEnableVertexAttribArray(_index);
+		glVertexAttribPointer(_index, _size, _type, _normalized, _stride, _pointer);
 	}
 }

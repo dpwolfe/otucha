@@ -27,6 +27,11 @@ namespace rffalcon {
 		void _parseAttributes(const std::vector<std::string> &formatParts);
 		void _pushVertices(const std::shared_ptr<std::vector<void*>> vertices);
 		void _pushIndices(const std::shared_ptr<std::vector<GLuint>> indices);
+		void _renderSetup();
+		void _renderFinish();
+		void _upload();
+		void _uploadVertices();
+		void _uploadIndices();
 
 		std::string _format;
 		std::shared_ptr<VertexAttribute> _attributes[MAX_VERTEX_ATTRIBUTES];
