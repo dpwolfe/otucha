@@ -2,7 +2,7 @@
 
 std::string ModelViewWithShader::_vertexShaderPath = "";
 std::string ModelViewWithShader::_fragmentShaderPath = "";
-ShaderProgram* ModelViewWithShader::_shaderProgram = nullptr;
+std::shared_ptr<ShaderProgram> ModelViewWithShader::_shaderProgram = nullptr;
 GLuint ModelViewWithShader::_shaderProgramId = 0;
 int ModelViewWithShader::_instanceCount = 0;
 GLint ModelViewWithShader::_ppuLoc_mc_ec = -2;
@@ -21,7 +21,7 @@ ModelViewWithShader::ModelViewWithShader()
 {
 	if (_shaderProgram == 0)
 	{
-		_shaderProgram = new ShaderProgram(_vertexShaderPath, _fragmentShaderPath);
+		_shaderProgram = std::make_shared<ShaderProgram>(_vertexShaderPath, _fragmentShaderPath);
 		_shaderProgramId = _shaderProgram->getId();
 		_initGLSLVariableLocations();
 	}

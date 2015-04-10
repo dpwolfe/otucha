@@ -15,9 +15,9 @@ namespace rffalcon
 		int height = 0;
 		int top = 0;
 		int left = 0;
-		unsigned char* buffer = nullptr;
+		unsigned char *buffer = nullptr;
 		int pitch = 0;
-		FT_Glyph glyph;
+		FT_Glyph glyph = nullptr;
 	};
 
 	class TextureAtlas

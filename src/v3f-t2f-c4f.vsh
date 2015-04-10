@@ -14,7 +14,7 @@ attribute vec4 color;
 
 void main()
 {
-	gl_texCoord[0].xy = texCoord.xy;
+	gl_TexCoord[0].xy = texCoord.xy;
 	gl_FrontColor     = color;
 	gl_Position       = projection * (view * (model * vec4(vertex, 1.0)));
 }

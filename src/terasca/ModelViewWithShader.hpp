@@ -25,7 +25,7 @@ protected:
 
 private:
 	static std::string _vertexShaderPath, _fragmentShaderPath;
-	static ShaderProgram* _shaderProgram;
+	static std::shared_ptr<ShaderProgram> _shaderProgram;
 	static int _instanceCount;
 
 	static void _initGLSLVariableLocations();
