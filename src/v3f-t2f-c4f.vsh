@@ -4,11 +4,10 @@
 precision highp float;
 #endif
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform mat4 mc_ec;
+uniform mat4 ec_dc;
 
-attribute vec3 vertex;
+attribute vec3 mcPosition;
 attribute vec2 texCoord;
 attribute vec4 color;
 
@@ -16,5 +15,5 @@ void main()
 {
 	gl_TexCoord[0].xy = texCoord.xy;
 	gl_FrontColor     = color;
-	gl_Position       = projection * (view * (model * vec4(vertex, 1.0)));
+	gl_Position       = ec_dc * (mc_ec * vec4(mcPosition, 1.0));
 }

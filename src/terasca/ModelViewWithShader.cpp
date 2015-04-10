@@ -13,6 +13,7 @@ GLint ModelViewWithShader::_ppuLoc_kd = -2;
 GLint ModelViewWithShader::_ppuLoc_ks = -2;
 GLint ModelViewWithShader::_ppuLoc_m = -2;
 GLint ModelViewWithShader::_ppuLoc_a = -2;
+GLint ModelViewWithShader::_ppuLoc_texture = -2;
 GLint ModelViewWithShader::_pvaLoc_mcPosition = -2;
 GLint ModelViewWithShader::_pvaLoc_mcNormal = -2;
 
@@ -52,5 +53,6 @@ void ModelViewWithShader::_initGLSLVariableLocations()
 	_ppuLoc_ks = _getUniformLocation(_shaderProgramId, "ks");
 	_ppuLoc_m = _getUniformLocation(_shaderProgramId, "m");
 	_ppuLoc_a = _getUniformLocation(_shaderProgramId, "a");
+	_ppuLoc_texture = _getUniformLocation(_shaderProgramId, "texture");
 	_pvaLoc_mcNormal = _getAttribLocation(_shaderProgramId, "mcNormal");
 }

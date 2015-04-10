@@ -93,7 +93,7 @@ Matrix4x4 Matrix4x4::orthographic(double xmin, double xmax, double ymin, double 
 	return Matrix4x4(
 		2.0/(xmax-xmin), 0.0,              0.0,             -(xmax+xmin)/(xmax-xmin),
 		0.0,             2.0/(ymax-ymin),  0.0,             -(ymax+ymin)/(ymax-ymin),
-		0.0,             0.0,             -2.0/(zmax-zmin),  (zmax+zmin)/(zmax-zmin),
+		0.0,             0.0,             -2.0/(zmax-zmin), -(zmax+zmin)/(zmax-zmin),
 		0.0,             0.0,              0.0,              1.0);
 }
 
