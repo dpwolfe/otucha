@@ -28,7 +28,6 @@ TextureFont::~TextureFont()
 		_glyphs[index]->kerning.clear();
 	}
 	_glyphs.clear();
-	_filename = nullptr;
 }
 
 float TextureFont::getHeight() const
@@ -122,6 +121,8 @@ void TextureFont::_generateKerning()
 {
 	FT_Library library;
 	FT_Face face;
+	FT_Error error = FT_Init_FreeType(&library);
+	if (error != FT_Err_Ok) { throw new std::exception(); }
 
 	_loadFace(&library, &face);
 
