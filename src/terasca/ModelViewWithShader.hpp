@@ -21,6 +21,7 @@ protected:
 	static GLint _ppuLoc_ks;
 	static GLint _ppuLoc_m;
 	static GLint _ppuLoc_a;
+	static GLint _ppuLoc_texture;
 	static GLint _pvaLoc_mcPosition, _pvaLoc_mcNormal;
 
 private:

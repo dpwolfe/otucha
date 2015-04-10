@@ -119,6 +119,30 @@ void VertexBuffer::_renderSetup()
 		_state = CLEAN;
 	}
 
+	glClearColor(1, 1, 1, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	GLint programId;
+	glGetIntegerv(GL_CURRENT_PROGRAM, &programId);
+	glUseProgram(_shaderProgramId);
+
+	rffalcon::Matrix4x4 mc_ec, ec_dc;
+	_getMatrices(mc_ec, ec_dc);
+	float mc_ec_cm[16];
+	mc_ec.copyToColumnMajor(mc_ec_cm);
+	glUniformMatrix4fv(_ppuLoc_mc_ec, 1, GL_FALSE, mc_ec_cm);
+	float ec_dc_cm[16];
+	ec_dc.copyToColumnMajor(ec_dc_cm);
+	glUniformMatrix4fv(_ppuLoc_ec_dc, 1, GL_FALSE, ec_dc_cm);
+
+	glUniform1i(_ppuLoc_texture, 0);
+
+#ifndef __EMSCRIPTEN__
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+#endif
+
 	glBindBuffer(GL_ARRAY_BUFFER, _verticesId);
 	for (int index = 0; index < MAX_VERTEX_ATTRIBUTES; ++index)
 	{
@@ -165,15 +189,24 @@ void VertexBuffer::_uploadVertices()
 {
 	size_t vSize = _vertices.size() * _stride;
 	glBindBuffer(GL_ARRAY_BUFFER, _verticesId);
+	
+	char* buffer = new char[vSize];
+	for (size_t index = 0; index < _vertices.size(); ++index) {
+		memcpy(buffer + index * _stride, &_vertices[index], _stride);
+	}
+
 	if (vSize != _gpuVSize)
 	{
-		glBufferData(GL_ARRAY_BUFFER, vSize, _vertices.data(), GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, vSize, buffer, GL_DYNAMIC_DRAW);
 		_gpuVSize = vSize;
 	}
 	else
 	{
-		glBufferSubData(GL_ARRAY_BUFFER, 0, vSize, _vertices.data());
+		glBufferSubData(GL_ARRAY_BUFFER, 0, vSize, buffer);
 	}
+
+	delete[] buffer;
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
@@ -181,15 +214,24 @@ void VertexBuffer::_uploadIndices()
 {
 	size_t iSize = _indices.size() * sizeof(GLuint);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indicesId);
+
+	char* buffer = new char[iSize];
+	for (size_t index = 0; index < _indices.size(); ++index) {
+		memcpy(buffer + index * _stride, &_indices[index], _stride);
+	}
+
 	if (iSize != _gpuISize)
 	{
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize, _indices.data(), GL_DYNAMIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize, buffer, GL_DYNAMIC_DRAW);
 		_gpuISize = iSize;
 	}
 	else
 	{
-		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, iSize, _indices.data());
+		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, iSize, buffer);
 	}
+
+	delete[] buffer;
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
