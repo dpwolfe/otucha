@@ -33,6 +33,24 @@ VertexBuffer::~VertexBuffer()
 		_vertices.pop_back();
 		delete[] vertex;
 	}
+
+	for (size_t index = 0; index < MAX_VERTEX_ATTRIBUTES; ++index)
+	{
+		_attributes[index] = nullptr;
+	}
+
+	if (_vaoId > 0) {
+		glDeleteVertexArrays(1, &_vaoId);
+		_vaoId = 0;
+	}
+
+	if (_verticesId > 0) {
+		glDeleteBuffers(1, &_verticesId);
+	}
+
+	if (_indicesId > 0) {
+		glDeleteBuffers(1, &_indicesId);
+	}
 }
 
 void VertexBuffer::push(const std::shared_ptr<std::vector<void*>> vertices, const std::shared_ptr<std::vector<GLuint>> indices)
@@ -113,6 +131,8 @@ void VertexBuffer::render()
 
 void VertexBuffer::_renderSetup()
 {
+	glBindVertexArray(0);
+
 	if (_state != CLEAN)
 	{
 		_upload();
@@ -143,24 +163,34 @@ void VertexBuffer::_renderSetup()
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 #endif
 
-	glBindBuffer(GL_ARRAY_BUFFER, _verticesId);
-	for (int index = 0; index < MAX_VERTEX_ATTRIBUTES; ++index)
+	if (_vaoId == 0)
 	{
-		std::shared_ptr<VertexAttribute> attribute = _attributes[index];
-		if (attribute != nullptr)
+		glGenVertexArrays(1, &_vaoId);
+		glBindVertexArray(_vaoId);
+		glBindBuffer(GL_ARRAY_BUFFER, _verticesId);
+		for (int index = 0; index < MAX_VERTEX_ATTRIBUTES; ++index)
 		{
-			attribute->enable();
+			std::shared_ptr<VertexAttribute> attribute = _attributes[index];
+			if (attribute != nullptr)
+			{
+				attribute->enable();
+			}
+		}
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		if (_indices.size() > 0)
+		{
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indicesId);
 		}
 	}
 
-	if (_indices.size() > 0)
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indicesId);
-	}
+	glBindVertexArray(_vaoId);
 }
 
 void VertexBuffer::_renderFinish()
 {
+	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
@@ -169,12 +199,12 @@ void VertexBuffer::_upload()
 {
 	if (_state != FROZEN)
 	{
-		if (!_verticesId)
+		if (_verticesId == 0)
 		{
 			glGenBuffers(1, &_verticesId);
 		}
 
-		if (!_indicesId)
+		if (_indicesId == 0)
 		{
 			glGenBuffers(1, &_indicesId);
 		}
@@ -188,6 +218,7 @@ void VertexBuffer::_upload()
 void VertexBuffer::_uploadVertices()
 {
 	size_t vSize = _vertices.size() * _stride;
+	glBindVertexArray(_vaoId);
 	glBindBuffer(GL_ARRAY_BUFFER, _verticesId);
 	
 	char* buffer = new char[vSize];

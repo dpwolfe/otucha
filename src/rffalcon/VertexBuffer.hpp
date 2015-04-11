@@ -40,6 +40,7 @@ namespace rffalcon {
 		std::vector<GLuint> _indices;
 		std::vector<rffalcon::ivec4> _items;
 		GLuint _verticesId = 0;
+		GLuint _vaoId = 0;
 		int _gpuVSize = 0;
 		GLuint _indicesId = 0;
 		int _gpuISize = 0;
