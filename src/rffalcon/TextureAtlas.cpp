@@ -10,7 +10,7 @@ TextureAtlas::TextureAtlas(const int width, const int height, const int depth)
 	// contains padding in atlas to avoid sampling artifacts
 	rffalcon::ivec3 paddingNode = { { 1, 1, width - 2 } };
 	_nodes.push_back(paddingNode);
-	_data = new unsigned char[width * height * depth];
+	_data = new unsigned char[width * height * depth]();
 }
 
 
