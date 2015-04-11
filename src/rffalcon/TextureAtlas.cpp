@@ -180,12 +180,11 @@ int TextureAtlas::_fit(const int index, const int width, const int height)
 void TextureAtlas::setRegion(rffalcon::ivec4 region, GlyphData glyphData)
 {
 	int depth = getDepth();
-	int width = getWidth();
 	int charSize = sizeof(char);
 	for (int i = 0; i < glyphData.height; ++i)
 	{
-		memcpy(_data + ((region.y + i) * width + region.x) * charSize * depth,
-			   _data + (i * glyphData.pitch * charSize), width * charSize * depth);
+		memcpy(_data + ((region.y + i) * getWidth() + region.x) * charSize * depth,
+			   glyphData.buffer + (i * glyphData.pitch * charSize), glyphData.width * charSize * depth);
 	}
 	
 }
