@@ -192,7 +192,7 @@ void VertexBuffer::_uploadVertices()
 	
 	char* buffer = new char[vSize];
 	for (size_t index = 0; index < _vertices.size(); ++index) {
-		memcpy(buffer + index * _stride, &_vertices[index], _stride);
+		memcpy(buffer + index * _stride, _vertices[index], _stride);
 	}
 
 	if (vSize != _gpuVSize)
@@ -216,9 +216,9 @@ void VertexBuffer::_uploadIndices()
 	size_t indexSize = sizeof(GLuint);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indicesId);
 
-	char* buffer = new char[iSize];
+	char *buffer = new char[iSize];
 	for (size_t index = 0; index < _indices.size(); ++index) {
-		memcpy(buffer + index * indexSize, &_indices[index], _stride);
+		memcpy(buffer + index * indexSize, &_indices[index], indexSize);
 	}
 
 	if (iSize != _gpuISize)
