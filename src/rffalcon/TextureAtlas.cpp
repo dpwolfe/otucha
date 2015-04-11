@@ -204,20 +204,23 @@ void TextureAtlas::upload()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 	GLenum pixelDataType;
-	int internalFormat;
+	GLint internalFormat;
+	GLenum format;
 	if (_depth == 4)
 	{
 #ifdef GL_UNSIGNED_INT_8_8_8_8_REV
 		pixelDataType = GL_UNSIGNED_INT_8_8_8_8_REV;
+		format = GL_BGRA;
 #else
 		pixelDataType = GL_UNSIGNED_BYTE;
+		format = GL_RGBA;
 #endif
 		internalFormat = GL_RGBA;
 	}
 	else {
 		pixelDataType = GL_UNSIGNED_BYTE;
-		internalFormat = (_depth == 3) ? GL_RGB : GL_RED;
+		format = internalFormat = (_depth == 3) ? GL_RGB : GL_RED;
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, internalFormat, pixelDataType, _data);
+	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, _width, _height, 0, format, pixelDataType, _data);
 }
