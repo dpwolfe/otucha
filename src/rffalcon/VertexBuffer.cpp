@@ -221,7 +221,7 @@ void VertexBuffer::_uploadVertices()
 	glBindVertexArray(_vaoId);
 	glBindBuffer(GL_ARRAY_BUFFER, _verticesId);
 	
-	char* buffer = new char[vSize];
+	char* buffer = new char[vSize]();
 	for (size_t index = 0; index < _vertices.size(); ++index) {
 		memcpy(buffer + index * _stride, _vertices[index], _stride);
 	}
@@ -247,7 +247,7 @@ void VertexBuffer::_uploadIndices()
 	size_t indexSize = sizeof(GLuint);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indicesId);
 
-	char *buffer = new char[iSize];
+	char *buffer = new char[iSize]();
 	for (size_t index = 0; index < _indices.size(); ++index) {
 		memcpy(buffer + index * indexSize, &_indices[index], indexSize);
 	}
