@@ -161,8 +161,8 @@ void TextureFont::_addTextureGlyph(wchar_t charCode, GlyphData glyphData, rffalc
 	glyph->outlineThickness = _outlineThickness;
 	glyph->offsetX = glyphData.left;
 	glyph->offsetY = glyphData.top;
-	glyph->s0 = region.x / static_cast<float>(glyphData.width);
-	glyph->t0 = region.y / static_cast<float>(glyphData.height);
+	glyph->s0 = region.x / static_cast<float>(_atlas->getWidth());
+	glyph->t0 = region.y / static_cast<float>(_atlas->getHeight());
 	glyph->s1 = (region.x + glyphData.width) / static_cast<float>(_atlas->getWidth());
 	glyph->t1 = (region.y + glyphData.height) / static_cast<float>(_atlas->getHeight());
 
