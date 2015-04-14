@@ -54,15 +54,16 @@ void ModelView::setEyeCoordinatesZMinZMax(double zMin, double zMax)
 
 void ModelView::_getMatrices(rffalcon::Matrix4x4& mc_ec, rffalcon::Matrix4x4& ec_dc)
 {
-	mc_ec = rffalcon::Matrix4x4::lookAt(_eye, _center, _up);
 
 	if (_projectionType == PERSPECTIVE)
 	{
+		mc_ec = rffalcon::Matrix4x4::lookAt(_eye, _center, _up);
 		ec_dc = rffalcon::Matrix4x4::perspective(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
 			_eyeCoordinatesZMin, _eyeCoordinatesZMax, _zProjectionPlane);
 	}
 	else if (_projectionType == ORTHOGRAPHIC)
 	{
+		mc_ec = rffalcon::Matrix4x4::Identity;
 		ec_dc = rffalcon::Matrix4x4::orthographic(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
 			_mcRegionOfInterest[4], _mcRegionOfInterest[5]);
 	}
