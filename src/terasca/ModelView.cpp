@@ -63,7 +63,10 @@ void ModelView::_getMatrices(rffalcon::Matrix4x4& mc_ec, rffalcon::Matrix4x4& ec
 	}
 	else if (_projectionType == ORTHOGRAPHIC)
 	{
-		mc_ec = rffalcon::Matrix4x4::Identity;
+		mc_ec = rffalcon::Matrix4x4(1.0, 0.0, 0.0, 0.0,
+									0.0, 1.0, 0.0, 0.0,
+									0.0, 0.0, 0.0, 0.0,
+									0.0, 0.0, 0.0, 1.0);
 		ec_dc = rffalcon::Matrix4x4::orthographic(_mcRegionOfInterest[0], _mcRegionOfInterest[1], _mcRegionOfInterest[2], _mcRegionOfInterest[3],
 			_mcRegionOfInterest[4], _mcRegionOfInterest[5]);
 	}
