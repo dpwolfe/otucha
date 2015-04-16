@@ -100,4 +100,28 @@ void Block::_initBlock()
 	glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(vec3), vertices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vbo[1]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 12 * sizeof(int), _element_indices, GL_STATIC_DRAW);
+	
+	GLint programId;
+	glGetIntegerv(GL_CURRENT_PROGRAM, &programId);
+	GLint pvaLoc_mcNormal = glGetAttribLocation(programId, "mcNormal");
+	GLint pvaLoc_mcPosition = glGetAttribLocation(programId, "mcPosition");
+
+	if (pvaLoc_mcPosition < 0)
+	{
+		std::cerr << "Unable to find per-vertex attribute: 'mcPosition'" << std::endl;
+	}
+	else
+	{
+		glVertexAttribPointer(pvaLoc_mcPosition, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		glEnableVertexAttribArray(pvaLoc_mcPosition);
+	}
+
+	if (pvaLoc_mcNormal  < 0)
+	{
+		std::cerr << "Unable to find per-vertex attribute: 'mcNormal'" << std::endl;
+	}
+	else
+	{
+		glDisableVertexAttribArray(pvaLoc_mcNormal);
+	}
 }
