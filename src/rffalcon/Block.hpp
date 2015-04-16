@@ -16,6 +16,7 @@ namespace rffalcon {
 		float _xmin, _xmax, _ymin, _ymax, _zmin, _zmax;
 		GLuint _vao[1];
 		GLuint _vbo[2];
+		bool _initialized = false;
 
 		void _initBlock();
 
