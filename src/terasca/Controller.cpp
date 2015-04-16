@@ -1,8 +1,8 @@
 #include "Controller.hpp"
-
 #include <assert.h>
-
 #include <GL/glew.h>
+
+using namespace terasca;
 
 Controller* Controller::_instance = nullptr;
 int Controller::initialWindowWidth = 512;
@@ -60,9 +60,9 @@ void Controller::handleAsciiChar(unsigned char theChar, int x, int y)
 	double dsX, dsY;
 	screenSpaceToDeviceSpace(x, y, dsX, dsY);
 
-	for (size_t index = 0; index < models.size(); ++index)
+	for (size_t index = 0; index < modelViews.size(); ++index)
 	{
-		models[index]->handleCommand(theChar, dsX, dsY);
+		modelViews[index]->handleCommand(theChar, dsX, dsY);
 	}
 
 	redraw();
@@ -115,12 +115,12 @@ void Controller::setClearFlags(int rcFlags)
 	}
 }
 
-void Controller::addModel(std::shared_ptr<ModelView> modelView)
+void Controller::addModelView(std::shared_ptr<ModelView> modelView)
 {
 	assert(modelView != nullptr);
 	if (modelView != nullptr)
 	{
-		models.push_back(modelView);
+		modelViews.push_back(modelView);
 		_updateMCBoundingBox(modelView);
 	}
 }

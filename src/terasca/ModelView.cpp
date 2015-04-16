@@ -3,6 +3,8 @@
 #include "ModelView.hpp"
 #include "Matrix4x4.hpp"
 
+using namespace terasca;
+
 double ModelView::_mcRegionOfInterest[6] = { -1.0, 1.0, -1.0, 1.0, -1.0, 1.0 };
 rffalcon::AffinePoint ModelView::_eye(0, 0, 2);
 rffalcon::AffinePoint ModelView::_center(0, 0, 0);
@@ -52,6 +54,14 @@ void ModelView::setEyeCoordinatesZMinZMax(double zMin, double zMax)
 	_eyeCoordinatesZMax = zMax;
 }
 
+void ModelView::getMCBoundingBox(double* xyzBounds) const
+{
+	for (size_t index = 0; index < _models.size(); ++index)
+	{
+		_models[index]->getMCBoundingBox(xyzBounds);
+	}
+}
+
 void ModelView::_getMatrices(rffalcon::Matrix4x4& mc_ec, rffalcon::Matrix4x4& ec_dc)
 {
 
@@ -90,4 +100,14 @@ GLint ModelView::_getAttribLocation(GLuint programId, const std::string& name)
 		std::cerr << "Unable to find per-vertex attribute: '" << name << "'" << std::endl;
 	}
 	return loc;
+}
+
+void ModelView::addModel(std::shared_ptr<rffalcon::ModelBase> model)
+{
+	if (model == nullptr)
+	{
+		throw new std::exception();
+	}
+
+	_models.push_back(model);
 }

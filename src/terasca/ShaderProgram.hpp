@@ -2,36 +2,38 @@
 
 #include <string>
 #include <memory>
-
 #include <GL/glew.h>
 
-class ShaderProgram
+namespace terasca
 {
-public:
-	ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
-	virtual ~ShaderProgram();
-
-	int getId() const { return _id; }
-	void link();
-
-private:
-	struct Shader
+	class ShaderProgram
 	{
-		std::string path;
-		GLenum type;
-		std::string source;
-		int id;
+	public:
+		ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
+		virtual ~ShaderProgram();
 
-		Shader() : path(""), type(0), source(""), id(0) {}
+		int getId() const { return _id; }
+		void link();
+
+	private:
+		struct Shader
+		{
+			std::string path;
+			GLenum type;
+			std::string source;
+			int id;
+
+			Shader() : path(""), type(0), source(""), id(0) {}
+		};
+
+		int _id;
+		int _shaderCount;
+		std::unique_ptr<Shader[]> _shaders;
+
+		void initialize();
+		void loadShaderSource(Shader& shader);
+		void dispose();
+		void compileShader(Shader& shader);
+		void readFailLog(GLint id);
 	};
-
-	int _id;
-	int _shaderCount;
-	std::unique_ptr<Shader[]> _shaders;
-
-	void initialize();
-	void loadShaderSource(Shader& shader);
-	void dispose();
-	void compileShader(Shader& shader);
-	void readFailLog(GLint id);
-};
+}
