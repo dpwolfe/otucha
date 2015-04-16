@@ -6,6 +6,7 @@
 #include "Block.hpp"
 #include "DependencyContainer.hpp"
 #include "otuchaConfig.h"
+#include "Matrix3x3.hpp"
 
 #include <memory>
 #include <iostream>
@@ -33,6 +34,8 @@ void set3DViewingInformation(double xyz[6])
 
 int main(int argc, char* argv[])
 {
+	rffalcon::Matrix4x4 matrix;
+	rffalcon::Matrix3x3 matrix2;
 	fprintf(stdout, "%s Version %d.%d\n", argv[0], otucha_VERSION_MAJOR, otucha_VERSION_MINOR);
 	terasca::GLFWController c("otucha", terasca::Controller::DEPTH);
 	c.reportVersions(std::cout);
