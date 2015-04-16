@@ -14,34 +14,36 @@ using namespace otucha;
 
 void set3DViewingInformation(double xyz[6])
 {
-	ModelView::setMCRegionOfInterest(xyz);
+	terasca::ModelView::setMCRegionOfInterest(xyz);
 
 	rffalcon::AffinePoint eye(1.0, 1.0, 1.0);
 	rffalcon::AffinePoint center(0, 0, 0);
 	rffalcon::AffineVector up(0, 1, 0);
 
-	ModelView::setEyeCenterUp(eye, center, up);
+	terasca::ModelView::setEyeCenterUp(eye, center, up);
 
 	double zpp = -1.0;
 	double zmin = -99.0;
 	double zmax = -0.01;
 
-	ModelView::setProjectionType(PERSPECTIVE);
-	ModelView::setZProjectionPlane(zpp);
-	ModelView::setEyeCoordinatesZMinZMax(zmin, zmax);
+	terasca::ModelView::setProjectionType(PERSPECTIVE);
+	terasca::ModelView::setZProjectionPlane(zpp);
+	terasca::ModelView::setEyeCoordinatesZMinZMax(zmin, zmax);
 }
 
 int main(int argc, char* argv[])
 {
 	fprintf(stdout, "%s Version %d.%d\n", argv[0], otucha_VERSION_MAJOR, otucha_VERSION_MINOR);
-	GLFWController c("otucha", Controller::DEPTH);
+	terasca::GLFWController c("otucha", terasca::Controller::DEPTH);
 	c.reportVersions(std::cout);
 	std::string appPath(argv[0]);
 	unsigned found = appPath.find_last_of("/\\");
 	std::string appDir = appPath.substr(0, found + 1);
 	DependencyContainer::getSingleton()->setAppDir(appDir);
-	ModelViewWithShader::setShaderSources(appDir + "simple.vsh", appDir + "simple.fsh");
-	c.addModel(std::make_shared<Block>(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f));
+	std::shared_ptr<terasca::ModelView> modelView = std::make_shared<terasca::ModelViewWithShader>(appDir + "simple.vsh", appDir + "simple.fsh");
+	std::shared_ptr<rffalcon::ModelBase> model = std::make_shared<rffalcon::Block>(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f);
+	modelView->addModel(model);
+	c.addModelView(modelView);
 
 	glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
 	double xyz[6];
