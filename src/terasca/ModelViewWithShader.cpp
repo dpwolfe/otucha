@@ -29,10 +29,6 @@ void ModelViewWithShader::_initGLSLVariableLocations()
 	_ppuLoc_a = _getUniformLocation(_shaderProgramId, "a");
 	_ppuLoc_texture = _getUniformLocation(_shaderProgramId, "texture");
 	_pvaLoc_mcNormal = _getAttribLocation(_shaderProgramId, "mcNormal");
-	
-	glVertexAttribPointer(_pvaLoc_mcPosition, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(_pvaLoc_mcPosition);
-	glDisableVertexAttribArray(_pvaLoc_mcNormal);
 }
 
 void ModelViewWithShader::renderModels()
