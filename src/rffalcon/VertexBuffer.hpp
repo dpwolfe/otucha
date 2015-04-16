@@ -13,13 +13,13 @@
 #define FROZEN 2
 
 namespace rffalcon {
-	class VertexBuffer : public ModelViewWithShader {
+	class VertexBuffer : public ModelBase {
 	public:
 		VertexBuffer(const std::string &format);
 		~VertexBuffer();
 
 		void push(const std::shared_ptr<std::vector<void*>> vertices, const std::shared_ptr<std::vector<GLuint>> indices);
-		virtual void renderModels();
+		virtual void render();
 		virtual void handleCommand(unsigned char key, double ldsX, double ldsY) { }
 		virtual void getMCBoundingBox(double *xyzBounds) const;
 

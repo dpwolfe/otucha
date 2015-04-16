@@ -4,6 +4,8 @@
     #include "html5.h"
 #endif
 
+using namespace terasca;
+
 bool GLFWController::glfwInitialized = false;
 
 GLFWController::GLFWController(const std::string& windowTitle, int rcFlags) :
@@ -154,9 +156,9 @@ void GLFWController::handleDisplay()
 	glViewport(0, 0, width, height);
 	glClear(glClearFlags);
 	// draw the models
-	for (size_t index = 0; index < models.size(); ++index)
+	for (size_t index = 0; index < modelViews.size(); ++index)
 	{
-		models[index]->renderModels();
+		modelViews[index]->renderModels();
 	}
 
 	glfwSwapBuffers(_window);

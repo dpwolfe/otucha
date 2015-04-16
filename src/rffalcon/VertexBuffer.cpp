@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <sstream>
+#include <iostream>
 
 using namespace rffalcon;
 
@@ -113,7 +114,7 @@ void VertexBuffer::_pushIndices(const std::shared_ptr<std::vector<GLuint>> indic
 	_state |= DIRTY;
 }
 
-void VertexBuffer::renderModels()
+void VertexBuffer::render()
 {
 	size_t vCount = _vertices.size();
 	size_t iCount = _indices.size();
@@ -146,18 +147,15 @@ void VertexBuffer::_renderSetup()
 
 	GLint programId;
 	glGetIntegerv(GL_CURRENT_PROGRAM, &programId);
-	glUseProgram(_shaderProgramId);
-
-	rffalcon::Matrix4x4 mc_ec, ec_dc;
-	_getMatrices(mc_ec, ec_dc);
-	float mc_ec_cm[16];
-	mc_ec.copyToColumnMajor(mc_ec_cm);
-	glUniformMatrix4fv(_ppuLoc_mc_ec, 1, GL_FALSE, mc_ec_cm);
-	float ec_dc_cm[16];
-	ec_dc.copyToColumnMajor(ec_dc_cm);
-	glUniformMatrix4fv(_ppuLoc_ec_dc, 1, GL_FALSE, ec_dc_cm);
-
-	glUniform1i(_ppuLoc_texture, 0);
+	GLint ppuLoc_texture = glGetUniformLocation(programId, "texture");
+	if (ppuLoc_texture < 0)
+	{
+		std::cerr << "Unable to find per-primitive uniform: 'texture'" << std::endl;
+	}
+	else
+	{
+		glUniform1i(ppuLoc_texture, 0);
+	}
 
 #ifndef __EMSCRIPTEN__
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

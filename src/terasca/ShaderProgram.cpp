@@ -1,7 +1,8 @@
 #include "ShaderProgram.hpp"
-
 #include <fstream>
 #include <iostream>
+
+using namespace terasca;
 
 ShaderProgram::ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
     : _id(0), _shaderCount(2), _shaders(new Shader[2], std::default_delete<Shader[]>())
