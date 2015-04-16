@@ -24,7 +24,7 @@ Block::~Block()
 	glDeleteVertexArrays(1, _vao);
 }
 
-void Block::render()
+void Block::renderModels()
 {
 	GLint programId;
 	glGetIntegerv(GL_CURRENT_PROGRAM, &programId);

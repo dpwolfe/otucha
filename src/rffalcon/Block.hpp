@@ -8,7 +8,7 @@ public:
 	Block(float x, float y, float z, float lengthX, float lengthY, float lengthZ);
 	virtual ~Block();
 
-	virtual void render();
+	virtual void renderModels();
 	virtual void getMCBoundingBox(double* xyzBounds) const;
 
 private:
