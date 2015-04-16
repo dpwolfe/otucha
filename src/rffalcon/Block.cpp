@@ -20,7 +20,6 @@ Block::Block(float x, float y, float z, float lengthX, float lengthY, float leng
 	_zmin = z;
 	_zmax = z + lengthZ;
 	_phongMaterial = std::make_shared<PhongMaterial>(PhongMaterial::PolishedCopper);
-	_initBlock();
 }
 
 Block::~Block()
@@ -42,6 +41,12 @@ void Block::getMCBoundingBox(double* xyzBounds) const
 
 void Block::render()
 {
+	if (!_initialized)
+	{
+		_initBlock();
+		_initialized = true;
+	}
+
 	glBindVertexArray(_vao[0]);
 	
 	GLint programId;
