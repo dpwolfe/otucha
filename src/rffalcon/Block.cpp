@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "Block.hpp"
-#include "Matrix4x4.hpp"
 #include "Matrix3x3.hpp"
 #include "vec.hpp"
 #include "PhongMaterial.hpp"
