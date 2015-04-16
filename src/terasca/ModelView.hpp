@@ -14,7 +14,7 @@ public:
 	ModelView();
 	virtual ~ModelView();
 
-	virtual void render() = 0;
+	virtual void renderModels() = 0;
 	virtual void handleCommand(unsigned char key, double ldsX, double ldsY) { }
 	virtual void getMCBoundingBox(double* xyzBounds) const = 0;
 

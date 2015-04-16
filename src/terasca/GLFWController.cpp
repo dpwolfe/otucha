@@ -156,7 +156,7 @@ void GLFWController::handleDisplay()
 	// draw the models
 	for (size_t index = 0; index < models.size(); ++index)
 	{
-		models[index]->render();
+		models[index]->renderModels();
 	}
 
 	glfwSwapBuffers(_window);

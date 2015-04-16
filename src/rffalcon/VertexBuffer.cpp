@@ -113,7 +113,7 @@ void VertexBuffer::_pushIndices(const std::shared_ptr<std::vector<GLuint>> indic
 	_state |= DIRTY;
 }
 
-void VertexBuffer::render()
+void VertexBuffer::renderModels()
 {
 	size_t vCount = _vertices.size();
 	size_t iCount = _indices.size();

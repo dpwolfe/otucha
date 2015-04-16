@@ -19,7 +19,7 @@ namespace rffalcon {
 		~VertexBuffer();
 
 		void push(const std::shared_ptr<std::vector<void*>> vertices, const std::shared_ptr<std::vector<GLuint>> indices);
-		virtual void render();
+		virtual void renderModels();
 		virtual void handleCommand(unsigned char key, double ldsX, double ldsY) { }
 		virtual void getMCBoundingBox(double *xyzBounds) const;
 
