@@ -119,13 +119,13 @@ int main(int argc, char* argv[])
 	blockModelView->getMCBoundingBox(xyz);
 	set3DViewingInformation(blockModelView, xyz);
 
-	std::shared_ptr<rffalcon::VertexBuffer> textModel = testText(appDir);
-	std::shared_ptr<terasca::ModelView> textModelView = std::make_shared<terasca::ModelViewWithShader>(appDir + "v3f-t2f-c4f.vsh", appDir + "v3f-t2f-c4f.fsh");
-	textModelView->addModel(textModel);
-	textModelView->setProjectionType(ORTHOGRAPHIC);
-	c.addModelView(textModelView);
-	textModelView->getMCBoundingBox(xyz);
-	set3DViewingInformation(textModelView, xyz);
+	//std::shared_ptr<rffalcon::VertexBuffer> textModel = testText(appDir);
+	//std::shared_ptr<terasca::ModelView> textModelView = std::make_shared<terasca::ModelViewWithShader>(appDir + "v3f-t2f-c4f.vsh", appDir + "v3f-t2f-c4f.fsh");
+	//textModelView->addModel(textModel);
+	//textModelView->setProjectionType(ORTHOGRAPHIC);
+	//c.addModelView(textModelView);
+	//textModelView->getMCBoundingBox(xyz);
+	//set3DViewingInformation(textModelView, xyz);
 	c.addModelView(blockModelView);
 
 	// test console code to be removed later
