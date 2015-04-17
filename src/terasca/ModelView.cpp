@@ -5,18 +5,14 @@
 
 using namespace terasca;
 
-double ModelView::_mcRegionOfInterest[6] = { -1.0, 1.0, -1.0, 1.0, -1.0, 1.0 };
-rffalcon::AffinePoint ModelView::_eye(0, 0, 2);
-rffalcon::AffinePoint ModelView::_center(0, 0, 0);
-rffalcon::AffineVector ModelView::_up(0, 1, 0);
-ProjectionType ModelView::_projectionType = PERSPECTIVE;
-double ModelView::_zProjectionPlane = -1.0;
-double ModelView::_eyeCoordinatesZMin = -2.0;
-double ModelView::_eyeCoordinatesZMax = -0.01;
-rffalcon::Matrix4x4 ModelView::_dynamicView;
-
 ModelView::ModelView()
 {
+	_mcRegionOfInterest[0] = -1.0;
+	_mcRegionOfInterest[1] = 1.0;
+	_mcRegionOfInterest[2] = -1.0;
+	_mcRegionOfInterest[3] = 1.0;
+	_mcRegionOfInterest[4] = -1.0;
+	_mcRegionOfInterest[5] = 1.0;
 }
 
 ModelView::~ModelView()
