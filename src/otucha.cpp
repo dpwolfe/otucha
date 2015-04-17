@@ -84,12 +84,11 @@ void addText(std::shared_ptr<rffalcon::VertexBuffer> buffer, std::shared_ptr<rff
 std::shared_ptr<rffalcon::VertexBuffer> testText(const std::string &appDir)
 {
 	std::shared_ptr<rffalcon::TextureAtlas> atlas = std::make_shared<rffalcon::TextureAtlas>(512, 512, 1);
-	rffalcon::vec2 pen = { { 5, 400 } };
+	rffalcon::vec2 pen = { { 5, 5 } };
 	rffalcon::vec4 black = { { 0, 0, 0, 1 } };
-	std::shared_ptr<rffalcon::TextureFont> font = std::make_shared<rffalcon::TextureFont>(atlas, 27.0f, appDir + "DejaVuSansMono.ttf");
+	std::shared_ptr<rffalcon::TextureFont> font = std::make_shared<rffalcon::TextureFont>(atlas, 32.0f, appDir + "DejaVuSansMono.ttf");
 	pen.x = 5;
-	pen.y -= font->getHeight();
-	std::wstring text = L"#WORKSINMAIN #WORKSINMAIN #WORKSINMAIN";
+	std::wstring text = L"#WORKSINMAIN";
 	font->loadGlyphs(text);
 	std::shared_ptr<rffalcon::VertexBuffer> buffer = std::make_shared<rffalcon::VertexBuffer>("vertex:3f,texCoord:2f,color:4f");
 	addText(buffer, font, text, pen, black);
@@ -114,10 +113,8 @@ int main(int argc, char* argv[])
 	std::shared_ptr<terasca::ModelView> blockModelView = std::make_shared<terasca::ModelViewWithShader>(appDir + "simple.vsh", appDir + "simple.fsh");
 	std::shared_ptr<rffalcon::ModelBase> blockModel = std::make_shared<rffalcon::Block>(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f);
 	blockModelView->addModel(blockModel);
-	c.addModelView(blockModelView);
 
-
-	glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	double xyz[6];
 	blockModelView->getMCBoundingBox(xyz);
 	set3DViewingInformation(blockModelView, xyz);
@@ -126,9 +123,10 @@ int main(int argc, char* argv[])
 	std::shared_ptr<terasca::ModelView> textModelView = std::make_shared<terasca::ModelViewWithShader>(appDir + "v3f-t2f-c4f.vsh", appDir + "v3f-t2f-c4f.fsh");
 	textModelView->addModel(textModel);
 	textModelView->setProjectionType(ORTHOGRAPHIC);
-	//c.addModelView(textModelView);
+	c.addModelView(textModelView);
 	textModelView->getMCBoundingBox(xyz);
 	set3DViewingInformation(textModelView, xyz);
+	c.addModelView(blockModelView);
 
 	// test console code to be removed later
 	DependencyContainer::getSingleton()->getConsole()->registerCommand(L"test", [](warbler::t_consoleArgs_ptr args) {
