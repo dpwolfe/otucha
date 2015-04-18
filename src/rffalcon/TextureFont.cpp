@@ -18,6 +18,9 @@ TextureFont::TextureFont(std::shared_ptr<TextureAtlas> atlas, const float pointS
 	_lcdWeights[0] = 0x40;
 	_lcdWeights[0] = 0x10;
 	_initialize();
+#ifdef __EMSCRIPTEN__
+	_hinting = false;
+#endif
 }
 
 TextureFont::~TextureFont()
@@ -167,7 +170,8 @@ void TextureFont::_addTextureGlyph(wchar_t charCode, GlyphData glyphData, rffalc
 	glyph->t1 = (region.y + glyphData.height) / static_cast<float>(_atlas->getHeight());
 
 	// get advance
-	FT_Load_Glyph(face, glyphIndex, FT_LOAD_RENDER | FT_LOAD_NO_HINTING);
+	FT_Error error = FT_Load_Glyph(face, glyphIndex, FT_LOAD_RENDER | FT_LOAD_NO_HINTING);
+	if (error != FT_Err_Ok) { throw new std::exception(); }
 	FT_GlyphSlot slot = face->glyph;
 	glyph->advanceX = slot->advance.x / POINT_RESf;
 	glyph->advanceY = slot->advance.y / POINT_RESf;

@@ -83,7 +83,7 @@ void addText(std::shared_ptr<rffalcon::VertexBuffer> buffer, std::shared_ptr<rff
 
 std::shared_ptr<rffalcon::VertexBuffer> testText(const std::string &appDir)
 {
-	std::shared_ptr<rffalcon::TextureAtlas> atlas = std::make_shared<rffalcon::TextureAtlas>(512, 512, 1);
+	std::shared_ptr<rffalcon::TextureAtlas> atlas = std::make_shared<rffalcon::TextureAtlas>(512, 512, 3);
 	rffalcon::vec2 pen = { { 5, 5 } };
 	rffalcon::vec4 black = { { 0, 0, 0, 1 } };
 	std::shared_ptr<rffalcon::TextureFont> font = std::make_shared<rffalcon::TextureFont>(atlas, 32.0f, appDir + "DejaVuSansMono.ttf");
@@ -119,7 +119,7 @@ int main(int argc, char* argv[])
 	blockModelView->getMCBoundingBox(xyz);
 	set3DViewingInformation(blockModelView, xyz);
 
-	//std::shared_ptr<rffalcon::VertexBuffer> textModel = testText(appDir);
+	std::shared_ptr<rffalcon::VertexBuffer> textModel = testText(appDir);
 	//std::shared_ptr<terasca::ModelView> textModelView = std::make_shared<terasca::ModelViewWithShader>(appDir + "v3f-t2f-c4f.vsh", appDir + "v3f-t2f-c4f.fsh");
 	//textModelView->addModel(textModel);
 	//textModelView->setProjectionType(ORTHOGRAPHIC);
