@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 2.8.7)
 project(otucha)
 find_package(OpenGL REQUIRED)
 # The version number
