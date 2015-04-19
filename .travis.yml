@@ -1,0 +1,27 @@
+language: cpp
+
+compiler:
+	- clang
+	- gcc
+
+before_install:
+	- echo $LANG
+	- echo $LC_ALL
+	- sudo apt-get update -qq
+	- sudo apt-get install -y -qq lcov curl
+	- npm install
+
+after_success:
+
+branches:
+  only:
+	- master
+
+script:
+	- grunt build
+	- cd build
+	- cmake
+
+os:
+	- linux
+	- osx
