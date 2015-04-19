@@ -20,4 +20,4 @@ branches:
 script:
   - grunt build
   - cd build
-  - cmake
+  - make
