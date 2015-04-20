@@ -42,3 +42,6 @@ script:
   - grunt build
   - cd build
   - make
+
+notifications:
+  email: false
