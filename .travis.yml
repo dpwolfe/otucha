@@ -1,20 +1,38 @@
 language: cpp
 
+script: cmake
+
 compiler:
   - clang
   - gcc
+  
+env:
+  global:
+    - GCC_VERSION="4.9"
 
 before_install:
   - echo $LANG
   - echo $LC_ALL
-  - sudo apt-get update -qq
-  - sudo apt-get install -y -qq lcov curl
+  - export SOURCE_ROOT=`pwd`;
+  - npm install
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -qq
-  - sudo apt-get install libstdc++-4.8-dev
-  - npm install
-  # GLFW dependencies
-  - sudo apt-get install libXxf86vm-dev
+  # gcc before_install
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq -y --force-yes g++-${GCC_VERSION}; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-${GCC_VERSION}" CC="gcc-${GCC_VERSION}"; fi
+  
+  # clang before_install
+  - if [ "$CXX" == "clang++" ]; then export LIBCXX=On; fi
+  - if [ "$CXX" == "clang++" ]; then svc co --quiet http://llvm.org/svn/llvm-project/libcxx/trunk libcxx; fi
+  - if [ "$CXX" == "clang++" ]; then cd libcxx/lib && bash buildit; fi
+  - if [ "$CXX" == "clang++" ]; then sudo cp ./libc++.so.1.0 /usr/lib/; fi
+  - if [ "$CXX" == "clang++" ]; then sudo mkdir /usr/include/c++/v1; fi
+  - if [ "$CXX" == "clang++" ]; then cd .. && sudo cp -r include/* /usr/include/c++/v1/; fi
+  - if [ "$CXX" == "clang++" ]; then cd /usr/lib && sudo ln -sf libc++.so.1.0 libc++.so; fi
+  - if [ "$CXX" == "clang++" ]; then sudo ln -sf libc++.so.1.0 libc++.so.1 && $cwd; fi
+
+  # GLFW before_install
+  - sudo apt-get install -qq -y libXxf86vm-dev
 
 branches:
   only:
