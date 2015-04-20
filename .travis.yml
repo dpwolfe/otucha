@@ -30,7 +30,14 @@ before_install:
   - if [ "$CXX" == "clang++" ]; then cd .. && sudo cp -r include/* /usr/include/c++/v1/; fi
   - if [ "$CXX" == "clang++" ]; then cd /usr/lib && sudo ln -sf libc++.so.1.0 libc++.so; fi
   - if [ "$CXX" == "clang++" ]; then sudo ln -sf libc++.so.1.0 libc++.so.1 && $cwd; fi
-
+  # clang libcxxabi for gtest
+  - if [ "$CXX" == "clang++" ]; then cd ${SOURCE_ROOT}; fi
+  - if [ "$CXX" == "clang++" ]; then svn co --quiet http://llvm.org/svn/llvm-project/libcxxabi/trunk libcxxabi; fi
+  - if [ "$CXX" == "clang++" ]; then cd libcxxabi/lib && bash buildit; fi
+  - if [ "$CXX" == "clang++" ]; then sudo cp ./libc++abi.so.1.0 /usr/lib/; fi
+  - if [ "$CXX" == "clang++" ]; then cd .. && sudo cp -r include/* /usr/include/c++/v1/; fi
+  - if [ "$CXX" == "clang++" ]; then sudo ln -sf libc++abi.so.1.0 libc++abi.so.1 && $cwd; fi
+  
   # GLFW before_install
   - sudo apt-get install -qq -y libXxf86vm-dev
 
@@ -39,6 +46,7 @@ branches:
   - master
 
 script:
+  - cd ${SOURCE_ROOT}
   - grunt build
   - cd build
   - make
