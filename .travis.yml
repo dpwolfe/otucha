@@ -39,6 +39,7 @@ branches:
   - master
 
 script:
+  - cd ${SOURCE_ROOT}
   - grunt build
   - cd build
   - make
