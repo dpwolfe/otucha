@@ -19,6 +19,13 @@ module.exports = function (grunt) {
                     'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON ../src'
                 ].join('&&')
             },
+            coverage: {
+                command: [
+                    'echo Building coverage',
+                    'cd cbuild',
+                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug ../src'
+                ].join('&&')
+            },
             xcode: {
                 command: [
                     'echo Building Xcode',
@@ -106,6 +113,10 @@ module.exports = function (grunt) {
     grunt.registerTask('build:native', function () {
         grunt.file.mkdir('build');
         grunt.task.run(['shell:native']);
+    });
+    grunt.registerTask('build:coverage', function () {
+        grunt.file.mkdir('cbuild');
+        grunt.task.run(['shell:coverage']);
     });
     grunt.registerTask('build:xcode', function () {
         grunt.file.mkdir('xbuild');
