@@ -1,6 +1,7 @@
 #include "Matrix3x3.hpp"
 
 #include <memory>
+#include <cstring>
 
 using namespace rffalcon;
 
@@ -108,7 +109,7 @@ double Matrix3x3::determinant() const
 
 void Matrix3x3::_copyFrom(const Matrix3x3& m)
 {
-	memcpy((void*)_value, (void*)m._value, 9 * sizeof(double));
+	std::memcpy((void*)_value, (void*)m._value, 9 * sizeof(double));
 }
 
 Matrix3x3 Matrix3x3::transpose() const
