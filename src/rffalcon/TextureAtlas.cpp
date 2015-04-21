@@ -1,3 +1,4 @@
+#include <cstring>
 #include "TextureAtlas.hpp"
 #include "vec.hpp"
 
@@ -183,7 +184,7 @@ void TextureAtlas::setRegion(rffalcon::ivec4 region, GlyphData glyphData)
 	int charSize = sizeof(char);
 	for (int i = 0; i < glyphData.height; ++i)
 	{
-		memcpy(_data + ((region.y + i) * getWidth() + region.x) * charSize * depth,
+		std::memcpy(_data + ((region.y + i) * getWidth() + region.x) * charSize * depth,
 			   glyphData.buffer + (i * glyphData.pitch * charSize), glyphData.width * charSize * depth);
 	}
 	
