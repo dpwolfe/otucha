@@ -8,7 +8,7 @@ compiler:
   
 env:
   global:
-    - GCC_VERSION="4.9"
+    - GCC_VERSION="4.8"
 
 before_install:
   - echo $LANG
