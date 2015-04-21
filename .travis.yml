@@ -13,7 +13,6 @@ before_install:
   - echo $LC_ALL
   - export SOURCE_ROOT=`pwd`;
   - npm install
-  
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -qq
   
