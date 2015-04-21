@@ -143,7 +143,7 @@ t_consoleArgs_ptr Console::_getConsoleArgs(const std::wstring &input, const Cons
                 throw std::exception();
             }
         }
-        args->push_back(consoleArg);
+        args->push_back(static_cast<void*>(consoleArg));
         ++argTypeIt;
     }
     return args;
