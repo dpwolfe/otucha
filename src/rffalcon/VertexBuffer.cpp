@@ -3,6 +3,7 @@
 #include <vector>
 #include <sstream>
 #include <iostream>
+#include <cstring>
 
 using namespace rffalcon;
 
@@ -99,7 +100,7 @@ void VertexBuffer::_pushVertices(const std::shared_ptr<std::vector<void*>> verti
 	for (size_t index = 0; index < vertices->size(); ++index)
 	{
 		char *vertex = new char[_stride];
-		memcpy(vertex, (*vertices)[index], _stride);
+		std::memcpy(vertex, (*vertices)[index], _stride);
 		_vertices.push_back(vertex);
 	}
 	_state |= DIRTY;
@@ -220,7 +221,7 @@ void VertexBuffer::_uploadVertices()
 	
 	char* buffer = new char[vSize]();
 	for (size_t index = 0; index < _vertices.size(); ++index) {
-		memcpy(buffer + index * _stride, _vertices[index], _stride);
+		std::memcpy(buffer + index * _stride, _vertices[index], _stride);
 	}
 
 	if (vSize != _gpuVSize)
