@@ -25,7 +25,7 @@ namespace warbler {
         std::wstring stringValue;
     };
     
-    typedef std::vector<const ConsoleArg> t_consoleArgs;
+    typedef std::vector<ConsoleArg> t_consoleArgs;
     typedef std::shared_ptr<t_consoleArgs> t_consoleArgs_ptr;
     typedef std::function<void(t_consoleArgs_ptr)> t_commandHandler;
     typedef std::vector<ConsoleArgType> t_consoleArgTypes;
