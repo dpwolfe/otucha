@@ -1,12 +1,20 @@
 cmake_minimum_required(VERSION 2.8.7)
 project(otucha)
 find_package(OpenGL REQUIRED)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/external/coveralls-cmake)
+
 # The version number
 set(otucha_VERSION_MAJOR 0)
 set(otucha_VERSION_MINOR 1)
 
 option(OTUCHA_EMSCRIPTEN_ENABLED "Enable building with Emscripten" ON)
 option(OTUCHA_DO_NOT_WARN_GL_H "Turn off the warning for gl.h and gl3.h both begin defined on Mac" OFF)
+option(COVERALLS "Generate coveralls data" OFF)
+
+if (COVERALLS)
+	include(Coveralls)
+	coveralls_turn_on_coverage()
+endif()
 
 if(OTUCHA_EMSCRIPTEN_ENABLED)
 	message(STATUS "Enabling Emscripten compile")
