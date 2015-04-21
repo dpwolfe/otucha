@@ -50,7 +50,7 @@ namespace warbler {
         int argCount;
     };
     
-    typedef std::vector<const ConsoleCommand> t_commandHandlers;
+    typedef std::vector<ConsoleCommand> t_commandHandlers;
     typedef std::shared_ptr<t_commandHandlers> t_commandHandlers_ptr;
     typedef std::unordered_map<std::wstring, t_commandHandlers_ptr> t_commandHandlerMap;
     
