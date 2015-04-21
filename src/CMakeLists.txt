@@ -9,7 +9,8 @@ set(otucha_VERSION_MINOR 1)
 
 option(OTUCHA_EMSCRIPTEN_ENABLED "Enable building with Emscripten" ON)
 option(OTUCHA_DO_NOT_WARN_GL_H "Turn off the warning for gl.h and gl3.h both begin defined on Mac" OFF)
-option(COVERALLS "Generate coveralls data" OFF)
+option(COVERALLS "Turn on coveralls support" OFF)
+option(COVERALLS_UPLOAD "Upload the generated coveralls json" ON)
 
 if (COVERALLS)
 	include(Coveralls)

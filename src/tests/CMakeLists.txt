@@ -5,5 +5,5 @@ set_property(TARGET tests PROPERTY CXX_STANDARD 11)
 if (COVERALLS)
 	set(COVERAGE_SRCS "${PROJECT_SOURCE_DIR}/rffalcon/Matrix3x3.cpp" "${PROJECT_SOURCE_DIR}/rffalcon/TextureAtlas.cpp"
 		"${PROJECT_SOURCE_DIR}/warbler/Console.cpp")
-	coveralls_setup(${COVERAGE_SRCS} ON)
+	coveralls_setup(${COVERAGE_SRCS} ${COVERALLS_UPLOAD} ${PROJECT_SOURCE_DIR}/external/coveralls-cmake)
 endif()
