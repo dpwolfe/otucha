@@ -2,6 +2,7 @@
 #include "Console.hpp"
 
 #include <memory>
+#include <cmath>
 
 using namespace warbler;
 
