@@ -1,7 +1,5 @@
 language: cpp
 
-script: cmake
-
 compiler:
   - clang
   - gcc
@@ -15,8 +13,13 @@ before_install:
   - echo $LC_ALL
   - export SOURCE_ROOT=`pwd`;
   - npm install
+  
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -qq
+  
+  # code coverage before_install
+  - sudo apt-get install -y -qq lcov curl
+  
   # gcc before_install
   - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq -y --force-yes g++-${GCC_VERSION}; fi
   - if [ "$CXX" = "g++" ]; then export CXX="g++-${GCC_VERSION}" CC="gcc-${GCC_VERSION}"; fi
