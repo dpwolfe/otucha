@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <assert.h>
+#include <cstring>
 
 using namespace rffalcon;
 
@@ -128,7 +129,7 @@ Matrix4x4 Matrix4x4::lookAt(AffinePoint& eye, AffinePoint& center, AffineVector&
 
 void Matrix4x4::_copyFrom(const Matrix4x4& m)
 {
-	memcpy((void*)_value, (void*)m._value, 16 * sizeof(double));
+	std::memcpy((void*)_value, (void*)m._value, 16 * sizeof(double));
 }
 
 double Matrix4x4::_get(int row, int column) const
