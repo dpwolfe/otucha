@@ -12,7 +12,7 @@ option(OTUCHA_DO_NOT_WARN_GL_H "Turn off the warning for gl.h and gl3.h both beg
 option(COVERALLS "Turn on coveralls support" OFF)
 option(COVERALLS_UPLOAD "Upload the generated coveralls json" ON)
 
-if (COVERALLS)
+if(COVERALLS)
 	include(Coveralls)
 	coveralls_turn_on_coverage()
 endif()
@@ -58,7 +58,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	set(CMAKE_EXE_LINKER_FLAGS "-o otucha.html ${CMAKE_EXE_LINKER_FLAGS}")
 	set(OTUCHA_RESOURCE_COPY_BUILD_STAGE "PRE_BUILD")
 else()
-	include_directories (
+	include_directories(
 		"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
 		"${PROJECT_SOURCE_DIR}/external/glew-1.11.0/include"
 	)
@@ -76,7 +76,7 @@ else()
 endif()
 
 # Header to pass some of the CMake settings to the source code
-configure_file (
+configure_file(
 	"${PROJECT_SOURCE_DIR}/otuchaConfig.h.in"
 	"${PROJECT_BINARY_DIR}/otuchaConfig.h"
 )
@@ -88,7 +88,7 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-include_directories (
+include_directories(
 	"${PROJECT_BINARY_DIR}"
 	"${PROJECT_SOURCE_DIR}/rffalcon"
 	"${PROJECT_SOURCE_DIR}/terasca"
@@ -106,18 +106,18 @@ else()
 	# /MD for gtest
 	set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib.")
 	# Compile external dependencies
-	add_subdirectory (external)
+	add_subdirectory(external)
 	include_directories(
 		"${gtest_SOURCE_DIR}/include"
 	)
-	add_subdirectory (tests)
+	add_subdirectory(tests)
 endif()
 
-add_executable (otucha otucha.cpp DependencyContainer.cpp DependencyContainer.hpp)
+add_executable(otucha otucha.cpp DependencyContainer.cpp DependencyContainer.hpp)
 if(OTUCHA_EMSCRIPTEN_ENABLED)
-	target_link_libraries (otucha rffalcon terasca warbler ${OPENGL_LIBRARY} freetype)
+	target_link_libraries(otucha rffalcon terasca warbler ${OPENGL_LIBRARY} freetype)
 else()
-	target_link_libraries (otucha rffalcon terasca warbler ${OPENGL_LIBRARY} glfw GLEW_1110 freetype)
+	target_link_libraries(otucha rffalcon terasca warbler ${OPENGL_LIBRARY} glfw GLEW_1110 freetype)
 endif()
 set_property(TARGET otucha PROPERTY CXX_STANDARD 11)
 
