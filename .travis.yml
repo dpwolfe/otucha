@@ -48,10 +48,17 @@ branches:
   - master
 
 script:
+  # build
   - cd ${SOURCE_ROOT}
   - grunt build
   - cd build
   - make
+  # coveralls build
+  #- cd ${SOURCE_ROOT}
+  #- grunt build:coveralls
+  #- cd cbuild
+  #- make
+  #- make coveralls
 
 notifications:
   email: false
