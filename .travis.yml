@@ -54,11 +54,11 @@ script:
   - cd build
   - make
   # coveralls build
-  #- cd ${SOURCE_ROOT}
-  #- grunt build:coveralls
-  #- cd cbuild
-  #- make
-  #- make coveralls
+  - cd ${SOURCE_ROOT}
+  - grunt build:coveralls
+  - cd cbuild
+  - make
+  - make coveralls
 
 notifications:
   email: false
