@@ -9,6 +9,7 @@ if(COVERALLS)
 endif()
 
 add_executable(tests ${CPP_FILES})
+target_link_libraries (tests gtest warbler rffalcon GLEW_1110 freetype)
 
 set_property(TARGET tests PROPERTY CXX_STANDARD 11)
 
