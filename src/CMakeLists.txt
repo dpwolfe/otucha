@@ -97,8 +97,11 @@ include_directories(
 )
 
 add_subdirectory(rffalcon)
+get_directory_property(RFFALCON_SRCS DIRECTORY rffalcon DEFINITION CPP_FILES)
 add_subdirectory(terasca)
+get_directory_property(TERASCA_SRCS DIRECTORY terasca DEFINITION CPP_FILES)
 add_subdirectory(warbler)
+get_directory_property(WARBLER_SRCS DIRECTORY warbler DEFINITION CPP_FILES)
 
 if(OTUCHA_EMSCRIPTEN_ENABLED)
 	add_subdirectory("external/freetype-2.5.5")

@@ -1,2 +1,3 @@
-set(WARBLER_SRCS Console.cpp Console.hpp)
-add_library(warbler ${WARBLER_SRCS})
+set(CPP_FILES Console.cpp)
+set(HPP_FILES Console.hpp)
+add_library(warbler ${CPP_FILES} ${HPP_FILES})
