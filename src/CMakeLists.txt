@@ -113,6 +113,7 @@ else()
 	include_directories(
 		"${gtest_SOURCE_DIR}/include"
 	)
+	include(CTest)
 	add_subdirectory(tests)
 endif()
 
