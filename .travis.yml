@@ -58,6 +58,9 @@ script:
   - grunt build:coveralls
   - cd cbuild
   - make
+
+after_success:
+  # Avoiding failure due to Coveralls 500s
   - make coveralls
 
 notifications:
