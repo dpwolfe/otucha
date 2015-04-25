@@ -412,6 +412,9 @@ foreach(NOT_COVERED_SRC ${COVERAGE_SRCS_REMAINING})
 
 	# Generate the final JSON for this file.
 	message("Generate JSON for non-gcov file: ${NOT_COVERED_SRC}...")
+	file(RELATIVE_PATH GCOV_SRC_REL_PATH "${PROJECT_ROOT}" "${NOT_COVERED_SRC}")
+	file(MD5 "${NOT_COVERED_SRC}" GCOV_CONTENTS_MD5)
+	message("MD5: ${NOT_COVERED_SRC} = ${GCOV_CONTENTS_MD5}")
 	string(CONFIGURE ${SRC_FILE_TEMPLATE} FILE_JSON)
 	set(JSON_GCOV_FILES "${JSON_GCOV_FILES}${FILE_JSON}, ")
 endforeach()
