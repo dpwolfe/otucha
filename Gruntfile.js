@@ -129,6 +129,7 @@ module.exports = function (grunt) {
             if (!grunt.file.exists('embuild/CMakeCache.txt')) {
                 grunt.file.mkdir('embuild');
                 grunt.task.run('shell:emscripten_cmake');
+                grunt.task.run('shell:emscripten_cmake');
             }
             grunt.task.run('shell:emscripten_make');
             grunt.task.run('bowercopy:html');
