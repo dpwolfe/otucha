@@ -75,6 +75,8 @@ endif()
 
 if (NOT GCOV_EXECUTABLE)
 	message(FATAL_ERROR "gcov not found! Aborting...")
+else()
+	message("gcov executable: ${GCOV_EXECUTABLE}")
 endif()
 
 find_package(Git)
