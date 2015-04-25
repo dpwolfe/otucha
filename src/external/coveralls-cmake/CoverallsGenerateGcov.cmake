@@ -67,16 +67,16 @@ endif()
 # CMake list format.
 string(REGEX REPLACE "\\*" ";" COVERAGE_SRCS ${COVERAGE_SRCS})
 
-if ($ENV{GCOV})
-	find_program(GCOV_EXECUTABLE $ENV{GCOV})
-else()
+if ("$ENV{GCOV}" STREQUAL "")
 	find_program(GCOV_EXECUTABLE gcov)
+else()
+	find_program(GCOV_EXECUTABLE $ENV{GCOV})
 endif()
 
-if (NOT GCOV_EXECUTABLE)
-	message(FATAL_ERROR "gcov not found! Aborting...")
-else()
+if (GCOV_EXECUTABLE)
 	message("gcov executable: ${GCOV_EXECUTABLE}")
+else()
+	message(FATAL_ERROR "gcov not found! Aborting...")
 endif()
 
 find_package(Git)
