@@ -7,9 +7,10 @@ precision highp float;
 uniform sampler2D texture;
 
 varying vec2 texCoordxy;
+varying vec4 texColor;
 
 void main()
 {
 	float a = texture2D(texture, texCoordxy).r;
-	gl_FragColor = vec4(gl_Color.rgb, gl_Color.a * a);
+	gl_FragColor = vec4(texColor.rgb, texColor.a * a);
 }
