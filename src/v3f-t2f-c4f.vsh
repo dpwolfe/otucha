@@ -11,9 +11,11 @@ attribute vec3 vertex;
 attribute vec2 texCoord;
 attribute vec4 color;
 
+varying vec2 texCoordxy;
+
 void main()
 {
-	gl_TexCoord[0].xy = texCoord.xy;
+	texCoordxy = texCoord.xy;
 	gl_FrontColor     = color;
 	gl_Position       = ec_dc * (mc_ec * vec4(vertex, 1.0));
 }
