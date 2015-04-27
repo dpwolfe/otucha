@@ -4,8 +4,8 @@ A cross-platform C++ OpenGL program that also compiles to JavaScript using Emscr
 
 #### Status
 
-- Builds and runs on Mac OS X and Windows natively as well as in browser using Emscripten.
-- Currently working on text rendering support.
+- Builds and runs on Windows, Mac OS X and Linux as well as in browser with Emscripten
+- Currently working on increasing code coverage and moving external dependencies to submodules
 
 #### Developer Setup
 Follow these steps for Windows or Mac development.  Pay careful attention to any platform specific instructions each vendor provides.
@@ -54,7 +54,7 @@ Follow these steps for Windows or Mac development.  Pay careful attention to any
 
 A perspective view of a cube with copper material properties and three lights in positions selected in order to produce specular highlights.
 
-[Image of Copper Cube](https://onedrive.live.com/embed?cid=EB3994E07F023E78&resid=EB3994E07F023E78%2142597&authkey=AAuP3j8_a2lGV1A)
+[Screenshot of Copper Cube](https://onedrive.live.com/embed?cid=EB3994E07F023E78&resid=EB3994E07F023E78%2142597&authkey=AAuP3j8_a2lGV1A)
 
 [Live Demo](http://spritegeist.azurewebsites.net/)
 
