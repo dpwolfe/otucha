@@ -5,7 +5,7 @@ set(CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 
 if(COVERALLS)
 	set(COVERAGE_SRCS ${RFFALCON_SRCS} ${WARBLER_SRCS} ${TERASCA_SRCS} ${CPP_FILES})
-	coveralls_setup("${COVERAGE_SRCS}" ${COVERALLS_UPLOAD} "${PROJECT_SOURCE_DIR}/external/coveralls-cmake")
+	coveralls_setup("${COVERAGE_SRCS}" ${COVERALLS_UPLOAD} "${PROJECT_SOURCE_DIR}/src/external/coveralls-cmake")
 endif()
 
 add_executable(tests ${CPP_FILES})
