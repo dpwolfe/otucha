@@ -15,7 +15,7 @@ add_subdirectory(freetype-2.5.5)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 set(OPENGL_LIBRARY
 	${OPENGL_LIBRARY}
-	-lGL -lGLU -lXrandr -lXext -lX11 -lrt -lXxf86vm -lXinerama -lXcursor
+	-lGL -lGLU -lXrandr -lXext -lX11 -lrt -lXi -lXxf86vm -lXinerama -lXcursor
 	${CMAKE_DL_LIBS}
 	${GLFW_LIBRARIES}
 )
