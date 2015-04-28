@@ -4,8 +4,8 @@ A cross-platform C++ OpenGL program that also compiles to JavaScript using Emscr
 
 #### Status
 
-- Builds and runs on Mac OS X and Windows natively as well as in browser using Emscripten.
-- Currently working on text rendering support.
+- Builds and runs on Windows, Mac OS X and Linux as well as in browser with Emscripten
+- Currently working on increasing code coverage and moving external dependencies to submodules, updating some in the process
 
 #### Developer Setup
 Follow these steps for Windows or Mac development.  Pay careful attention to any platform specific instructions each vendor provides.
@@ -52,18 +52,18 @@ Follow these steps for Windows or Mac development.  Pay careful attention to any
 
 #### What you'll see
 
-A perspective view of a cube with copper material properties and three lights in positions selected in order to produce specular highlights.
+A perspective view of a cube with copper material properties and three lights in positions selected in order to produce specular highlights.  A sample of rendered text also appears on the bottom left corner.
 
-[Image of Copper Cube](https://onedrive.live.com/embed?cid=EB3994E07F023E78&resid=EB3994E07F023E78%2142597&authkey=AAuP3j8_a2lGV1A)
+[Screenshot of just the Copper Cube](https://onedrive.live.com/embed?cid=EB3994E07F023E78&resid=EB3994E07F023E78%2142597&authkey=AAuP3j8_a2lGV1A)
 
-[Live Demo](http://spritegeist.azurewebsites.net/)
+[Live Demo of just the cube](http://spritegeist.azurewebsites.net/)
 
 
 #### Code names
 Like otucha, these code names have no special meaning and are picked using the random page feature on Wikipedia.  They are used for namespaces of discrete areas of the app that have separate concerns at the moment. They are:
 
-**RFFalcon**: Short for red-footed falcon.  Model, Point and Matrix classes. Text rendering with freetype and vec union structs.
+**RFFalcon**: Short for red-footed falcon.  Geometry, models and rendering.  Point and Matrix classes including vec union structs. Text built on freetype.
 
-**Terasca**: MVC classes.
+**Terasca**: MVC application classes.
 
 **Warbler**: Console implementation.
