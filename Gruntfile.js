@@ -38,10 +38,9 @@ module.exports = function (grunt) {
             submodule_init: {
                 command: [
                     'echo Initializing glfw submodule',
-                    'pushd ' + path.join('submodules', 'glfw'),
+                    'cd ' + path.join('submodules', 'glfw'),
                     'git submodule init',
-                    'git submodule update',
-                    'popd'
+                    'git submodule update'
                 ].join('&&')
             },
             emscripten_cmake: {
