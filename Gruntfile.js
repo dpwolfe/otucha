@@ -1,4 +1,5 @@
 module.exports = function (grunt) {
+	var path = require('path');
     require('load-grunt-tasks')(grunt);
     grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -16,22 +17,31 @@ module.exports = function (grunt) {
                 command: [
                     'echo Building native',
                     'cd build',
-                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON ../src'
+                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON ..'
                 ].join('&&')
             },
             coveralls: {
                 command: [
                     'echo Building coveralls',
                     'cd cbuild',
-                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug ../src'
+                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug ..'
                 ].join('&&')
             },
             xcode: {
                 command: [
                     'echo Building Xcode',
                     'cd xbuild',
-                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -G Xcode ../src',
+                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -G Xcode ..',
                     'open -a Xcode otucha.xcodeproj'
+                ].join('&&')
+            },
+            submodule_init: {
+                command: [
+                    'echo Initializing glfw submodule',
+                    'pushd ' + path.join('submodules', 'glfw'),
+                    'git submodule init',
+                    'git submodule update',
+                    'popd'
                 ].join('&&')
             },
             emscripten_cmake: {
@@ -40,7 +50,7 @@ module.exports = function (grunt) {
                 },
                 command: [
                     'cd embuild',
-                    'emcmake cmake ../src'
+                    'emcmake cmake ..'
                 ].join('&&')
             },
             emscripten_make: {
@@ -140,5 +150,8 @@ module.exports = function (grunt) {
             }
         }
         grunt.task.run('bowercopy:server');
+    });
+    grunt.registerTask('init', function () {
+        grunt.task.run('shell:submodule_init');
     });
 }

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.7)
 project(otucha)
 find_package(OpenGL REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/external/coveralls-cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/src/external/coveralls-cmake)
 
 # The version number
 set(otucha_VERSION_MAJOR 0)
@@ -65,8 +65,8 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	set(OTUCHA_RESOURCE_COPY_BUILD_STAGE "PRE_BUILD")
 else()
 	include_directories(
-		"${PROJECT_SOURCE_DIR}/external/glfw-3.0.4/include"
-		"${PROJECT_SOURCE_DIR}/external/glew-1.11.0/include"
+		"${PROJECT_SOURCE_DIR}/submodules/glfw/include"
+		"${PROJECT_SOURCE_DIR}/src/external/glew-1.11.0/include"
 	)
 	if(OTUCHA_DO_NOT_WARN_GL_H)
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
@@ -83,8 +83,8 @@ endif()
 
 # Header to pass some of the CMake settings to the source code
 configure_file(
-	"${PROJECT_SOURCE_DIR}/otuchaConfig.h.in"
-	"${PROJECT_BINARY_DIR}/otuchaConfig.h"
+	"${PROJECT_SOURCE_DIR}/src/otuchaConfig.h.in"
+	"${PROJECT_BINARY_DIR}/src/otuchaConfig.h"
 )
 
 add_definitions(
@@ -95,35 +95,46 @@ add_definitions(
 )
 
 include_directories(
-	"${PROJECT_BINARY_DIR}"
-	"${PROJECT_SOURCE_DIR}/rffalcon"
-	"${PROJECT_SOURCE_DIR}/terasca"
-	"${PROJECT_SOURCE_DIR}/warbler"
-	"${PROJECT_SOURCE_DIR}/external/freetype-2.5.5/include"
+	"${PROJECT_BINARY_DIR}/src"
+	"${PROJECT_SOURCE_DIR}/src/rffalcon"
+	"${PROJECT_SOURCE_DIR}/src/terasca"
+	"${PROJECT_SOURCE_DIR}/src/warbler"
+	"${PROJECT_SOURCE_DIR}/src/external/freetype-2.5.5/include"
 )
 
-add_subdirectory(rffalcon)
-get_directory_property(RFFALCON_SRCS DIRECTORY rffalcon DEFINITION CPP_FILES)
-add_subdirectory(terasca)
-get_directory_property(TERASCA_SRCS DIRECTORY terasca DEFINITION CPP_FILES)
-add_subdirectory(warbler)
-get_directory_property(WARBLER_SRCS DIRECTORY warbler DEFINITION CPP_FILES)
+add_subdirectory("${PROJECT_SOURCE_DIR}/src/rffalcon")
+get_directory_property(RFFALCON_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/rffalcon" DEFINITION CPP_FILES)
+add_subdirectory("${PROJECT_SOURCE_DIR}/src/terasca")
+get_directory_property(TERASCA_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/terasca" DEFINITION CPP_FILES)
+add_subdirectory("${PROJECT_SOURCE_DIR}/src/warbler")
+get_directory_property(WARBLER_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/warbler" DEFINITION CPP_FILES)
 
 if(OTUCHA_EMSCRIPTEN_ENABLED)
-	add_subdirectory("external/freetype-2.5.5")
+	add_subdirectory("${PROJECT_SOURCE_DIR}/src/external/freetype-2.5.5")
 else()
 	# /MD for gtest
 	set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib.")
 	# Compile external dependencies
-	add_subdirectory(external)
+	add_subdirectory("${PROJECT_SOURCE_DIR}/src/external")
+	
+	### GLFW ###
+	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
+	set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
+	set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
+	set(GLFW_INSTALL OFF CACHE BOOL "Generate GLFW installation target")
+	set(BUILD_TESTING OFF CACHE BOOL "Build testing targets")
+	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/glfw")
+	
 	include_directories(
 		"${gtest_SOURCE_DIR}/include"
 	)
 	include(CTest)
-	add_subdirectory(tests)
+	add_subdirectory("${PROJECT_SOURCE_DIR}/src/tests")
 endif()
 
-add_executable(otucha otucha.cpp DependencyContainer.cpp DependencyContainer.hpp)
+add_executable(otucha "${PROJECT_SOURCE_DIR}/src/otucha.cpp"
+                      "${PROJECT_SOURCE_DIR}/src/DependencyContainer.cpp"
+                      "${PROJECT_SOURCE_DIR}/src/DependencyContainer.hpp")
 if(OTUCHA_EMSCRIPTEN_ENABLED)
 	target_link_libraries(otucha rffalcon terasca warbler ${OPENGL_LIBRARY} freetype)
 else()
@@ -132,7 +143,7 @@ endif()
 set_property(TARGET otucha PROPERTY CXX_STANDARD 11)
 
 # Copy shader files during build
-file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/*.*sh")
+file(GLOB shaderFiles "${PROJECT_SOURCE_DIR}/src/*.*sh")
 foreach(file ${shaderFiles})
 	add_custom_command(TARGET otucha ${OTUCHA_RESOURCE_COPY_BUILD_STAGE}
 		COMMAND ${CMAKE_COMMAND} -E copy_if_different "${file}"
@@ -142,6 +153,6 @@ endforeach()
 
 # Copy font file during build
 add_custom_command(TARGET otucha ${OTUCHA_RESOURCE_COPY_BUILD_STAGE}
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PROJECT_SOURCE_DIR}/external/dejavu-fonts-ttf-2.34/ttf/DejaVuSansMono.ttf"
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PROJECT_SOURCE_DIR}/src/external/dejavu-fonts-ttf-2.34/ttf/DejaVuSansMono.ttf"
 			${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}
-			COMMENT "Copying ${PROJECT_SOURCE_DIR}/external/dejavu-fonts-ttf-2.34/ttf/DejaVuSansMono.ttf to ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}")
+			COMMENT "Copying ${PROJECT_SOURCE_DIR}/src/external/dejavu-fonts-ttf-2.34/ttf/DejaVuSansMono.ttf to ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}")

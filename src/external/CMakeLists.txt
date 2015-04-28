@@ -9,12 +9,6 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-### GLFW ###
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW documentation")
-
-add_subdirectory(glfw-3.0.4)
 add_subdirectory(gtest-1.7.0)
 add_subdirectory(freetype-2.5.5)
 
