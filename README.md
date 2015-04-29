@@ -5,7 +5,7 @@ A cross-platform C++ OpenGL program that also compiles to JavaScript using Emscr
 #### Status
 
 - Builds and runs on Windows, Mac OS X and Linux as well as in browser with Emscripten
-- Currently working on increasing code coverage and moving external dependencies to submodules, updating some in the process
+- Currently working on increasing code coverage and moving external dependencies to submodules, upgrading them in the process
 
 #### Developer Setup
 Follow these steps for Windows or Mac development.  Pay careful attention to any platform specific instructions each vendor provides.
@@ -19,6 +19,7 @@ Follow these steps for Windows or Mac development.  Pay careful attention to any
 
    ```
    npm install
+   grunt init
    ```
 
 #### Building with Emscripten
