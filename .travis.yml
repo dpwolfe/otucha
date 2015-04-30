@@ -3,7 +3,7 @@ language: cpp
 sudo: false
 
 compiler:
-- clang
+#- clang
 - gcc
 
 addons:
@@ -13,7 +13,7 @@ addons:
     - ubuntu-toolchain-r-test
     - kubuntu-backports
     packages:
-    - clang-3.5
+    #- clang-3.5
     - cmake
     - g++-4.9
     # Coveralls
