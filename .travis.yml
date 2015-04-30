@@ -1,9 +1,30 @@
 language: cpp
 
+sudo: false
+
 compiler:
-  - clang
-  - gcc
-  
+- clang
+- gcc
+
+addons:
+  apt:
+    sources:
+    - llvm-toolchain-precise-3.5
+    - ubuntu-toolchain-r-test
+    - kubuntu-backports
+    packages:
+    - clang-3.5
+    - cmake
+    - g++-4.9
+    - libstdc++6
+    # Coveralls
+    - curl
+    # GLFW
+    - libxxf86vm-dev
+cache:
+  directories:
+    - $HOME/.ccache
+
 env:
   global:
     - GCC_VERSION="4.9"
@@ -13,36 +34,10 @@ before_install:
   - echo $LC_ALL
   - export SOURCE_ROOT=`pwd`;
   - npm install
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo add-apt-repository ppa:kalakris/cmake -y
-  - sudo apt-get update -qq
-  
-  # code coverage & cmake before_install
-  - sudo apt-get install -y -qq lcov curl cmake
   
   # gcc before_install
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq -y --force-yes g++-${GCC_VERSION}; fi
   - if [ "$CXX" = "g++" ]; then export CXX="g++-${GCC_VERSION}" CC="gcc-${GCC_VERSION}" GCOV="gcov-${GCC_VERSION}"; fi
-  
-  # clang before_install
-  - if [ "$CXX" == "clang++" ]; then export LIBCXX=On; fi
-  - if [ "$CXX" == "clang++" ]; then svn co --quiet http://llvm.org/svn/llvm-project/libcxx/trunk libcxx; fi
-  - if [ "$CXX" == "clang++" ]; then cd libcxx/lib && bash buildit; fi
-  - if [ "$CXX" == "clang++" ]; then sudo cp ./libc++.so.1.0 /usr/lib/; fi
-  - if [ "$CXX" == "clang++" ]; then sudo mkdir /usr/include/c++/v1; fi
-  - if [ "$CXX" == "clang++" ]; then cd .. && sudo cp -r include/* /usr/include/c++/v1/; fi
-  - if [ "$CXX" == "clang++" ]; then cd /usr/lib && sudo ln -sf libc++.so.1.0 libc++.so; fi
-  - if [ "$CXX" == "clang++" ]; then sudo ln -sf libc++.so.1.0 libc++.so.1 && $cwd; fi
-  # clang libcxxabi for gtest
-  - if [ "$CXX" == "clang++" ]; then cd ${SOURCE_ROOT}; fi
-  - if [ "$CXX" == "clang++" ]; then svn co --quiet http://llvm.org/svn/llvm-project/libcxxabi/trunk libcxxabi; fi
-  - if [ "$CXX" == "clang++" ]; then cd libcxxabi/lib && bash buildit; fi
-  - if [ "$CXX" == "clang++" ]; then sudo cp ./libc++abi.so.1.0 /usr/lib/; fi
-  - if [ "$CXX" == "clang++" ]; then cd .. && sudo cp -r include/* /usr/include/c++/v1/; fi
-  - if [ "$CXX" == "clang++" ]; then sudo ln -sf libc++abi.so.1.0 libc++abi.so.1 && $cwd; fi
-  
-  # GLFW before_install
-  - sudo apt-get install -qq -y libXxf86vm-dev
+  - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.5" CC="clang-3.5"; fi
 
 branches:
   only:
@@ -61,8 +56,11 @@ script:
   - make
 
 after_success:
-  # Avoiding failure due to Coveralls 500s
+  # In after_success to avoid failures due to Coveralls 500s
   - make coveralls
+
+before_cache:
+  - ccache --show-stats
 
 notifications:
   email: false
