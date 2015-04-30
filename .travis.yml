@@ -15,7 +15,6 @@ addons:
     packages:
     - clang-3.5
     - cmake
-    - gcc-4.9
     - g++-4.9
     - libstdc++6
     # Coveralls
@@ -28,7 +27,7 @@ cache:
 
 env:
   global:
-    - GCC_VERSION="4.9"
+    - GCC_VERSION="4.8"
 
 before_install:
   - echo $LANG
