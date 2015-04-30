@@ -51,7 +51,6 @@ branches:
 script:
   # build
   - cd ${SOURCE_ROOT}
-  - grunt init
   - grunt build
   - cd build
   - make
