@@ -51,6 +51,9 @@ script:
   - grunt build:coveralls
   - cd cbuild
   - make
+
+after_success:
+  # In after_success to avoid failures due to Coveralls 500s
   - make coveralls
 
 before_cache:
