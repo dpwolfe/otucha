@@ -63,6 +63,6 @@ Like otucha, these code names have no special meaning and are picked using the r
 
 **RFFalcon**: Short for red-footed falcon.  Geometry, models and rendering.  Point and Matrix classes including vec union structs. Text built on freetype.
 
-**Terasca**: MVC application classes.
+**Terasca**: MVC application framework.
 
-**Warbler**: Console implementation.
+**Warbler**: Console and logging.
