@@ -6,7 +6,7 @@ set(CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 if(COVERALLS)
 	set(COVERAGE_SRCS ${RFFALCON_SRCS} ${WARBLER_SRCS} ${TERASCA_SRCS} ${CPP_FILES})
 	coveralls_setup("${COVERAGE_SRCS}" ${COVERALLS_UPLOAD} "${PROJECT_SOURCE_DIR}/src/external/coveralls-cmake")
-	if("$ENV{CXX}" MATCHES "^.*g++\\+\\+.*$")
+	if("$ENV{CXX}" MATCHES "^.*g\\+\\+.*$")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs --coverage")
 	endif()
 endif()
