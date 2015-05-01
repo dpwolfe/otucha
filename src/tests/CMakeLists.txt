@@ -8,8 +8,8 @@ if(COVERALLS)
 	coveralls_setup("${COVERAGE_SRCS}" ${COVERALLS_UPLOAD} "${PROJECT_SOURCE_DIR}/src/external/coveralls-cmake")
 endif()
 
-add_executable(tests ${CPP_FILES})
-target_link_libraries (tests gtest warbler rffalcon GLEW_1110 freetype)
+add_executable(unitTests ${CPP_FILES})
+target_link_libraries (unitTests gtest warbler rffalcon GLEW_1110 freetype)
 
-set_property(TARGET tests PROPERTY CXX_STANDARD 11)
-add_test(all tests)
+set_property(TARGET unitTests PROPERTY CXX_STANDARD 11)
+add_test(NAME unitTests COMMAND unitTests)

@@ -131,6 +131,7 @@ else()
 		"${gtest_SOURCE_DIR}/include"
 	)
 	include(CTest)
+	enable_testing()
 	add_subdirectory("${PROJECT_SOURCE_DIR}/src/tests")
 endif()
 
