@@ -92,10 +92,10 @@ void Block::render()
 void Block::_initBlock()
 {
 	vec3 vertices[] = {
-		{ _xmin, _ymin, _zmax }, { _xmin, _ymax, _zmax },
-		{ _xmax, _ymin, _zmax }, { _xmax, _ymax, _zmax },
-		{ _xmax, _ymin, _zmin }, { _xmax, _ymax, _zmin },
-		{ _xmin, _ymin, _zmin }, { _xmin, _ymax, _zmin }
+        { { _xmin, _ymin, _zmax } }, { { _xmin, _ymax, _zmax } },
+        { { _xmax, _ymin, _zmax } }, { { _xmax, _ymax, _zmax } },
+        { { _xmax, _ymin, _zmin } }, { { _xmax, _ymax, _zmin } },
+        { { _xmin, _ymin, _zmin } }, { { _xmin, _ymax, _zmin } }
 	};
 	glGenVertexArrays(1, _vao);
 	glBindVertexArray(_vao[0]);
