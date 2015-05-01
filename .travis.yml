@@ -15,7 +15,7 @@ addons:
     packages:
     #- clang-3.5
     - cmake
-    - g++-4.8
+    - g++-4.9
     # Coveralls
     - curl
     # GLFW
@@ -26,7 +26,7 @@ cache:
 
 env:
   global:
-    - GCC_VERSION="4.8"
+    - GCC_VERSION="4.9"
 
 before_install:
   - echo $LANG
