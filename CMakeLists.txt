@@ -124,6 +124,7 @@ else()
 	set(GLFW_INSTALL OFF CACHE BOOL "Generate GLFW installation target")
 	set(BUILD_TESTING OFF CACHE BOOL "Build testing targets")
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/glfw")
+	get_directory_property(GLFW_LIBRARIES DIRECTORY "${PROJECT_SOURCE_DIR}/submodules/glfw" DEFINITION glfw_LIBRARIES)
 	
 	include_directories(
 		"${gtest_SOURCE_DIR}/include"
