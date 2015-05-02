@@ -21,8 +21,10 @@ addons:
     # GLFW
     - libxxf86vm-dev
 cache:
+  apt: true
   directories:
-    - $HOME/.ccache
+  - $HOME/.ccache
+  - node_modules
 
 env:
   global:
