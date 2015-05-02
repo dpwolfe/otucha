@@ -8,8 +8,8 @@ if(COVERALLS)
 	coveralls_setup("${COVERAGE_SRCS}" ${COVERALLS_UPLOAD} "${PROJECT_SOURCE_DIR}/src/external/coveralls-cmake")
 endif()
 
-add_executable(unitTests ${CPP_FILES})
-target_link_libraries (unitTests gtest warbler rffalcon GLEW_1110 freetype)
+add_executable(otucha_tests ${CPP_FILES})
+target_link_libraries (otucha_tests gtest warbler rffalcon GLEW_1110 freetype)
 
-set_property(TARGET unitTests PROPERTY CXX_STANDARD 11)
-add_test(NAME unitTests COMMAND unitTests)
+set_property(TARGET otucha_tests PROPERTY CXX_STANDARD 11)
+add_test(NAME otucha_tests COMMAND otucha_tests)
