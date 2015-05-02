@@ -5,14 +5,13 @@
 
 using namespace rffalcon;
 
-VertexAttribute::VertexAttribute(const std::string &name, GLint size, GLenum type, GLboolean normalized)
-	: _name(name), _size(size), _type(type), _normalized(normalized)
+VertexAttribute::VertexAttribute(const std::string &name, GLint size, GLenum type, GLboolean isNormalized)
+	: _name(name), _size(size), _type(type), _isNormalized(isNormalized)
 {
 }
 
 VertexAttribute::~VertexAttribute()
 {
-
 }
 
 std::shared_ptr<VertexAttribute> VertexAttribute::parse(const std::string &format)
@@ -44,9 +43,24 @@ std::shared_ptr<VertexAttribute> VertexAttribute::parse(const std::string &forma
 	return attribute;
 }
 
+std::string VertexAttribute::getName()
+{
+	return _name;
+}
+
 GLint VertexAttribute::getSize()
 {
 	return _size;
+}
+
+GLenum VertexAttribute::getType()
+{
+	return _type;
+}
+
+GLboolean VertexAttribute::getIsNormalized()
+{
+	return _isNormalized;
 }
 
 int VertexAttribute::getTypeSize()
@@ -105,6 +119,6 @@ void VertexAttribute::enable()
 	if (_index != -1)
 	{
 		glEnableVertexAttribArray(_index);
-		glVertexAttribPointer(_index, _size, _type, _normalized, _stride, _pointer);
+		glVertexAttribPointer(_index, _size, _type, _isNormalized, _stride, _pointer);
 	}
 }

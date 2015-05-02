@@ -11,11 +11,15 @@ namespace rffalcon
 	class VertexAttribute
 	{
 	public:
-		VertexAttribute(const std::string &name, GLint size, GLenum type, GLboolean normalized);
+		VertexAttribute(const std::string &name, GLint size, GLenum type, GLboolean isNormalized);
 		~VertexAttribute();
 
 		static std::shared_ptr<VertexAttribute> parse(const std::string &part);
+
+		std::string getName();
 		GLint getSize();
+		GLenum getType();
+		GLboolean getIsNormalized();
 		int getTypeSize();
 		void setStride(int stride);
 		void setPointer(GLchar *pointer);
@@ -28,7 +32,7 @@ namespace rffalcon
 		std::string _name;
 		GLint _size;
 		GLenum _type;
-		GLboolean _normalized;
+		GLboolean _isNormalized;
 		GLsizei _stride = 0;
 		GLchar *_pointer = 0;
 	};
