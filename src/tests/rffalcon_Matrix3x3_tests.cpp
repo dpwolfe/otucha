@@ -45,6 +45,20 @@ TEST(Matrix3x3Operators, inverse_multiplied_by_original_equals_identity) {
 	EXPECT_EQ(Matrix3x3::Identity, m3);
 }
 
+TEST(Matrix3x3Operators, double_brackets) {
+	Matrix3x3 m1(0, 1, 2, 3, 4, 5, 6, 7, 8);
+	for (int index = 0; index < 9; index++) {
+		EXPECT_EQ(m1[index / 3][index % 3], index);
+	}
+}
+
+TEST(Matrix3x3Operators, assignment) {
+	Matrix3x3 m1(1, 1, 2, 3, 1, 5, 6, 2, 8);
+	Matrix3x3 m2(-0.5, -1, 0.75, 1.5, -1, 0.25, 0, 1, -0.5);
+	m1 = m2;
+	EXPECT_EQ(m1, m2);
+}
+
 TEST(Matrix3x3Methods, transpose) {
 	Matrix3x3 m1(0, 1, 2, 3, 4, 5, 6, 7, 8);
 	Matrix3x3 m2 = m1.transpose();
