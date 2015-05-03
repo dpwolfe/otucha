@@ -9,7 +9,7 @@ compiler:
 addons:
   apt:
     sources:
-    - llvm-toolchain-precise-3.5
+    #- llvm-toolchain-precise-3.5
     - ubuntu-toolchain-r-test
     - kubuntu-backports
     packages:
@@ -25,7 +25,6 @@ cache:
   directories:
   - $HOME/.ccache
   - node_modules
-  - submodules
 
 env:
   global:
