@@ -25,6 +25,7 @@ cache:
   directories:
   - $HOME/.ccache
   - node_modules
+  - submodules
 
 env:
   global:
