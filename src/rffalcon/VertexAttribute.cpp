@@ -84,9 +84,19 @@ void VertexAttribute::setStride(int stride)
 	_stride = stride;
 }
 
+int VertexAttribute::getStride()
+{
+	return _stride;
+}
+
 void VertexAttribute::setPointer(GLchar *pointer)
 {
 	_pointer = pointer;
+}
+
+GLchar * VertexAttribute::getPointer()
+{
+	return _pointer;
 }
 
 GLenum VertexAttribute::_getType(char typeChar)

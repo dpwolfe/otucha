@@ -104,3 +104,17 @@ TEST(VertexAttributeMethods, getTypeSize_invalid)
 	VertexAttribute a("name", 7, -1, true);
 	EXPECT_EQ(a.getTypeSize(), 0);
 }
+
+TEST(VertexAttributeMethods, get_set_stride)
+{
+	VertexAttribute a("name", 7, -1, true);
+	a.setStride(7);
+	EXPECT_EQ(a.getStride(), 7);
+}
+
+TEST(VertexAttributeMethods, get_set_pointer)
+{
+	VertexAttribute a("name", 7, -1, true);
+	a.setPointer(reinterpret_cast<GLchar*>(7));
+	EXPECT_EQ(a.getPointer(), reinterpret_cast<GLchar*>(7));
+}

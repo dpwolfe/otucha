@@ -22,7 +22,9 @@ namespace rffalcon
 		GLboolean getIsNormalized();
 		int getTypeSize();
 		void setStride(int stride);
+		int getStride();
 		void setPointer(GLchar *pointer);
+		GLchar * getPointer();
 		void enable();
 
 	private:
