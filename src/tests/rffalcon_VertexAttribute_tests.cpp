@@ -21,6 +21,36 @@ TEST(VertexAttributeMethods, parse_with_valid_inputs)
 	EXPECT_EQ(a->getIsNormalized(), static_cast<GLboolean>(true));
 }
 
+TEST(VertexAttributeMethods, parse_with_valid_inputs_2)
+{
+	std::shared_ptr<VertexAttribute> a = VertexAttribute::parse("color:2f");
+	EXPECT_EQ(a->getName(), "color");
+	EXPECT_EQ(a->getSize(), 2);
+	EXPECT_EQ(a->getType(), GL_FLOAT);
+	EXPECT_EQ(a->getIsNormalized(), static_cast<GLboolean>(false));
+}
+
+
+TEST(VertexAttributeMethods, parse_type_chars)
+{
+	std::shared_ptr<VertexAttribute> a = VertexAttribute::parse("color:2b");
+	EXPECT_EQ(a->getType(), GL_BYTE);
+	a = VertexAttribute::parse("color:2B");
+	EXPECT_EQ(a->getType(), GL_UNSIGNED_BYTE);
+	a = VertexAttribute::parse("color:2s");
+	EXPECT_EQ(a->getType(), GL_SHORT);
+	a = VertexAttribute::parse("color:2S");
+	EXPECT_EQ(a->getType(), GL_UNSIGNED_SHORT);
+	a = VertexAttribute::parse("color:2i");
+	EXPECT_EQ(a->getType(), GL_INT);
+	a = VertexAttribute::parse("color:2I");
+	EXPECT_EQ(a->getType(), GL_UNSIGNED_INT);
+	a = VertexAttribute::parse("color:2f");
+	EXPECT_EQ(a->getType(), GL_FLOAT);
+	a = VertexAttribute::parse("color:2F"); // invalid
+	EXPECT_EQ(a->getType(), 0);
+}
+
 TEST(VertexAttributeMethods, getTypeSize_bool)
 {
 	VertexAttribute a("name", 7, GL_BOOL, true);
