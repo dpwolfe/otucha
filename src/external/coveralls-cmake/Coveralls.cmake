@@ -24,13 +24,13 @@
 
 
 #
-# Param _COVERAGE_SRCS	A list of source files that coverage should be collected for.
-# Param _COVERALLS_UPLOAD Upload the result to coveralls?
+# Param _COVERAGE_SRCS     A list of source files that coverage should be collected for.
+# Param _COVERALLS_UPLOAD  Upload the result to coveralls?
+# Param _COVERALLS_VERBOSE Print verbose statements in output
 #
-function(coveralls_setup _COVERAGE_SRCS _COVERALLS_UPLOAD)
+function(coveralls_setup _COVERAGE_SRCS _COVERALLS_UPLOAD _CMAKE_SCRIPT_PATH _COVERALLS_VERBOSE)
 
-	if (ARGC GREATER 2)
-		set(_CMAKE_SCRIPT_PATH ${ARGN})
+	if (_CMAKE_SCRIPT_PATH)
 		message("Coveralls: Using alternate CMake script dir: ${_CMAKE_SCRIPT_PATH}")
 	else()
 		set(_CMAKE_SCRIPT_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -57,13 +57,16 @@ function(coveralls_setup _COVERAGE_SRCS _COVERALLS_UPLOAD)
 		set(COVERAGE_SRCS "${COVERAGE_SRCS}*${COVERAGE_SRC}")
 	endforeach()
 
-	#message("Coverage sources: ${COVERAGE_SRCS}")
+	if (COVERALLS_VERBOSE)
+		message("Coverage sources: ${COVERAGE_SRCS}")
+	endif()
 	set(COVERALLS_FILE ${PROJECT_BINARY_DIR}/coveralls.json)
 
 	add_custom_target(coveralls_generate
 
 		# Zero the coverage counters.
 		COMMAND ${CMAKE_COMMAND}
+				-DCOVERALLS_VERBOSE="${COVERALLS_VERBOSE}"
 				-P "${_CMAKE_SCRIPT_PATH}/CoverallsClear.cmake"
 
 		# Run regress tests.
@@ -76,6 +79,7 @@ function(coveralls_setup _COVERAGE_SRCS _COVERALLS_UPLOAD)
 				-DCOVERAGE_SRCS="${COVERAGE_SRCS}" # TODO: This is passed like: "a b c", not "a;b;c"
 				-DCOVERALLS_OUTPUT_FILE="${COVERALLS_FILE}"
 				-DCOV_PATH="${PROJECT_BINARY_DIR}"
+				-DCOVERALLS_VERBOSE="${COVERALLS_VERBOSE}"
 				-DPROJECT_ROOT="${PROJECT_SOURCE_DIR}"
 				-P "${_CMAKE_SCRIPT_PATH}/CoverallsGenerateGcov.cmake"
 
@@ -107,6 +111,14 @@ function(coveralls_setup _COVERAGE_SRCS _COVERALLS_UPLOAD)
 	else()
 		message("COVERALLS UPLOAD: OFF")
 		add_custom_target(coveralls DEPENDS coveralls_generate)
+	endif()
+
+	if (_COVERALLS_VERBOSE)
+		message("COVERALLS VERBOSE: ON")
+		set(COVERALLS_VERBOSE ON)
+	else()
+		message("COVERALLS VERBOSE: OFF")
+		set(COVERALLS_VERBOSE OFF)
 	endif()
 
 endfunction()

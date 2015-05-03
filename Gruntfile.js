@@ -2,6 +2,8 @@ module.exports = function (grunt) {
     var path = require('path');
     require('load-grunt-tasks')(grunt);
 
+    var coverallsVerbose = grunt.option('coverallsVerbose') ? '-DCOVERALLS_VERBOSE=ON ' : '';
+    
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         update_submodules: {
@@ -25,7 +27,7 @@ module.exports = function (grunt) {
                 command: [
                     'echo Building coveralls',
                     'cd cbuild',
-                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug ..'
+                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -DCOVERALLS=ON ' + coverallsVerbose + '-DCMAKE_BUILD_TYPE=Debug ..'
                 ].join('&&')
             },
             xcode: {
