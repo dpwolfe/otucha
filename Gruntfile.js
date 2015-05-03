@@ -1,11 +1,12 @@
 module.exports = function (grunt) {
-	var path = require('path');
+    var path = require('path');
     require('load-grunt-tasks')(grunt);
-    grunt.loadNpmTasks('grunt-bowercopy');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        update_submodules: {
+            default: {}
+        },
         shell: {
             options: {
                 stderr: false
@@ -33,14 +34,6 @@ module.exports = function (grunt) {
                     'cd xbuild',
                     'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -G Xcode ..',
                     'open -a Xcode otucha.xcodeproj'
-                ].join('&&')
-            },
-            submodule_init: {
-                command: [
-                    'echo Initializing glfw submodule',
-                    'cd ' + path.join('submodules', 'glfw'),
-                    'git submodule init',
-                    'git submodule update'
                 ].join('&&')
             },
             emscripten_cmake: {
@@ -115,9 +108,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('default', function () {
-        grunt.task.run(['build']);
-    });
+    grunt.registerTask('default', ['build']);
     grunt.registerTask('build', ['build:native']);
     grunt.registerTask('build:native', function () {
         grunt.file.mkdir('build');
@@ -150,7 +141,5 @@ module.exports = function (grunt) {
         }
         grunt.task.run('bowercopy:server');
     });
-    grunt.registerTask('init', function () {
-        grunt.task.run('shell:submodule_init');
-    });
+    grunt.registerTask('init', ['update_submodules']);
 }
