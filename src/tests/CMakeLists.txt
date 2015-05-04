@@ -7,7 +7,7 @@ set(CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 
 if(COVERALLS)
 	set(COVERAGE_SRCS ${RFFALCON_SRCS} ${WARBLER_SRCS} ${TERASCA_SRCS} ${CPP_FILES})
-	coveralls_setup("${COVERAGE_SRCS}" ${COVERALLS_UPLOAD} "${PROJECT_SOURCE_DIR}/src/external/coveralls-cmake" ${COVERALLS_VERBOSE})
+	coveralls_setup("${COVERAGE_SRCS}" ${COVERALLS_UPLOAD} "${PROJECT_SOURCE_DIR}/submodules/coveralls-cmake/cmake" ${COVERALLS_VERBOSE})
 endif()
 
 add_executable(otucha_tests ${CPP_FILES})

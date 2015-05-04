@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.7)
 project(otucha)
 find_package(OpenGL REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/src/external/coveralls-cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/submodules/coveralls-cmake/cmake)
 
 # The version number
 set(otucha_VERSION_MAJOR 0)
