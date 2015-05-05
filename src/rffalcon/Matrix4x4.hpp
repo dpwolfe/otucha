@@ -29,6 +29,8 @@ namespace rffalcon
 
 		Matrix4x4 operator=(const Matrix4x4& rhs);
 		Matrix4x4Row operator[](int row) const;
+		bool operator==(const Matrix4x4& rhs) const;
+		bool operator!=(const Matrix4x4& rhs) const;
 		Matrix4x4 operator*(const Matrix4x4& rhs) const;
 		void copyToColumnMajor(float matrix[16]) const;
 

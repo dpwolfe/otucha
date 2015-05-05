@@ -55,6 +55,7 @@ TEST(Matrix3x3Operators, double_brackets) {
 TEST(Matrix3x3Operators, assignment) {
 	Matrix3x3 m1(1, 1, 2, 3, 1, 5, 6, 2, 8);
 	Matrix3x3 m2(-0.5, -1, 0.75, 1.5, -1, 0.25, 0, 1, -0.5);
+	EXPECT_NE(m1, m2);
 	m1 = m2;
 	EXPECT_EQ(m1, m2);
 }

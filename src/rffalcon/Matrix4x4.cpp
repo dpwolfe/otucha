@@ -57,6 +57,27 @@ Matrix4x4::Matrix4x4Row Matrix4x4::operator[](int row) const
 	return Matrix4x4Row(*this, row);
 }
 
+bool Matrix4x4::operator==(const Matrix4x4& rhs) const
+{
+	bool equal = true;
+	for (int row = 0; row < 4 && equal; row++)
+	{
+		for (int column = 0; column < 4 && equal; column++)
+		{
+			if (_value[row][column] != rhs._value[row][column])
+			{
+				equal = false;
+			}
+		}
+	}
+	return equal;
+}
+
+bool Matrix4x4::operator!=(const Matrix4x4& rhs) const
+{
+	return !(*this == rhs);
+}
+
 Matrix4x4 Matrix4x4::operator*(const Matrix4x4& rhs) const
 {
 	Matrix4x4 result;
