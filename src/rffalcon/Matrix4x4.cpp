@@ -7,9 +7,12 @@
 using namespace rffalcon;
 
 Matrix4x4::Matrix4x4Row::Matrix4x4Row(const Matrix4x4& parent, int row)
-	: _parent(parent), _row(row) {}
+	: _parent(parent), _row(row)
+{
+}
 
-double Matrix4x4::Matrix4x4Row::operator[](int column) const {
+double Matrix4x4::Matrix4x4Row::operator[](int column) const
+{
 	return _parent._get(_row, column);
 }
 
@@ -31,7 +34,6 @@ Matrix4x4::Matrix4x4(const Matrix4x4& m)
 
 Matrix4x4::~Matrix4x4()
 {
-
 }
 
 Matrix4x4::Matrix4x4(

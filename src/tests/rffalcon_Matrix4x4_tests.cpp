@@ -63,3 +63,27 @@ TEST(Matrix4x4Methods, copy_to_column_major) {
 		EXPECT_EQ(cm[i], expected[i]);
 	}
 }
+
+TEST(Matrix4x4Methods, orthographic) {
+	Matrix4x4 m1 = Matrix4x4::orthographic(-1, 3, -2, 6, -3, 13);
+	Matrix4x4 m2(0.5, 0, 0, -0.5, 0, 0.25, 0, -0.5, 0, 0, -0.125, -0.625, 0, 0, 0, 1);
+	EXPECT_EQ(m1, m2);
+}
+
+TEST(Matrix4x4Methods, perspective) {
+	Matrix4x4 m1 = Matrix4x4::perspective(-1, 3, -2, 6, -3, -1, -1);
+	Matrix4x4 m2(0.5, 0, 0.5, 0, 0, 0.25, 0.5, 0, 0, 0, -2, -3, 0, 0, -1, 0);
+	EXPECT_EQ(m1, m2);
+}
+
+TEST(Matrix4x4Methods, lookAt) {
+	rffalcon::AffinePoint eye(1.0, 1.0, 1.0);
+	rffalcon::AffinePoint center(0, 0, 0);
+	rffalcon::AffineVector up(0, 1, 0);
+	Matrix4x4 m1 = Matrix4x4::lookAt(eye, center, up);
+	Matrix4x4 m2(0.70710678118654757, 0, -0.70710678118654757, 0,
+		-0.40824829046386307, 0.81649658092772615, -0.40824829046386307, 0,
+		0.57735026918962584, 0.57735026918962584, 0.57735026918962584, -1.7320508075688776,
+		0, 0, 0, 1);
+	EXPECT_EQ(m1, m2);
+}
