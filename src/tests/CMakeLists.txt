@@ -1,4 +1,5 @@
 set(CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+              ${CMAKE_CURRENT_SOURCE_DIR}/rffalcon_AffineVector_tests.cpp
               ${CMAKE_CURRENT_SOURCE_DIR}/rffalcon_Matrix3x3_tests.cpp
               ${CMAKE_CURRENT_SOURCE_DIR}/rffalcon_Matrix4x4_tests.cpp
               ${CMAKE_CURRENT_SOURCE_DIR}/warbler_Console_tests.cpp

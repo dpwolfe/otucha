@@ -73,6 +73,24 @@ namespace rffalcon {
 		return AffineVector(_dx - rhs._dx, _dy - rhs._dy, _dz - rhs._dz);
 	}
 
+	AffineVector AffineVector::operator=(const AffineVector& rhs)
+	{
+		_dx = rhs._dx;
+		_dy = rhs._dy;
+		_dz = rhs._dz;
+		return *this;
+	}
+
+	bool AffineVector::operator==(const AffineVector& rhs) const
+	{
+		return _dx == rhs._dx && _dy == rhs._dy && _dz == rhs._dz;
+	}
+
+	bool AffineVector::operator!=(const AffineVector& rhs) const
+	{
+		return !(*this == rhs);
+	}
+
 	double AffineVector::operator[](int index) const
 	{
 		switch (index) {

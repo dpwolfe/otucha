@@ -19,12 +19,15 @@ namespace rffalcon {
 		AffineVector cross(const AffineVector& v);
 		AffineVector operator*(double rhs);
 		AffineVector operator-(const AffineVector& rhs);
+		bool operator==(const AffineVector& rhs) const;
+		bool operator!=(const AffineVector& rhs) const;
+		AffineVector operator=(const AffineVector& rhs);
 		double operator[](int index) const;
 
 	private:
-		double _dx;
-		double _dy;
-		double _dz;
+		double _dx = 0.0;
+		double _dy = 0.0;
+		double _dz = 0.0;
 	};
 
 }
