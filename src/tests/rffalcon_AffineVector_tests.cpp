@@ -71,9 +71,16 @@ TEST(AffineVectorOperators, bracket) {
 	EXPECT_EQ(v1[3], 0);
 }
 
-TEST(AffineVectorMethods, dot) {
+TEST(AffineVectorMethods, dot_with_point) {
+	AffineVector v(1, 2, 3);
+	AffinePoint p(2, 3, 7);
+	double result = v.dot(p);
+	EXPECT_EQ(result, 29);
+}
+
+TEST(AffineVectorMethods, dot_with_vector) {
 	AffineVector v1(1, 2, 3);
-	AffinePoint v2(2, 3, 7);
+	AffineVector v2(2, 3, 7);
 	double result = v1.dot(v2);
 	EXPECT_EQ(result, 29);
 }
