@@ -2,7 +2,7 @@
 
 namespace rffalcon {
 
-	typedef union
+	union vec2
 	{
 		float data[2];
 		struct
@@ -10,9 +10,17 @@ namespace rffalcon {
 			float x;
 			float y;
 		};
-	} vec2;
+		bool operator==(const vec2 &rhs) const
+		{
+			return x == rhs.x && y == rhs.y;
+		}
+		bool operator!=(const vec2 &rhs) const
+		{
+			return *this != rhs;
+		}
+	};
 
-	typedef union
+	union vec3
 	{
 		float data[3];
 		struct
@@ -33,9 +41,17 @@ namespace rffalcon {
 			float green;
 			float blue;
 		};
-	} vec3;
+		bool operator==(const vec3 &rhs) const
+		{
+			return x == rhs.x && y == rhs.y && z == rhs.z;
+		}
+		bool operator!=(const vec3 &rhs) const
+		{
+			return *this != rhs;
+		}
+	};
 
-	typedef union
+	union vec4
 	{
 		float data[4];
 		struct
@@ -66,9 +82,17 @@ namespace rffalcon {
 			float blue;
 			float alpha;
 		};
-	} vec4;
+		bool operator==(const vec4 &rhs) const
+		{
+			return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w;
+		}
+		bool operator!=(const vec4 &rhs) const
+		{
+			return *this != rhs;
+		}
+	};
 
-	typedef union
+	union ivec2
 	{
 		int data[2];
 		struct
@@ -86,9 +110,17 @@ namespace rffalcon {
 			int red;
 			int green;
 		};
-	} ivec2;
+		bool operator==(const ivec2 &rhs) const
+		{
+			return x == rhs.x && y == rhs.y;
+		}
+		bool operator!=(const ivec2 &rhs) const
+		{
+			return *this != rhs;
+		}
+	};
 
-	typedef union
+	union ivec3
 	{
 		int data[3];
 		struct
@@ -115,9 +147,17 @@ namespace rffalcon {
 			int green;
 			int blue;
 		};
-	} ivec3;
+		bool operator==(const ivec3 &rhs) const
+		{
+			return x == rhs.x && y == rhs.y && z == rhs.z;
+		}
+		bool operator!=(const ivec3 &rhs) const
+		{
+			return *this != rhs;
+		}
+	};
 
-	typedef union
+	union ivec4
 	{
 		int data[4];
 		struct
@@ -155,6 +195,14 @@ namespace rffalcon {
 			float istart;
 			float icount;
 		};
-	} ivec4;
+		bool operator==(const ivec4 &rhs) const
+		{
+			return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w;
+		}
+		bool operator!=(const ivec4 &rhs) const
+		{
+			return *this != rhs;
+		}
+	};
 
 }
