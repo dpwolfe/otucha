@@ -8,7 +8,9 @@ namespace rffalcon {
 
 	AffineVector::AffineVector()
 	{
-
+		_dx = 0.0;
+		_dy = 0.0;
+		_dz = 0.0;
 	}
 
 	AffineVector::AffineVector(const AffineVector& v)

@@ -16,7 +16,7 @@ namespace rffalcon {
 		}
 		bool operator!=(const vec2 &rhs) const
 		{
-			return *this != rhs;
+			return !(*this == rhs);
 		}
 	};
 
@@ -47,7 +47,7 @@ namespace rffalcon {
 		}
 		bool operator!=(const vec3 &rhs) const
 		{
-			return *this != rhs;
+			return !(*this == rhs);
 		}
 	};
 
@@ -88,7 +88,7 @@ namespace rffalcon {
 		}
 		bool operator!=(const vec4 &rhs) const
 		{
-			return *this != rhs;
+			return !(*this == rhs);
 		}
 	};
 
@@ -116,7 +116,7 @@ namespace rffalcon {
 		}
 		bool operator!=(const ivec2 &rhs) const
 		{
-			return *this != rhs;
+			return !(*this == rhs);
 		}
 	};
 
@@ -153,7 +153,7 @@ namespace rffalcon {
 		}
 		bool operator!=(const ivec3 &rhs) const
 		{
-			return *this != rhs;
+			return !(*this == rhs);
 		}
 	};
 
@@ -201,7 +201,7 @@ namespace rffalcon {
 		}
 		bool operator!=(const ivec4 &rhs) const
 		{
-			return *this != rhs;
+			return !(*this == rhs);
 		}
 	};
 

@@ -9,11 +9,13 @@ namespace rffalcon {
 		friend class AffineVector;
 	public:
 		AffinePoint();
-		AffinePoint(const AffinePoint& p);
+		AffinePoint(const AffinePoint &p);
 		AffinePoint(double x, double y, double z);
 		virtual ~AffinePoint();
 
-		AffineVector operator-(AffinePoint& rhs);
+		bool operator==(const AffinePoint &rhs) const;
+		bool operator!=(const AffinePoint &rhs) const;
+		AffineVector operator-(const AffinePoint &rhs) const;
 
 	private:
 		double _x;

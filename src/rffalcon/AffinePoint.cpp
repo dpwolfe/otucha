@@ -2,7 +2,12 @@
 
 namespace rffalcon {
 
-	AffinePoint::AffinePoint() { }
+	AffinePoint::AffinePoint()
+	{
+		_x = 0.0;
+		_y = 0.0;
+		_z = 0.0;
+	}
 
 	AffinePoint::AffinePoint(double x, double y, double z)
 	{
@@ -20,7 +25,17 @@ namespace rffalcon {
 
 	AffinePoint::~AffinePoint() { }
 
-	AffineVector AffinePoint::operator-(AffinePoint& rhs)
+	bool AffinePoint::operator==(const AffinePoint& rhs) const
+	{
+		return _x == rhs._x && _y == rhs._y && _z == rhs._z;
+	}
+
+	bool AffinePoint::operator!=(const AffinePoint& rhs) const
+	{
+		return !(*this == rhs);
+	}
+
+	AffineVector AffinePoint::operator-(const AffinePoint& rhs) const
 	{
 		return AffineVector(_x - rhs._x, _y - rhs._y, _z - rhs._z);
 	}

@@ -25,9 +25,9 @@ namespace rffalcon {
 		double operator[](int index) const;
 
 	private:
-		double _dx = 0.0;
-		double _dy = 0.0;
-		double _dz = 0.0;
+		double _dx;
+		double _dy;
+		double _dz;
 	};
 
 }
