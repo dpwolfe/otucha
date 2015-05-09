@@ -30,17 +30,17 @@ namespace rffalcon
 		int getHeight() const;
 		int getDepth() const;
 		GLuint getGLTextureId() const;
-		rffalcon::ivec4 getRegion(const int width, const int height);
-		void setRegion(rffalcon::ivec4 region, GlyphData glyphData);
+		ivec4 getRegion(const int width, const int height);
+		void setRegion(ivec4 region, GlyphData glyphData);
 		void upload();
 
 	private:
 		int _fit(const int index, const int width, const int height);
-		void _addNode(rffalcon::ivec4 region, int index);
+		void _addNode(ivec4 region, int index);
 		void _reduceNodes(int startIndex);
 		void _mergeNodes();
 
-		std::vector<rffalcon::ivec3> _nodes;
+		std::vector<ivec3> _nodes;
 		int _width;
 		int _height;
 		int _depth;

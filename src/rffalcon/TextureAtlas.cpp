@@ -9,7 +9,7 @@ TextureAtlas::TextureAtlas(const int width, const int height, const int depth)
 {
 	// starter node for fitting algorithm
 	// contains padding in atlas to avoid sampling artifacts
-	rffalcon::ivec3 paddingNode = { { 1, 1, width - 2 } };
+	ivec3 paddingNode = { { 1, 1, width - 2 } };
 	_nodes.push_back(paddingNode);
 	_data = new unsigned char[width * height * depth]();
 }
@@ -41,19 +41,19 @@ GLuint TextureAtlas::getGLTextureId() const
 	return _glTextureId;
 }
 
-rffalcon::ivec4 TextureAtlas::getRegion(const int width, const int height)
+ivec4 TextureAtlas::getRegion(const int width, const int height)
 {
 	int bestY = INT_MAX;
 	int bestWidth = INT_MAX;
 	int bestIndex = -1;
 	size_t nodeCount = _nodes.size();
-	rffalcon::ivec4 region = { { -1, -1, width, height } };
+	ivec4 region = { { -1, -1, width, height } };
 
 	for (size_t index = 0; index < nodeCount; ++index)
 	{
 		int y = _fit(index, width, height);
 		if (y >= 0) {
-			rffalcon::ivec3 node = _nodes[index];
+			ivec3 node = _nodes[index];
 			if (y < bestY || (y == bestY && node.width < bestWidth))
 			{
 				bestY = y;
@@ -76,9 +76,9 @@ rffalcon::ivec4 TextureAtlas::getRegion(const int width, const int height)
 }
 
 // Add node to envelope
-void TextureAtlas::_addNode(rffalcon::ivec4 region, int index)
+void TextureAtlas::_addNode(ivec4 region, int index)
 {
-	rffalcon::ivec3 node;
+	ivec3 node;
 	node.x = region.x;
 	node.yNext = region.y + region.height;
 	node.width = region.width;
@@ -90,8 +90,8 @@ void TextureAtlas::_reduceNodes(int startIndex)
 {
 	for (size_t index = startIndex + 1; index < _nodes.size(); ++index)
 	{
-		rffalcon::ivec3 curNode = _nodes[index];
-		rffalcon::ivec3 prevNode = _nodes[index - 1];
+		ivec3 curNode = _nodes[index];
+		ivec3 prevNode = _nodes[index - 1];
 		if (curNode.x < (prevNode.x + prevNode.width))
 		{
 			_nodes.erase(_nodes.begin() + index);
@@ -122,8 +122,8 @@ void TextureAtlas::_mergeNodes()
 {
 	for (size_t index = 0; index < _nodes.size() - 1; ++index)
 	{
-		rffalcon::ivec3 curNode = _nodes[index];
-		rffalcon::ivec3 nextNode = _nodes[index + 1];
+		ivec3 curNode = _nodes[index];
+		ivec3 nextNode = _nodes[index + 1];
 		if (curNode.yNext == nextNode.yNext)
 		{
 			curNode.width += nextNode.width;
@@ -135,7 +135,7 @@ void TextureAtlas::_mergeNodes()
 
 int TextureAtlas::_fit(const int index, const int width, const int height)
 {
-	rffalcon::ivec3 node = _nodes[index];
+	ivec3 node = _nodes[index];
 	int x = node.x;
 	int y = node.y;
 	int widthLeft = width;
@@ -178,7 +178,7 @@ int TextureAtlas::_fit(const int index, const int width, const int height)
 	return result;
 }
 
-void TextureAtlas::setRegion(rffalcon::ivec4 region, GlyphData glyphData)
+void TextureAtlas::setRegion(ivec4 region, GlyphData glyphData)
 {
 	int depth = getDepth();
 	int charSize = sizeof(char);
