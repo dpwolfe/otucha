@@ -41,6 +41,11 @@ GLuint TextureAtlas::getGLTextureId() const
 	return _glTextureId;
 }
 
+unsigned char* TextureAtlas::getData() const
+{
+	return _data;
+}
+
 ivec4 TextureAtlas::getRegion(const int width, const int height)
 {
 	int bestY = INT_MAX;

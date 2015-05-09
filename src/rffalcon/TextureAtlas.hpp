@@ -11,6 +11,15 @@ namespace rffalcon
 {
 	struct GlyphData
 	{
+		GlyphData()
+		{
+		}
+
+		GlyphData(int width, int height, int top, int left, unsigned char *buffer, int pitch, FT_Glyph glyph) :
+			width(width), height(height), top(top), left(left), buffer(buffer), pitch(pitch), glyph(glyph)
+		{
+		}
+
 		int width = 0;
 		int height = 0;
 		int top = 0;
@@ -30,6 +39,7 @@ namespace rffalcon
 		int getHeight() const;
 		int getDepth() const;
 		GLuint getGLTextureId() const;
+		unsigned char* getData() const;
 		ivec4 getRegion(const int width, const int height);
 		void setRegion(ivec4 region, GlyphData glyphData);
 		void upload();
