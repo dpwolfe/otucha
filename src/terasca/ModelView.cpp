@@ -19,6 +19,11 @@ ModelView::~ModelView()
 {
 }
 
+const double* ModelView::getMCRegionOfInterest() const
+{
+	return _mcRegionOfInterest;
+}
+
 void ModelView::setMCRegionOfInterest(double xyz[6])
 {
 	for (int i = 0; i < 6; i++)

@@ -23,7 +23,7 @@ namespace terasca
 		virtual void getMCBoundingBox(double* xyzBounds) const;
 		void addModel(std::shared_ptr<rffalcon::ModelBase> model);
 		void setProjectionType(ProjectionType type);
-
+		const double* getMCRegionOfInterest() const;
 		void setMCRegionOfInterest(double xyz[6]);
 		void setEyeCenterUp(rffalcon::AffinePoint eye, rffalcon::AffinePoint center, rffalcon::AffineVector up);
 		void setZProjectionPlane(double zpp);
