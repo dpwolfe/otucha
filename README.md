@@ -59,7 +59,7 @@ A perspective view of a cube with copper material properties and three lights in
 
 
 #### Code names
-Like otucha, these code names have no special meaning and are picked using the random page feature on Wikipedia.  They are used for namespaces of discrete areas of the app that have separate concerns at the moment. They are:
+Like otucha, these code names have no special meaning and are picked using the random page feature on Wikipedia.  They are used for namespaces of areas in the app that have separate concerns at the moment.
 
 **RFFalcon**: Short for red-footed falcon.  Geometry, models and rendering.  Point and Matrix classes including vec union structs. Text built on freetype.
 
