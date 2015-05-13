@@ -103,14 +103,18 @@ include_directories(
 	"${PROJECT_SOURCE_DIR}/src/external/freetype-2.5.5/include"
 )
 
+# add internal lib source files
 add_subdirectory("${PROJECT_SOURCE_DIR}/src/rffalcon")
-get_directory_property(RFFALCON_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/rffalcon" DEFINITION CPP_FILES)
 add_subdirectory("${PROJECT_SOURCE_DIR}/src/terasca")
-get_directory_property(TERASCA_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/terasca" DEFINITION CPP_FILES)
 add_subdirectory("${PROJECT_SOURCE_DIR}/src/warbler")
+
+# bring list of lib source files to outer scope for test to reference for Coveralls
+get_directory_property(RFFALCON_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/rffalcon" DEFINITION CPP_FILES)
+get_directory_property(TERASCA_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/terasca" DEFINITION CPP_FILES)
 get_directory_property(WARBLER_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/warbler" DEFINITION CPP_FILES)
 
 if(OTUCHA_EMSCRIPTEN_ENABLED)
+	# only freetype is build from external for Emscripten since the others are provided by Emscripten
 	add_subdirectory("${PROJECT_SOURCE_DIR}/src/external/freetype-2.5.5")
 else()
 	# /MD for gtest
@@ -128,11 +132,11 @@ else()
 	# Compile checked in external dependencies
 	add_subdirectory("${PROJECT_SOURCE_DIR}/src/external")
 
+	include(CTest)
+	enable_testing()
 	include_directories(
 		"${gtest_SOURCE_DIR}/include"
 	)
-	include(CTest)
-	enable_testing()
 	add_subdirectory("${PROJECT_SOURCE_DIR}/src/tests")
 endif()
 
