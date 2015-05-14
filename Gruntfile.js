@@ -20,21 +20,21 @@ module.exports = function (grunt) {
                 command: [
                     'echo Building native',
                     'cd build',
-                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON ..'
+                    'cmake -DOTUCHA_DO_NOT_WARN_GL_H=ON ..'
                 ].join('&&')
             },
             coveralls: {
                 command: [
                     'echo Building coveralls',
                     'cd cbuild',
-                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -DCOVERALLS=ON ' + coverallsVerbose + '-DCMAKE_BUILD_TYPE=Debug ..'
+                    'cmake -DOTUCHA_DO_NOT_WARN_GL_H=ON -DCOVERALLS=ON ' + coverallsVerbose + '-DCMAKE_BUILD_TYPE=Debug ..'
                 ].join('&&')
             },
             xcode: {
                 command: [
                     'echo Building Xcode',
                     'cd xbuild',
-                    'cmake -DOTUCHA_EMSCRIPTEN_ENABLED=OFF -DOTUCHA_DO_NOT_WARN_GL_H=ON -G Xcode ..',
+                    'cmake -DOTUCHA_DO_NOT_WARN_GL_H=ON -G Xcode ..',
                     'open -a Xcode otucha.xcodeproj'
                 ].join('&&')
             },
@@ -44,7 +44,7 @@ module.exports = function (grunt) {
                 },
                 command: [
                     'cd embuild',
-                    'emcmake cmake ..'
+                    'emcmake cmake -DOTUCHA_EMSCRIPTEN_ENABLED=ON ..'
                 ].join('&&')
             },
             emscripten_make: {

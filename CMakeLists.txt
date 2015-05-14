@@ -7,7 +7,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/submodules/cove
 set(otucha_VERSION_MAJOR 0)
 set(otucha_VERSION_MINOR 1)
 
-option(OTUCHA_EMSCRIPTEN_ENABLED "Enable building with Emscripten" ON)
+option(OTUCHA_EMSCRIPTEN_ENABLED "Enable building with Emscripten" OFF)
 option(OTUCHA_EMSCRIPTEN_DEBUG "Enable compile flags for easier JavaScript debugging" OFF)
 option(OTUCHA_DO_NOT_WARN_GL_H "Turn off the warning for gl.h and gl3.h both being defined on Mac" OFF)
 option(COVERALLS "Turn on Coveralls support" OFF)
