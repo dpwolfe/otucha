@@ -5,10 +5,10 @@ A cross-platform C++ OpenGL program that also compiles to JavaScript using Emscr
 #### Status
 
 - Builds and runs on Windows, Mac OS X and Linux as well as in browser with Emscripten
-- Currently working on increasing code coverage and moving external dependencies to submodules, upgrading them in the process
+- Currently working on moving external dependencies to submodules, upgrading them in the process
 
 #### Developer Setup
-Follow these steps for Windows or Mac development.  Pay careful attention to any platform specific instructions each vendor provides.
+Follow these steps for Windows or Mac development.  Pay careful attention to platform specific instructions.
 
 1. Install [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
 2. Install [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
