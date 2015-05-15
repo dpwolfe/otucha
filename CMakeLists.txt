@@ -141,8 +141,8 @@ else()
 endif()
 
 add_executable(otucha "${PROJECT_SOURCE_DIR}/src/otucha.cpp"
-                      "${PROJECT_SOURCE_DIR}/src/DependencyContainer.cpp"
-                      "${PROJECT_SOURCE_DIR}/src/DependencyContainer.hpp")
+					  "${PROJECT_SOURCE_DIR}/src/DependencyContainer.cpp"
+					  "${PROJECT_SOURCE_DIR}/src/DependencyContainer.hpp")
 if(OTUCHA_EMSCRIPTEN_ENABLED)
 	target_link_libraries(otucha rffalcon terasca warbler ${OPENGL_LIBRARY} freetype)
 else()
