@@ -100,14 +100,16 @@ std::shared_ptr<rffalcon::VertexBuffer> testText(const std::string &appDir)
 
 int main(int argc, char* argv[])
 {
+	// these two lines included for Emscripten which is excluding the constructors otherwise :(
 	rffalcon::Matrix4x4 matrix;
 	rffalcon::Matrix3x3 matrix2;
+
 	fprintf(stdout, "%s Version %d.%d\n", argv[0], otucha_VERSION_MAJOR, otucha_VERSION_MINOR);
 	terasca::GLFWController c("otucha", terasca::Controller::DEPTH);
 	c.reportVersions(std::cout);
 	std::string appPath(argv[0]);
-	unsigned found = appPath.find_last_of("/\\");
-	std::string appDir = appPath.substr(0, found + 1);
+	int directoryEnd = appPath.find_last_of("/\\");
+	std::string appDir = appPath.substr(0, directoryEnd + 1);
 	DependencyContainer::getSingleton()->setAppDir(appDir);
 	
 	std::shared_ptr<terasca::ModelView> blockModelView = std::make_shared<terasca::ModelViewWithShader>(appDir + "simple.vsh", appDir + "simple.fsh");
@@ -134,8 +136,6 @@ int main(int argc, char* argv[])
 	}, std::make_shared<warbler::t_consoleArgTypes>());
 	DependencyContainer::getSingleton()->getConsole()->executeCommand(L"test");
 	// end test console code
-
-	auto fontFace = DependencyContainer::getSingleton()->getFontFace();
 
 	c.run();
 
