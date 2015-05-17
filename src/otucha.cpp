@@ -125,9 +125,11 @@ int main(int argc, char* argv[])
 	std::shared_ptr<terasca::ModelView> textModelView = std::make_shared<terasca::ModelViewWithShader>(appDir + "v3f-t2f-c4f.vsh", appDir + "v3f-t2f-c4f.fsh");
 	textModelView->addModel(textModel);
 	textModelView->setProjectionType(ORTHOGRAPHIC);
-	c.addModelView(textModelView);
 	textModelView->getMCBoundingBox(xyz);
 	set3DViewingInformation(textModelView, xyz);
+
+	// add models to view, order matters
+	c.addModelView(textModelView);
 	c.addModelView(blockModelView);
 
 	// test console code to be removed later
