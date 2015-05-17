@@ -111,16 +111,17 @@ int main(int argc, char* argv[])
 	int directoryEnd = appPath.find_last_of("/\\");
 	std::string appDir = appPath.substr(0, directoryEnd + 1);
 	DependencyContainer::getSingleton()->setAppDir(appDir);
-	
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	double xyz[6];
+
+	// Block model
 	std::shared_ptr<terasca::ModelView> blockModelView = std::make_shared<terasca::ModelViewWithShader>(appDir + "simple.vsh", appDir + "simple.fsh");
 	std::shared_ptr<rffalcon::ModelBase> blockModel = std::make_shared<rffalcon::Block>(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f);
 	blockModelView->addModel(blockModel);
-
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	double xyz[6];
 	blockModelView->getMCBoundingBox(xyz);
 	set3DViewingInformation(blockModelView, xyz);
 
+	// Text model
 	std::shared_ptr<rffalcon::VertexBuffer> textModel = testText(appDir);
 	std::shared_ptr<terasca::ModelView> textModelView = std::make_shared<terasca::ModelViewWithShader>(appDir + "v3f-t2f-c4f.vsh", appDir + "v3f-t2f-c4f.fsh");
 	textModelView->addModel(textModel);
