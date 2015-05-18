@@ -45,8 +45,10 @@ std::string DependencyContainer::getAppDir()
 	return _appDir;
 }
 
-void DependencyContainer::setAppDir(const std::string &appDir)
+void DependencyContainer::setAppDir(const std::string &appPath)
 {
+	int directoryEnd = appPath.find_last_of("/\\");
+	std::string appDir = appPath.substr(0, directoryEnd + 1);
 	_appDir = appDir;
 }
 

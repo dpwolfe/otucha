@@ -108,9 +108,8 @@ int main(int argc, char* argv[])
 	terasca::GLFWController c("otucha", terasca::Controller::DEPTH);
 	c.reportVersions(std::cout);
 	std::string appPath(argv[0]);
-	int directoryEnd = appPath.find_last_of("/\\");
-	std::string appDir = appPath.substr(0, directoryEnd + 1);
-	DependencyContainer::getSingleton()->setAppDir(appDir);
+	DependencyContainer::getSingleton()->setAppDir(appPath);
+	std::string appDir = DependencyContainer::getSingleton()->getAppDir();
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	double xyz[6];
 
