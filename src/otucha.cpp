@@ -35,11 +35,11 @@ void set3DViewingInformation(std::shared_ptr<terasca::ModelView> modelView, doub
 	modelView->setEyeCoordinatesZMinZMax(zmin, zmax);
 }
 
-typedef struct {
+struct Vertex {
 	float x, y, z;
 	float s, t;
 	float r, g, b, a;
-} Vertex;
+};
 
 void addText(std::shared_ptr<rffalcon::VertexBuffer> buffer, std::shared_ptr<rffalcon::TextureFont> font,
 	const std::wstring &text, rffalcon::vec2 pen, const rffalcon::vec4 color)
