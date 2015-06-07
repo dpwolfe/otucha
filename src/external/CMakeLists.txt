@@ -9,7 +9,6 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-add_subdirectory(gtest-1.7.0)
 add_subdirectory(freetype-2.5.5)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")

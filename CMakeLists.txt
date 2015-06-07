@@ -118,7 +118,7 @@ get_directory_property(WARBLER_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/warbler
 
 if(OTUCHA_EMSCRIPTEN_ENABLED)
 	# only freetype is build from external for Emscripten since the others are provided by Emscripten
-	add_subdirectory("${PROJECT_SOURCE_DIR}/src/external/freetype-2.5.5")
+	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/freetype2")
 else()
 	# /MD for gtest
 	set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib.")
@@ -132,7 +132,7 @@ else()
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/glfw")
 	get_directory_property(GLFW_LIBRARIES DIRECTORY "${PROJECT_SOURCE_DIR}/submodules/glfw" DEFINITION glfw_LIBRARIES)
 	
-	# Compile checked in external dependencies
+	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/gtest")
 	add_subdirectory("${PROJECT_SOURCE_DIR}/src/external")
 
 	include(CTest)
