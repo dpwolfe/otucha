@@ -10,3 +10,6 @@
 [submodule "submodules/gmock"]
 	path = submodules/gmock
 	url = https://github.com/cpp-mirrors/gmock.git
+[submodule "submodules/gtest"]
+	path = submodules/gtest
+	url = https://github.com/cpp-mirrors/gtest.git
