@@ -44,7 +44,7 @@ module.exports = function (grunt) {
                 },
                 command: [
                     'cd embuild',
-                    'emcmake cmake -DOTUCHA_EMSCRIPTEN_ENABLED=ON ..'
+                    'emcmake cmake -DOTUCHA_EMSCRIPTEN_ENABLED=ON -G "MinGW Makefiles" ..'
                 ].join('&&')
             },
             emscripten_make: {
