@@ -103,7 +103,7 @@ include_directories(
 	"${PROJECT_SOURCE_DIR}/src/rffalcon"
 	"${PROJECT_SOURCE_DIR}/src/terasca"
 	"${PROJECT_SOURCE_DIR}/src/warbler"
-	"${PROJECT_SOURCE_DIR}/src/external/freetype-2.5.5/include"
+	"${PROJECT_SOURCE_DIR}/submodules/freetype2/include"
 )
 
 # add internal lib source files
@@ -117,7 +117,8 @@ get_directory_property(TERASCA_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/terasca
 get_directory_property(WARBLER_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/warbler" DEFINITION CPP_FILES)
 
 if(OTUCHA_EMSCRIPTEN_ENABLED)
-	# only freetype is build from external for Emscripten since the others are provided by Emscripten
+	# GLFW and GLEW are provided by Emscripten 
+	# Freetype is not included in Emscripten
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/freetype2")
 else()
 	# /MD for gtest
@@ -133,6 +134,7 @@ else()
 	get_directory_property(GLFW_LIBRARIES DIRECTORY "${PROJECT_SOURCE_DIR}/submodules/glfw" DEFINITION glfw_LIBRARIES)
 	
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/gtest")
+	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/freetype2")
 	add_subdirectory("${PROJECT_SOURCE_DIR}/src/external")
 
 	include(CTest)
