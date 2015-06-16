@@ -14,27 +14,28 @@ module.exports = function (grunt) {
                 stderr: false
             },
             target: {
-                command: 'echo Use build:emscripten or build:native'
+                command: 'echo Use build:js or cmake:native'
             },
             native: {
                 command: [
-                    'echo Building native',
+                    'echo Running CMake for native',
                     'cd build',
                     'cmake -DOTUCHA_DO_NOT_WARN_GL_H=ON ..'
                 ].join('&&')
             },
             coveralls: {
                 command: [
-                    'echo Building coveralls',
+                    'echo Running CMake for Coveralls',
                     'cd cbuild',
                     'cmake -DOTUCHA_DO_NOT_WARN_GL_H=ON -DCOVERALLS=ON ' + coverallsVerbose + '-DCMAKE_BUILD_TYPE=Debug ..'
                 ].join('&&')
             },
             xcode: {
                 command: [
-                    'echo Building Xcode',
+                    'echo Running CMake for Xcode',
                     'cd xbuild',
                     'cmake -DOTUCHA_DO_NOT_WARN_GL_H=ON -G Xcode ..',
+                    'echo Opening Xcode...',
                     'open -a Xcode otucha.xcodeproj'
                 ].join('&&')
             },
@@ -100,23 +101,23 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['build:native']);
-    grunt.registerTask('build:native', function () {
+    grunt.registerTask('default', ['cmake']);
+    grunt.registerTask('cmake', ['cmake:native']);
+    grunt.registerTask('cmake:native', function () {
         grunt.file.mkdir('build');
         grunt.task.run(['shell:native']);
     });
-    grunt.registerTask('build:coveralls', function () {
+    grunt.registerTask('cmake:coveralls', function () {
         grunt.file.mkdir('cbuild');
         grunt.task.run(['shell:coveralls']);
     });
-    grunt.registerTask('build:xcode', function () {
+    grunt.registerTask('cmake:xcode', function () {
         grunt.file.mkdir('xbuild');
         grunt.task.run(['shell:xcode']);
     });
     grunt.registerTask('build:js', function () {
         if (grunt.option('jsUseDist')) {
-            grunt.fail("jsUseDist is not supported at the moment.");
+            grunt.fail('jsUseDist is not supported at the moment.');
         } else {
             if (!grunt.file.exists('embuild/CMakeCache.txt')) {
                 grunt.file.mkdir('embuild');
