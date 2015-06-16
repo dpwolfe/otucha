@@ -57,7 +57,7 @@ module.exports = function (grunt) {
         bowercopy: {
             server: {
                 options: {
-                    srcPrefix: 'src',
+                    srcPrefix: 'src/server',
                     destPrefix: 'www'
                 },
                 files: {
@@ -66,11 +66,11 @@ module.exports = function (grunt) {
             },
             html: {
                 options: {
-                    srcPrefix: 'embuild',
+                    srcPrefix: 'src/server',
                     destPrefix: 'www'
                 },
                 files: {
-                    'index.html': 'otucha.html'
+                    'index.html': 'index.html'
                 }
             },
             js: {
@@ -80,16 +80,6 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'otucha.js': 'otucha.js',
-                }
-            },
-            dist: {
-                options: {
-                    srcPrefix: 'dist',
-                    destPrefix: 'www'
-                },
-                files: {
-                    'otucha.js': 'otucha.js',
-                    'index.html': 'index.html'
                 }
             }
         },
@@ -126,7 +116,7 @@ module.exports = function (grunt) {
     });
     grunt.registerTask('build:js', function () {
         if (grunt.option('jsUseDist')) {
-            grunt.task.run(['bowercopy:dist']);
+            grunt.fail("jsUseDist is not supported at the moment.");
         } else {
             if (!grunt.file.exists('embuild/CMakeCache.txt')) {
                 grunt.file.mkdir('embuild');
