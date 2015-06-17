@@ -42,10 +42,10 @@ branches:
 
 script:
   # build
-  - cd ${SOURCE_ROOT} && grunt build
+  - cd ${SOURCE_ROOT} && grunt cmake:native
   - cd build && make
   # coveralls build
-  - cd ${SOURCE_ROOT} && grunt build:coveralls
+  - cd ${SOURCE_ROOT} && grunt cmake:coveralls
   - cd cbuild && make
 
 after_success:
