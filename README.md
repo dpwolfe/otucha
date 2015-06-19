@@ -1,6 +1,6 @@
 # otucha [![Build Status](https://travis-ci.org/dpwolfe/otucha.svg?branch=master)](https://travis-ci.org/dpwolfe/otucha) [![Coverage Status](https://coveralls.io/repos/dpwolfe/otucha/badge.svg?branch=master)](https://coveralls.io/r/dpwolfe/otucha?branch=master)
 
-A cross-platform C++ OpenGL program. Builds and runs natively on a Windows, OSX and Linux. Runs in Chrome, Firefox and Safari (OSX) when built with Emscripten.
+A cross-platform C++ OpenGL program. Builds and runs natively on Windows, OSX and Linux. Runs in Chrome, Firefox and Safari (OSX) when built with Emscripten.
 
 ### Status
 - Currently moving external dependencies to submodules, upgrading as necessary.
@@ -46,7 +46,7 @@ A cross-platform C++ OpenGL program. Builds and runs natively on a Windows, OSX 
 1. Run the following command from the repository root:
 
   ```
-  grunt build:xcode
+  grunt cmake:xcode
   ```
 2. Open the generated xcodeproj in the xbuild directory.
 
