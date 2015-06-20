@@ -18,7 +18,6 @@ A cross-platform C++ OpenGL program. Builds and runs natively on Windows, OSX an
 
    ```
    npm install
-   grunt init
    ```
 
 ### Building web
@@ -48,7 +47,8 @@ A cross-platform C++ OpenGL program. Builds and runs natively on Windows, OSX an
   ```
   grunt cmake:xcode
   ```
-2. Open the generated xcodeproj in the xbuild directory.
+
+Xcode will launch once completed.
 
 ### What you'll see
 A perspective view of a cube with copper material properties and three lights in positions selected in order to produce specular highlights.  A sample of rendered text also appears on the bottom left corner.
