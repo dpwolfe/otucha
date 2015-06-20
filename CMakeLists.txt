@@ -133,7 +133,7 @@ else()
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/glfw")
 	get_directory_property(GLFW_LIBRARIES DIRECTORY "${PROJECT_SOURCE_DIR}/submodules/glfw" DEFINITION glfw_LIBRARIES)
 	
-	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/gtest")
+	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/gmock")
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/freetype2")
 	add_subdirectory("${PROJECT_SOURCE_DIR}/src/external")
 
@@ -141,6 +141,7 @@ else()
 	enable_testing()
 	include_directories(
 		"${gtest_SOURCE_DIR}/include"
+		"${gmock_SOURCE_DIR}/include"
 	)
 	add_subdirectory("${PROJECT_SOURCE_DIR}/src/tests")
 endif()

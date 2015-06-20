@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 #include "VertexAttribute.hpp"
 
 using namespace rffalcon;
