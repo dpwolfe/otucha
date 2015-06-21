@@ -13,7 +13,7 @@ if(COVERALLS)
 endif()
 
 add_executable(otucha_tests ${CPP_FILES})
-target_link_libraries (otucha_tests gtest warbler rffalcon GLEW_1110 freetype)
+target_link_libraries (otucha_tests gtest warbler rffalcon libglew_static freetype)
 
 set_property(TARGET otucha_tests PROPERTY CXX_STANDARD 11)
 add_test(NAME otucha_tests COMMAND otucha_tests)

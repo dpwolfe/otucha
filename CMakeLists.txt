@@ -70,7 +70,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 else()
 	include_directories(
 		"${PROJECT_SOURCE_DIR}/submodules/glfw/include"
-		"${PROJECT_SOURCE_DIR}/src/external/glew-1.11.0/include"
+		"${PROJECT_SOURCE_DIR}/submodules/glew-cmake/include"
 	)
 	if(OTUCHA_DO_NOT_WARN_GL_H)
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED")
@@ -120,9 +120,13 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	# GLFW and GLEW are provided by Emscripten 
 	# Freetype is not included in Emscripten
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/freetype2")
+	#add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/oglplus")
 else()
 	# /MD for gtest
 	set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib.")
+	if(MSVC AND NOT "${MSVC_VERSION}" LESS 1400)
+		add_definitions( "/MP" )
+	endif()
 	
 	### GLFW ###
 	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
@@ -133,12 +137,17 @@ else()
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/glfw")
 	get_directory_property(GLFW_LIBRARIES DIRECTORY "${PROJECT_SOURCE_DIR}/submodules/glfw" DEFINITION glfw_LIBRARIES)
 	
-	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/gmock")
+	### GLEW ###
+	set(glew-cmake_BUILD_SHARED OFF CACHE BOOL "Build the shared glew library") # only build static
+	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/glew-cmake")
+	set_target_properties(libglew_static PROPERTIES STATIC_LIBRARY_FLAGS "/machine:x86")
+	
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/freetype2")
-	add_subdirectory("${PROJECT_SOURCE_DIR}/src/external")
+	#add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/oglplus")
 
 	include(CTest)
 	enable_testing()
+	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/gmock")
 	include_directories(
 		"${gtest_SOURCE_DIR}/include"
 		"${gmock_SOURCE_DIR}/include"
@@ -152,7 +161,7 @@ add_executable(otucha "${PROJECT_SOURCE_DIR}/src/otucha.cpp"
 if(OTUCHA_EMSCRIPTEN_ENABLED)
 	target_link_libraries(otucha rffalcon terasca warbler ${OPENGL_LIBRARY} freetype)
 else()
-	target_link_libraries(otucha rffalcon terasca warbler ${OPENGL_LIBRARY} glfw GLEW_1110 freetype)
+	target_link_libraries(otucha rffalcon terasca warbler ${OPENGL_LIBRARY} glfw libglew_static freetype)
 endif()
 set_property(TARGET otucha PROPERTY CXX_STANDARD 11)
 

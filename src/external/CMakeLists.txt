@@ -22,7 +22,7 @@ set(OPENGL_LIBRARY
 	${CMAKE_DL_LIBS}
 	${GLFW_LIBRARIES}
 )
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+endif()
 
 ### GLEW ###
 
