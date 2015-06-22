@@ -165,7 +165,7 @@ add_executable(otucha "${PROJECT_SOURCE_DIR}/src/otucha.cpp"
 if(OTUCHA_EMSCRIPTEN_ENABLED)
 	target_link_libraries(otucha rffalcon terasca warbler ${OPENGL_LIBRARY} freetype)
 else()
-	target_link_libraries(otucha rffalcon terasca warbler ${OPENGL_LIBRARY} glfw libglew_static freetype)
+	target_link_libraries(otucha rffalcon terasca warbler ${OPENGL_LIBRARY} glfw ${GLFW_LIBRARIES} libglew_static freetype)
 endif()
 set_property(TARGET otucha PROPERTY CXX_STANDARD 11)
 
