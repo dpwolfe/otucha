@@ -124,6 +124,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 else()
 	# /MD for gtest
 	set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib.")
+	
 	if(MSVC AND NOT "${MSVC_VERSION}" LESS 1400)
 		add_definitions( "/MP" )
 	endif()
@@ -141,7 +142,9 @@ else()
 	### GLEW ###
 	set(glew-cmake_BUILD_SHARED OFF CACHE BOOL "Build the shared glew library") # only build static
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/glew-cmake")
-	set_target_properties(libglew_static PROPERTIES STATIC_LIBRARY_FLAGS "/machine:x86")
+	if(MSVC AND NOT "${MSVC_VERSION}" LESS 1400)
+		set_target_properties(libglew_static PROPERTIES STATIC_LIBRARY_FLAGS "/machine:x86")
+	endif()
 	
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/freetype2")
 	#add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/oglplus")
