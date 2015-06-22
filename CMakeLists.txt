@@ -130,6 +130,7 @@ else()
 	
 	### GLFW ###
 	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
+	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
 	set(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
 	set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
 	set(GLFW_INSTALL OFF CACHE BOOL "Generate GLFW installation target")
@@ -176,6 +177,6 @@ endforeach()
 
 # Copy font file during build
 add_custom_command(TARGET otucha ${OTUCHA_RESOURCE_COPY_BUILD_STAGE}
-	COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PROJECT_SOURCE_DIR}/src/external/dejavu-fonts-ttf-2.34/ttf/DejaVuSansMono.ttf"
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PROJECT_SOURCE_DIR}/submodules/dejavu-fonts-release-latest/dejavu-fonts-ttf/ttf/DejaVuSansMono.ttf"
 			${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}
-			COMMENT "Copying ${PROJECT_SOURCE_DIR}/src/external/dejavu-fonts-ttf-2.34/ttf/DejaVuSansMono.ttf to ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}")
+			COMMENT "Copying ${PROJECT_SOURCE_DIR}/submodules/dejavu-fonts-release-latest/dejavu-fonts-ttf/ttf/DejaVuSansMono.ttf to ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}")

@@ -19,3 +19,6 @@
 [submodule "submodules/glew-cmake"]
 	path = submodules/glew-cmake
 	url = https://github.com/Perlmint/glew-cmake.git
+[submodule "submodules/dejavu-fonts-release-latest"]
+	path = submodules/dejavu-fonts-release-latest
+	url = https://github.com/dpwolfe/dejavu-fonts-release-latest.git
