@@ -13,9 +13,6 @@
 [submodule "submodules/gtest"]
 	path = submodules/gtest
 	url = https://github.com/cpp-mirrors/gtest.git
-[submodule "submodules/oglplus"]
-	path = submodules/oglplus
-	url = https://github.com/matus-chochlik/oglplus.git
 [submodule "submodules/glew-cmake"]
 	path = submodules/glew-cmake
 	url = https://github.com/Perlmint/glew-cmake.git
