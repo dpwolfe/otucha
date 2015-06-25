@@ -7,13 +7,17 @@ set(CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
               ${CMAKE_CURRENT_SOURCE_DIR}/rffalcon_VertexAttribute_tests.cpp
               ${CMAKE_CURRENT_SOURCE_DIR}/warbler_Console_tests.cpp) 
 
+set(MOCK_CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/GLMock.cpp)
+set(MOCK_HPP_FILES GLMock.hpp)
+add_library(otucha_mocks ${MOCK_CPP_FILES} ${MOCK_HPP_FILES})
+
 if(COVERALLS)
 	set(COVERAGE_SRCS ${RFFALCON_SRCS} ${WARBLER_SRCS} ${TERASCA_SRCS} ${CPP_FILES})
 	coveralls_setup("${COVERAGE_SRCS}" ${COVERALLS_UPLOAD} "${PROJECT_SOURCE_DIR}/submodules/coveralls-cmake/cmake" ${COVERALLS_VERBOSE})
 endif()
 
 add_executable(otucha_tests ${CPP_FILES})
-target_link_libraries (otucha_tests gtest warbler rffalcon libglew_static freetype)
+target_link_libraries (otucha_tests gtest gmock warbler rffalcon freetype otucha_mocks)
 
 set_property(TARGET otucha_tests PROPERTY CXX_STANDARD 11)
 add_test(NAME otucha_tests COMMAND otucha_tests)
