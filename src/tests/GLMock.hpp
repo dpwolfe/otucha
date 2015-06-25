@@ -2,10 +2,14 @@
 
 #include <gmock/gmock.h>
 
-#if defined(__MINGW32__) || defined(__CYGWIN__)
-	#define _GLAPI extern
+#if defined(_WIN32)
+  #if defined(__MINGW32__) || defined(__CYGWIN__)
+    #define _GLAPI extern
+  #else
+    #define _GLAPI __declspec(dllexport)
+  #endif
 #else
-	#define _GLAPI __declspec(dllexport)
+  #define _GLAPI extern
 #endif
 #define GLAPI _GLAPI
 #include <GL/glew.h>
