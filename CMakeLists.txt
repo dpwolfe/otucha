@@ -13,6 +13,7 @@ option(OTUCHA_DO_NOT_WARN_GL_H "Turn off the warning for gl.h and gl3.h both bei
 option(COVERALLS "Turn on Coveralls support" OFF)
 option(COVERALLS_UPLOAD "Upload the generated Coveralls json" ON)
 option(COVERALLS_VERBOSE "Print verbose statements in Coveralls output" OFF)
+option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
 
 if(COVERALLS)
 	include(Coveralls)
