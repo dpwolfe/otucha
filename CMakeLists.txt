@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.7)
-project(otucha)
+project(otucha CXX C)
 find_package(OpenGL REQUIRED)
 find_package(Threads)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/submodules/coveralls-cmake/cmake)
@@ -125,6 +125,8 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 else()
 	if(MSVC)
 		add_definitions( "/MP" )
+	else()
+		set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries (DLLs).")
 	endif()
 	
 	### GLFW ###
