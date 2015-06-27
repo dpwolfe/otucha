@@ -111,6 +111,7 @@ module.exports = function (grunt) {
         grunt.file.mkdir('cbuild');
         grunt.task.run(['shell:coveralls']);
     });
+	grunt.registerTask('xcode', ['cmake:xcode']);
     grunt.registerTask('cmake:xcode', function () {
         grunt.file.mkdir('xbuild');
         grunt.task.run(['shell:xcode']);
