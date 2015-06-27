@@ -37,7 +37,6 @@ TEST(TextureAtlasMethods, getRegion)
 TEST(TextureAtlasMethods, getRegion_is_unique)
 {
 	TextureAtlas a(512, 256, 1);
-	ivec4 expectedRegion = { { 1, 1, 77, 44 } };
 	ivec4 region1 = a.getRegion(77, 44);
 	ivec4 region2 = a.getRegion(77, 44);
 	EXPECT_NE(region1.x, region2.x);
