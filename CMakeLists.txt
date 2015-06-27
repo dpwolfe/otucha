@@ -14,7 +14,6 @@ option(OTUCHA_DO_NOT_WARN_GL_H "Turn off the warning for gl.h and gl3.h both bei
 option(COVERALLS "Turn on Coveralls support" OFF)
 option(COVERALLS_UPLOAD "Upload the generated Coveralls json" ON)
 option(COVERALLS_VERBOSE "Print verbose statements in Coveralls output" OFF)
-option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
 
 if(COVERALLS)
 	include(Coveralls)
@@ -80,7 +79,7 @@ else()
 	endif()
 	if(NOT MSVC)
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-		set(CMAKE_STANDARD_LIBRARIES ${CMAKE_STANDARD_LIBRARIES} pthread)
+		set(CMAKE_STANDARD_LIBRARIES ${CMAKE_STANDARD_LIBRARIES})
 	endif()
 	if("$ENV{CXX}" MATCHES "^.*clang\\+\\+.*$")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
@@ -120,14 +119,9 @@ get_directory_property(TERASCA_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/terasca
 get_directory_property(WARBLER_SRCS DIRECTORY "${PROJECT_SOURCE_DIR}/src/warbler" DEFINITION CPP_FILES)
 
 if(OTUCHA_EMSCRIPTEN_ENABLED)
-	# GLFW and GLEW are provided by Emscripten 
-	# Freetype is not included in Emscripten
+	# GLFW and GLEW are provided by Emscripten
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/freetype2")
-	#add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/oglplus")
 else()
-	# /MD for gtest
-	set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib.")
-	
 	if(MSVC AND NOT "${MSVC_VERSION}" LESS 1400)
 		add_definitions( "/MP" )
 	endif()
@@ -145,20 +139,26 @@ else()
 	### GLEW ###
 	set(glew-cmake_BUILD_SHARED OFF CACHE BOOL "Build the shared glew library") # only build static
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/glew-cmake")
-	if(MSVC AND NOT "${MSVC_VERSION}" LESS 1400)
+	if(MSVC)
 		set_target_properties(libglew_static PROPERTIES STATIC_LIBRARY_FLAGS "/machine:x86")
 	endif()
 	
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/freetype2")
-	#add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/oglplus")
 
 	include(CTest)
 	enable_testing()
+	
+	### GOOGLE MOCK ###
+	if(MSVC)
+		# /MD for gtest
+		set(gtest_force_shared_crt ON CACHE BOOL "Use shared (DLL) run-time lib even when Google Test is built as static lib.")
+	endif()
 	add_subdirectory("${PROJECT_SOURCE_DIR}/submodules/gmock")
 	include_directories(
 		"${gtest_SOURCE_DIR}/include"
 		"${gmock_SOURCE_DIR}/include"
 	)
+	
 	add_subdirectory("${PROJECT_SOURCE_DIR}/src/tests")
 endif()
 
