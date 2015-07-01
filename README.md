@@ -30,7 +30,7 @@ A cross-platform C++ OpenGL program. Builds and runs natively on Windows, OSX an
 ### Grunt options
 **--jsMin** - Runs uglify (mangle + compress) on the output Emscripten JS.
 
-**--jsUseDist** - No longer supported. Uses the otucha.js and index.html from the dist directory instead of building them with Emscripten.  Used for git deploy on a server that does not have CMake and Emscripten available.
+**--jsUseDist** - Support has been temporarily removed.  Uses the otucha.js and index.html from the dist directory instead of building them with Emscripten.  Used for git deploy on a server that does not have CMake and Emscripten available.
 
 ### Building native
 1. Run the following command from the repository root:
