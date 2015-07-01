@@ -119,3 +119,9 @@ TEST(VertexAttributeMethods, get_set_pointer)
 	a.setPointer(reinterpret_cast<GLchar*>(7));
 	EXPECT_EQ(a.getPointer(), reinterpret_cast<GLchar*>(7));
 }
+
+TEST(VertexAttributeMethods, enable)
+{
+	VertexAttribute a("name", 7, -1, true);
+	//a.enable();
+}
