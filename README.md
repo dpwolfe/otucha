@@ -6,7 +6,7 @@ A cross-platform C++ OpenGL program. Builds and runs natively on Windows, OSX an
 - Increasing code coverage using the OpenGL and GLEW mocks
 
 ### Developer Setup
-*Pay careful attention to platform specific instructions.*
+*Pay careful attention to any platform specific instructions for the dependencies below.*
 
 1. Install [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
 2. Install [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
