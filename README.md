@@ -50,7 +50,7 @@ A cross-platform C++ OpenGL program. Builds and runs natively on Windows, OSX an
 Xcode will launch when completed.
 
 ### What you'll see
-A perspective view of a cube with copper material properties and three lights in positions selected in order to produce specular highlights.  A sample of rendered text also appears on the bottom left corner.
+A perspective view of a copper cube and three lights in positions that produce specular highlights.  A sample of rendered text also appears on the bottom left corner.
 
 [Live Demo](http://spritegeist.azurewebsites.net/)
 
