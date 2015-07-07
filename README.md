@@ -25,7 +25,7 @@ A cross-platform C++ OpenGL program. Builds and runs natively on Windows, OSX an
   ```
   grunt build:js
   ```
-2. Open the index.html in the /www directory in Chrome, Firefox or Safari (OSX)
+2. Open www/index.html in Chrome, Firefox or Safari (OSX)
 
 ### Grunt options
 **--jsMin** - Runs uglify (mangle + compress) on the output Emscripten JS.
