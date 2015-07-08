@@ -1,7 +1,7 @@
 {
   "name": "otucha",
   "version": "0.0.1",
-  "description": "An OpenGL program that compiles from C++ to JavaScript using Emscripten",
+  "description": "A cross-platform C++ OpenGL program that also compiles to JavaScript using Emscripten",
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
