@@ -57,8 +57,8 @@ A perspective view of a copper cube and three lights in positions that produce s
 ### Code names
 Like otucha, these code names have no special meaning and are picked using the random page feature on Wikipedia.  They are used for namespaces.
 
-**RFFalcon**: Short for red-footed falcon.  Geometry, models and rendering.  Point and Matrix classes including vec union structs. Text rendering with C++ OpenGL layer on top of FreeType.
+**RFFalcon**: Short for Red-Footed Falcon.  Geometry, models and rendering.  Point and Matrix classes including vec union structs. Text rendering with C++ OpenGL layer on top of FreeType.
 
-**Terasca**: MVC application framework utilizing GLFW and GLEW.
+**Terasca**: Simple MVC application framework utilizing GLFW and GLEW.
 
 **Warbler**: Console and logging.
