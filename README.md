@@ -28,7 +28,7 @@ A cross-platform C++ OpenGL program. Builds and runs natively on Windows, OSX an
 2. Open www/index.html in Chrome, Firefox or Safari (OSX)
 
 ### Grunt options
-**--jsMin** - Runs uglify (mangle & compress) on the output Emscripten JS.
+**--jsMin** - Runs uglify with mangle and compress options on the output JavaScript
 
 **--jsUseDist** - Support is temporarily removed.  Uses the otucha.js and index.html from the dist directory instead of building them with Emscripten.  Used for git deploy on a server that does not have CMake and Emscripten available.
 
