@@ -6,14 +6,13 @@ A cross-platform C++ OpenGL program. Builds and runs natively on Windows, OSX an
 - Increasing code coverage using the OpenGL and GLEW mocks
 
 ### Developer Setup
-*Pay careful attention to any platform specific instructions for the dependencies below.*
-
-1. Install [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
-2. Install [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
-3. Install [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/)
-4. Install [Grunt](http://gruntjs.com/) from [here](http://gruntjs.com/getting-started)
-5. Install [Bower](http://bower.io/)
-6. Run the following command from the repository root:
+1. Install the following, paying careful attention to any platform specific instructions:
+  - [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
+  - [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
+  - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/)
+  - [Grunt](http://gruntjs.com/) from [here](http://gruntjs.com/getting-started)
+  - [Bower](http://bower.io/)
+2. Run the following command from the repository root:
 
    ```
    npm install
