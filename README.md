@@ -45,8 +45,7 @@ A cross-platform OpenGL program in C++. Builds and runs natively on Windows, OSX
   ```
   grunt cmake:xcode
   ```
-
-Xcode will launch when completed.
+  Xcode will launch when completed.
 
 ### What you'll see
 A perspective view of a copper cube and three lights in positions that produce specular highlights.  A sample of rendered text also appears on the bottom left corner.
