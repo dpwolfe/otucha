@@ -3,7 +3,7 @@
 A cross-platform OpenGL program in C++. Builds and runs natively on Windows, OSX and Linux. Runs in Chrome, Firefox and Safari when built with Emscripten.
 
 ### In Progress
-- Increasing code coverage using the custom OpenGL and GLEW mock lib.
+- Increasing code coverage using the custom OpenGL and GLEW mock lib
 
 ### Developer Setup
 1. Install the following, paying careful attention to any platform specific instructions:
@@ -48,7 +48,7 @@ A cross-platform OpenGL program in C++. Builds and runs natively on Windows, OSX
   Xcode will launch when completed.
 
 ### What you'll see
-A perspective view of a copper cube and three lights in positions that produce specular highlights.  A sample of rendered text also appears on the bottom left corner.
+A perspective view of a copper cube and three lights in positions that produce specular highlights.  Some rendered text also appears on the bottom left corner.
 
 [Live Demo](http://spritegeist.azurewebsites.net/)
 
