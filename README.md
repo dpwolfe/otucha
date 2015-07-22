@@ -37,7 +37,7 @@ A cross-platform OpenGL program in C++. Builds and runs natively on Windows, OSX
   ```
   grunt
   ```
-2. Build using the generated build files.  For example, if developing on Windows with Visual Studio, open the otucha.sln, build and run.  If developing on Mac or Linux, build using the Makefile.
+2. Build using the generated files under the `build` directory.  For example, if developing on Windows with Visual Studio, open the otucha.sln, build and run.  If developing on Mac or Linux, build using the Makefile.
 
 ### Building with Xcode
 1. Run the following command from the repository root:
