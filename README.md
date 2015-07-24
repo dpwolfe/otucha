@@ -29,7 +29,7 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
 ### Grunt options
 **--jsMin** - Runs uglify with mangle and compress options on the output JavaScript
 
-**--jsUseDist** - Support is temporarily removed. Uses prebuilt JS and HTML for git deploy on a server that does not have CMake and Emscripten available.
+**--jsUseDist** - Support is temporarily removed. Uses pre-built JS and HTML for git deploy on a server that does not have CMake and Emscripten available.
 
 ### Building native
 1. Run the following command from the repository root:
