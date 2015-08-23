@@ -18,7 +18,10 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
    npm install
    ```
 3. Update the version of npm that came with NodeJS to the latest:
-  - `sudo npm install npm -g` or for Windows `npm install npm -g`
+
+  ```
+  sudo npm install npm -g` or for Windows `npm install npm -g`
+  ```
 
 ### Building web
 1. Run the following command from the repository root:
