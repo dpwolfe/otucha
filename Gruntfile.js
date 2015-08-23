@@ -1,5 +1,5 @@
 module.exports = function (grunt) {
-    var path = require('path');
+    var os = require('os');
     require('load-grunt-tasks')(grunt);
 
     var coverallsVerbose = grunt.option('coverallsVerbose') ? '-DCOVERALLS_VERBOSE=ON ' : '';
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
             emscripten_make: {
                 command: [
                     'cd embuild',
-                    'make'
+                    os.platform() === 'win32' ? 'mingw32-make' : 'make'
                 ].join('&&')
             }
         },
