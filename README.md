@@ -9,9 +9,10 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
 1. Install the following, paying careful attention to any platform specific instructions:
   - [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
   - [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
+    - Windows: Activate the MinGW toolchain, [instructions](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
   - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/)
-  - [Grunt](http://gruntjs.com/) from [here](http://gruntjs.com/getting-started)
-  - [Bower](http://bower.io/)
+  - [Grunt](http://gruntjs.com/) with `npm install -g grunt-cli`
+  - [Bower](http://bower.io/) with `npm install -g bower`
 2. Run the following command from the repository root:
 
    ```
