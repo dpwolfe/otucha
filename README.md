@@ -7,8 +7,8 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
 
 ### Developer Setup
 1. Install the following, paying careful attention to any platform specific instructions:
-  - [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
   - [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
+  - [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
   - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/)
   - [Grunt](http://gruntjs.com/) from [here](http://gruntjs.com/getting-started)
   - [Bower](http://bower.io/)
@@ -17,6 +17,8 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
    ```
    npm install
    ```
+3. Update the version of npm that came with NodeJS to the latest:
+  - `sudo npm install npm -g` or for Windows `npm install npm -g`
 
 ### Building web
 1. Run the following command from the repository root:
