@@ -10,6 +10,9 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
   - [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
     - OSX: Launch the CMake app after copying it to your _Applications_ and follow the instructions found under _Tools > How to Install For Command Line Use_
   - [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
+    - OSX:
+      - Put the extracted `emsdk_portable` in your home directory
+      - Follow the [Platform-specific notes](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html#platform-notes-installation-instructions-portable-sdk)
     - Windows: [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
   - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/)
   - [Grunt](http://gruntjs.com/)
