@@ -16,7 +16,7 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
       - You can install Python 2.7.10 [here](https://www.python.org/downloads/release/python-2710/) instead of doing the last step in the Platform-specific notes since that step may not work. _Do not use Python 3._
       - Open a command prompt in the `emsdk_portable` directory and run these commands:
 
-        ```
+        ```shell
         ./emsdk update
         ./emsdk install latest
         ./emsdk activate latest
@@ -24,7 +24,7 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
         ```
       - Add the following line to your ~/.bash_profile:
 
-        ```
+        ```shell
         source ./emsdk_env.sh
         ```
     - Windows: [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
