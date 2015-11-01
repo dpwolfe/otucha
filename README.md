@@ -119,6 +119,9 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
 
   Xcode will launch when completed.
 
+2. Switch the target from _ALL\_BUILD_ to _otucha_
+3. Build and run
+
 ### What you'll see
 A perspective view of a copper cube and three lights in positions that produce specular highlights.  Some rendered text also appears on the bottom left corner.
 
