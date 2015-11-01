@@ -22,55 +22,93 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
         ./emsdk activate latest
         source ./emsdk_env.sh
         ```
+  
       - Add the following line to your ~/.bash_profile:
 
         ```shell
         source ./emsdk_env.sh
         ```
+  
     - Windows: [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
   - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/)
   - [Grunt](http://gruntjs.com/)
-    - Windows: `npm install -g grunt-cli`
-    - OSX: `sudo npm install -g grunt-cli`
+    - Windows: Run the following in a command prompt:
+
+      ```shell
+      npm install -g grunt-cli
+      ```
+
+    - OSX: Run the following in a command prompt:
+
+      ```shell
+      sudo npm install -g grunt-cli
+      ```
+
   - [Bower](http://bower.io/)
-    - Windows: `npm install -g bower`
-    - OSX: `sudo npm install -g bower`
+    - Windows: Run the following in a command prompt:
+    
+      ```shell
+      npm install -g bower`
+      ```
+
+    - OSX: Run the following in a command prompt:
+    
+      ```shell
+      sudo npm install -g bower
+      ```
+
 2. Run the following command from the repository root:
 
    ```
    npm install
    ```
+
 3. Update the version of npm that came with NodeJS to the latest:
-  - Linux: `sudo npm install npm -g`
-  - Windows: `npm install npm -g` and delete the `npm` and `npm.cmd` files from the `\Program Files\nodejs` directory.
+  - OSX: Run the following in a command prompt:
+
+    ```shell
+    sudo npm install npm -g
+    ```
+
+  - Windows:
+    - Run the following in a command prompt:
+
+      ```shell
+      npm install npm -g
+      ```
+
+    - Delete the `npm` and `npm.cmd` files from the `\Program Files\nodejs` directory.
 
 ### Building web
-1. Run the following command from the repository root:
+1. Run the following command in the repository root:
 
-  ```
+  ```shell
   grunt build:js
   ```
+
 2. Open www/index.html in Chrome, Firefox or Safari (OSX)
 
 ### Grunt options
 **--jsMin** - Runs uglify with mangle and compress options on the output JavaScript
 
-**--jsUseDist** - Support is temporarily removed. Uses pre-built JS and HTML for git deploy on a server that does not have CMake and Emscripten available.
+**--jsUseDist** - _Support is temporarily removed._ Uses pre-built JS and HTML for git deploy on a server that does not have CMake and Emscripten available.
 
 ### Building native
 1. Run the following command from the repository root:
 
-  ```
+  ```shell
   grunt
   ```
+
 2. Build using the generated files under the `build` directory.  For example, if developing on Windows with Visual Studio, open the otucha.sln, build and run.  If developing on Mac or Linux, build using the Makefile.
 
 ### Building with Xcode
 1. Run the following command from the repository root:
 
-  ```
+  ```shell
   grunt cmake:xcode
   ```
+
   Xcode will launch when completed.
 
 ### What you'll see
