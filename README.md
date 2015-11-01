@@ -56,7 +56,7 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
     - Windows: Run the following in a command prompt:
     
       ```shell
-      npm install -g bower`
+      npm install -g bower
       ```
 
     - OSX: Run the following in a command prompt:
