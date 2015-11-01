@@ -27,7 +27,7 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
       - Add the following line to your ~/.bash_profile:
 
         ```shell
-        source ./emsdk_env.sh
+        source ./emsdk_portable/emsdk_env.sh
         ```
   
     - Windows: [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
