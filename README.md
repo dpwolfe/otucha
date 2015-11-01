@@ -15,6 +15,7 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
       - Follow the [Platform-specific notes](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html#platform-notes-installation-instructions-portable-sdk)
       - You can install Python 2.7.10 [here](https://www.python.org/downloads/release/python-2710/) if the last step in the Platform-specific notes does not work.
       - Open a command prompt in the `emsdk_portable` directory and run this command: `./emsdk update && ./emsdk install latest && ./emsdk activate latest && source ./emsdk_env.sh`
+      - Add the following line to your `~/.bash_profile`: `source ./emsdk_env.sh`
     - Windows: [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
   - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/)
   - [Grunt](http://gruntjs.com/)
