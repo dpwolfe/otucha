@@ -3,6 +3,7 @@
 A cross-platform OpenGL program written in C++. Builds and runs natively on Windows, OSX and Linux. Runs in Chrome, Firefox and Safari when built with Emscripten.
 
 ### In Progress
+- Fixing build with latest dependencies when following Developer Setup
 - Increasing code coverage using the custom OpenGL and GLEW mock lib
 
 ### Developer Setup
