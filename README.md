@@ -8,9 +8,9 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
 
 ### Developer Setup
 1. Install the following, paying careful attention to any platform specific instructions:
-  - [CMake](http://www.cmake.org/) from [here](http://www.cmake.org/files/v3.1/?C=M;O=D)
+  - [CMake](http://www.cmake.org/) - (currently using 3.4.0-rc2)
     - OSX: Launch the CMake app after copying it to your _Applications_ and follow the instructions found under _Tools > How to Install For Command Line Use_
-  - [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html)
+  - [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html) - (currently using 1.35.4)
     - OSX:
       - Put the extracted `emsdk_portable` in your home directory
       - Follow the [Platform-specific notes](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html#platform-notes-installation-instructions-portable-sdk)
@@ -37,9 +37,9 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
         ```
   
     - Windows: [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
-  - [Java](http://www.java.com/en/download) from [here](http://www.java.com/en/download) for Emscripten
-  - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/)
-  - [Grunt](http://gruntjs.com/)
+  - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/) - (currently using v4.2.1)
+    - Emscripten uses a different version when you run `initem` 
+  - [Grunt](http://gruntjs.com/) - (currently using 0.1.13)
     - Windows: Run the following in a command prompt:
 
       ```shell
@@ -52,7 +52,7 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
       sudo npm install -g grunt-cli
       ```
 
-  - [Bower](http://bower.io/)
+  - [Bower](http://bower.io/) - (currently using 1.6.5)
     - Windows: Run the following in a command prompt:
     
       ```shell
