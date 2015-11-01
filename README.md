@@ -27,7 +27,7 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
       - Add the following line to your ~/.bash_profile:
 
         ```shell
-        alias initem='source ./emdsdk_portable/emsdk_env.sh'
+        alias initem='source ./emsdk_portable/emsdk_env.sh'
         ```
         
       - Before compiling JavaScript, make sure you have run this in your command prompt once:
