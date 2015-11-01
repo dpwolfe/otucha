@@ -27,7 +27,13 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
       - Add the following line to your ~/.bash_profile:
 
         ```shell
-        source ./emsdk_portable/emsdk_env.sh
+        alias initem='source ./emdsdk_portable/emsdk_env.sh'
+        ```
+        
+      - Before compiling JavaScript, make sure you have run this in your command prompt once:
+      
+        ```shell
+        initem
         ```
   
     - Windows: [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
@@ -81,7 +87,7 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
     - Delete the `npm` and `npm.cmd` files from the `\Program Files\nodejs` directory.
 
 ### Building web
-1. Run the following command in the repository root:
+1. Run the following command in the repository root after running `initem`:
 
   ```shell
   grunt build:js
