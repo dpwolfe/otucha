@@ -3,6 +3,7 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     var coverallsVerbose = grunt.option('coverallsVerbose') ? '-DCOVERALLS_VERBOSE=ON ' : '';
+    var isWin32 = os.platform() === 'win32';
     
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -45,13 +46,13 @@ module.exports = function (grunt) {
                 },
                 command: [
                     'cd embuild',
-                    'emcmake cmake -DOTUCHA_EMSCRIPTEN_ENABLED=ON -G "MinGW Makefiles" ..'
+                    'emcmake cmake -DOTUCHA_EMSCRIPTEN_ENABLED=ON -G "' + (isWin32 ? 'MinGW Makefiles' : 'Unix Makefiles') + '" ..'
                 ].join('&&')
             },
             emscripten_make: {
                 command: [
                     'cd embuild',
-                    os.platform() === 'win32' ? 'mingw32-make' : 'make'
+                    isWin32 ? 'mingw32-make' : 'make'
                 ].join('&&')
             }
         },
