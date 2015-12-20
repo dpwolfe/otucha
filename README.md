@@ -35,7 +35,13 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
         initem
         ```
   
-    - Windows: [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
+    - Windows:
+      - [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
+      
+        ```shell
+        emsdk install mingw-4.6.2-32bit
+        emsdk activate mingw-4.6.2-32bit
+        ```
       - Open the Emscripten Command Prompt and run these commands:
 
         ```shell
