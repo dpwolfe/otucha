@@ -36,6 +36,13 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
         ```
   
     - Windows: [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
+      - Open the Emscripten Command Prompt and run these commands:
+
+        ```shell
+        ./emsdk update
+        ./emsdk install emscripten-tag-1.35.14-64bit
+        ./emsdk activate emscripten-tag-1.35.14-64bit
+        ```
   - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/) - (currently using 4.2.1)
     - Emscripten uses a different version when you run `initem` 
   - [Grunt](http://gruntjs.com/) - (currently using 0.1.13)
