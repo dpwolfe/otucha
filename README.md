@@ -18,8 +18,8 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
 
         ```shell
         ./emsdk update
-        ./emsdk install sdk-tag-1.35.14-64bit
-        ./emsdk activate sdk-tag-1.35.14-64bit
+        ./emsdk install latest
+        ./emsdk activate latest
         source ./emsdk_env.sh
         ```
   
@@ -46,8 +46,8 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
 
         ```shell
         emsdk update
-        emsdk install sdk-tag-1.35.14-64bit
-        emsdk activate sdk-tag-1.35.14-64bit
+        emsdk install latest
+        emsdk activate latest
         ```
   - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/) - (currently using 4.2.1)
     - Emscripten uses a different version when you run `initem` 
