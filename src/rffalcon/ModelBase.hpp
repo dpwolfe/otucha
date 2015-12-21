@@ -1,6 +1,9 @@
 #pragma once
 
 #include <memory>
+#ifdef TEST
+    #define GLAPI
+#endif
 #include <GL/glew.h>
 #include "PhongMaterial.hpp"
 

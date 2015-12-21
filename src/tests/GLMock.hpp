@@ -11,9 +11,9 @@
 #else
   #define _GLAPI extern
 #endif
-#define GLAPI _GLAPI
+#define GLAPI
 #include <GL/glew.h>
-#define GLAPI _GLAPI
+#define GLAPI
 
 #include <memory>
 

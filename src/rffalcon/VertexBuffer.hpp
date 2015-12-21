@@ -4,6 +4,9 @@
 #include <memory>
 #include <vector>
 #include <GL/glew.h>
+#ifdef TEST
+    #define GLAPI
+#endif
 #include "ModelViewWithShader.hpp"
 #include "VertexAttribute.hpp"
 #include "vec.hpp"

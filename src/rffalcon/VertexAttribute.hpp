@@ -2,6 +2,9 @@
 
 #include <string>
 #include <memory>
+#ifdef TEST
+    #define GLAPI
+#endif
 #include <GL/glew.h>
 
 #define MAX_VERTEX_ATTRIBUTES 16

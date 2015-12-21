@@ -2,6 +2,9 @@
 
 #include <vector>
 #include "vec.hpp"
+#ifdef TEST
+    #define GLAPI
+#endif
 #include <GL/glew.h>
 #include "ft2build.h"
 #include FT_FREETYPE_H

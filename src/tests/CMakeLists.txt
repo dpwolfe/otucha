@@ -14,7 +14,7 @@ if(COVERALLS)
 endif()
 
 add_executable(otucha_tests ${CPP_FILES} ${MOCK_CPP_FILES} ${MOCK_HPP_FILES})
-target_link_libraries(otucha_tests freetype warbler rffalcon gmock_main)
+target_link_libraries(otucha_tests freetype warbler rffalcon_test gmock_main)
 
 set_property(TARGET otucha_tests PROPERTY CXX_STANDARD 11)
 add_test(NAME otucha_tests COMMAND otucha_tests)
