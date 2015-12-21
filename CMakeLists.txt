@@ -35,7 +35,7 @@ if(OTUCHA_EMSCRIPTEN_ENABLED)
 	endif()
 
 	# Check Emscripten version
-	set(EMSCRIPTEN_REQUIRED_VERSION 1.35.4)
+	set(EMSCRIPTEN_REQUIRED_VERSION 1.35.0)
 	if(EXISTS "${EMSCRIPTEN_ROOT_PATH}/emscripten-version.txt")
 		file(READ "${EMSCRIPTEN_ROOT_PATH}/emscripten-version.txt" EMSCRIPTEN_VERSION)
 		# string replace only to clean up console output, not otherwise required
