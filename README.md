@@ -7,9 +7,9 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
 
 ### Developer Setup
 1. Install the following, paying careful attention to any platform specific instructions:
-  - [CMake](http://www.cmake.org/) - (currently using 3.4.0-rc2)
+  - [CMake](http://www.cmake.org/) - (currently using 3.4.1)
     - OSX: Launch the CMake app after copying it to your _Applications_ and follow the instructions found under _Tools > How to Install For Command Line Use_
-  - [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html) - (currently using 1.35.4)
+  - [Emscripten](http://kripken.github.io/emscripten-site/) from [here](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html) - (currently using 1.35.0)
     - OSX:
       - Put the extracted `emsdk_portable` in your home directory
       - Follow the [Platform-specific notes](http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html#platform-notes-installation-instructions-portable-sdk)
@@ -35,7 +35,20 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
         initem
         ```
   
-    - Windows: [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
+    - Windows:
+      - [Activate the MinGW toolchain](http://kripken.github.io/emscripten-site/docs/building_from_source/toolchain_what_is_needed.html?highlight=mingw).
+      
+        ```shell
+        emsdk install mingw-4.6.2-32bit
+        emsdk activate mingw-4.6.2-32bit
+        ```
+      - Open the Emscripten Command Prompt and run these commands:
+
+        ```shell
+        emsdk update
+        emsdk install latest
+        emsdk activate latest
+        ```
   - [NodeJS](http://nodejs.org/) from [here](http://nodejs.org/download/) - (currently using 4.2.1)
     - Emscripten uses a different version when you run `initem` 
   - [Grunt](http://gruntjs.com/) - (currently using 0.1.13)
