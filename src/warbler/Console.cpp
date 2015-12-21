@@ -119,29 +119,16 @@ t_consoleArgs_ptr Console::_getConsoleArgs(const std::wstring &input, const Cons
     auto argTypeIt = command.argTypes->begin();
     while (!argStream.eof())
     {
-        if (command.argTypes->end() == argTypeIt)
-        {
-            throw std::exception();
-        }
-        
         ConsoleArg consoleArg;
         consoleArg.type = *argTypeIt;
         argStream >> consoleArg.stringValue;
         if (consoleArg.type == ConsoleArgType::FLOAT)
         {
             consoleArg.floatValue = std::stod(consoleArg.stringValue);
-            if (consoleArg.floatValue == 0.0 && consoleArg.stringValue[0] != '0')
-            {
-                throw std::exception();
-            }
         }
         else if (consoleArg.type == ConsoleArgType::INT)
         {
             consoleArg.intValue = std::stoi(consoleArg.stringValue);
-            if (consoleArg.intValue == 0 && consoleArg.stringValue[0] != '0')
-            {
-                throw std::exception();
-            }
         }
         args->push_back(consoleArg);
         ++argTypeIt;
