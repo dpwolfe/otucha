@@ -137,7 +137,7 @@ A cross-platform OpenGL program written in C++. Builds and runs natively on Wind
 ### What you'll see
 A perspective view of a copper cube and three lights in positions that produce specular highlights.  Some rendered text also appears on the bottom left corner.
 
-[Live Demo](http://spritegeist.azurewebsites.net/)
+[Live Demo](http://otucha.spritegeist.com/) - It may take a minute for the server to wake up since "Always On" is turned off.
 
 ### Code names
 Like otucha, these code names have no special meaning and are picked using the random page feature on Wikipedia.  They are used for namespaces.
